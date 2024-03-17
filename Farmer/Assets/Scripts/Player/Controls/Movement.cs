@@ -1,3 +1,4 @@
+using Scripts.SO;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -9,14 +10,16 @@ public class Movement : MonoBehaviour
     Rigidbody2D _rb;
     Animator _animator;
     Vector2 _delta;
+    PlayerSO _playerSO;
 
     int _aniX;
     int _aniY;
 
     [Inject]
-    public void Construct(InputService inputService)
+    public void Construct(InputService inputService, PlayerSO playerSO)
     {
         _inputService = inputService;
+        _playerSO = playerSO;
     }
 
     void Start()
@@ -34,7 +37,7 @@ public class Movement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _delta * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _delta * Time.fixedDeltaTime * _playerSO.Speed);
     }
 
     void Animate(Vector2 delta)
