@@ -19,18 +19,26 @@ public class TilePlacement : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, Vector3.zero);
             float distance;
-
+            
             if (plane.Raycast(ray, out distance))
             {
+                
                 Vector3 worldPos = ray.GetPoint(distance);
                 Debug.Log("Мировые координаты: " + worldPos); // Отладочный вывод
 
                 // Преобразуем позицию в координаты ячейки сетки
                 Vector3Int cellPos = tilemap.WorldToCell(worldPos);
                 Debug.Log("Координаты ячейки: " + cellPos); // Отладочный вывод
-
+                if(!tilemap.HasTile(cellPos))
+                    {
                 // Устанавливаем заданный RuleTile в выбранную ячейку
                 tilemap.SetTile(cellPos, ruleTile);
+
+                }
+                else
+                {
+                    Debug.Log("Здесь уже есть тайл!");
+                }
             }
         }
     }
