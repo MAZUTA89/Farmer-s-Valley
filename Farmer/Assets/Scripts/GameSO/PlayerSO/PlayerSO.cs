@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Scripts.SO
+namespace Scripts.SO.Player
 {
-    [CreateAssetMenu(fileName = "PlayerSO", menuName = "ScriptableObjects/PlayerSO")]
+    [CreateAssetMenu(fileName = "PlayerSO", menuName = "SO/PlayerSO")]
     public class PlayerSO : ScriptableObject
     {
         public float Speed;

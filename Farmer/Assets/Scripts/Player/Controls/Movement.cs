@@ -1,4 +1,5 @@
 using Scripts.SO;
+using Scripts.SO.Player;
 using TMPro;
 using UnityEngine;
 using Zenject;
