@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Eggplant bag
   _icon: {fileID: 21300000, guid: ccf27a3e49a5c8346b859b9abd7dcd81, type: 3}
+  _count: 10

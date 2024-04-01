@@ -10,10 +10,12 @@ namespace Scripts.InventoryCode
         List<InventoryItemSO> _inventoryItems;
         Transform _container;
         private List<InventoryCell> _cells;
+        Transform _dragParent;
 
-        public Inventory(Transform container, List<InventoryItemSO> inventoryItems)
+        public Inventory(Transform container, Transform dragParent, List<InventoryItemSO> inventoryItems)
         {
             _inventoryItems = inventoryItems;
+            _dragParent = dragParent;
             _container = container;
             _cells = new List<InventoryCell>();
             InitializeCells(_cells, _container);
@@ -25,6 +27,7 @@ namespace Scripts.InventoryCode
             foreach(Transform cell in container)
             {
                 var inventoryCell = cell.gameObject.GetComponent<InventoryCell>();
+                inventoryCell.Initialize(_dragParent, _inventoryItems);
                 cells.Add(inventoryCell);
             }
 
@@ -42,6 +45,13 @@ namespace Scripts.InventoryCode
         
         public void Render()
         {
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                foreach (var item in _inventoryItems)
+                {
+                    Debug.Log("Item: " + item.Name);
+                }
+            }
             foreach (var cell in _cells)
             {
                 if(cell.IsEmpty == true)

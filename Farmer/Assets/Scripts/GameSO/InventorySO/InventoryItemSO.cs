@@ -9,13 +9,15 @@ namespace Scripts.SO.InventoryItem
     {
         public string Name => _name;
         public Sprite Icon => _icon;
+        public int Count => _count;
         [SerializeField] private string _name;
         [SerializeField] private Sprite _icon;
+        [SerializeField] private int _count;
 
         public void RenderUI(InventoryCell inventoryCell)
         {
             inventoryCell.Icon.sprite = _icon;
-            inventoryCell.Text.text = _name;
+            inventoryCell.Text.text = _name + $"({Count}";
         }
     }
 }

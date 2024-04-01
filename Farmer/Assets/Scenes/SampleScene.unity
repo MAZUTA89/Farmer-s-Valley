@@ -131,9 +131,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -2817,9 +2825,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -3113,9 +3129,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -3290,9 +3314,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -3848,7 +3880,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 940977a2271d95843984bc0a4f4c239f, type: 3}
   m_Name: 
@@ -4151,9 +4183,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -4962,9 +5002,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -5361,9 +5409,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -5627,9 +5683,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -5954,9 +6018,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -6056,9 +6128,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -6421,9 +6501,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -6690,9 +6778,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -6867,9 +6963,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -7072,7 +7176,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 749c809e6e7a26e47b67734737b6b7c0, type: 2}
   - {fileID: 11400000, guid: e079df4063c5c5e4bb4ca0e0ad9555df, type: 2}
   - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: a60e381e453c5da46a79675834c41545, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 1e9ce64faaee645458ba445dc4195f80, type: 2}
+  - {fileID: 11400000, guid: 27c8d08cb470fb744a0c7cbce163fa2d, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: a60e381e453c5da46a79675834c41545, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
   InventoryContainer: {fileID: 494272780}
+  DragParent: {fileID: 573698812}
 --- !u!1001 &1804830305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7081,9 +7198,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -7183,9 +7308,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x
@@ -7676,9 +7809,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 494272780}
     m_Modifications:
+    - target: {fileID: 1290138923595483435, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 1515329090311066343, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Name
       value: InventoryCell (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4729667310360732307, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.049999237
       objectReference: {fileID: 0}
     - target: {fileID: 5055636920527890145, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
       propertyPath: m_Pivot.x

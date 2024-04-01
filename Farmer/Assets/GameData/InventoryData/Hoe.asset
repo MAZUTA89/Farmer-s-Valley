@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Hoe
   _icon: {fileID: 21300000, guid: af9b7cc1d6f5d1246bb993111d8a0d93, type: 3}
+  _count: 10
