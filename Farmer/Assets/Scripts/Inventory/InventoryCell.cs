@@ -14,63 +14,76 @@ namespace Scripts.InventoryCode
     {
         [SerializeField] Image IconElement;
         [SerializeField] TextMeshProUGUI TextElement;
-        List<InventoryItemSO> _inventoryItems;
-        Transform _dragParent;
-        Transform _dragOrigin;
-        public bool IsEmpty {  get; private set; }
+        Action _dragEvent;
+        public InventoryItem InventoryItem { get; private set; }
+        public  Transform DragParent { get; private set; }
+        public Transform DragOrigin { get; private set; }
+        public bool IsEmpty { get; private set; }
 
         public Image Icon => IconElement;
         public TextMeshProUGUI Text => TextElement;
-        private void Start()
+
+        private void OnDisable()
         {
+            _dragEvent = null;
         }
-        public void Initialize(Transform dragParent, List<InventoryItemSO> inventoryItems)
+        public void InitializeDragParent(Transform dragParent)
         {
-            _dragOrigin = transform.parent;
-            _dragParent = dragParent;
-            _inventoryItems = inventoryItems;
+            DragOrigin = transform.parent;
+            DragParent = dragParent;
+        }
+        public void OverwriteDragOrigin(Transform dragOrigin)
+        {
+            DragOrigin = dragOrigin;
+        }
+        public void InitializeItem(InventoryItem inventoryItem)
+        {
+            InventoryItem = inventoryItem;
+            IsEmpty = false;
+        }
+        public void InitializeDragEvent(Action dragMethod)
+        {
+            _dragEvent += dragMethod;
         }
         public void SetEmpty(bool isEmpty)
         {
             IsEmpty = isEmpty;
         }
 
-        public void RenderCell()
-        {
-
-        }
-
         public void OnDrag(PointerEventData eventData)
         {
-            Debug.Log($"Draging {gameObject.name}");
             transform.position = Input.mousePosition;
-            //Debug.Log("Drag index element:" + )
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log($"Begin Drag {gameObject.name}");
-            transform.SetParent(_dragParent);
+            transform.SetParent(DragParent);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log($"End Drag {gameObject.name}");
-            int closetIndex = 0;
-            for (int i = 0; i < _dragOrigin.transform.childCount; i++)
+            
+            PlaceInTheNearestCell();
+            if (InventoryItem != null)
             {
-                if(Vector3.Distance(_dragOrigin.GetChild(i).position, transform.position) <
-                    Vector3.Distance(_dragOrigin.GetChild(closetIndex).position, transform.position))
+                _dragEvent?.Invoke();
+            }
+        }
+
+        void PlaceInTheNearestCell()
+        {
+            int closetIndex = 0;
+            for (int i = 0; i < DragOrigin.transform.childCount; i++)
+            {
+                if (Vector3.Distance(DragOrigin.GetChild(i).position, transform.position) <
+                    Vector3.Distance(DragOrigin.GetChild(closetIndex).position, transform.position))
                 {
                     closetIndex = i;
                 }
-
             }
-
-            //_inventoryItems.In
-            transform.SetParent(_dragOrigin);
-            Debug.Log("Closet index " + closetIndex);
+            transform.SetParent(DragOrigin);
             transform.SetSiblingIndex(closetIndex);
         }
+
     }
 }

@@ -7,19 +7,17 @@ namespace Scripts.InventoryCode
 {
     public class PlayerInventory : MonoBehaviour
     {
-        Inventory _inventory;
+        [SerializeField] Inventory _backPackInventory;
+        [SerializeField] Inventory _activeInventory;
         [Inject]
-        public void Construct(Inventory inventory)
+        public void Construct(Inventory backPackInventory)
         {
-             _inventory = inventory;
+             _backPackInventory = backPackInventory;
         }
 
         private void Update()
         {
-            if (_inventory != null)
-            {
-                _inventory.Render();
-            }
+           
         }
     }
 }
