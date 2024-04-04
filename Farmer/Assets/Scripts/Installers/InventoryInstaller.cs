@@ -21,7 +21,7 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             _backPackInventory.InitializeItemKit(StartKit);
-            _activeInventory.InitializeItemKit(new List<InventoryItemAssetData>());
+            _activeInventory.InitializeItemKit(new List<InventoryItemAssetData>(4));
             Container.Bind<Inventory>().FromComponentInHierarchy().AsTransient();
             Container.BindInstance(DragParent)
                 .WithId("DragParent")

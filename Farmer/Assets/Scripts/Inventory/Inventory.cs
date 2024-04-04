@@ -8,7 +8,9 @@ namespace Scripts.InventoryCode
 {
     public class Inventory : MonoBehaviour
     {
+        [SerializeField] int Size;
         private Transform _container;
+        private RectTransform _rectTransform;
         private List<InventoryItemAssetData> _inventoryItemsAssetData;
         private List<InventoryItem> _inventoryItems;
         private List<InventoryCell> _cells;
@@ -23,21 +25,22 @@ namespace Scripts.InventoryCode
 
         private void Start()
         {
-            _inventoryItems = new List<InventoryItem>();
-            _cells = new List<InventoryCell>();
             _container = gameObject.transform;
+            _rectTransform = _container.GetComponent<RectTransform>();
+            EndDragExtension.RegisterInventoryRectTransform
+                (_rectTransform);
+
+            _inventoryItems = new List<InventoryItem>(Size);
+            _cells = new List<InventoryCell>();
             InitializeInventoryItems(_inventoryItemsAssetData);
             InitializeCells(_cells, _container);
         }
-        //public Inventory(Transform container, Transform dragParent, List<InventoryItemAssetData> inventoryItems)
-        //{
-        //    _inventoryItems = new List<InventoryItem>();
-        //    _dragParent = dragParent;
-        //    _container = container;
-        //    _cells = new List<InventoryCell>();
-        //    InitializeInventoryItems(inventoryItems);
-        //    InitializeCells(_cells, _container);
-        //}
+        private void OnDisable()
+        {
+            EndDragExtension.UnregisterInventoryRectTransform
+                (_rectTransform);
+        }
+        
         private void Update()
         {
             Render();
@@ -118,16 +121,15 @@ namespace Scripts.InventoryCode
         }
         void OverwriteInventoryItems(List<InventoryItem> inventoryItems)
         {
-            int i = 0;
-            foreach(Transform cellObject in _container)
+            for (int i = 0; i < _container.childCount; i++)
             {
-                var inventoryCell = 
-                    cellObject.gameObject.GetComponent<InventoryCell>();
-                if(inventoryCell.InventoryItem != null)
+                Transform child = _container.GetChild(i);
+                var inventoryCell =
+                    child.gameObject.GetComponent<InventoryCell>();
+                if (inventoryCell.InventoryItem != null)
                 {
                     inventoryItems[i] = inventoryCell.InventoryItem;
                 }
-                i++;
             }
         }
         public void Render()

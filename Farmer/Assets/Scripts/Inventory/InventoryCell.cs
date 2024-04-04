@@ -16,7 +16,7 @@ namespace Scripts.InventoryCode
         [SerializeField] TextMeshProUGUI TextElement;
         Action _dragEvent;
         public InventoryItem InventoryItem { get; private set; }
-        public  Transform DragParent { get; private set; }
+        public Transform DragParent { get; private set; }
         public Transform DragOrigin { get; private set; }
         public bool IsEmpty { get; private set; }
 
@@ -27,6 +27,10 @@ namespace Scripts.InventoryCode
         {
             _dragEvent = null;
         }
+        private void Start()
+        {
+
+        }
         public void InitializeDragParent(Transform dragParent)
         {
             DragOrigin = transform.parent;
@@ -35,6 +39,7 @@ namespace Scripts.InventoryCode
         public void OverwriteDragOrigin(Transform dragOrigin)
         {
             DragOrigin = dragOrigin;
+            
         }
         public void InitializeItem(InventoryItem inventoryItem)
         {
@@ -62,15 +67,24 @@ namespace Scripts.InventoryCode
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            
-            PlaceInTheNearestCell();
+            Inventory inventory;
+            if (EndDragExtension.CheckMouseIntersectionWithContainers(eventData,
+                out inventory))
+            {
+                inventory.AddCell(this);
+                PlaceInTheNearestCell();
+            }
+            else
+            {
+                PlaceInTheNearestCell();
+            }
             if (InventoryItem != null)
             {
                 _dragEvent?.Invoke();
             }
         }
 
-        void PlaceInTheNearestCell()
+        public void PlaceInTheNearestCell()
         {
             int closetIndex = 0;
             for (int i = 0; i < DragOrigin.transform.childCount; i++)
