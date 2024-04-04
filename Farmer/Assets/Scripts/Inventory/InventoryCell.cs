@@ -15,10 +15,11 @@ namespace Scripts.InventoryCode
         [SerializeField] Image IconElement;
         [SerializeField] TextMeshProUGUI TextElement;
         Action _dragEvent;
+        int _siblingIndex;
         public InventoryItem InventoryItem { get; private set; }
-        public Transform DragParent { get; private set; }
-        public Transform DragOrigin { get; private set; }
-        public bool IsEmpty { get; private set; }
+
+        public Transform _globalVisualContext { get; private set; }
+        public Transform _originVisualContext { get; private set; }
 
         public Image Icon => IconElement;
         public TextMeshProUGUI Text => TextElement;
@@ -33,27 +34,23 @@ namespace Scripts.InventoryCode
         }
         public void InitializeDragParent(Transform dragParent)
         {
-            DragOrigin = transform.parent;
-            DragParent = dragParent;
+            _originVisualContext = transform.parent;
+            _globalVisualContext = dragParent;
         }
         public void OverwriteDragOrigin(Transform dragOrigin)
         {
-            DragOrigin = dragOrigin;
-            
+            _originVisualContext = dragOrigin;
+
         }
         public void InitializeItem(InventoryItem inventoryItem)
         {
             InventoryItem = inventoryItem;
-            IsEmpty = false;
         }
         public void InitializeDragEvent(Action dragMethod)
         {
             _dragEvent += dragMethod;
         }
-        public void SetEmpty(bool isEmpty)
-        {
-            IsEmpty = isEmpty;
-        }
+
 
         public void OnDrag(PointerEventData eventData)
         {
@@ -62,42 +59,51 @@ namespace Scripts.InventoryCode
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            transform.SetParent(DragParent);
+            
+            transform.SetParent(_globalVisualContext);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Inventory inventory;
+            InventoryBase inventory;
             if (EndDragExtension.CheckMouseIntersectionWithContainers(eventData,
                 out inventory))
             {
-                inventory.AddCell(this);
-                PlaceInTheNearestCell();
+                //inventory.AddCell(this);
+                EndDragExtension.PlaceInTheNearestCell(inventory.Container,
+                    this);
             }
             else
             {
-                PlaceInTheNearestCell();
+                EndDragExtension.PlaceInTheNearestCell(_originVisualContext,
+                    this);
             }
-            if (InventoryItem != null)
-            {
-                _dragEvent?.Invoke();
-            }
+
+            _dragEvent?.Invoke();
         }
 
         public void PlaceInTheNearestCell()
         {
             int closetIndex = 0;
-            for (int i = 0; i < DragOrigin.transform.childCount; i++)
+            for (int i = 0; i < _originVisualContext.transform.childCount; i++)
             {
-                if (Vector3.Distance(DragOrigin.GetChild(i).position, transform.position) <
-                    Vector3.Distance(DragOrigin.GetChild(closetIndex).position, transform.position))
+                if (Vector3.Distance(_originVisualContext.GetChild(i).position, transform.position) <
+                    Vector3.Distance(_originVisualContext.GetChild(closetIndex).position, transform.position))
                 {
                     closetIndex = i;
                 }
             }
-            transform.SetParent(DragOrigin);
+            transform.SetParent(_originVisualContext);
             transform.SetSiblingIndex(closetIndex);
         }
 
+        public void Initialize(Transform globalVisualContext,
+            InventoryItem inventoryItem, Action endDragEvent)
+        {
+            _globalVisualContext = globalVisualContext;
+            _originVisualContext = transform.parent;
+            InventoryItem = inventoryItem;
+            _dragEvent = endDragEvent;
+        }
     }
 }

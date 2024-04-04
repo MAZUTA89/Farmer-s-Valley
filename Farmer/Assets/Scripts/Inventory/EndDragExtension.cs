@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using Scripts.InventoryCode;
 using UnityEngine.UI;
@@ -30,7 +30,7 @@ namespace Scripts.InventoryCode
         }
 
         public static bool CheckMouseIntersectionWithContainers
-            (PointerEventData eventData, out Inventory inventory)
+            (PointerEventData eventData, out InventoryBase inventory)
         {
             foreach (var rect in _containersRectTransform)
             {
@@ -43,7 +43,7 @@ namespace Scripts.InventoryCode
 
                 if(rect.rect.Contains(mousePosition))
                 {
-                    inventory = rect.gameObject.GetComponent<Inventory>();
+                    inventory = rect.gameObject.GetComponent<InventoryBase>();
                     return true;
                 }
 
@@ -51,5 +51,24 @@ namespace Scripts.InventoryCode
             inventory = null;
             return false;
         }
+        public static void PlaceInTheNearestCell(Transform visualContext,
+            InventoryCell inventoryCell)
+        {
+            int closetIndex = 0;
+            for (int i = 0; i < visualContext.transform.childCount; i++)
+            {
+                if (Vector3.Distance(visualContext.GetChild(i).position,
+                    inventoryCell.transform.position) <
+                    Vector3.Distance(visualContext.GetChild(closetIndex).position,
+                    inventoryCell.transform.position))
+                {
+                    closetIndex = i;
+                }
+            }
+            inventoryCell.transform.SetParent(visualContext);
+            inventoryCell.transform.SetSiblingIndex(closetIndex);
+        }
+
+        
     }
 }
