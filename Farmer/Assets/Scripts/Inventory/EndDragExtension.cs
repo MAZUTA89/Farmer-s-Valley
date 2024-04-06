@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using Scripts.InventoryCode;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 
 namespace Scripts.InventoryCode
@@ -51,7 +52,7 @@ namespace Scripts.InventoryCode
             inventory = null;
             return false;
         }
-        public static void PlaceInTheNearestCell(Transform visualContext,
+        public static async void PlaceInTheNearestCell(Transform visualContext,
             InventoryCell inventoryCell, int currentIndex)
         {
             int closetIndex = 0;
@@ -66,7 +67,7 @@ namespace Scripts.InventoryCode
                 }
             }
             inventoryCell.transform.SetParent(visualContext);
-            MoveCellTo(inventoryCell.transform, closetIndex, currentIndex);
+            await MoveCellTo(inventoryCell.transform, closetIndex, currentIndex);
             //inventoryCell.transform.SetSiblingIndex(closetIndex);
         }
         //public static void PlaceInTheNearestCell(Transform visualContext, InventoryCell inventoryCell)
@@ -106,21 +107,23 @@ namespace Scripts.InventoryCode
            var child = visualContext.GetChild(closetIndex);
             Debug.Log(closetIndex);
         }
-        static void MoveCellTo(Transform cellTransform, int closetIndex, int currentIndex)
+        static async Task  MoveCellTo(Transform cellTransform, int closetIndex, int currentIndex)
         {
             //int currentIndex = cellTransform.GetSiblingIndex();
             if(closetIndex > currentIndex)
             {
-                for (int i = currentIndex; i < closetIndex; i++)
+                for (int i = currentIndex; i <= closetIndex; i++)
                 {
                     cellTransform.SetSiblingIndex(i);
+                    await Task.Delay(500);
                 }
             }
             else
             {
-                for(int i = currentIndex; i > closetIndex; i--)
+                for(int i = currentIndex; i >= closetIndex; i--)
                 {
                     cellTransform.SetSiblingIndex(i);
+                    await Task.Delay(500);
                 }
             }
             
