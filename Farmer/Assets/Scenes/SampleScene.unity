@@ -6025,7 +6025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 196820705616246789, guid: f32ccfc313951de4f999ae675b3e27d8, type: 3}
       propertyPath: m_Constraint
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 196820705616246789, guid: f32ccfc313951de4f999ae675b3e27d8, type: 3}
       propertyPath: m_Padding.m_Top

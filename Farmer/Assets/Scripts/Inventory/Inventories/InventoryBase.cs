@@ -101,7 +101,7 @@ namespace Scripts.InventoryCode
         protected virtual void OnStart()
         {
             Container = transform;
-            EndDragExtension.RegisterInventoryRectTransform
+            DragExtension.RegisterInventoryRectTransform
                 (gameObject.GetComponent<RectTransform>());
             OnBeginDragEvent += OnBeginDragCell;
             OnEndDragEvent += OnEndDrag;
