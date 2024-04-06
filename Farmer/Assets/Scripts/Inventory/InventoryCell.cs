@@ -14,7 +14,8 @@ namespace Scripts.InventoryCode
     {
         [SerializeField] Image IconElement;
         [SerializeField] TextMeshProUGUI TextElement;
-        Action _dragEvent;
+        Action _endDragEvent;
+        Action<InventoryCell> _beginDragEvent;
         int _siblingIndex;
         public InventoryItem InventoryItem { get; private set; }
 
@@ -26,11 +27,15 @@ namespace Scripts.InventoryCode
 
         private void OnDisable()
         {
-            _dragEvent = null;
+            _endDragEvent = null;
         }
         private void Start()
         {
 
+        }
+        private void Update()
+        {
+            InventoryItem?.RenderUI(this);
         }
         public void InitializeDragParent(Transform dragParent)
         {
@@ -48,38 +53,51 @@ namespace Scripts.InventoryCode
         }
         public void InitializeDragEvent(Action dragMethod)
         {
-            _dragEvent += dragMethod;
+            _endDragEvent += dragMethod;
         }
 
 
         public void OnDrag(PointerEventData eventData)
         {
-            transform.position = Input.mousePosition;
+            transform.position = _originVisualContext.InverseTransformVector(Input.mousePosition);
+            EndDragExtension.ShowNearestCellFor(this, _originVisualContext);
         }
-
+        int currentIndex;
         public void OnBeginDrag(PointerEventData eventData)
         {
-            
+            currentIndex = transform.GetSiblingIndex();
+            Debug.Log($"Begin index: {currentIndex}");
             transform.SetParent(_globalVisualContext);
+            _beginDragEvent?.Invoke(this);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            InventoryBase inventory;
-            if (EndDragExtension.CheckMouseIntersectionWithContainers(eventData,
-                out inventory))
-            {
-                //inventory.AddCell(this);
-                EndDragExtension.PlaceInTheNearestCell(inventory.Container,
-                    this);
-            }
-            else
-            {
+            //InventoryBase inventory;
+            //if (EndDragExtension.CheckMouseIntersectionWithContainers(eventData,
+            //    out inventory))
+            //{
+            //    if(_originVisualContext == inventory.Container)
+            //    {
+            //        Debug.Log("Тот же контейнер");
+            //        EndDragExtension.PlaceInTheNearestCell(_originVisualContext,
+            //        this);
+            //    }
+            //    else
+            //    {
+            //        EndDragExtension.PlaceInTheNearestCell(inventory.Container, this);
+            //    }
+            //    //inventory.AddCell(this);
+            //    //EndDragExtension.PlaceInTheNearestCell(inventory.Container,
+            //    //    this);
+            //}
+            //else
+            //{
                 EndDragExtension.PlaceInTheNearestCell(_originVisualContext,
-                    this);
-            }
+                    this, currentIndex);
+            //}
 
-            _dragEvent?.Invoke();
+            _endDragEvent?.Invoke();
         }
 
         public void PlaceInTheNearestCell()
@@ -98,12 +116,14 @@ namespace Scripts.InventoryCode
         }
 
         public void Initialize(Transform globalVisualContext,
-            InventoryItem inventoryItem, Action endDragEvent)
+            InventoryItem inventoryItem, Action endDragEvent,
+            Action<InventoryCell> beginDragEvent)
         {
             _globalVisualContext = globalVisualContext;
             _originVisualContext = transform.parent;
             InventoryItem = inventoryItem;
-            _dragEvent = endDragEvent;
+            _endDragEvent = endDragEvent;
+            _beginDragEvent = beginDragEvent;
         }
     }
 }

@@ -3163,7 +3163,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0002540079, y: -0.0008952046}
-  m_SizeDelta: {x: -0.0002, y: 385.04}
+  m_SizeDelta: {x: -0.0002, y: 516.24}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &494272781
 MonoBehaviour:
@@ -5159,8 +5159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2493ed88c103c4c877c7b5552b152b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backPackInventory: {fileID: 0}
-  _activeInventory: {fileID: 0}
 --- !u!1 &1402137752
 GameObject:
   m_ObjectHideFlags: 0
@@ -5347,6 +5345,7 @@ Transform:
   m_Children:
   - {fileID: 1791796164}
   - {fileID: 1372844967}
+  - {fileID: 1754268706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468980088
@@ -5592,6 +5591,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721743187}
   m_CullTransparentMesh: 1
+--- !u!1 &1754268705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1754268706}
+  - component: {fileID: 1754268707}
+  m_Layer: 0
+  m_Name: StaticInventoriesInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1754268706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754268705}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1453234722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1754268707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754268705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012b19fed66d6df44a5b2cc212e6d8ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backPackStartItemKit:
+  - {fileID: 11400000, guid: 539059c631a4ca64197a14eaba3497f8, type: 2}
+  - {fileID: 11400000, guid: 749c809e6e7a26e47b67734737b6b7c0, type: 2}
+  - {fileID: 11400000, guid: 1e9ce64faaee645458ba445dc4195f80, type: 2}
+  - {fileID: 11400000, guid: e079df4063c5c5e4bb4ca0e0ad9555df, type: 2}
+  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: da37a0ccda8958c418749364a34d906a, type: 2}
+  - {fileID: 11400000, guid: 27c8d08cb470fb744a0c7cbce163fa2d, type: 2}
+  - {fileID: 11400000, guid: a60e381e453c5da46a79675834c41545, type: 2}
+  _backPackInventory: {fileID: 494272783}
+  _activeStartItemKit: []
+  _activeInventory: {fileID: 1951533486}
+  _sellerStartItemKit: []
+  _sellerInventory: {fileID: 0}
 --- !u!1 &1757571513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5775,10 +5832,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DragParent: {fileID: 573698812}
   CellTemplate: {fileID: 1858852897024890904, guid: 47d9da38d43663144a8ba5fe9a4d4d89, type: 3}
+  EmptyCellTemplate: {fileID: 6815851499041236181, guid: eb8ab5ce62ab5084f8cdd4f5369d91d2, type: 3}
   _activeInventory: {fileID: 1951533486}
   _activeInventoryInfo: {fileID: 11400000, guid: 8a7fdc4556ad6cd4aa932480dca8b1cb, type: 2}
   _storageInventoryInfo: {fileID: 11400000, guid: 3f9516492c3f939469ce70b03da94b69, type: 2}
-  _backPackInventory: {fileID: 494272783}
   StartKit:
   - {fileID: 11400000, guid: 539059c631a4ca64197a14eaba3497f8, type: 2}
   - {fileID: 11400000, guid: 749c809e6e7a26e47b67734737b6b7c0, type: 2}

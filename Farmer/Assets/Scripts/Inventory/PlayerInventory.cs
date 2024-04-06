@@ -7,12 +7,11 @@ namespace Scripts.InventoryCode
 {
     public class PlayerInventory : MonoBehaviour
     {
-        [SerializeField] Inventory _backPackInventory;
-        [SerializeField] Inventory _activeInventory;
-        [Inject]
-        public void Construct(Inventory backPackInventory)
+        
+
+        private void Start()
         {
-             _backPackInventory = backPackInventory;
+            
         }
 
         private void Update()

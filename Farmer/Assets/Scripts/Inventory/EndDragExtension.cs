@@ -52,7 +52,7 @@ namespace Scripts.InventoryCode
             return false;
         }
         public static void PlaceInTheNearestCell(Transform visualContext,
-            InventoryCell inventoryCell)
+            InventoryCell inventoryCell, int currentIndex)
         {
             int closetIndex = 0;
             for (int i = 0; i < visualContext.transform.childCount; i++)
@@ -66,9 +66,64 @@ namespace Scripts.InventoryCode
                 }
             }
             inventoryCell.transform.SetParent(visualContext);
-            inventoryCell.transform.SetSiblingIndex(closetIndex);
+            MoveCellTo(inventoryCell.transform, closetIndex, currentIndex);
+            //inventoryCell.transform.SetSiblingIndex(closetIndex);
         }
+        //public static void PlaceInTheNearestCell(Transform visualContext, InventoryCell inventoryCell)
+        //{
+        //    int closestIndex = 0;
+        //    float closestDistance = 0;
+        //    Vector3 localPosition = visualContext.InverseTransformPoint(inventoryCell.transform.position);
 
-        
+        //    for (int i = 0; i < visualContext.childCount; i++)
+        //    {
+        //        float distance = Vector3.Distance(localPosition, visualContext.GetChild(i).localPosition);
+        //        if (distance < closestDistance)
+        //        {
+        //            closestDistance = distance;
+        //            closestIndex = i;
+        //        }
+        //    }
+
+        //    inventoryCell.transform.SetParent(visualContext);
+        //    inventoryCell.transform.SetSiblingIndex(closestIndex);
+        //}
+
+        public static void ShowNearestCellFor(InventoryCell inventoryCell, Transform visualContext)
+        {
+            int closetIndex = 0;
+            Debug.Log("Count " + visualContext.transform.childCount);
+            for (int i = 0; i < visualContext.transform.childCount; i++)
+            {
+                if (Vector3.Distance(visualContext.GetChild(i).position,
+                    inventoryCell.transform.position) <
+                    Vector3.Distance(visualContext.GetChild(closetIndex).position,
+                    inventoryCell.transform.position))
+                {
+                    closetIndex = i;
+                }
+            }
+           var child = visualContext.GetChild(closetIndex);
+            Debug.Log(closetIndex);
+        }
+        static void MoveCellTo(Transform cellTransform, int closetIndex, int currentIndex)
+        {
+            //int currentIndex = cellTransform.GetSiblingIndex();
+            if(closetIndex > currentIndex)
+            {
+                for (int i = currentIndex; i < closetIndex; i++)
+                {
+                    cellTransform.SetSiblingIndex(i);
+                }
+            }
+            else
+            {
+                for(int i = currentIndex; i > closetIndex; i--)
+                {
+                    cellTransform.SetSiblingIndex(i);
+                }
+            }
+            
+        }
     }
 }

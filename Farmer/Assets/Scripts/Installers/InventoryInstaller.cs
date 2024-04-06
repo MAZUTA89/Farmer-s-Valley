@@ -15,6 +15,8 @@ namespace Scripts.Installers
         [SerializeField] Transform DragParent;
         [Header("Cell prefab")]
         [SerializeField] private InventoryCell CellTemplate;
+        [Header("Empty cell prefab")]
+        [SerializeField] private GameObject EmptyCellTemplate;
         [Header("Active inventory")]
         [SerializeField] private InventoryBase _activeInventory;
         [SerializeField] private InventoryInfo _activeInventoryInfo;
@@ -22,25 +24,13 @@ namespace Scripts.Installers
         [Space]
         [Header("Backpack inventory")]
         [SerializeField] private InventoryInfo _storageInventoryInfo;
-        [SerializeField] private InventoryBase _backPackInventory;
+        
         [SerializeField] List<InventoryItemAssetData> StartKit;
         public override void InstallBindings()
         {
-            _backPackInventory.Initialize(StartKit);
-            _activeInventory.Initialize(new List<InventoryItemAssetData>());
             BindInventories();
             BindCellTemplate();
             BindGlobalVisualContext();
-            //Container.BindInstance(_backPackInventory)
-            //    .WithId("BackpackInventory")
-            //    .AsSingle();
-            //Container.BindInstance(_activeInventory)
-            //    .WithId("ActiveInventory")
-            //    .AsSingle();
-            //Container.Bind<PlayerInventory>().FromComponentInHierarchy().AsSingle();
-
-            //Container.Bind<Inventory>().WithArguments(InventoryContainer, StartKit).WhenInjectedInto<PlayerInventory>();
-
 
         }
         void BindGlobalVisualContext()
@@ -54,10 +44,12 @@ namespace Scripts.Installers
             Container.BindInstance(CellTemplate)
                 .WithId("CellTemplate")
                 .AsTransient();
+            Container.BindInstance(EmptyCellTemplate)
+                .WithId("EmptyCellTemplate")
+                .AsTransient();
         }
         void BindInventories()
         {
-            Container.Bind<InventoryBase>().AsTransient();
             Container.Bind<InventoryStorage>().AsTransient();
             Container.BindInstance(_storageInventoryInfo)
                 .WithId("InventoryStorageInfo")

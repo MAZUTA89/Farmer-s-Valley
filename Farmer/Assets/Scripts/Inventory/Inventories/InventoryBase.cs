@@ -15,17 +15,23 @@ namespace Scripts.InventoryCode
         public Transform Container { get; private set; }
         private Transform _globalVisualContext;
         private InventoryCell _inventoryCellTemplate;
+        private GameObject _emptyCellTemplate;
         protected List<InventoryItem> InventoryItems;
 
+        protected Action<InventoryCell> OnBeginDragEvent;
         protected Action OnEndDragEvent;
+
+        private GameObject _tmpEmptyCell;
 
 
         [Inject]
         public void Construct([Inject(Id = "DragParent")] Transform dragParent,
-            [Inject(Id = "CellTemplate")] InventoryCell inventoryCellTemplate)
+            [Inject(Id = "CellTemplate")] InventoryCell inventoryCellTemplate,
+            [Inject(Id = "EmptyCellTemplate")] GameObject emptyInventoryCellTemplate)
         {
             _globalVisualContext = dragParent;
             _inventoryCellTemplate = inventoryCellTemplate;
+            _emptyCellTemplate = emptyInventoryCellTemplate;
         }
 
         public void Initialize(List<InventoryItemAssetData> inventoryItemAssetData)
@@ -35,10 +41,20 @@ namespace Scripts.InventoryCode
         }
         public void Initialize(List<InventoryItem> inventoryItems)
         {
-            foreach (InventoryItem item in inventoryItems)
+            OnStart();
+            for (int i = 0; i < TotalSize; i++)
             {
-                AddItem(item);
+                if(i < inventoryItems.Count)
+                {
+                    AddItem(inventoryItems[i]);
+                }
+                else
+                {
+                    Instantiate(_emptyCellTemplate, Container);
+                    //AddItem(null);
+                }
             }
+            
         }
         List<InventoryItem> InitializeInventoryItems
             (List<InventoryItemAssetData> inventoryItemAssetData)
@@ -67,7 +83,8 @@ namespace Scripts.InventoryCode
         public virtual void AddItem(InventoryItem inventoryItem)
         {
             InventoryCell newCell = Instantiate(_inventoryCellTemplate, Container);
-            newCell.Initialize(_globalVisualContext, inventoryItem, OnEndDragEvent);
+            newCell.Initialize(_globalVisualContext, inventoryItem,
+                OnEndDragEvent, OnBeginDragEvent);
         }
         public bool IsFull()
         {
@@ -80,20 +97,33 @@ namespace Scripts.InventoryCode
                 return true;
             }
         }
-        protected virtual void OnEndDrag()
-        {
-
-        }
-        protected virtual void Start()
+        
+        protected virtual void OnStart()
         {
             Container = transform;
             EndDragExtension.RegisterInventoryRectTransform
                 (gameObject.GetComponent<RectTransform>());
+            OnBeginDragEvent += OnBeginDragCell;
             OnEndDragEvent += OnEndDrag;
         }
         private void OnDisable()
         {
+            OnBeginDragEvent -= OnBeginDragCell;
             OnEndDragEvent -= OnEndDrag;
         }
+        protected virtual void OnBeginDragCell(InventoryCell inventoryCell)
+        {
+            //Debug.Log("Invoke begin drag!");
+            int siblingIndex = inventoryCell.transform.GetSiblingIndex();
+            _tmpEmptyCell = Instantiate(_emptyCellTemplate, Container);
+            _tmpEmptyCell.name = "SiblingCell";
+            _tmpEmptyCell.transform.SetSiblingIndex(siblingIndex);
+        }
+        protected virtual void OnEndDrag()
+        {
+            Destroy(_tmpEmptyCell);
+        }
+
+        
     }
 }
