@@ -33,38 +33,32 @@ namespace Scripts.InventoryCode
         {
 
         }
+        public void Initialize(Transform globalVisualContext,
+            InventoryItem inventoryItem)
+        {
+            _globalVisualContext = globalVisualContext;
+            OriginVisualContext = transform.parent;
+            InventoryItem = inventoryItem;
+            
+        }
+        public void RegisterEvents(Action endDragEvent, Action<InventoryCell> beginDragEvent)
+        {
+            _endDragEvent = endDragEvent;
+            _beginDragEvent = beginDragEvent;
+        }
         private void Update()
         {
             InventoryItem?.RenderUI(this);
         }
-        public void InitializeDragParent(Transform dragParent)
-        {
-            OriginVisualContext = transform.parent;
-            _globalVisualContext = dragParent;
-        }
-        public void OverwriteDragOrigin(Transform dragOrigin)
-        {
-            OriginVisualContext = dragOrigin;
-
-        }
-        public void InitializeItem(InventoryItem inventoryItem)
-        {
-            InventoryItem = inventoryItem;
-        }
-        public void InitializeDragEvent(Action dragMethod)
-        {
-            _endDragEvent += dragMethod;
-        }
-
+        
         public void OnDrag(PointerEventData eventData)
         {
             transform.position = OriginVisualContext.InverseTransformVector(Input.mousePosition);
-            DragExtension.ShowNearestCellFor(this, OriginVisualContext);
+            //DragExtension.ShowNearestCellFor(this, OriginVisualContext);
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
             BeginDragSiblingIndex = transform.GetSiblingIndex();
-            Debug.Log($"Begin index: {BeginDragSiblingIndex}");
             _beginDragEvent?.Invoke(this);
             transform.SetParent(_globalVisualContext);
         }
@@ -73,35 +67,37 @@ namespace Scripts.InventoryCode
         {
             InventoryBase inventory;
             if (DragExtension.CheckMouseIntersectionWithContainers(eventData,
-                out inventory))
+                out inventory))// если есть пересечение с другим инвентарем
             {
+                // если это тот же инвентарь
                 if (OriginVisualContext == inventory.Container)
                 {
-                    Debug.Log("Тот же контейнер");
                     DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
                     this, BeginDragSiblingIndex);
                 }
-                else
+                else//другой инвентарь
                 {
-                    DragExtension.PlaceInTheNearestCellLocal(inventory.Container, this, BeginDragSiblingIndex);
+                    if (inventory.IsFull())// если полон, то не перекладывать
+                    {
+                        DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
+                        this, BeginDragSiblingIndex);
+                    }
+                    else// переложить и переподписать ячейку на события другого инвентаря
+                    {
+                        DragExtension.PlaceInTheNearestCellGlobal(inventory.Container, this);
+                        OriginVisualContext = inventory.Container;
+                        _endDragEvent?.Invoke();
+                        inventory.RegisterDragEvents(this);
+                        return;
+                    }
                 }
             }
-            else
+            else// нет пересечений с другим инвентарем
             {
                 DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
                     this, BeginDragSiblingIndex);
             }
             _endDragEvent?.Invoke();
-        }
-        public void Initialize(Transform globalVisualContext,
-            InventoryItem inventoryItem, Action endDragEvent,
-            Action<InventoryCell> beginDragEvent)
-        {
-            _globalVisualContext = globalVisualContext;
-            OriginVisualContext = transform.parent;
-            InventoryItem = inventoryItem;
-            _endDragEvent = endDragEvent;
-            _beginDragEvent = beginDragEvent;
         }
     }
 }

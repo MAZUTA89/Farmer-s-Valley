@@ -10,13 +10,12 @@ namespace Scripts.InventoryCode
     public abstract class InventoryBase : MonoBehaviour
     {
         protected int TotalSize;
-        
         protected int CurrentSize => Container.childCount;
         public Transform Container { get; private set; }
-        private Transform _globalVisualContext;
-        private InventoryCell _inventoryCellTemplate;
-        private GameObject _emptyCellTemplate;
         protected List<InventoryItem> InventoryItems;
+        protected IInventoryCellFactory _inventoryCellFactory;
+        private Transform _globalVisualContext;
+        
 
         protected Action<InventoryCell> OnBeginDragEvent;
         protected Action OnEndDragEvent;
@@ -25,13 +24,9 @@ namespace Scripts.InventoryCode
 
 
         [Inject]
-        public void Construct([Inject(Id = "DragParent")] Transform dragParent,
-            [Inject(Id = "CellTemplate")] InventoryCell inventoryCellTemplate,
-            [Inject(Id = "EmptyCellTemplate")] GameObject emptyInventoryCellTemplate)
+        public void Construct([Inject(Id = "DragParent")] Transform dragParent)
         {
             _globalVisualContext = dragParent;
-            _inventoryCellTemplate = inventoryCellTemplate;
-            _emptyCellTemplate = emptyInventoryCellTemplate;
         }
 
         public void Initialize(List<InventoryItemAssetData> inventoryItemAssetData)
@@ -42,17 +37,9 @@ namespace Scripts.InventoryCode
         public void Initialize(List<InventoryItem> inventoryItems)
         {
             OnStart();
-            for (int i = 0; i < TotalSize; i++)
+            foreach (var item in inventoryItems)
             {
-                if(i < inventoryItems.Count)
-                {
-                    AddItem(inventoryItems[i]);
-                }
-                else
-                {
-                    Instantiate(_emptyCellTemplate, Container);
-                    //AddItem(null);
-                }
+                AddItem(item);
             }
             
         }
@@ -80,21 +67,30 @@ namespace Scripts.InventoryCode
             }
             return inventoryItems;
         }
+
+        public void RegisterDragEvents(InventoryCell inventoryCell)
+        {
+            inventoryCell.RegisterEvents(OnEndDragEvent, OnBeginDragEvent);
+        }
         public virtual void AddItem(InventoryItem inventoryItem)
         {
-            InventoryCell newCell = Instantiate(_inventoryCellTemplate, Container);
-            newCell.Initialize(_globalVisualContext, inventoryItem,
-                OnEndDragEvent, OnBeginDragEvent);
+            InventoryCell newCell = _inventoryCellFactory.Create(Container);
+            newCell.Initialize(_globalVisualContext, inventoryItem);
+            RegisterDragEvents(newCell);
         }
+        /// <summary>
+        /// Возвращает true, если инвентарь заполнен
+        /// </summary>
+        /// <returns></returns>
         public bool IsFull()
         {
             if(CurrentSize >= TotalSize)
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
         
@@ -113,17 +109,13 @@ namespace Scripts.InventoryCode
         }
         protected virtual void OnBeginDragCell(InventoryCell inventoryCell)
         {
-            //Debug.Log("Invoke begin drag!");
-            int siblingIndex = inventoryCell.transform.GetSiblingIndex();
-            _tmpEmptyCell = Instantiate(_emptyCellTemplate, Container);
-            _tmpEmptyCell.name = "SiblingCell";
-            _tmpEmptyCell.transform.SetSiblingIndex(siblingIndex);
+            _tmpEmptyCell = _inventoryCellFactory.CreateEmpty(inventoryCell);
+            
         }
         protected virtual void OnEndDrag()
         {
-            Destroy(_tmpEmptyCell);
+            if(_tmpEmptyCell != null)
+                Destroy(_tmpEmptyCell);
         }
-
-        
     }
 }

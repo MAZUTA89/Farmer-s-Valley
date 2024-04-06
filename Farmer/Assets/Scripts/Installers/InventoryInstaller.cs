@@ -17,21 +17,22 @@ namespace Scripts.Installers
         [SerializeField] private InventoryCell CellTemplate;
         [Header("Empty cell prefab")]
         [SerializeField] private GameObject EmptyCellTemplate;
+        [Header("ItemResourceSO")]
+        [SerializeField] private ItemSourceSO ItemSource;
+        [Space]
         [Header("Active inventory")]
-        [SerializeField] private InventoryBase _activeInventory;
         [SerializeField] private InventoryInfo _activeInventoryInfo;
         [Space]
         [Space]
         [Header("Backpack inventory")]
         [SerializeField] private InventoryInfo _storageInventoryInfo;
-        
         [SerializeField] List<InventoryItemAssetData> StartKit;
         public override void InstallBindings()
         {
             BindInventories();
             BindCellTemplate();
             BindGlobalVisualContext();
-
+            BindFactories();
         }
         void BindGlobalVisualContext()
         {
@@ -58,6 +59,19 @@ namespace Scripts.Installers
             Container.BindInstance(_activeInventoryInfo)
                 .WithId("ActiveInventoryInfo")
                 .AsTransient();
+        }
+        void BindFactories()
+        {
+            Container.Bind<IInventoryCellFactory>()
+                .To<StorageCellFactory>()
+                .WithArguments(CellTemplate, EmptyCellTemplate)
+                .WhenInjectedInto<InventoryStorage>();
+        }
+        void BindItemResourceLogic()
+        {
+            Container.Bind<ItemResourceDroper>().AsSingle();
+            Container.BindInstance(ItemSource).AsTransient();
+            Container.Bind<ItemResource>().AsTransient();
         }
     }
 }

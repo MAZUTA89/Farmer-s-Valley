@@ -8,10 +8,12 @@ namespace Scripts.InventoryCode
     public class InventoryStorage : InventoryBase
     {
         [Inject]
-        public void ConstructStorage(
-            [Inject(Id = "InventoryStorageInfo")] InventoryInfo inventoryInfo)
+        public virtual void ConstructStorage(
+            [Inject(Id = "InventoryStorageInfo")] InventoryInfo inventoryInfo,
+            IInventoryCellFactory inventoryCellFactory)
         {
             TotalSize = inventoryInfo.TotalSize;
+            _inventoryCellFactory = inventoryCellFactory;
         }
     }
 }

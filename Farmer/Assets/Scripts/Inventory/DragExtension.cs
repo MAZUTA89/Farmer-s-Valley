@@ -57,21 +57,22 @@ namespace Scripts.InventoryCode
         public static async void PlaceInTheNearestCellLocal(Transform visualContext,
             InventoryCell inventoryCell, int currentIndex)
         {
-            int closetIndex = 0;
-            for (int i = 0; i < visualContext.transform.childCount; i++)
-            {
-                if (Vector3.Distance(visualContext.GetChild(i).position,
-                    inventoryCell.transform.position) <
-                    Vector3.Distance(visualContext.GetChild(closetIndex).position,
-                    inventoryCell.transform.position))
-                {
-                    closetIndex = i;
-                }
-            }
+            int closetIndex = GetNearestIndex(visualContext, inventoryCell);
+            
             inventoryCell.transform.SetParent(visualContext);
             await MoveCellTo(inventoryCell.transform, closetIndex, currentIndex);
         }
-        public static Transform GetNearestCellTransform(Transform visualContext,
+        public static void PlaceInTheNearestCellGlobal(Transform visualContext,
+            InventoryCell inventoryCell)
+        {
+            int closetIndex = GetNearestIndex(visualContext, inventoryCell);
+
+            inventoryCell.transform.SetParent(visualContext);
+            
+            inventoryCell.transform.SetSiblingIndex(closetIndex);
+        }
+
+        static int GetNearestIndex(Transform visualContext,
             InventoryCell inventoryCell)
         {
             int closetIndex = 0;
@@ -85,6 +86,13 @@ namespace Scripts.InventoryCode
                     closetIndex = i;
                 }
             }
+            return closetIndex;
+        }
+        public static Transform GetNearestCellTransform(Transform visualContext,
+            InventoryCell inventoryCell)
+        {
+            int closetIndex = GetNearestIndex(visualContext, inventoryCell);
+            
             return visualContext.GetChild(closetIndex);
         }
 

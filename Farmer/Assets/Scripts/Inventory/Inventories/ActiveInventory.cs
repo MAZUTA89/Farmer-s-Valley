@@ -5,14 +5,20 @@ using Zenject;
 
 namespace Scripts.InventoryCode
 {
-    public class ActiveInventory : InventoryBase
+    public class ActiveInventory : InventoryStorage
     {
 
-        [Inject]
-        public void ConstructActive(
-            [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo)
+        //[Inject]
+        //public void ConstructActive(
+        //    [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo
+        //    )
+        //{
+        //    TotalSize = inventoryInfo.TotalSize;
+        //}
+
+        public override void ConstructStorage([Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo, IInventoryCellFactory inventoryCellFactory)
         {
-            TotalSize = inventoryInfo.TotalSize;
+            base.ConstructStorage(inventoryInfo, inventoryCellFactory);
         }
     }
 }
