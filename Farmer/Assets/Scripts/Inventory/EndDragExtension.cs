@@ -107,7 +107,7 @@ namespace Scripts.InventoryCode
            var child = visualContext.GetChild(closetIndex);
             Debug.Log(closetIndex);
         }
-        static async Task  MoveCellTo(Transform cellTransform, int closetIndex, int currentIndex)
+        static async Task MoveCellTo(Transform cellTransform, int closetIndex, int currentIndex)
         {
             //int currentIndex = cellTransform.GetSiblingIndex();
             if(closetIndex > currentIndex)
@@ -115,7 +115,7 @@ namespace Scripts.InventoryCode
                 for (int i = currentIndex; i <= closetIndex; i++)
                 {
                     cellTransform.SetSiblingIndex(i);
-                    await Task.Delay(500);
+                    await Task.Delay(1);
                 }
             }
             else
@@ -123,7 +123,7 @@ namespace Scripts.InventoryCode
                 for(int i = currentIndex; i >= closetIndex; i--)
                 {
                     cellTransform.SetSiblingIndex(i);
-                    await Task.Delay(500);
+                    await Task.Delay(1);
                 }
             }
             
