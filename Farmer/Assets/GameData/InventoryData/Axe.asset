@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   _name: Axe
-  _icon: {fileID: 21300000, guid: ab2692b1e99ab294da7367f7bcc0962f, type: 3}
-  _count: 18
+  _icon: {fileID: 21300000, guid: 60a102bfcf0f8e345a30d54fa708f7c0, type: 3}

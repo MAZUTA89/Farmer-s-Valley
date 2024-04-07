@@ -1,4 +1,5 @@
 ﻿using Scripts.InventoryCode;
+using Scripts.InventoryCode.ItemResources;
 using Scripts.SO.Inventory;
 using Scripts.SO.InventoryItem;
 using System;
@@ -17,8 +18,6 @@ namespace Scripts.Installers
         [SerializeField] private InventoryCell CellTemplate;
         [Header("Empty cell prefab")]
         [SerializeField] private GameObject EmptyCellTemplate;
-        [Header("ItemResourceSO")]
-        [SerializeField] private ItemSourceSO ItemSource;
         [Space]
         [Header("Active inventory")]
         [SerializeField] private InventoryInfo _activeInventoryInfo;
@@ -27,18 +26,25 @@ namespace Scripts.Installers
         [Header("Backpack inventory")]
         [SerializeField] private InventoryInfo _storageInventoryInfo;
         [SerializeField] List<InventoryItemAssetData> StartKit;
+        [Space]
+        [Header("ItemResourceSO")]
+        [SerializeField] private ItemSourceSO ItemSourceSO;
+        [Header("Item resource prefab")]
+        [SerializeField] private ItemResource ItemResourcePrefab;
         public override void InstallBindings()
         {
             BindInventories();
             BindCellTemplate();
             BindGlobalVisualContext();
             BindFactories();
+            BindItemResourceLogic();
+            BindCells();
         }
         void BindGlobalVisualContext()
         {
             Container.BindInstance(DragParent)
                 .WithId("DragParent")
-                .AsSingle();
+                .AsTransient();
         }
         void BindCellTemplate()
         {
@@ -51,7 +57,7 @@ namespace Scripts.Installers
         }
         void BindInventories()
         {
-            Container.Bind<InventoryStorage>().AsTransient();
+            Container.Bind<InventoryStorage>().FromComponentInHierarchy().AsTransient();
             Container.BindInstance(_storageInventoryInfo)
                 .WithId("InventoryStorageInfo")
                 .AsTransient();
@@ -70,8 +76,17 @@ namespace Scripts.Installers
         void BindItemResourceLogic()
         {
             Container.Bind<ItemResourceDroper>().AsSingle();
-            Container.BindInstance(ItemSource).AsTransient();
+            Container.BindInstance(ItemSourceSO).AsTransient();
+            Container.BindInstance(ItemResourcePrefab).AsTransient();
             Container.Bind<ItemResource>().AsTransient();
+            Container.Bind<IItemResourceFactory>()
+                .To<ItemResourceFactory>()
+                .WithArguments(Container, ItemResourcePrefab)
+                .WhenInjectedInto<ItemResourceDroper>();
+        }
+        void BindCells()
+        {
+            Container.Bind<InventoryCell>().FromComponentInHierarchy().AsTransient();
         }
     }
 }

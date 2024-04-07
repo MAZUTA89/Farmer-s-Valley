@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.InventoryCode
 {
@@ -8,15 +9,21 @@ namespace Scripts.InventoryCode
     {
         InventoryCell _inventoryCellTemplate;
         GameObject _emptyCellPrefab;
-        public StorageCellFactory(InventoryCell inventoryCellTemplate, GameObject emptyCellPrefab) 
+        DiContainer _container;
+        public StorageCellFactory(DiContainer diContainer,
+            InventoryCell inventoryCellTemplate,
+            GameObject emptyCellPrefab) 
         {
             _inventoryCellTemplate = inventoryCellTemplate;
             _emptyCellPrefab = emptyCellPrefab;
+            _container = diContainer;
         }
 
         public InventoryCell Create(Transform visualContext)
         {
-            return GameObject.Instantiate(_inventoryCellTemplate, visualContext);
+            return _container.InstantiatePrefabForComponent<InventoryCell>
+                (_inventoryCellTemplate, visualContext);
+            //return GameObject.Instantiate(_inventoryCellTemplate, visualContext);
         }
 
         public GameObject CreateEmpty(InventoryCell inventoryCell)

@@ -1,11 +1,11 @@
-﻿using Scripts.SO.InventoryItem;
+﻿using Scripts.InventoryCode.ItemResources;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 
 namespace Scripts.InventoryCode
@@ -25,6 +25,16 @@ namespace Scripts.InventoryCode
         public TextMeshProUGUI Text => TextElement;
 
         public int BeginDragSiblingIndex { get; private set; }
+
+        ItemResourceDroper _itemResourceDroper;
+
+        [Inject]
+        public void Construct(ItemResourceDroper itemResourceDroper)
+        {
+            _itemResourceDroper = itemResourceDroper;
+        }
+
+
         private void OnDisable()
         {
             _endDragEvent = null;
@@ -94,8 +104,9 @@ namespace Scripts.InventoryCode
             }
             else// нет пересечений с другим инвентарем
             {
-                DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
-                    this, BeginDragSiblingIndex);
+                _endDragEvent?.Invoke();
+                Destroy(this.gameObject);
+                _itemResourceDroper.DropByPlayer(InventoryItem);
             }
             _endDragEvent?.Invoke();
         }

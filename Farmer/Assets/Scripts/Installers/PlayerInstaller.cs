@@ -10,8 +10,12 @@ namespace Scripts.Installers
     public class PlayerInstaller : MonoInstaller
     {
         [SerializeField] PlayerSO PlayerSO;
+        [SerializeField] Transform _playerTransform;
         public override void InstallBindings()
         {
+            Container.BindInstance(_playerTransform)
+                .WithId("PlayerTransform")
+                .AsTransient();
             Container.Bind<Movement>().AsSingle();
             Container.BindInstance(PlayerSO).AsTransient();
         }

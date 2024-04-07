@@ -11,6 +11,8 @@ namespace Scripts.InventoryCode
         public float FollowSpeed;
         public float FollowDistance;
         public float FollowTime;
-        public float DropForce;
+        public float PushSpeed;
+        public float GravityScale;
+        public float PushDistance;
     }
 }
