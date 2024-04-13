@@ -2,23 +2,19 @@
 using System;
 using System.Collections.Generic;
 using Zenject;
+using UnityEngine;
 
 namespace Scripts.InventoryCode
 {
     public class ActiveInventory : InventoryStorage
     {
-
-        //[Inject]
-        //public void ConstructActive(
-        //    [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo
-        //    )
-        //{
-        //    TotalSize = inventoryInfo.TotalSize;
-        //}
-
         public override void ConstructStorage([Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo, IInventoryCellFactory inventoryCellFactory)
         {
             base.ConstructStorage(inventoryInfo, inventoryCellFactory);
+        }
+        private void Update()
+        {
+            
         }
     }
 }

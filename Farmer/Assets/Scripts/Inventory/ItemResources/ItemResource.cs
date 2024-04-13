@@ -6,29 +6,33 @@ using Zenject;
 
 namespace Scripts.InventoryCode.ItemResources
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class ItemResource : MonoBehaviour
     {
+        [SerializeField] SpriteRenderer ItemVisualRenderer;
         ItemSourceSO _itemSourceSO;
         ItemResourceStateMachine _stateMachine;
         Transform _playerTransform;
         Sprite _icon;
-        public InventoryStorage InventoryStorage {  get; private set; }
-        public InventoryItem InventoryItem {  get; private set; }
+        public PlayerInventory PlayerInventory { get; private set; }
+        public InventoryItem InventoryItem { get; private set; }
         public Rigidbody2D RigidBody { get; private set; }
-        public SpriteRenderer SpriteRenderer { get; private set; }
+        public SpriteRenderer SpriteRenderer
+        {
+            get { return ItemVisualRenderer; }
+        }
+            
         public PushState PushState { get; private set; }
         public FollowState FollowState { get; private set; }
         public OnGroundState OnGroundState { get; private set; }
-        
+
 
         [Inject]
         public void Construct(ItemSourceSO itemSourceSO,
             [Inject(Id = "PlayerTransform")] Transform playerTransform,
-            InventoryStorage inventoryStorage)
+            PlayerInventory playerInventory)
         {
-            InventoryStorage = inventoryStorage;
+            PlayerInventory = playerInventory;
             _itemSourceSO = itemSourceSO;
             _playerTransform = playerTransform;
         }
@@ -36,7 +40,6 @@ namespace Scripts.InventoryCode.ItemResources
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody2D>();
-            SpriteRenderer = GetComponent<SpriteRenderer>();
             RigidBody.gravityScale = _itemSourceSO.GravityScale;
             SpriteRenderer.sprite = _icon;
             InitializeStateMachine();
@@ -63,9 +66,9 @@ namespace Scripts.InventoryCode.ItemResources
             OnGroundState = new OnGroundState(_stateMachine, this, _itemSourceSO);
             _stateMachine.Initialize(PushState);
         }
-        public void AddInventoryItem()
+        public bool PickupResource()
         {
-            InventoryStorage.AddItem(InventoryItem);
+            return PlayerInventory.TryPickupResource(this);
         }
         public float GetDistanceToPlayer()
         {

@@ -44,7 +44,8 @@ namespace Scripts.InventoryCode.ItemResources
 
         public override void Perform()
         {
-            if(Vector2.Distance(_rigidBody.position, _goal) < 0.1f)
+            if(Vector2.Distance(_rigidBody.position, _goal) < 
+                SourceSO.DistanceToChangeGroundState)
             {
                 StateMachine.ChangeOnGroundState();
             }

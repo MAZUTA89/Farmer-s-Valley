@@ -43,10 +43,12 @@ namespace Scripts.InventoryCode.ItemResources
             {
                 StateMachine.ChangeOnGroundState();
             }
-            if(distance <= 0.1f)
+            if(distance <= SourceSO.PickupDistance)
             {
-                ItemResource.AddInventoryItem();
-                ItemResource.Destroy(ItemResource.gameObject);
+                if(ItemResource.PickupResource())
+                {
+                    ItemResource.Destroy(ItemResource.gameObject);
+                }
             }
         }
     }

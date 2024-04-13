@@ -63,7 +63,7 @@ namespace Scripts.InventoryCode
         
         public void OnDrag(PointerEventData eventData)
         {
-            transform.position = OriginVisualContext.InverseTransformVector(Input.mousePosition);
+            transform.position = Input.mousePosition;
             //DragExtension.ShowNearestCellFor(this, OriginVisualContext);
         }
         public void OnBeginDrag(PointerEventData eventData)
@@ -98,6 +98,7 @@ namespace Scripts.InventoryCode
                         OriginVisualContext = inventory.Container;
                         _endDragEvent?.Invoke();
                         inventory.RegisterDragEvents(this);
+                        _endDragEvent?.Invoke();
                         return;
                     }
                 }

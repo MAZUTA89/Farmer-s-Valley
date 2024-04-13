@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 0
   FollowDistance: 1.08
-  FollowTime: 0
   PushSpeed: 2.18
   GravityScale: 0
   PushDistance: 0.35
+  PickupDistance: 0.21
+  DistanceToChangeGroundState: 0.08

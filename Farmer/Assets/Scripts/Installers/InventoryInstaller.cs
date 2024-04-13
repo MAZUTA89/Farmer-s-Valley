@@ -65,6 +65,10 @@ namespace Scripts.Installers
             Container.BindInstance(_activeInventoryInfo)
                 .WithId("ActiveInventoryInfo")
                 .AsTransient();
+            Container.Bind<ChestInventory>().AsTransient();
+            Container.Bind<PlayerInventory>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindFactories()
         {
@@ -86,7 +90,9 @@ namespace Scripts.Installers
         }
         void BindCells()
         {
-            Container.Bind<InventoryCell>().FromComponentInHierarchy().AsTransient();
+            Container.Bind<InventoryCell>()
+                .FromComponentInHierarchy()
+                .AsTransient();
         }
     }
 }
