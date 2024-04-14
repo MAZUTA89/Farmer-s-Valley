@@ -1,4 +1,5 @@
 ﻿using Scripts.InventoryCode;
+using Scripts.SaveLoader;
 using Scripts.SO.InventoryItem;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,8 @@ namespace Scripts.InventoryCode
             inventoryCell.Icon.sprite = _icon;
             inventoryCell.Text.text = _name;
         }
+
+        public abstract ItemData GetItemData();
+        
     }
 }

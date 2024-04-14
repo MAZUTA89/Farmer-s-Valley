@@ -3,6 +3,7 @@ using Scripts.SO.Player;
 using TMPro;
 using UnityEngine;
 using Zenject;
+
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour

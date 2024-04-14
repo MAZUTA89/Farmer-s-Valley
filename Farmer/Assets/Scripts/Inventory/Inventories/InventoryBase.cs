@@ -102,24 +102,26 @@ namespace Scripts.InventoryCode
                 return false;
             }
         }
-
-        protected virtual void Start()
+        private void Awake()
         {
             _contextRect = gameObject.GetComponent<RectTransform>();
+        }
+        protected virtual void Start()
+        {
+        }
+        private void OnEnable()
+        {
             DragExtension.RegisterInventoryRectTransform
                 (_contextRect);
-            
+
             OnBeginDragEvent += OnBeginDragCell;
             OnEndDragEvent += OnEndDrag;
         }
         private void OnDisable()
         {
+            DragExtension.UnregisterInventoryRectTransform(_contextRect);
             OnBeginDragEvent -= OnBeginDragCell;
             OnEndDragEvent -= OnEndDrag;
-        }
-        private void OnDestroy()
-        {
-            DragExtension.UnregisterInventoryRectTransform(_contextRect);
         }
         protected virtual void OnBeginDragCell(InventoryCell inventoryCell)
         {

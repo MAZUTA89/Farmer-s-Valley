@@ -1,4 +1,5 @@
 ﻿using Scripts.InventoryCode;
+using Scripts.SaveLoader;
 using Scripts.SO.InventoryItem;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,12 @@ namespace Scripts.InventoryCode
         {
             base.RenderUI(inventoryCell);
             inventoryCell.name += $"{Count}";
+        }
+
+        public override ItemData GetItemData()
+        {
+            return new QuantitativeItemData()
+            { SoName = Name, Count = Count };
         }
     }
 }

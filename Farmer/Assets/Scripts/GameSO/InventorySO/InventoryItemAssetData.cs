@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Scripts.SO.InventoryItem
 {
     [CreateAssetMenu(fileName = "InventoryItemSO", menuName = "SO/InventoryItem")]
-    public class InventoryItemAssetData : ScriptableObject, IInventoryItem
+    public class InventoryItemAssetData : ScriptableObject
     {
         public string Name => _name;
         public Sprite Icon => _icon;

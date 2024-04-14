@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.SaveLoader;
+using System;
 using UnityEngine;
 
 namespace Scripts.InventoryCode
@@ -7,6 +8,7 @@ namespace Scripts.InventoryCode
     {
         string Name { get; }
         Sprite Icon { get; }
-        
+
+        ItemData GetItemData();
     }
 }

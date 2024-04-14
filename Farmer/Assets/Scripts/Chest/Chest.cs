@@ -36,6 +36,8 @@ namespace Scripts.ChestItem
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
             _openCloseFlag = true;
             _inventoryItems = new List<InventoryItem>();
+            _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
+            _chestStorage.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
@@ -50,15 +52,14 @@ namespace Scripts.ChestItem
             {
                 _animator.SetBool(_aniIsOpenCode, _openCloseFlag);
                 _animator.SetBool(_aniIsCloseCode, false);
-                
-                _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
+                _chestStorage.gameObject.SetActive(true);
             }
             else
             {
                 _animator.SetBool(_aniIsCloseCode, true);
                 _animator.SetBool(_aniIsOpenCode, _openCloseFlag);
                 _inventoryItems = _chestStorage.GetItems();
-                Destroy(_chestStorage.gameObject);
+                _chestStorage.gameObject.SetActive(false);
             }
             _openCloseFlag = !_openCloseFlag;
         }
