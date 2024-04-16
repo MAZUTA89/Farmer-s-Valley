@@ -12,5 +12,7 @@ namespace Scripts.MainMenuScripts
     {
         [SerializeField] private TMP_InputField TMP_InputField;
         public TMP_InputField InputText => TMP_InputField;
+        [SerializeField] private TextMeshProUGUI InfoTextField;
+        public TextMeshProUGUI InfoText => InfoTextField;
     }
 }

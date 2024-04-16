@@ -22,16 +22,22 @@ namespace Scripts.MainMenuScripts
             else
                 return false;
         }
+        /// <summary>
+        /// true если имя существует, false - нет
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
         public bool CheckForExist(string name, List<string> names)
         {
             foreach(string savedName in names)
             {
                 if(savedName == name)
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
     }
 }

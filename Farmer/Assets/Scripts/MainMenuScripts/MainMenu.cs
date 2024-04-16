@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PimDeWitte.UnityMainThreadDispatcher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Scripts.MainMenuCode
 {
     public class MainMenu : MonoBehaviour
     {
+        
         private const string GameSceneName = "FarmScene";
         private LoadMenu _loadMenu;
         private NewGameMenu _newGameMenu;
@@ -30,12 +32,12 @@ namespace Scripts.MainMenuCode
         }
         public void NewGame()
         {
-            gameObject.SetActive(false);
+            _menuObject.SetActive(false);
             _newGameMenu.Activate();
         }
         public void LoadGame()
         {
-            gameObject.SetActive(false);
+            _menuObject.SetActive(false);
             _loadMenu.Activate();
         }
         public void Settings()

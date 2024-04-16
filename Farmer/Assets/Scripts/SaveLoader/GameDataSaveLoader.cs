@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
+using Assets.Scripts;
 
 namespace Scripts.SaveLoader
 {
     public class GameDataSaveLoader
     {
-        const string c_levelsNamesKey = "LevelNamesKeys";
+        
         public GameDataSaveLoader() { }
 
         public void SaveGameState(GameDataState gameDataState)
@@ -27,11 +28,12 @@ namespace Scripts.SaveLoader
         public void SaveWorldNamesJson(List<string> worldNames)
         {
             string json = JsonConvert.SerializeObject(worldNames);
-            PlayerPrefs.SetString(c_levelsNamesKey, json);
+            PlayerPrefs.SetString(GameConfiguration.SaveLevelNamesKeyName, json);
         }
         public List<string> LoadWorldNamesJson()
         {
-            string json = PlayerPrefs.GetString(c_levelsNamesKey);
+            string json = 
+                PlayerPrefs.GetString(GameConfiguration.SaveLevelNamesKeyName);
             var names =
                 JsonConvert.DeserializeObject<List<string>>(json);
             return names;

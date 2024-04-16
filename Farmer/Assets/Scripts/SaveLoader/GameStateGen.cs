@@ -9,7 +9,5 @@ namespace AScripts.SaveLoader
     public class GameStateGen : MonoBehaviour
     {
         GameDataState GameDataState;
-
-
     }
 }

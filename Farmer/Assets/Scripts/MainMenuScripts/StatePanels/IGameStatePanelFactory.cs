@@ -6,6 +6,6 @@ namespace Scripts.MainMenuCode
 {
     public interface IGameStatePanelFactory
     {
-        GameObject Create(string stateName, Transform content);
+        GameStatePanel Create(string stateName, Transform content);
     }
 }

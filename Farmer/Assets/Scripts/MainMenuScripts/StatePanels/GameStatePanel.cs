@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Scripts.MainMenuCode
 {
@@ -9,5 +11,11 @@ namespace Scripts.MainMenuCode
     {
         [SerializeField] private TextMeshProUGUI NameTextField;
         public TextMeshProUGUI NameText => NameTextField;
+
+        
+        public void Load()
+        {
+            SceneManager.LoadScene(GameConfiguration.FarmSceneName);
+        }
     }
 }

@@ -20,14 +20,14 @@ namespace Scripts.MainMenuCode
             _container = container;
             _template = gameStatePanel;
         }
-        public GameObject Create(string stateName, Transform content)
+        public GameStatePanel Create(string stateName, Transform content)
         {
             var panel = _container
                 .InstantiatePrefabForComponent<GameStatePanel>
                 (_template, content);
 
             panel.NameText.text = stateName;
-            return panel.gameObject;
+            return panel;
         }
     }
 }
