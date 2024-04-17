@@ -6,6 +6,6 @@ namespace Assets.Scripts.Placement
 {
     public interface IOccupyingSeveralCells : IOccupyingСells
     {
-        List<Vector3Int> GetOccupyingCells();
+        List<Vector2Int> GetOccupyingCells();
     }
 }

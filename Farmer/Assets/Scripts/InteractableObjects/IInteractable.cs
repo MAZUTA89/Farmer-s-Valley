@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
 
-namespace Assets.Scripts.Placement
+namespace Scripts.InteractableObjects
 {
-    public interface IOccupyingOneCell
+    public interface IInteractable
     {
-        Vector2Int GetOccupyingCell();
     }
 }

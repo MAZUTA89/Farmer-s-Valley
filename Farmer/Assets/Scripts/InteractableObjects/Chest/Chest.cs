@@ -1,4 +1,5 @@
 using Assets.Scripts.Placement;
+using Scripts.ChestItem;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using Scripts.SaveLoader;
@@ -7,11 +8,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.ChestItem
+namespace Scripts.InteractableObjects
 {
     [RequireComponent(typeof(Animator))]
     
-    public class Chest : PlacementItem, IOccupyingOneCell
+    public class Chest : PlacementItem, IOccupyingOneCell, ISaveLoadItem, IInteractable
     {
         Animator _animator;
         int _aniIsCloseCode;
@@ -68,13 +69,18 @@ namespace Scripts.ChestItem
             _openCloseFlag = !_openCloseFlag;
         }
 
-        public Vector3Int GetOccupyingCell()
+        public Vector2Int GetOccupyingCell()
         {
             return PlacePosition;
         }
-        public ChestData GetData()
-        {
+        
 
+        IItemData ISaveLoadItem.GetData()
+        {
+            ChestData itemData = new ChestData();
+            itemData.SetPosition(PlacePosition);
+            itemData.UpdateItems(_inventoryItems);
+            return itemData;
         }
     }
 }

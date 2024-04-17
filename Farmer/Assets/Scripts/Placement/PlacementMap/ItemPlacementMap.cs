@@ -8,20 +8,19 @@ namespace Scripts.PlacementCode
 {
     public class ItemPlacementMap
     {
-        private List<Vector3Int> _occupiedPositions;
-        private List<Vector3Int> _sandPositions;
+        private List<Vector2Int> _occupiedPositions;
         private Tilemap _tileMap;
 
         public ItemPlacementMap(Tilemap tileMap)
         {
-            _occupiedPositions = new List<Vector3Int>();
+            _occupiedPositions = new List<Vector2Int>();
             _tileMap = tileMap;
         }
-        public bool IsOccupied(Vector3Int position)
+        public bool IsOccupied(Vector2Int position)
         {
             return _occupiedPositions.Contains(position);
         }
-        public bool IsOccupied(List<Vector3> positions)
+        public bool IsOccupied(List<Vector2> positions)
         {
             List<Vector3Int> intPositions = new List<Vector3Int>();
             foreach (var pos in positions)
@@ -58,14 +57,20 @@ namespace Scripts.PlacementCode
         }
         public void RemovePositions(IOccupyingSeveralCells obj)
         {
-            List<Vector3Int> positions = obj.GetOccupyingCells();
+            List<Vector2Int> positions = obj.GetOccupyingCells();
             _occupiedPositions.RemoveAll(x => positions.Contains(x));
+        }
+
+        public void PlaceObjectOnCell(GameObject gameObject, Vector3Int position)
+        {
+            Vector3 objPosition = _tileMap.CellToWorld(position);
+            gameObject.transform.position = objPosition;
         }
         public Vector3Int Vector3ConvertToVector2Int(Vector3 position)
         {
             return _tileMap.WorldToCell(position);
         }
-        public List<Vector3Int> Vector3ConvertToVector2Int(List<Vector3> position)
+        public List<Vector3Int> Vector3ConvertToVector2Int(List<Vector2> position)
         {
             List<Vector3Int> intPositions = new List<Vector3Int>();
             foreach (var pos in intPositions)

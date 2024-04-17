@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.ChestItem
+namespace Scripts.InteractableObjects
 { 
     public class ChestFromResourceFactory : IChestFactory
     {
@@ -16,7 +16,7 @@ namespace Scripts.ChestItem
             _container = diContainer;
         }
 
-        public Chest Create(List<InventoryItem> inventoryItems, Vector2Int vector2Int)
+        public Chest Create(List<InventoryItem> inventoryItems)
         {
             var chest =
                 _container.InstantiatePrefabForComponent<Chest>

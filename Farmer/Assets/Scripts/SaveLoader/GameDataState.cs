@@ -11,7 +11,8 @@ namespace Scripts.SaveLoader
     public class GameDataState
     {
         public string GameDataStateName;
-        public Vector2 PlayerPosition;
+        public PlayerData PlayerData;
+        public List<IItemData> ItemDataList;
         public List<ChestData> Chests;
         public List<ItemData> ActivePackInventory;
         public List<ItemData> BackPackInventory;
@@ -22,7 +23,6 @@ namespace Scripts.SaveLoader
             ActivePackInventory = new List<ItemData>();
             BackPackInventory = new List<ItemData>();
             GameDataStateName = gameDataStateName;
-
         }
         public void UpdateActivePackInventory(List<InventoryItem> inventoryItems)
         {
@@ -34,24 +34,14 @@ namespace Scripts.SaveLoader
             BackPackInventory =
                 SaveLoaderExtension.ConvertItemsToItemsData(inventoryItems);
         }
-        public void AddChestData(ChestData chestData)
+        
+        public void AddItemData(IItemData itemData)
         {
-            Chests.Add(chestData);
+            ItemDataList.Add(itemData);
         }
-        public void RemoveChestData(ChestData chestData)
+        public void RemoveItemData(IItemData itemData)
         {
-            Chests.Remove(chestData);
-        }
-        public void AddDefaultData(List<PlacementItem> placementItems)
-        {
-            foreach (var item in placementItems)
-            {
-                if(item is Chest)
-                {
-                    Chest chest = (Chest)item;
-                    AddChestData(chest.GetChestData())
-                }
-            }
+            ItemDataList.Remove(itemData);
         }
     }
 }

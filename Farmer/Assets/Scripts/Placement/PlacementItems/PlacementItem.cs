@@ -11,14 +11,14 @@ namespace Scripts.PlacementCode
     public abstract class PlacementItem : MonoBehaviour 
     {
         protected ItemPlacementMap PlacementMap;
-        public Vector3Int PlacePosition {  get; private set; }
+        public Vector2Int PlacePosition {  get; private set; }
 
         [Inject]
         public void ConstructItem(ItemPlacementMap placementMap)
         {
             PlacementMap = placementMap;
         }
-        public virtual void InitializePosition(Vector3Int placePosition)
+        public virtual void InitializePosition(Vector2Int placePosition)
         {
             PlacePosition = placePosition;
         }
