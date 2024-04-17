@@ -1,4 +1,6 @@
-﻿using Scripts.InventoryCode;
+﻿using Scripts.ChestItem;
+using Scripts.InventoryCode;
+using Scripts.PlacementCode;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -39,6 +41,17 @@ namespace Scripts.SaveLoader
         public void RemoveChestData(ChestData chestData)
         {
             Chests.Remove(chestData);
+        }
+        public void AddDefaultData(List<PlacementItem> placementItems)
+        {
+            foreach (var item in placementItems)
+            {
+                if(item is Chest)
+                {
+                    Chest chest = (Chest)item;
+                    AddChestData(chest.GetChestData())
+                }
+            }
         }
     }
 }

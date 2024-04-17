@@ -1,4 +1,7 @@
+using Assets.Scripts.Placement;
 using Scripts.InventoryCode;
+using Scripts.PlacementCode;
+using Scripts.SaveLoader;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +11,7 @@ namespace Scripts.ChestItem
 {
     [RequireComponent(typeof(Animator))]
     
-    public class Chest : MonoBehaviour
+    public class Chest : PlacementItem, IOccupyingOneCell
     {
         Animator _animator;
         int _aniIsCloseCode;
@@ -29,8 +32,9 @@ namespace Scripts.ChestItem
         }
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             _animator = GetComponent<Animator>();
             _aniIsCloseCode = Animator.StringToHash("IsClose");
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
@@ -62,6 +66,15 @@ namespace Scripts.ChestItem
                 _chestStorage.gameObject.SetActive(false);
             }
             _openCloseFlag = !_openCloseFlag;
+        }
+
+        public Vector3Int GetOccupyingCell()
+        {
+            return PlacePosition;
+        }
+        public ChestData GetData()
+        {
+
         }
     }
 }

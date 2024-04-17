@@ -7,18 +7,14 @@ using UnityEngine.Assertions.Must;
 
 namespace Scripts.SaveLoader
 {
-    public class ChestData
+    public class ChestData : PlacementItemData
     {
-        public Vector2Int Position;
         public List<ItemData> Items;
         public ChestData()
         {
             Items = new List<ItemData>();
         }
-        public void UpdatePosition(Vector2Int position)
-        {
-            Position = position;
-        }
+        
 
         public void UpdateItems(List<InventoryItem> inventoryItems)
         {

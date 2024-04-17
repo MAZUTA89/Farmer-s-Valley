@@ -44,6 +44,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""e716f881-de55-4b70-a08c-6d03c4ca86df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InteractWithItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a4632a1-c5a9-46a3-9803-0f9df0801b9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +141,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""MouseDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""069a45e0-4e5c-4d44-82fd-ffa703e3bfcf"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe1a8ed3-523b-42fa-80cb-f4ae394bc7f4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PSScheme"",
+                    ""action"": ""InteractWithItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -150,6 +190,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerMap = asset.FindActionMap("PlayerMap", throwIfNotFound: true);
         m_PlayerMap_Movement = m_PlayerMap.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMap_MouseDelta = m_PlayerMap.FindAction("MouseDelta", throwIfNotFound: true);
+        m_PlayerMap_UseItem = m_PlayerMap.FindAction("UseItem", throwIfNotFound: true);
+        m_PlayerMap_InteractWithItem = m_PlayerMap.FindAction("InteractWithItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -213,12 +255,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IPlayerMapActions> m_PlayerMapActionsCallbackInterfaces = new List<IPlayerMapActions>();
     private readonly InputAction m_PlayerMap_Movement;
     private readonly InputAction m_PlayerMap_MouseDelta;
+    private readonly InputAction m_PlayerMap_UseItem;
+    private readonly InputAction m_PlayerMap_InteractWithItem;
     public struct PlayerMapActions
     {
         private @InputActions m_Wrapper;
         public PlayerMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMap_Movement;
         public InputAction @MouseDelta => m_Wrapper.m_PlayerMap_MouseDelta;
+        public InputAction @UseItem => m_Wrapper.m_PlayerMap_UseItem;
+        public InputAction @InteractWithItem => m_Wrapper.m_PlayerMap_InteractWithItem;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -234,6 +280,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MouseDelta.started += instance.OnMouseDelta;
             @MouseDelta.performed += instance.OnMouseDelta;
             @MouseDelta.canceled += instance.OnMouseDelta;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
+            @InteractWithItem.started += instance.OnInteractWithItem;
+            @InteractWithItem.performed += instance.OnInteractWithItem;
+            @InteractWithItem.canceled += instance.OnInteractWithItem;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -244,6 +296,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MouseDelta.started -= instance.OnMouseDelta;
             @MouseDelta.performed -= instance.OnMouseDelta;
             @MouseDelta.canceled -= instance.OnMouseDelta;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
+            @InteractWithItem.started -= instance.OnInteractWithItem;
+            @InteractWithItem.performed -= instance.OnInteractWithItem;
+            @InteractWithItem.canceled -= instance.OnInteractWithItem;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -274,5 +332,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
+        void OnInteractWithItem(InputAction.CallbackContext context);
     }
 }
