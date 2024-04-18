@@ -1,5 +1,4 @@
 using Assets.Scripts.Placement;
-using Scripts.ChestItem;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using Scripts.SaveLoader;

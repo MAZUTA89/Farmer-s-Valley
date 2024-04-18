@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Scripts.SO.InventoryItem
 {
-    [CreateAssetMenu(fileName = "QuantitativeItem", menuName = "SO/QuantitativeItem")]
+    [CreateAssetMenu(fileName = "QuantitativeItem",
+        menuName = "SO/InventoryItems/QuantitativeItem")]
     public class QuantitativeItemAssetData : InventoryItemAssetData
     {
         public int Count => _count;

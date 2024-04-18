@@ -1,5 +1,4 @@
-﻿using Scripts.ChestItem;
-using Scripts.InventoryCode;
+﻿using Scripts.InventoryCode;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

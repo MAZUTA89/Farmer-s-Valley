@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 
-namespace Scripts.ChestItem
+namespace Scripts.InventoryCode
 {
     public class InventoryChestPanelFactory : IInventoryPanelFactory
     {
@@ -17,7 +17,6 @@ namespace Scripts.ChestItem
         {
             _container = diContainer;
             _storageTemplate = storageTemplate;
-            // _globalVisualContext = globalVisualContext;
         }
         public InventoryBase Create(List<InventoryItem> inventoryItems)
         {

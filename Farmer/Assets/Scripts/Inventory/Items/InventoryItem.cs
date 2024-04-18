@@ -8,20 +8,23 @@ using UnityEngine;
 
 namespace Scripts.InventoryCode
 {
-    public abstract class InventoryItem : IInventoryItem
+    public abstract class InventoryItem : ScriptableObject, IInventoryItem
     {
         public string Name => _name;
 
         public Sprite Icon => _icon;
-        
+
+        public ItemType ItemType => _itemType;
+
         private string _name;
         private Sprite _icon;
+        private ItemType _itemType;
         
-        public InventoryItem(InventoryItemAssetData assetData)
+        public InventoryItem(IInventoryItem inventoryItem)
         {
-                
-            _name = assetData.Name;
-            _icon = assetData.Icon;
+            _itemType = inventoryItem.ItemType;
+            _name = inventoryItem.Name;
+            _icon = inventoryItem.Icon;
         }
        
         public virtual void RenderUI(InventoryCell inventoryCell)
@@ -33,4 +36,6 @@ namespace Scripts.InventoryCode
         public abstract ItemData GetItemData();
         
     }
+
+    
 }

@@ -5998,22 +5998,22 @@ MonoBehaviour:
   _activeInventoryInfo: {fileID: 11400000, guid: 8a7fdc4556ad6cd4aa932480dca8b1cb, type: 2}
   _storageInventoryInfo: {fileID: 11400000, guid: 3f9516492c3f939469ce70b03da94b69, type: 2}
   StartKit:
-  - {fileID: 11400000, guid: 539059c631a4ca64197a14eaba3497f8, type: 2}
-  - {fileID: 11400000, guid: 749c809e6e7a26e47b67734737b6b7c0, type: 2}
-  - {fileID: 11400000, guid: e079df4063c5c5e4bb4ca0e0ad9555df, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: a60e381e453c5da46a79675834c41545, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 1e9ce64faaee645458ba445dc4195f80, type: 2}
-  - {fileID: 11400000, guid: 27c8d08cb470fb744a0c7cbce163fa2d, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: a60e381e453c5da46a79675834c41545, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
-  - {fileID: 11400000, guid: 74dcb94556aac01498899ff6c2be9424, type: 2}
+  - {fileID: 11400000, guid: d32c1daec29762549985c6b99904ad8c, type: 2}
+  - {fileID: 11400000, guid: f832179adcaade04983c9023297dd9e6, type: 2}
+  - {fileID: 11400000, guid: c28c541ff4918ae48b15550a7a4f616b, type: 2}
+  - {fileID: 11400000, guid: f2e8dd436f1da8347809310062e0fb46, type: 2}
+  - {fileID: 11400000, guid: c3815a58e24b1e7448f1a50827a7ce55, type: 2}
+  - {fileID: 11400000, guid: 95194caa2b8aef3498ef36e7ef24fc9c, type: 2}
+  - {fileID: 11400000, guid: ee092bcdf24c4f0428df1804845daa63, type: 2}
+  - {fileID: 11400000, guid: 67b5b73960f2ea844892b62e104bad87, type: 2}
+  - {fileID: 11400000, guid: 47066c0b4d4b55742bbe0a18b0946357, type: 2}
+  - {fileID: 11400000, guid: 5767ef91f5520144583f1d108cfc5d6e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ItemSourceSO: {fileID: 11400000, guid: 75ac4e4a90982914b95b8dfd7094c410, type: 2}
   ItemResourcePrefab: {fileID: 312125806613843823, guid: b1b6466e287a34244a60a47282329c24, type: 3}
 --- !u!114 &1791796169

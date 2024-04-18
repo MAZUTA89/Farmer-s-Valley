@@ -62,6 +62,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LBK"",
+                    ""type"": ""Button"",
+                    ""id"": ""210e6cfe-261e-4e9c-b326-6c75ec7f0f4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RBK"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c965d55-962e-44b3-8c36-65d6ad0be7ad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +181,116 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""InteractWithItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d714f7c-d73e-46f8-9003-c61a4d893965"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LBK"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d359f161-713b-41f5-85af-d776ad3eb802"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RBK"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""InventoryMap"",
+            ""id"": ""a3b1922f-5963-47f4-8882-bafac1824f51"",
+            ""actions"": [
+                {
+                    ""name"": ""ChooseFirstCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""38abc9b6-fd9e-464d-8353-d380ac2aa0c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseSecondCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c9037d8-7a3a-41c3-92fd-185e6770df86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseThirdCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e151e78-0916-424f-b807-02d42c081bcc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChooseFourthCell"",
+                    ""type"": ""Button"",
+                    ""id"": ""8611d126-3241-4df4-bea6-1f358cf1bff0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a2f9a90b-a73b-451e-909a-443ffd13c2b4"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseFirstCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ea69903-1ef0-404d-afeb-2b49a3c71d37"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseSecondCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c283153-6845-4357-adcb-315cc314c87c"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseThirdCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4650cca3-0a10-4d3e-a855-890e164de949"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChooseFourthCell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -192,6 +320,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerMap_MouseDelta = m_PlayerMap.FindAction("MouseDelta", throwIfNotFound: true);
         m_PlayerMap_UseItem = m_PlayerMap.FindAction("UseItem", throwIfNotFound: true);
         m_PlayerMap_InteractWithItem = m_PlayerMap.FindAction("InteractWithItem", throwIfNotFound: true);
+        m_PlayerMap_LBK = m_PlayerMap.FindAction("LBK", throwIfNotFound: true);
+        m_PlayerMap_RBK = m_PlayerMap.FindAction("RBK", throwIfNotFound: true);
+        // InventoryMap
+        m_InventoryMap = asset.FindActionMap("InventoryMap", throwIfNotFound: true);
+        m_InventoryMap_ChooseFirstCell = m_InventoryMap.FindAction("ChooseFirstCell", throwIfNotFound: true);
+        m_InventoryMap_ChooseSecondCell = m_InventoryMap.FindAction("ChooseSecondCell", throwIfNotFound: true);
+        m_InventoryMap_ChooseThirdCell = m_InventoryMap.FindAction("ChooseThirdCell", throwIfNotFound: true);
+        m_InventoryMap_ChooseFourthCell = m_InventoryMap.FindAction("ChooseFourthCell", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,6 +393,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_MouseDelta;
     private readonly InputAction m_PlayerMap_UseItem;
     private readonly InputAction m_PlayerMap_InteractWithItem;
+    private readonly InputAction m_PlayerMap_LBK;
+    private readonly InputAction m_PlayerMap_RBK;
     public struct PlayerMapActions
     {
         private @InputActions m_Wrapper;
@@ -265,6 +403,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @MouseDelta => m_Wrapper.m_PlayerMap_MouseDelta;
         public InputAction @UseItem => m_Wrapper.m_PlayerMap_UseItem;
         public InputAction @InteractWithItem => m_Wrapper.m_PlayerMap_InteractWithItem;
+        public InputAction @LBK => m_Wrapper.m_PlayerMap_LBK;
+        public InputAction @RBK => m_Wrapper.m_PlayerMap_RBK;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -286,6 +426,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractWithItem.started += instance.OnInteractWithItem;
             @InteractWithItem.performed += instance.OnInteractWithItem;
             @InteractWithItem.canceled += instance.OnInteractWithItem;
+            @LBK.started += instance.OnLBK;
+            @LBK.performed += instance.OnLBK;
+            @LBK.canceled += instance.OnLBK;
+            @RBK.started += instance.OnRBK;
+            @RBK.performed += instance.OnRBK;
+            @RBK.canceled += instance.OnRBK;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -302,6 +448,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractWithItem.started -= instance.OnInteractWithItem;
             @InteractWithItem.performed -= instance.OnInteractWithItem;
             @InteractWithItem.canceled -= instance.OnInteractWithItem;
+            @LBK.started -= instance.OnLBK;
+            @LBK.performed -= instance.OnLBK;
+            @LBK.canceled -= instance.OnLBK;
+            @RBK.started -= instance.OnRBK;
+            @RBK.performed -= instance.OnRBK;
+            @RBK.canceled -= instance.OnRBK;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -319,6 +471,76 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMapActions @PlayerMap => new PlayerMapActions(this);
+
+    // InventoryMap
+    private readonly InputActionMap m_InventoryMap;
+    private List<IInventoryMapActions> m_InventoryMapActionsCallbackInterfaces = new List<IInventoryMapActions>();
+    private readonly InputAction m_InventoryMap_ChooseFirstCell;
+    private readonly InputAction m_InventoryMap_ChooseSecondCell;
+    private readonly InputAction m_InventoryMap_ChooseThirdCell;
+    private readonly InputAction m_InventoryMap_ChooseFourthCell;
+    public struct InventoryMapActions
+    {
+        private @InputActions m_Wrapper;
+        public InventoryMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ChooseFirstCell => m_Wrapper.m_InventoryMap_ChooseFirstCell;
+        public InputAction @ChooseSecondCell => m_Wrapper.m_InventoryMap_ChooseSecondCell;
+        public InputAction @ChooseThirdCell => m_Wrapper.m_InventoryMap_ChooseThirdCell;
+        public InputAction @ChooseFourthCell => m_Wrapper.m_InventoryMap_ChooseFourthCell;
+        public InputActionMap Get() { return m_Wrapper.m_InventoryMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryMapActions set) { return set.Get(); }
+        public void AddCallbacks(IInventoryMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Add(instance);
+            @ChooseFirstCell.started += instance.OnChooseFirstCell;
+            @ChooseFirstCell.performed += instance.OnChooseFirstCell;
+            @ChooseFirstCell.canceled += instance.OnChooseFirstCell;
+            @ChooseSecondCell.started += instance.OnChooseSecondCell;
+            @ChooseSecondCell.performed += instance.OnChooseSecondCell;
+            @ChooseSecondCell.canceled += instance.OnChooseSecondCell;
+            @ChooseThirdCell.started += instance.OnChooseThirdCell;
+            @ChooseThirdCell.performed += instance.OnChooseThirdCell;
+            @ChooseThirdCell.canceled += instance.OnChooseThirdCell;
+            @ChooseFourthCell.started += instance.OnChooseFourthCell;
+            @ChooseFourthCell.performed += instance.OnChooseFourthCell;
+            @ChooseFourthCell.canceled += instance.OnChooseFourthCell;
+        }
+
+        private void UnregisterCallbacks(IInventoryMapActions instance)
+        {
+            @ChooseFirstCell.started -= instance.OnChooseFirstCell;
+            @ChooseFirstCell.performed -= instance.OnChooseFirstCell;
+            @ChooseFirstCell.canceled -= instance.OnChooseFirstCell;
+            @ChooseSecondCell.started -= instance.OnChooseSecondCell;
+            @ChooseSecondCell.performed -= instance.OnChooseSecondCell;
+            @ChooseSecondCell.canceled -= instance.OnChooseSecondCell;
+            @ChooseThirdCell.started -= instance.OnChooseThirdCell;
+            @ChooseThirdCell.performed -= instance.OnChooseThirdCell;
+            @ChooseThirdCell.canceled -= instance.OnChooseThirdCell;
+            @ChooseFourthCell.started -= instance.OnChooseFourthCell;
+            @ChooseFourthCell.performed -= instance.OnChooseFourthCell;
+            @ChooseFourthCell.canceled -= instance.OnChooseFourthCell;
+        }
+
+        public void RemoveCallbacks(IInventoryMapActions instance)
+        {
+            if (m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInventoryMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InventoryMapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InventoryMapActions @InventoryMap => new InventoryMapActions(this);
     private int m_PSSchemeSchemeIndex = -1;
     public InputControlScheme PSSchemeScheme
     {
@@ -334,5 +556,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnInteractWithItem(InputAction.CallbackContext context);
+        void OnLBK(InputAction.CallbackContext context);
+        void OnRBK(InputAction.CallbackContext context);
+    }
+    public interface IInventoryMapActions
+    {
+        void OnChooseFirstCell(InputAction.CallbackContext context);
+        void OnChooseSecondCell(InputAction.CallbackContext context);
+        void OnChooseThirdCell(InputAction.CallbackContext context);
+        void OnChooseFourthCell(InputAction.CallbackContext context);
     }
 }

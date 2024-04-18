@@ -113,7 +113,6 @@ namespace Scripts.InventoryCode
         {
             DragExtension.RegisterInventoryRectTransform
                 (_contextRect);
-
             OnBeginDragEvent += OnBeginDragCell;
             OnEndDragEvent += OnEndDrag;
         }

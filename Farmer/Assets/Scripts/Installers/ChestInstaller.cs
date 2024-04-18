@@ -1,9 +1,9 @@
-﻿using Scripts.ChestItem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using Scripts.InventoryCode;
+using Scripts.InteractableObjects;
 
 namespace Scripts.Installers
 {

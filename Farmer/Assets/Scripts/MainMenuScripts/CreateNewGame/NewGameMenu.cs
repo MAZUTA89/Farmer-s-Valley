@@ -90,7 +90,7 @@ namespace Scripts.MainMenuCode
         {
             
             GameDataState gameDataState = new(name);
-            LoadedData.Instance.Initialize(gameDataState, true);
+            LoadedData.Instance().Initialize(gameDataState, true);
         }
         public void OnBack()
         {

@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LBK",
+                    "type": "Button",
+                    "id": "210e6cfe-261e-4e9c-b326-6c75ec7f0f4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RBK",
+                    "type": "Button",
+                    "id": "0c965d55-962e-44b3-8c36-65d6ad0be7ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -139,6 +157,116 @@
                     "processors": "",
                     "groups": "PSScheme",
                     "action": "InteractWithItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d714f7c-d73e-46f8-9003-c61a4d893965",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LBK",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d359f161-713b-41f5-85af-d776ad3eb802",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RBK",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InventoryMap",
+            "id": "a3b1922f-5963-47f4-8882-bafac1824f51",
+            "actions": [
+                {
+                    "name": "ChooseFirstCell",
+                    "type": "Button",
+                    "id": "38abc9b6-fd9e-464d-8353-d380ac2aa0c3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseSecondCell",
+                    "type": "Button",
+                    "id": "0c9037d8-7a3a-41c3-92fd-185e6770df86",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseThirdCell",
+                    "type": "Button",
+                    "id": "1e151e78-0916-424f-b807-02d42c081bcc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChooseFourthCell",
+                    "type": "Button",
+                    "id": "8611d126-3241-4df4-bea6-1f358cf1bff0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a2f9a90b-a73b-451e-909a-443ffd13c2b4",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseFirstCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ea69903-1ef0-404d-afeb-2b49a3c71d37",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseSecondCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2c283153-6845-4357-adcb-315cc314c87c",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseThirdCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4650cca3-0a10-4d3e-a855-890e164de949",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChooseFourthCell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

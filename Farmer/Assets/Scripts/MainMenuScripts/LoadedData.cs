@@ -7,12 +7,12 @@ namespace Scripts.MainMenuCode
 {
     public class LoadedData : MonoBehaviour
     {
-        public static LoadedData DataInstance;
+        static LoadedData _dataInstance;
         private void Awake()
         {
-            if (DataInstance == null)
+            if (_dataInstance == null)
             {
-                DataInstance = this;
+                _dataInstance = this;
             }
             DontDestroyOnLoad(this);
         }
@@ -26,7 +26,7 @@ namespace Scripts.MainMenuCode
         }
         public static LoadedData Instance()
         {
-            return DataInstance;
+            return _dataInstance;
         }
     }
 }

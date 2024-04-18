@@ -20,15 +20,10 @@ namespace Scripts.PlacementCode
         {
             return _occupiedPositions.Contains(position);
         }
-        public bool IsOccupied(List<Vector2> positions)
+        public bool IsOccupied(List<Vector2Int> positions)
         {
-            List<Vector3Int> intPositions = new List<Vector3Int>();
-            foreach (var pos in positions)
-            {
-                var intPos = Vector3ConvertToVector2Int(pos);
-                intPositions.Add(intPos);
-            }
-            foreach (var position in intPositions)
+            
+            foreach (var position in positions)
             {
                 if (_occupiedPositions.Contains(position))
                 {
@@ -66,20 +61,22 @@ namespace Scripts.PlacementCode
             Vector3 objPosition = _tileMap.CellToWorld(position);
             gameObject.transform.position = objPosition;
         }
-        public Vector3Int Vector3ConvertToVector2Int(Vector3 position)
+        public Vector2Int Vector3ConvertToVector2Int(Vector3 position)
         {
-            return _tileMap.WorldToCell(position);
+            Vector3Int pos3 = _tileMap.WorldToCell(position);
+            Vector2Int pos2 = new Vector2Int(pos3.x, pos3.y);
+            return pos2;
         }
-        public List<Vector3Int> Vector3ConvertToVector2Int(List<Vector2> position)
-        {
-            List<Vector3Int> intPositions = new List<Vector3Int>();
-            foreach (var pos in intPositions)
-            {
-                var intPos = Vector3ConvertToVector2Int(pos);
-                intPositions.Add(intPos);
-            }
-            return intPositions;
-        }
+        //public List<Vector2Int> Vector3ConvertToVector2Int(List<Vector2> position)
+        //{
+        //    List<Vector3Int> intPositions = new List<Vector3Int>();
+        //    foreach (var pos in intPositions)
+        //    {
+        //        var intPos = Vector3ConvertToVector2Int(pos);
+        //        intPositions.Add(intPos);
+        //    }
+        //    return intPositions;
+        //}
 
     }
 }

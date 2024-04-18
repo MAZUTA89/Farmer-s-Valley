@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Scripts.InteractableObjects
 {
-    public interface ISeedFactory : IInteractableObjectFactory<Seed, SeedSO>
+    public interface ISeedFctory : IInteractableObjectFactory<Seed, SeedSO>
     {
     }
 }

@@ -1,10 +1,9 @@
-﻿using Scripts.InventoryCode;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Scripts.ChestItem
+namespace Scripts.InventoryCode
 {
     public class InventoryStoragePanelFactory : IInventoryPanelFactory
     {

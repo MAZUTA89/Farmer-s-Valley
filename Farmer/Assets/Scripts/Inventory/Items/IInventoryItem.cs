@@ -8,7 +8,7 @@ namespace Scripts.InventoryCode
     {
         string Name { get; }
         Sprite Icon { get; }
-
-        ItemData GetItemData();
+        ItemType ItemType { get; }
+        IItemData GetItemData();
     }
 }
