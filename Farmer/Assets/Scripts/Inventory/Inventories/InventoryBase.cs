@@ -1,5 +1,4 @@
-﻿using Scripts.SO.InventoryItem;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,7 +17,7 @@ namespace Scripts.InventoryCode
         }
         protected int TotalSize;
         protected int CurrentSize => Container.childCount;
-        protected List<InventoryItem> InventoryItems;
+        protected List<IInventoryItem> InventoryItems;
         protected IInventoryCellFactory _inventoryCellFactory;
         private Transform _globalVisualContext;
         private RectTransform _contextRect;
@@ -36,14 +35,9 @@ namespace Scripts.InventoryCode
             _globalVisualContext = dragParent;
         }
 
-        public void Initialize(List<InventoryItemAssetData> inventoryItemAssetData)
+        public void Initialize(List<IInventoryItem> inventoryItems)
         {
-            InventoryItems = InitializeInventoryItems(inventoryItemAssetData);
-            Initialize(InventoryItems);
-        }
-        public void Initialize(List<InventoryItem> inventoryItems)
-        {
-            InventoryItems = new List<InventoryItem>(TotalSize);
+            InventoryItems = new List<IInventoryItem>(TotalSize);
             InventoryItems.InsertRange(0, inventoryItems);
             foreach (var item in inventoryItems)
             {
@@ -51,36 +45,12 @@ namespace Scripts.InventoryCode
             }
 
         }
-        List<InventoryItem> InitializeInventoryItems
-            (List<InventoryItemAssetData> inventoryItemAssetData)
-        {
-            List<InventoryItem> inventoryItems = new List<InventoryItem>();
-            foreach (var assetData in inventoryItemAssetData)
-            {
-                InventoryItem inventoryItem = null;
-                switch (assetData)
-                {
-                    case QuantitativeItemAssetData quantitativeItem:
-                        {
-                            inventoryItem = new QuantitativeItem(quantitativeItem);
-                            break;
-                        }
-                    case InventoryItemAssetData inventoryItemAssetDataBase:
-                        {
-                            inventoryItem = new ToolItem(inventoryItemAssetDataBase);
-                            break;
-                        }
-                }
-                inventoryItems.Add(inventoryItem);
-            }
-            return inventoryItems;
-        }
 
         public void RegisterDragEvents(InventoryCell inventoryCell)
         {
             inventoryCell.RegisterEvents(OnEndDragEvent, OnBeginDragEvent);
         }
-        public virtual void AddItem(InventoryItem inventoryItem)
+        public virtual void AddItem(IInventoryItem inventoryItem)
         {
             InventoryItems.Add(inventoryItem);
             InventoryCell newCell = _inventoryCellFactory.Create(Container);
@@ -139,9 +109,9 @@ namespace Scripts.InventoryCode
 
         }
 
-        List<InventoryItem> OverwriteInventoryItemsSequence()
+        List<IInventoryItem> OverwriteInventoryItemsSequence()
         {
-            List<InventoryItem> items = new List<InventoryItem>();
+            List<IInventoryItem> items = new List<IInventoryItem>();
             for (int i = 0; i < Container.childCount; i++)
             {
                 var cellObject = Container.GetChild(i);
@@ -153,7 +123,7 @@ namespace Scripts.InventoryCode
             }
             return items;
         }
-        public List<InventoryItem> GetItems()
+        public List<IInventoryItem> GetItems()
         {
             return InventoryItems;
         }

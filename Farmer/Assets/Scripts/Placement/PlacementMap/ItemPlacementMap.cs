@@ -9,18 +9,18 @@ namespace Scripts.PlacementCode
     public class ItemPlacementMap
     {
         private List<Vector2Int> _occupiedPositions;
-        private Tilemap _tileMap;
+        protected Tilemap TileMap;
 
         public ItemPlacementMap(Tilemap tileMap)
         {
             _occupiedPositions = new List<Vector2Int>();
-            _tileMap = tileMap;
+            TileMap = tileMap;
         }
-        public bool IsOccupied(Vector2Int position)
+        public virtual bool IsOccupied(Vector2Int position)
         {
             return _occupiedPositions.Contains(position);
         }
-        public bool IsOccupied(List<Vector2Int> positions)
+        public virtual bool IsOccupied(List<Vector2Int> positions)
         {
             
             foreach (var position in positions)
@@ -33,14 +33,13 @@ namespace Scripts.PlacementCode
             return false;
         }
 
-        public bool IsOccupiedBySand()
-        {
-            return true;
-        }
-
         public void AddPosition(IOccupyingOneCell obj)
         {
             _occupiedPositions.Add(obj.GetOccupyingCell());
+        }
+        public void AddPosition(Vector2Int position)
+        {
+            _occupiedPositions.Add(position);
         }
         public void AddPositions(IOccupyingSeveralCells obj)
         {
@@ -50,20 +49,26 @@ namespace Scripts.PlacementCode
         {
             _occupiedPositions.Remove(obj.GetOccupyingCell());
         }
+        public void RemovePosition(Vector2Int position)
+        {
+            _occupiedPositions.Remove(position);
+        }
         public void RemovePositions(IOccupyingSeveralCells obj)
         {
             List<Vector2Int> positions = obj.GetOccupyingCells();
             _occupiedPositions.RemoveAll(x => positions.Contains(x));
         }
 
-        public void PlaceObjectOnCell(GameObject gameObject, Vector3Int position)
+
+        public virtual void PlaceObjectOnCell(GameObject gameObject, Vector3Int position)
         {
-            Vector3 objPosition = _tileMap.CellToWorld(position);
+            Vector3 objPosition = TileMap.CellToWorld(position);
             gameObject.transform.position = objPosition;
         }
+        
         public Vector2Int Vector3ConvertToVector2Int(Vector3 position)
         {
-            Vector3Int pos3 = _tileMap.WorldToCell(position);
+            Vector3Int pos3 = TileMap.WorldToCell(position);
             Vector2Int pos2 = new Vector2Int(pos3.x, pos3.y);
             return pos2;
         }

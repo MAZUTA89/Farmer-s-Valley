@@ -14,7 +14,7 @@ namespace Scripts.InventoryCode.ItemResources
             _itemResourceTemplate = itemResourceTemplate;
             _container = diContainer;
         }
-        public ItemResource Create(InventoryItem inventoryItem,
+        public ItemResource Create(IInventoryItem inventoryItem,
             Vector3 position)
         {
             var item = _container.InstantiatePrefabForComponent<ItemResource>

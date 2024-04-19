@@ -20,12 +20,12 @@ namespace Scripts.InteractableObjects
         /// True если открыт, false если закрыт
         /// </summary>
         bool _openCloseFlag;
-        List<InventoryItem> _inventoryItems;
+        List<IInventoryItem> _inventoryItems;
         IInventoryPanelFactory _inventoryStoragePanelFactory;
         InventoryBase _chestStorage;
 
         [Inject]
-        public void Construct(
+        public void ConstructChest(
             IInventoryPanelFactory inventoryStoragePanelFactory)
         {
             _inventoryStoragePanelFactory = inventoryStoragePanelFactory;
@@ -39,7 +39,7 @@ namespace Scripts.InteractableObjects
             _aniIsCloseCode = Animator.StringToHash("IsClose");
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
             _openCloseFlag = true;
-            _inventoryItems = new List<InventoryItem>();
+            _inventoryItems = new List<IInventoryItem>();
             _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
             _chestStorage.gameObject.SetActive(false);
         }

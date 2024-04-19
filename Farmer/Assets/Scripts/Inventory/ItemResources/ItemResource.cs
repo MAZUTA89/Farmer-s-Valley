@@ -15,7 +15,7 @@ namespace Scripts.InventoryCode.ItemResources
         Transform _playerTransform;
         Sprite _icon;
         public PlayerInventory PlayerInventory { get; private set; }
-        public InventoryItem InventoryItem { get; private set; }
+        public IInventoryItem InventoryItem { get; private set; }
         public Rigidbody2D RigidBody { get; private set; }
         public SpriteRenderer SpriteRenderer
         {
@@ -52,7 +52,7 @@ namespace Scripts.InventoryCode.ItemResources
         {
             _stateMachine.FixedPerform();
         }
-        public void Initialize(InventoryItem inventoryItem)
+        public void Initialize(IInventoryItem inventoryItem)
         {
             InventoryItem = inventoryItem;
             _icon = inventoryItem.Icon;

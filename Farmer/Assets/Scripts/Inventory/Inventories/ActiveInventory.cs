@@ -11,7 +11,7 @@ namespace Scripts.InventoryCode
     {
         InputService _inputService;
         int _chosenIndex;
-        public InventoryItem ChosenItem { get; private set; }
+        public IInventoryItem ChosenItem { get; private set; }
 
         [Inject]
         public void ConstructActive(InputService inputService)
@@ -33,17 +33,6 @@ namespace Scripts.InventoryCode
             if(_inputService.IsChosenCell(out _chosenIndex))
             {
                 ChosenItem = InventoryItems[_chosenIndex];
-                switch(ChosenItem)
-                {
-                    case QuantitativeItem item:
-                        {
-                            break;
-                        }
-                    case ToolItem item:
-                        {
-                            break;
-                        }
-                }
             }
         }
     }

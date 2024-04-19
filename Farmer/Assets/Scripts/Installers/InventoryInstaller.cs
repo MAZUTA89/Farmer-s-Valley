@@ -1,7 +1,6 @@
 ﻿using Scripts.InventoryCode;
 using Scripts.InventoryCode.ItemResources;
 using Scripts.SO.Inventory;
-using Scripts.SO.InventoryItem;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,7 +24,6 @@ namespace Scripts.Installers
         [Space]
         [Header("Backpack inventory")]
         [SerializeField] private InventoryInfo _storageInventoryInfo;
-        [SerializeField] List<InventoryItemAssetData> StartKit;
         [Space]
         [Header("ItemResourceSO")]
         [SerializeField] private ItemSourceSO ItemSourceSO;
@@ -65,7 +63,8 @@ namespace Scripts.Installers
             Container.BindInstance(_activeInventoryInfo)
                 .WithId("ActiveInventoryInfo")
                 .AsTransient();
-            Container.Bind<ChestInventory>().AsTransient();
+
+            //Container.Bind<ChestInventory>().AsTransient();
             Container.Bind<PlayerInventory>()
                 .FromComponentInHierarchy()
                 .AsSingle();

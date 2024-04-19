@@ -12,13 +12,13 @@ namespace Scripts.InventoryCode
         ChestInventory _storageTemplate;
         [Inject(Id = "DragParent")] Transform _globalVisualContext;
         public InventoryChestPanelFactory(DiContainer diContainer,
-            [Inject(Id = "ChestPanelTemplate")] ChestInventory storageTemplate
+            /*[Inject(Id = "ChestPanelTemplate")]*/ ChestInventory storageTemplate
            )
         {
             _container = diContainer;
             _storageTemplate = storageTemplate;
         }
-        public InventoryBase Create(List<InventoryItem> inventoryItems)
+        public InventoryBase Create(List<IInventoryItem> inventoryItems)
         {
             var storage = _container.
             InstantiatePrefabForComponent<ChestInventory>(_storageTemplate,

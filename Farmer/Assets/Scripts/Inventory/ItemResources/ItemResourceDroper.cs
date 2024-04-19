@@ -16,7 +16,7 @@ namespace Scripts.InventoryCode.ItemResources
             _playerTransform = playerTransform;
             _factory = itemResourceFactory;
         }
-        public void DropByPlayer(InventoryItem inventoryItem)
+        public void DropByPlayer(IInventoryItem inventoryItem)
         {
             ItemResource itemResource = _factory.Create(inventoryItem, _playerTransform.position);
         }

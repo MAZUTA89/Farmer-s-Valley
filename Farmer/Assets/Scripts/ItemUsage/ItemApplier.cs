@@ -11,31 +11,17 @@ namespace Scripts.ItemUsage
 {
     public class ItemApplier
     {
-        ActiveInventory _activeInventory;
         MapClicker _mapClicker;
         ItemPlacementMap _itemPlacementMap;
         IApplyItem _applyItem;
         Vector2Int _clickedPosition;
-        public ItemApplier(ActiveInventory activeInventory,
-            ItemPlacementMap itemPlacementMap)
+        public ItemApplier(ItemPlacementMap itemPlacementMap)
         {
             _activeInventory = activeInventory;
             _itemPlacementMap = itemPlacementMap;
         }
-
-        public void Update()
+        public void ApplyItem(IInventoryItem inventoryItem)
         {
-            if (_activeInventory.ChosenItem.ItemType != ItemType.Resource)
-            {
-                if (_activeInventory.ChosenItem.ItemType == ItemType.Production)
-                {
-                    if (_mapClicker.IsClicked(out _clickedPosition))
-                    {
-
-                    }
-
-                }
-            }
 
         }
     }

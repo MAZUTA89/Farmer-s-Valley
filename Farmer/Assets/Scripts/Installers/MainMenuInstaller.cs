@@ -19,7 +19,6 @@ namespace Scripts.Installers
         [SerializeField] private NewGamePanel _newGamePanel;
         public override void InstallBindings()
         {
-            
             BindMainMenu();
             BindLoadMenu();
             BindNewGameMenu();

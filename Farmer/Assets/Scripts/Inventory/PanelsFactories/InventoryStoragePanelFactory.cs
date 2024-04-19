@@ -18,7 +18,7 @@ namespace Scripts.InventoryCode
             _storageTemplate = storageTemplate;
            // _globalVisualContext = globalVisualContext;
         }
-        public InventoryBase Create(List<InventoryItem> inventoryItems)
+        public InventoryBase Create(List<IInventoryItem> inventoryItems)
         {
             var storage = _container.
             InstantiatePrefabForComponent<InventoryStorage>(_storageTemplate,

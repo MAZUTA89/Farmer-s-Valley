@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Scripts.InteractableObjects
 {
-    public class ChestFactory : IInteractableObjectFactory<Chest, List<InventoryItem>>
+    public class ChestFactory : IInteractableObjectFactory<Chest, List<IInventoryItem>>
     {
         Chest _chestTemplate;
         DiContainer _container;
@@ -19,7 +19,7 @@ namespace Scripts.InteractableObjects
             _chestTemplate = chestTemplate;
             _container = diContainer;
         }
-        public Chest Create(List<InventoryItem> inventoryItems)
+        public Chest Create(List<IInventoryItem> inventoryItems)
         {
             var chest
                 = _container.InstantiatePrefabForComponent<Chest>(_chestTemplate);

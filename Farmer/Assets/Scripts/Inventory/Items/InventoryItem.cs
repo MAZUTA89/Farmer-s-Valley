@@ -1,6 +1,5 @@
 ﻿using Scripts.InventoryCode;
 using Scripts.SaveLoader;
-using Scripts.SO.InventoryItem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,24 +7,16 @@ using UnityEngine;
 
 namespace Scripts.InventoryCode
 {
-    public abstract class InventoryItem : ScriptableObject, IInventoryItem
+    [CreateAssetMenu(fileName = "InventoryItem",
+            menuName = "SO/InventoryItems/InventoryItem")]
+    public class InventoryItem : ScriptableObject, IInventoryItem
     {
         public string Name => _name;
 
         public Sprite Icon => _icon;
 
-        public ItemType ItemType => _itemType;
-
-        private string _name;
-        private Sprite _icon;
-        private ItemType _itemType;
-        
-        public InventoryItem(IInventoryItem inventoryItem)
-        {
-            _itemType = inventoryItem.ItemType;
-            _name = inventoryItem.Name;
-            _icon = inventoryItem.Icon;
-        }
+        [SerializeField] private string _name;
+        [SerializeField] private Sprite _icon;
        
         public virtual void RenderUI(InventoryCell inventoryCell)
         {
@@ -33,8 +24,12 @@ namespace Scripts.InventoryCode
             inventoryCell.Text.text = _name;
         }
 
-        public abstract ItemData GetItemData();
-        
+        public virtual IItemData GetItemData()
+        {
+            InventoryItemData inventoryItemData
+                = new InventoryItemData() { SoName = _name };
+            return inventoryItemData;
+        }
     }
 
     

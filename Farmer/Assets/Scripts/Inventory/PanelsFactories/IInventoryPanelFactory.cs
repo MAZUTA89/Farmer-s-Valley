@@ -7,6 +7,6 @@ namespace Scripts.InventoryCode
 {
     public interface IInventoryPanelFactory
     {
-        public InventoryBase Create(List<InventoryItem> inventoryItems);
+        public InventoryBase Create(List<IInventoryItem> inventoryItems);
     }
 }
