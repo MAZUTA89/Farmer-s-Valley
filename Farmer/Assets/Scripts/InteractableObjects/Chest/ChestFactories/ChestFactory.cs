@@ -14,7 +14,8 @@ namespace Scripts.InteractableObjects
         {
             
         }
-        public ChestFactory(DiContainer diContainer, Chest chestTemplate) 
+        public ChestFactory(DiContainer diContainer,
+             Chest chestTemplate) 
         {
             _chestTemplate = chestTemplate;
             _container = diContainer;
@@ -23,6 +24,7 @@ namespace Scripts.InteractableObjects
         {
             var chest
                 = _container.InstantiatePrefabForComponent<Chest>(_chestTemplate);
+            chest.Initialize(inventoryItems);
             return chest;
         }
     }

@@ -47,7 +47,22 @@ namespace AScripts.SaveLoader
         private void Start()
         {
             LoadPlayerInventories();
-            LoadPlacementItems();
+            //LoadPlacementItems();
+            LoadChestData();
+        }
+        void LoadChestData()
+        {
+            List<ChestData> chestDataList = _gameDataState.ChestDataList;
+            foreach (var chestData in chestDataList)
+            {
+                List<IInventoryItem> inventoryItems
+                    = ProcessInventoryItemsData(chestData.Items);
+                Chest chest = _chestFactory.Create(inventoryItems);
+                Vector2Int pos = chestData.GetPosition();
+                Vector3Int pos3 = new Vector3Int(pos.x, pos.y, 0);
+                _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
+                _placementMap.AddPosition(pos);
+            }
         }
         void LoadPlacementItems()
         {
@@ -120,7 +135,9 @@ namespace AScripts.SaveLoader
                 case ChestInventoryItemData data:
                     {
                         IChestInventoryItem chest = inventoryItem as IChestInventoryItem;
-                        chest.Items = data.ItemsList;
+                        List<IInventoryItem> inventoryItems
+                            = ProcessInventoryItemsData(data.ItemsList);
+                        chest.Items = inventoryItems;
                         return chest;
                     }
                 case QuantitativeItemData data:

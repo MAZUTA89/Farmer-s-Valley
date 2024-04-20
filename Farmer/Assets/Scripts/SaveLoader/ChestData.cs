@@ -9,10 +9,9 @@ namespace Scripts.SaveLoader
     public class ChestData : PlacementItemData
     {
         public List<InventoryItemData> Items;
-        public ChestData(PlacementItemData placementItemData)
+        public ChestData()
         {
             Items = new List<InventoryItemData>();
-            SetPosition(placementItemData.GetPosition());
         }
         
 

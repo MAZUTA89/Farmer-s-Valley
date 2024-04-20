@@ -20,10 +20,14 @@ namespace Scripts.InventoryCode
         public override InventoryItemData GetItemData()
         {
             List<InventoryItemData> inventoryItemDatas = new List<InventoryItemData>();
-            foreach (var item in Items)
+            if(Items != null)
             {
-                inventoryItemDatas.Add(item.GetItemData());
+                foreach (var item in Items)
+                {
+                    inventoryItemDatas.Add(item.GetItemData());
+                }
             }
+            
             QuantitativeItemData quantitativeInventoryItem
                 = (QuantitativeItemData)base.GetItemData();
             ChestInventoryItemData data =

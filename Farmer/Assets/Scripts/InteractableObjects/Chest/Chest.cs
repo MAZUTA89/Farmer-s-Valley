@@ -38,7 +38,10 @@ namespace Scripts.InteractableObjects
             _animator = GetComponent<Animator>();
             _aniIsCloseCode = Animator.StringToHash("IsClose");
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
-            _inventoryItems = new List<IInventoryItem>();
+            if(_inventoryItems == null)
+            {
+                _inventoryItems = new List<IInventoryItem>();
+            }
             _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
             _chestStorage.gameObject.SetActive(false);
             _openCloseFlag = true;
@@ -69,7 +72,10 @@ namespace Scripts.InteractableObjects
             }
             _openCloseFlag = !_openCloseFlag;
         }
-
+        public void Initialize(List<IInventoryItem> inventoryItems)
+        {
+            _inventoryItems  = inventoryItems;
+        }
         public Vector2Int GetOccupyingCell()
         {
             return PlacePosition;
@@ -77,15 +83,22 @@ namespace Scripts.InteractableObjects
 
         public override PlacementItemData GetData()
         {
-            itemData = new ChestData(base.GetData());
+            itemData = new ChestData();
             itemData.SetPosition(PlacePosition);
-            itemData.UpdateItems(_inventoryItems);
             return itemData;
         }
         public override void OnExitTheGame()
         {
             _inventoryItems = _chestStorage.GetItems();
-            base.OnExitTheGame();
+            SaveData();
+        }
+        public override void SaveData()
+        {
+            _data = GetData();
+            ChestData chestData = new ChestData();
+            chestData.SetPosition(_data.GetPosition());
+            chestData.UpdateItems(_inventoryItems);
+            GameDataState.AddChestData(chestData);
         }
 
     }
