@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -12,9 +13,18 @@ namespace Scripts.MainMenuCode
         [SerializeField] private TextMeshProUGUI NameTextField;
         public TextMeshProUGUI NameText => NameTextField;
 
-        
+        GameDataSaveLoader _gameDataSaveLoader;
+
+        private void Start()
+        {
+            _gameDataSaveLoader = new GameDataSaveLoader();
+        }
+
         public void Load()
         {
+            GameDataState gameDataState = 
+                _gameDataSaveLoader.LoadGameState(NameText.text);
+            LoadedData.Instance().Initialize(gameDataState, false);
             SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
     }

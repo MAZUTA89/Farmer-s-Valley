@@ -16,7 +16,7 @@ namespace Scripts.InteractableObjects
             _container = diContainer;
         }
 
-        public Chest Create(List<InventoryItem> inventoryItems)
+        public Chest Create(List<IInventoryItem> inventoryItems)
         {
             var chest =
                 _container.InstantiatePrefabForComponent<Chest>

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Scripts.InteractableObjects
 {
-    public class ChestFactory : IInteractableObjectFactory<Chest, List<IInventoryItem>>
+    public class ChestFactory : IChestFactory
     {
         Chest _chestTemplate;
         DiContainer _container;

@@ -1,4 +1,5 @@
-﻿using Scripts.SO.Inventory;
+﻿using Scripts.FarmGameEvents;
+using Scripts.SO.Inventory;
 using System;
 using System.Collections.Generic;
 using Zenject;
@@ -14,6 +15,24 @@ namespace Scripts.InventoryCode
         {
             TotalSize = inventoryInfo.TotalSize;
             _inventoryCellFactory = inventoryCellFactory;
+        }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            GameEvents.OnExitTheGameEvent += OnExitTheGame;
+        }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GameEvents.OnExitTheGameEvent -= OnExitTheGame;
+        }
+        protected override void SaveInventory()
+        {
+            _gameDataState.UpdateBackPackInventory(InventoryItems);
+        }
+        public virtual void OnExitTheGame()
+        {
+            SaveInventory();
         }
     }
 }

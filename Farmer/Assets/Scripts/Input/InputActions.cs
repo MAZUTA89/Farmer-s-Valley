@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCloseGameMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a552e7c9-58bc-488f-a9c8-059743898353"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RBK"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96af86e0-143c-4613-991c-4e8238ee3160"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCloseGameMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -322,6 +342,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_PlayerMap_InteractWithItem = m_PlayerMap.FindAction("InteractWithItem", throwIfNotFound: true);
         m_PlayerMap_LBK = m_PlayerMap.FindAction("LBK", throwIfNotFound: true);
         m_PlayerMap_RBK = m_PlayerMap.FindAction("RBK", throwIfNotFound: true);
+        m_PlayerMap_OpenCloseGameMenu = m_PlayerMap.FindAction("OpenCloseGameMenu", throwIfNotFound: true);
         // InventoryMap
         m_InventoryMap = asset.FindActionMap("InventoryMap", throwIfNotFound: true);
         m_InventoryMap_ChooseFirstCell = m_InventoryMap.FindAction("ChooseFirstCell", throwIfNotFound: true);
@@ -395,6 +416,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMap_InteractWithItem;
     private readonly InputAction m_PlayerMap_LBK;
     private readonly InputAction m_PlayerMap_RBK;
+    private readonly InputAction m_PlayerMap_OpenCloseGameMenu;
     public struct PlayerMapActions
     {
         private @InputActions m_Wrapper;
@@ -405,6 +427,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @InteractWithItem => m_Wrapper.m_PlayerMap_InteractWithItem;
         public InputAction @LBK => m_Wrapper.m_PlayerMap_LBK;
         public InputAction @RBK => m_Wrapper.m_PlayerMap_RBK;
+        public InputAction @OpenCloseGameMenu => m_Wrapper.m_PlayerMap_OpenCloseGameMenu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -432,6 +455,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @RBK.started += instance.OnRBK;
             @RBK.performed += instance.OnRBK;
             @RBK.canceled += instance.OnRBK;
+            @OpenCloseGameMenu.started += instance.OnOpenCloseGameMenu;
+            @OpenCloseGameMenu.performed += instance.OnOpenCloseGameMenu;
+            @OpenCloseGameMenu.canceled += instance.OnOpenCloseGameMenu;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -454,6 +480,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @RBK.started -= instance.OnRBK;
             @RBK.performed -= instance.OnRBK;
             @RBK.canceled -= instance.OnRBK;
+            @OpenCloseGameMenu.started -= instance.OnOpenCloseGameMenu;
+            @OpenCloseGameMenu.performed -= instance.OnOpenCloseGameMenu;
+            @OpenCloseGameMenu.canceled -= instance.OnOpenCloseGameMenu;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -558,6 +587,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnInteractWithItem(InputAction.CallbackContext context);
         void OnLBK(InputAction.CallbackContext context);
         void OnRBK(InputAction.CallbackContext context);
+        void OnOpenCloseGameMenu(InputAction.CallbackContext context);
     }
     public interface IInventoryMapActions
     {

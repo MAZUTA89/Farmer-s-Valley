@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.InventoryCode;
+using System;
 using System.Collections.Generic;
 
 namespace Scripts.SaveLoader
@@ -20,6 +21,17 @@ namespace Scripts.SaveLoader
         public BagInventoryItemData(QuantitativeItemData inventoryItemData) : base(inventoryItemData)
         {
             Count = inventoryItemData.Count;
+        }
+    }
+    public class ChestInventoryItemData : QuantitativeItemData
+    {
+        public List<InventoryItemData> ItemsList;
+        public ChestInventoryItemData(QuantitativeItemData inventoryItemData,
+            List<InventoryItemData> inventoryItems)
+            : base(inventoryItemData)
+        {
+            Count = inventoryItemData.Count;
+            ItemsList = inventoryItems;
         }
     }
 }

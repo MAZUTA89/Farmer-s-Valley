@@ -8,6 +8,11 @@ namespace Scripts.MainMenuCode
     public class LoadedData : MonoBehaviour
     {
         static LoadedData _dataInstance;
+        
+        static LoadedData()
+        {
+            IsDefault = true;
+        }
         private void Awake()
         {
             if (_dataInstance == null)
@@ -16,7 +21,7 @@ namespace Scripts.MainMenuCode
             }
             DontDestroyOnLoad(this);
         }
-        public bool IsDefault { get; private set; }
+        public static bool IsDefault { get; private set; }
         public GameDataState GameDataState { get; private set; }
 
         public void Initialize(GameDataState gameDataState, bool isDefault)

@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Scripts.GameMenuCode;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using Zenject;
 
 namespace Scripts.Installers
@@ -13,6 +10,9 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             Container.Bind<InputService>().AsSingle();
+            Container.Bind<GameMenu>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
     }
 }

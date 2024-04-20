@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.SaveLoader;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,12 +28,15 @@ namespace Scripts.InventoryCode
         protected Action OnEndDragEvent;
 
         private GameObject _tmpEmptyCell;
+        protected GameDataState _gameDataState;
 
 
         [Inject]
-        public void Construct([Inject(Id = "DragParent")] Transform dragParent)
+        public void Construct([Inject(Id = "DragParent")] Transform dragParent, 
+            GameDataState gameDataState)
         {
             _globalVisualContext = dragParent;
+            _gameDataState = gameDataState;
         }
 
         public void Initialize(List<IInventoryItem> inventoryItems)
@@ -79,14 +83,14 @@ namespace Scripts.InventoryCode
         protected virtual void Start()
         {
         }
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             DragExtension.RegisterInventoryRectTransform
                 (_contextRect);
             OnBeginDragEvent += OnBeginDragCell;
             OnEndDragEvent += OnEndDrag;
         }
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             DragExtension.UnregisterInventoryRectTransform(_contextRect);
             OnBeginDragEvent -= OnBeginDragCell;
@@ -126,6 +130,11 @@ namespace Scripts.InventoryCode
         public List<IInventoryItem> GetItems()
         {
             return InventoryItems;
+        }
+        
+        protected virtual void SaveInventory()
+        {
+
         }
     }
 }

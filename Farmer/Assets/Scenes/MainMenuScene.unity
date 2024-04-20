@@ -4016,7 +4016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuObject: {fileID: 2020871519}
-  _statePanelTemplate: {fileID: 3569714260121622303, guid: 73dc6b542444e5f4298094f5d2b4513a, type: 3}
+  _statePanelTemplate: {fileID: 1020085359913950656, guid: 73dc6b542444e5f4298094f5d2b4513a, type: 3}
   _loadMenuPanel: {fileID: 1832309855}
   _content: {fileID: 74934785}
   _newGamePanel: {fileID: 111223936}

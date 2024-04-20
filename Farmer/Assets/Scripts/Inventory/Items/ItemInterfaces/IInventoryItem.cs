@@ -9,6 +9,6 @@ namespace Scripts.InventoryCode
         string Name { get; }
         Sprite Icon { get; }
         void RenderUI(InventoryCell inventoryCell);
-        IItemData GetItemData();
+        InventoryItemData GetItemData();
     }
 }

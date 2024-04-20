@@ -35,5 +35,9 @@ namespace Scripts.InventoryCode
                 ChosenItem = InventoryItems[_chosenIndex];
             }
         }
+        protected override void SaveInventory()
+        {
+            _gameDataState.UpdateActivePackInventory(InventoryItems);
+        }
     }
 }

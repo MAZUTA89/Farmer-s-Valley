@@ -11,14 +11,24 @@ namespace Scripts.InventoryCode
             menuName = "SO/InventoryItems/QuantitativeInventoryItem")]
     public class QuantitativeInventoryItem : InventoryItem, IQuantitativeInventoryItem
     {
-        public int Count => _count;
+        public int Count
+        {
+            get
+            {
+                return _count;
+            }
+            set 
+            { 
+                _count = value;
+            }
+        }
         [SerializeField] private int _count;
 
-        public override IItemData GetItemData()
+        public override InventoryItemData GetItemData()
         {
-            IItemData itemData = base.GetItemData();
+            InventoryItemData itemData = base.GetItemData();
             QuantitativeItemData quantitativeItemData =
-                new QuantitativeItemData((InventoryItemData)itemData)
+                new QuantitativeItemData(itemData)
                 { Count = _count };
             return quantitativeItemData;
         }

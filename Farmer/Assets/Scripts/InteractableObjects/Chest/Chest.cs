@@ -11,7 +11,7 @@ namespace Scripts.InteractableObjects
 {
     [RequireComponent(typeof(Animator))]
     
-    public class Chest : PlacementItem, IOccupyingOneCell, ISaveLoadItem, IInteractable
+    public class Chest : PlacementItem, IOccupyingOneCell, ISaveLoadPlacementItem, IInteractable
     {
         Animator _animator;
         int _aniIsCloseCode;
@@ -23,6 +23,7 @@ namespace Scripts.InteractableObjects
         List<IInventoryItem> _inventoryItems;
         IInventoryPanelFactory _inventoryStoragePanelFactory;
         InventoryBase _chestStorage;
+        ChestData itemData;
 
         [Inject]
         public void ConstructChest(
@@ -34,14 +35,15 @@ namespace Scripts.InteractableObjects
         // Start is called before the first frame update
         protected override void Start()
         {
-            base.Start();
             _animator = GetComponent<Animator>();
             _aniIsCloseCode = Animator.StringToHash("IsClose");
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
-            _openCloseFlag = true;
             _inventoryItems = new List<IInventoryItem>();
             _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
             _chestStorage.gameObject.SetActive(false);
+            _openCloseFlag = true;
+
+            base.Start();
         }
 
         // Update is called once per frame
@@ -72,14 +74,19 @@ namespace Scripts.InteractableObjects
         {
             return PlacePosition;
         }
-        
 
-        IItemData ISaveLoadItem.GetData()
+        public override PlacementItemData GetData()
         {
-            ChestData itemData = new ChestData();
+            itemData = new ChestData(base.GetData());
             itemData.SetPosition(PlacePosition);
             itemData.UpdateItems(_inventoryItems);
             return itemData;
         }
+        public override void OnExitTheGame()
+        {
+            _inventoryItems = _chestStorage.GetItems();
+            base.OnExitTheGame();
+        }
+
     }
 }

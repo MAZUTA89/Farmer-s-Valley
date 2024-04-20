@@ -13,5 +13,8 @@ namespace Scripts.InventoryCode
             base.OnDrag(eventData);
             transform.position = Input.mousePosition;
         }
+        public override void OnExitTheGame()
+        {
+        }
     }
 }

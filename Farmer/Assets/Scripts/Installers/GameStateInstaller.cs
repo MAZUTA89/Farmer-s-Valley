@@ -16,15 +16,28 @@ namespace Scripts.Installers
 
         public override void InstallBindings()
         {
-            if(LoadedData.Instance().IsDefault)
+
+            if (LoadedData.IsDefault)
+            {
+                if (LoadedData.Instance() == null)
+                {
+                    _gameDataState = new GameDataState("Editor mode");
+                }
+                else
+                {
+                    _gameDataState = LoadedData.Instance().GameDataState;
+                }
+            }
+            else
             {
                 _gameDataState = LoadedData.Instance().GameDataState;
                 foreach (var placementItem in _placementItems)
                 {
-                    ISaveLoadItem saveLoadItem = placementItem as ISaveLoadItem;
-                    _gameDataState.AddItemData(saveLoadItem.GetData());
+                    Destroy(placementItem.gameObject);
                 }
             }
+            Container.BindInstance(_gameDataState).AsSingle();
+            Container.Bind<GameDataSaveLoader>().AsSingle();
         }
     }
 }

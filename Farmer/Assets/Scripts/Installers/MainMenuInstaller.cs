@@ -22,6 +22,7 @@ namespace Scripts.Installers
             BindMainMenu();
             BindLoadMenu();
             BindNewGameMenu();
+           // BindSatePanel();
         }
         void BindMainMenu()
         {
@@ -51,6 +52,10 @@ namespace Scripts.Installers
                 .WithId("NewGamePanel")
                 .AsTransient();
             Container.Bind<NewGameMenu>().AsSingle();
+        }
+        void BindSatePanel()
+        {
+            Container.Bind<GameStatePanel>().AsTransient();
         }
     }
 }

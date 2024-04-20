@@ -5,6 +5,6 @@ namespace Scripts.InventoryCode
 {
     public interface IQuantitativeInventoryItem : IInventoryItem
     {
-        int Count { get; }
+        int Count { get; set; }
     }
 }

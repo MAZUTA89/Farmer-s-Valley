@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.SaveLoader
 {
-    public class PlacementItemData : IItemData
+    public  class PlacementItemData : IItemData
     {
         public int X;
         public int Y;

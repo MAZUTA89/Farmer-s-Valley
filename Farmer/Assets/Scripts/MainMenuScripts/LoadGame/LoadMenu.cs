@@ -1,4 +1,5 @@
-﻿using Scripts.SaveLoader;
+﻿using Assets.Scripts;
+using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -34,7 +35,10 @@ namespace Scripts.MainMenuCode
 
             List<string> lvlNames = _gameDataSaveLoader.LoadWorldNamesJson();
 
-            if(lvlNames != null &&
+            _gameStatePanelFactory.Create(GameConfiguration.SaveEditorGameStateName,
+                _content);
+
+            if (lvlNames != null &&
                 lvlNames.Count > 0)
             {
                 CreateStatePanels(lvlNames);

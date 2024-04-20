@@ -13,7 +13,7 @@ namespace Scripts.SaveLoader
 
         public void SaveGameState(GameDataState gameDataState)
         {
-            string json = JsonConvert.SerializeObject(gameDataState);
+            string json = JsonConvert.SerializeObject(gameDataState, Formatting.Indented);
             PlayerPrefs.SetString(gameDataState.GameDataStateName,
                 json);
         }

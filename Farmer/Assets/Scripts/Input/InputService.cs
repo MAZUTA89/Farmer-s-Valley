@@ -57,6 +57,11 @@ public class InputService : IDisposable
     {
         return _inputActions.PlayerMap.RBK.WasPerformedThisFrame();
     }
+    public bool IsOpenCloseMenu()
+    {
+        return _inputActions.PlayerMap.OpenCloseGameMenu
+            .WasPerformedThisFrame();
+    }
     public void Dispose()
     {
         _inputActions.Disable();

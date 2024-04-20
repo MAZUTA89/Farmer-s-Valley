@@ -88,9 +88,15 @@ namespace Scripts.MainMenuCode
         }
         void StartLevel(string name)
         {
-            
             GameDataState gameDataState = new(name);
             LoadedData.Instance().Initialize(gameDataState, true);
+            List<string> names = _gameDataSaveLoader.LoadWorldNamesJson();
+            if(names == null)
+            {
+                names = new List<string>();
+            }
+            names.Add(name);
+            _gameDataSaveLoader.SaveWorldNamesJson(names);
         }
         public void OnBack()
         {

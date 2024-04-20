@@ -49,7 +49,7 @@ namespace Scripts.MainMenuCode
         {
             Application.Quit();
         }
-
+        
         public void OnBack()
         {
             _loadMenu.OnBack();

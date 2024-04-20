@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Installers;
+using Assets.Scripts.ItemUsage;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using System;
@@ -13,12 +14,16 @@ namespace Scripts.ItemUsage
     {
         MapClicker _mapClicker;
         ItemPlacementMap _itemPlacementMap;
+        SandTilePlacementMap _sandTilePlacementMap;
         IApplyItem _applyItem;
         Vector2Int _clickedPosition;
-        public ItemApplier(ItemPlacementMap itemPlacementMap)
+        IItemHandler _hoeItemHandler;
+        IItemHandler _bagItemHandler;
+        public ItemApplier(ItemPlacementMap itemPlacementMap,
+            SandTilePlacementMap sandTilePlacementMap)
         {
-            _activeInventory = activeInventory;
             _itemPlacementMap = itemPlacementMap;
+            _sandTilePlacementMap = sandTilePlacementMap;
         }
         public void ApplyItem(IInventoryItem inventoryItem)
         {

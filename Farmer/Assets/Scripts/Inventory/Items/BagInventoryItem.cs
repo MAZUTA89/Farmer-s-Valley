@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Inventory.Items
-{
+namespace Scripts.InventoryCode
+{ 
     [CreateAssetMenu(fileName = "BagInventoryItem",
             menuName = "SO/InventoryItems/BagInventoryItem")]
     public class BagInventoryItem : QuantitativeInventoryItem, IBagInventoryItem
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Inventory.Items
 
         [SerializeField] private Seed _seedObject;
         [SerializeField] private SeedSO _seedSO;
-        public override IItemData GetItemData()
+        public override InventoryItemData GetItemData()
         {
            QuantitativeItemData quantitativeItemData =
                 (QuantitativeItemData)base.GetItemData();

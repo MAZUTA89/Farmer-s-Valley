@@ -24,7 +24,7 @@ namespace Scripts.InventoryCode
             inventoryCell.Text.text = _name;
         }
 
-        public virtual IItemData GetItemData()
+        public virtual InventoryItemData GetItemData()
         {
             InventoryItemData inventoryItemData
                 = new InventoryItemData() { SoName = _name };

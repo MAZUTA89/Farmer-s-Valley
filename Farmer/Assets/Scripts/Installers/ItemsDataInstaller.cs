@@ -19,9 +19,10 @@ namespace Scripts.Installers
         [SerializeField] private ChestInventory InventoryStorageTemplate;
 
         [SerializeField] private Tilemap _gameElementsMap;
+        [SerializeField] private Chest _chestTemplate;
         public override void InstallBindings()
         {
-            //BindInventoryItemsDictionary();
+            BindInventoryItemsDictionary();
             //BindItemsData();
             BindPlacement();
             BindObjectsLogic();
@@ -40,8 +41,6 @@ namespace Scripts.Installers
         }
         void BindObjectsLogic()
         {
-            //ChestInventory chest = Container
-            //    .InstantiatePrefabForComponent<ChestInventory>(InventoryStorageTemplate, (Transform)null);
             Container.Bind<ChestInventory>().FromInstance(InventoryStorageTemplate)
                 .AsTransient();
             Container.Bind<IInventoryPanelFactory>()
@@ -49,7 +48,13 @@ namespace Scripts.Installers
                  //.WithArguments(Container, InventoryStorageTemplate)
                  .WhenInjectedInto<Chest>();
 
-            Container.Bind<Chest>().FromComponentInHierarchy().AsTransient();
+            Container.BindInstance(_chestTemplate).AsTransient();
+            //Container.Bind<IInteractableObjectFactory<Chest, List<IInventoryItem>>>()
+            //    .To<IChestFactory>().AsTransient();
+            Container.Bind<IChestFactory>().To<ChestFactory>().AsTransient();
+
+            Container.Bind<Chest>().FromComponentInHierarchy()
+                .AsTransient();
         }
         void BindItemsData()
         {

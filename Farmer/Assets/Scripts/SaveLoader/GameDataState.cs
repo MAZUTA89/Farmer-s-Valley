@@ -11,19 +11,21 @@ namespace Scripts.SaveLoader
     {
         public string GameDataStateName;
         public PlayerData PlayerData;
-        public List<IItemData> PlacementObjectsDataList;
-        public List<IItemData> ActivePackInventory;
-        public List<IItemData> BackPackInventory;
+        public List<PlacementItemData> PlacementObjectsDataList;
+        public List<InventoryItemData> ActivePackInventory;
+        public List<InventoryItemData> BackPackInventory;
 
         public GameDataState(string gameDataStateName)
         {
-            ActivePackInventory = new List<IItemData>();
-            BackPackInventory = new List<IItemData>();
+            ActivePackInventory = new List<InventoryItemData>();
+            BackPackInventory = new List<InventoryItemData>();
             GameDataStateName = gameDataStateName;
+            PlacementObjectsDataList = new List<PlacementItemData>();
         }
         public void UpdateActivePackInventory(List<IInventoryItem> inventoryItems)
         {
-            List<IItemData> itemDataList = new List<IItemData>();
+            List<InventoryItemData> itemDataList =
+                new List<InventoryItemData>();
             foreach (var item in inventoryItems)
             {
                 itemDataList.Add(item.GetItemData());
@@ -32,7 +34,8 @@ namespace Scripts.SaveLoader
         }
         public void UpdateBackPackInventory(List<IInventoryItem> inventoryItems)
         {
-            List<IItemData> itemDataList = new List<IItemData>();
+            List<InventoryItemData> itemDataList = 
+                new List<InventoryItemData>();
             foreach (var item in inventoryItems)
             {
                 itemDataList.Add(item.GetItemData());
@@ -40,11 +43,11 @@ namespace Scripts.SaveLoader
             BackPackInventory = itemDataList;
         }
         
-        public void AddItemData(IItemData itemData)
+        public void AddItemData(PlacementItemData itemData)
         {
             PlacementObjectsDataList.Add(itemData);
         }
-        public void RemoveItemData(IItemData itemData)
+        public void RemoveItemData(PlacementItemData itemData)
         {
             PlacementObjectsDataList.Remove(itemData);
         }

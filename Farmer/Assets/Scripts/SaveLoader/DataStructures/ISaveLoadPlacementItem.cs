@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Scripts.SaveLoader
 {
-    public interface ISaveLoadItem
+    public interface ISaveLoadPlacementItem
     {
-        IItemData GetData();
+        PlacementItemData GetData();
+        void SaveData();
     }
 }
