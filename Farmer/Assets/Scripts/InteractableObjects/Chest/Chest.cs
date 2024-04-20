@@ -23,7 +23,6 @@ namespace Scripts.InteractableObjects
         List<IInventoryItem> _inventoryItems;
         IInventoryPanelFactory _inventoryStoragePanelFactory;
         InventoryBase _chestStorage;
-        ChestData itemData;
 
         [Inject]
         public void ConstructChest(
@@ -32,7 +31,6 @@ namespace Scripts.InteractableObjects
             _inventoryStoragePanelFactory = inventoryStoragePanelFactory;
         }
 
-        // Start is called before the first frame update
         protected override void Start()
         {
             _animator = GetComponent<Animator>();
@@ -49,7 +47,6 @@ namespace Scripts.InteractableObjects
             base.Start();
         }
 
-        // Update is called once per frame
         void Update()
         {
 
@@ -83,23 +80,11 @@ namespace Scripts.InteractableObjects
 
         public override PlacementItemData GetData()
         {
-            itemData = new ChestData();
-            itemData.SetPosition(PlacePosition);
-            return itemData;
-        }
-        public override void OnExitTheGame()
-        {
-            _inventoryItems = _chestStorage.GetItems();
-            SaveData();
-        }
-        public override void SaveData()
-        {
-            _data = GetData();
             ChestData chestData = new ChestData();
-            chestData.SetPosition(_data.GetPosition());
-            chestData.UpdateItems(_inventoryItems);
-            GameDataState.AddChestData(chestData);
+            var data = base.GetData();
+            chestData.SetPosition(data.GetPosition());
+            chestData.UpdateItems(_chestStorage.GetItems());
+            return chestData;
         }
-
     }
 }

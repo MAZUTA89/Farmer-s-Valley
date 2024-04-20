@@ -12,6 +12,7 @@ namespace Scripts.SaveLoader
         public ChestData()
         {
             Items = new List<InventoryItemData>();
+            ItemTypeName = nameof(ChestData);
         }
         
 

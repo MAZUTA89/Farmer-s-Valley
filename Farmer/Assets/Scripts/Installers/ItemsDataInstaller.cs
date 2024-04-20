@@ -45,17 +45,11 @@ namespace Scripts.Installers
                 .AsTransient();
             Container.Bind<IInventoryPanelFactory>()
                  .To<InventoryChestPanelFactory>()
-                 //.WithArguments(Container, InventoryStorageTemplate)
                  .WhenInjectedInto<Chest>();
 
             IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
             Container.BindInstance(chestFactory).AsTransient();
-            //Container.BindInstance(_chestTemplate).AsTransient();
-            //Container.Bind<IInteractableObjectFactory<Chest, List<IInventoryItem>>>()
-            //    .To<IChestFactory>().AsTransient();
-            //Container.Bind<IChestFactory>().To<ChestFactory>()
-            //    .AsTransient();
-                //.WithArguments(Container, _chestTemplate);
+            
 
             Container.Bind<Chest>().FromComponentInHierarchy()
                 .AsTransient();

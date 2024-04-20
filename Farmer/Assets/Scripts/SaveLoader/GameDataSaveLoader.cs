@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using Assets.Scripts;
+using Newtonsoft.Json.Linq;
 
 namespace Scripts.SaveLoader
 {
@@ -22,7 +23,11 @@ namespace Scripts.SaveLoader
         {
             string json = PlayerPrefs.GetString(keyName);
             GameDataState gameDataState =
-                JsonConvert.DeserializeObject<GameDataState>(json);
+                JsonConvert.DeserializeObject<GameDataState>(json,
+                new JsonSerializerSettings
+                {
+                    Converters = new List<JsonConverter> { new ItemPlacementDataConverter() }
+                });
             return gameDataState;
         } 
         public void SaveWorldNamesJson(List<string> worldNames)
@@ -37,6 +42,32 @@ namespace Scripts.SaveLoader
             var names =
                 JsonConvert.DeserializeObject<List<string>>(json);
             return names;
+        }
+
+        public class ItemPlacementDataConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(PlacementItemData);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                JObject item = JObject.Load(reader);
+                var typeName = item["ItemTypeName"].ToString();
+                switch (typeName)
+                {
+                    case nameof(ChestData):
+                        return item.ToObject<ChestData>(serializer);
+                    default:
+                        return item.ToObject<PlacementItemData>(serializer);
+                }
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

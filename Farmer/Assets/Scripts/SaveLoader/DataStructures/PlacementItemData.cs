@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scripts.SaveLoader
 {
@@ -10,7 +6,12 @@ namespace Scripts.SaveLoader
     {
         public int X;
         public int Y;
-        
+        public string ItemTypeName;
+
+        public PlacementItemData()
+        {
+            ItemTypeName = nameof(PlacementItemData);
+        }
         public void SetPosition(Vector2Int position)
         {
             X = position.x;

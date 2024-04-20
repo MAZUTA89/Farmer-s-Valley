@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
-using Assets.Scripts.Installers;
 
 namespace Scripts.InventoryCode
 {

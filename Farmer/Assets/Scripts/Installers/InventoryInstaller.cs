@@ -64,7 +64,6 @@ namespace Scripts.Installers
                 .WithId("ActiveInventoryInfo")
                 .AsTransient();
 
-            //Container.Bind<ChestInventory>().AsTransient();
             Container.Bind<PlayerInventory>()
                 .FromComponentInHierarchy()
                 .AsSingle();

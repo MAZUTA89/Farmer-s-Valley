@@ -30,38 +30,36 @@ namespace AScripts.SaveLoader
         Dictionary<string, IInventoryItem> _inventoryItemsDictionary;
         IChestFactory _chestFactory;
         ItemPlacementMap _placementMap;
+        Movement _movement;
 
 
         [Inject]
         public void Construct(GameDataState gameDataState,
             Dictionary<string, IInventoryItem> inventoryItemsDictionary,
             ItemPlacementMap itemPlacementMap,
-            IChestFactory chestFactory)
+            IChestFactory chestFactory,
+            Movement movement)
         {
             _gameDataState = gameDataState;
             _inventoryItemsDictionary = inventoryItemsDictionary;
             _chestFactory = chestFactory;
             _placementMap = itemPlacementMap;
+            _movement = movement;
         }
 
         private void Start()
         {
             LoadPlayerInventories();
-            //LoadPlacementItems();
-            LoadChestData();
+            LoadPlacementItems();
+            LoadPlayerData();
+            //LoadChestData();
         }
-        void LoadChestData()
+        void LoadPlayerData()
         {
-            List<ChestData> chestDataList = _gameDataState.ChestDataList;
-            foreach (var chestData in chestDataList)
+            PlayerData playerData = _gameDataState.PlayerData;
+            if(LoadedData.IsDefault == false)
             {
-                List<IInventoryItem> inventoryItems
-                    = ProcessInventoryItemsData(chestData.Items);
-                Chest chest = _chestFactory.Create(inventoryItems);
-                Vector2Int pos = chestData.GetPosition();
-                Vector3Int pos3 = new Vector3Int(pos.x, pos.y, 0);
-                _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                _placementMap.AddPosition(pos);
+                _movement.SetLoadedPosition(playerData.GetPosition());
             }
         }
         void LoadPlacementItems()

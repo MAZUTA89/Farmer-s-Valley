@@ -16,7 +16,8 @@ namespace Scripts.Installers
             Container.BindInstance(_playerTransform)
                 .WithId("PlayerTransform")
                 .AsTransient();
-            Container.Bind<Movement>().AsSingle();
+            Container.Bind<Movement>().FromComponentInHierarchy()
+                .AsSingle();
             Container.BindInstance(PlayerSO).AsTransient();
         }
     }

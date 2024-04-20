@@ -3,8 +3,6 @@ using Assets.Scripts.ItemUsage;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +13,6 @@ namespace Scripts.ItemUsage
         MapClicker _mapClicker;
         ItemPlacementMap _itemPlacementMap;
         SandTilePlacementMap _sandTilePlacementMap;
-        IApplyItem _applyItem;
         Vector2Int _clickedPosition;
         IItemHandler _hoeItemHandler;
         IItemHandler _bagItemHandler;

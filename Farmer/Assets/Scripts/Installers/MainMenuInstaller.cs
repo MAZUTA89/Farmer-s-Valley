@@ -22,7 +22,6 @@ namespace Scripts.Installers
             BindMainMenu();
             BindLoadMenu();
             BindNewGameMenu();
-           // BindSatePanel();
         }
         void BindMainMenu()
         {

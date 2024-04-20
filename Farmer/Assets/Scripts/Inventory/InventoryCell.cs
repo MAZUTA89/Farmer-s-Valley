@@ -64,7 +64,6 @@ namespace Scripts.InventoryCode
         public void OnDrag(PointerEventData eventData)
         {
             transform.position = Input.mousePosition;
-            //DragExtension.ShowNearestCellFor(this, OriginVisualContext);
         }
         public void OnBeginDrag(PointerEventData eventData)
         {

@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Inventory.Items;
-using Scripts.InventoryCode;
-using Scripts.SaveLoader;
+﻿using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

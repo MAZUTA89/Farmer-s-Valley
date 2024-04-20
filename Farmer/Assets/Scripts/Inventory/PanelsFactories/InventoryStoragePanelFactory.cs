@@ -16,7 +16,6 @@ namespace Scripts.InventoryCode
         {
             _container = diContainer;
             _storageTemplate = storageTemplate;
-           // _globalVisualContext = globalVisualContext;
         }
         public InventoryBase Create(List<IInventoryItem> inventoryItems)
         {

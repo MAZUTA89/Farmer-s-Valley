@@ -72,16 +72,5 @@ namespace Scripts.PlacementCode
             Vector2Int pos2 = new Vector2Int(pos3.x, pos3.y);
             return pos2;
         }
-        //public List<Vector2Int> Vector3ConvertToVector2Int(List<Vector2> position)
-        //{
-        //    List<Vector3Int> intPositions = new List<Vector3Int>();
-        //    foreach (var pos in intPositions)
-        //    {
-        //        var intPos = Vector3ConvertToVector2Int(pos);
-        //        intPositions.Add(intPos);
-        //    }
-        //    return intPositions;
-        //}
-
     }
 }

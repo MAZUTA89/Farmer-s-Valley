@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 using UnityEngine.Tilemaps;
@@ -28,12 +27,7 @@ namespace Scripts.PlacementCode
             GameDataState = gameDataState;
         }
 
-        public virtual PlacementItemData GetData()
-        {
-            PlacementItemData data = new PlacementItemData();
-            data.SetPosition(PlacePosition);
-            return data;
-        }
+        
 
         public virtual void InitializePosition(Vector2Int placePosition)
         {
@@ -85,6 +79,12 @@ namespace Scripts.PlacementCode
             _data = GetData();
             GameDataState.AddItemData(_data);
             IsSaved = true;
+        }
+        public virtual PlacementItemData GetData()
+        {
+            PlacementItemData data = new PlacementItemData();
+            data.SetPosition(PlacePosition);
+            return data;
         }
     }
 }

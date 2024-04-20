@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace Scripts.InventoryCode.ItemResources
+﻿namespace Scripts.InventoryCode.ItemResources
 {
     public class OnGroundState : ItemResourceState
     {
