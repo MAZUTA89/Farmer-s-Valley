@@ -73,7 +73,7 @@ namespace Scripts.InteractableObjects
         {
             _inventoryItems  = inventoryItems;
         }
-        public Vector2Int GetOccupyingCell()
+        public Vector3Int GetOccupyingCell()
         {
             return PlacePosition;
         }

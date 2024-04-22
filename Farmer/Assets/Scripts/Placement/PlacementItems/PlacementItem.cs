@@ -14,7 +14,7 @@ namespace Scripts.PlacementCode
         [SerializeField] private bool _isDefaultStateObject;
         protected ItemPlacementMap PlacementMap;
         protected GameDataState GameDataState;
-        public Vector2Int PlacePosition { get; private set; }
+        public Vector3Int PlacePosition { get; private set; }
         protected bool _isInitialized;
         protected PlacementItemData _data;
         protected bool IsSaved;
@@ -27,9 +27,9 @@ namespace Scripts.PlacementCode
             GameDataState = gameDataState;
         }
 
-        
 
-        public virtual void InitializePosition(Vector2Int placePosition)
+
+        public virtual void InitializePosition(Vector3Int placePosition)
         {
             PlacePosition = placePosition;
             _isInitialized = true;
@@ -47,26 +47,25 @@ namespace Scripts.PlacementCode
             if (!_isInitialized)
             {
                 PlacePosition = PlacementMap
-                .Vector3ConvertToVector2Int(gameObject.transform.position);
+                .Vector3ConvertToVector3Int(gameObject.transform.position);
+                PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
             }
             OccupyCells();
         }
         private void OccupyCells()
         {
-            if (this is IOccupyingСells)
+
+            if (this is IOccupyingSeveralCells)
             {
-                if (this is IOccupyingSeveralCells)
-                {
-                    IOccupyingSeveralCells obj =
-                        (this as IOccupyingSeveralCells);
-                    PlacementMap.AddPositions(obj);
-                }
-                if (this is IOccupyingOneCell)
-                {
-                    IOccupyingOneCell obj =
-                        (this as IOccupyingOneCell);
-                    PlacementMap.AddPosition(obj);
-                }
+                IOccupyingSeveralCells obj =
+                    (this as IOccupyingSeveralCells);
+                PlacementMap.AddPositions(obj);
+            }
+            if (this is IOccupyingOneCell)
+            {
+                IOccupyingOneCell obj =
+                    (this as IOccupyingOneCell);
+                PlacementMap.AddPosition(obj);
             }
         }
         public virtual void OnExitTheGame()

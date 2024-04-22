@@ -1,4 +1,6 @@
-﻿namespace Scripts.InventoryCode.ItemResources
+﻿using UnityEngine;
+
+namespace Scripts.InventoryCode.ItemResources
 {
     public class OnGroundState : ItemResourceState
     {
@@ -26,6 +28,7 @@
             float distance = ItemResource.GetDistanceToPlayer();
             if (distance <= SourceSO.FollowDistance)
             {
+                Debug.Log("Вижу игрока!!");
                 StateMachine.ChangeFollowState();
             }
         }

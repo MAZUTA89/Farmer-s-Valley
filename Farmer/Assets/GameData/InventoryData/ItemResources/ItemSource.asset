@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0670a5d1bf920414d915fd4737761b98, type: 3}
   m_Name: ItemSource
   m_EditorClassIdentifier: 
-  FollowSpeed: 0
-  FollowDistance: 1.08
+  FollowSpeed: 0.2
+  FollowDistance: 0.5
   PushSpeed: 2.18
   GravityScale: 0
-  PushDistance: 0.35
-  PickupDistance: 0.21
+  PushDistance: 0.65
+  PickupDistance: 0.15
   DistanceToChangeGroundState: 0.08

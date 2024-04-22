@@ -12,14 +12,14 @@ namespace Scripts.SaveLoader
         {
             ItemTypeName = nameof(PlacementItemData);
         }
-        public void SetPosition(Vector2Int position)
+        public void SetPosition(Vector3Int position)
         {
             X = position.x;
             Y = position.y;
         }
-        public Vector2Int GetPosition()
+        public Vector3Int GetPosition()
         {
-            return new Vector2Int(X, Y);
+            return new Vector3Int(X, Y);
         }
     }
 }

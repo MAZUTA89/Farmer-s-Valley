@@ -2,6 +2,7 @@
 using Scripts.InventoryCode;
 using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
+using Scripts.PlayerCode;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace AScripts.SaveLoader
         Dictionary<string, IInventoryItem> _inventoryItemsDictionary;
         IChestFactory _chestFactory;
         ItemPlacementMap _placementMap;
-        Movement _movement;
+        Player _player;
 
 
         [Inject]
@@ -38,13 +39,13 @@ namespace AScripts.SaveLoader
             Dictionary<string, IInventoryItem> inventoryItemsDictionary,
             ItemPlacementMap itemPlacementMap,
             IChestFactory chestFactory,
-            Movement movement)
+            Player player)
         {
             _gameDataState = gameDataState;
             _inventoryItemsDictionary = inventoryItemsDictionary;
             _chestFactory = chestFactory;
             _placementMap = itemPlacementMap;
-            _movement = movement;
+            _player = player;
         }
 
         private void Start()
@@ -59,7 +60,7 @@ namespace AScripts.SaveLoader
             PlayerData playerData = _gameDataState.PlayerData;
             if(LoadedData.IsDefault == false)
             {
-                _movement.SetLoadedPosition(playerData.GetPosition());
+                _player.Load(playerData);
             }
         }
         void LoadPlacementItems()
@@ -74,10 +75,9 @@ namespace AScripts.SaveLoader
                     var data = itemData as ChestData;
                     List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
                     Chest chest = _chestFactory.Create(inventoryItems);
-                    Vector2Int pos = itemData.GetPosition();
-                    Vector3Int pos3 = new Vector3Int(pos.x, pos.y, 0);
+                    Vector3Int pos3 = itemData.GetPosition();
                     _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                    _placementMap.AddPosition(pos);
+                    _placementMap.AddPosition(pos3);
                 }
                 
                 //switch (placementItem)

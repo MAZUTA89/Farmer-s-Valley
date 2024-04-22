@@ -17,6 +17,7 @@ namespace Scripts.InventoryCode
         public Seed ProductionObject => _seedObject;
 
         [SerializeField] private Seed _seedObject;
+
         [SerializeField] private SeedSO _seedSO;
         public override InventoryItemData GetItemData()
         {

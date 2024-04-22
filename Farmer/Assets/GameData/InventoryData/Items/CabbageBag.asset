@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: CabbageBag
   _icon: {fileID: 21300000, guid: d252d5894721efe42b24459c013f98c3, type: 3}
+  _color: {r: 0.4007165, g: 0.7830189, b: 0.3508811, a: 1}
+  IsCountTextActive: 1
   _count: 0
+  _seedObject: {fileID: 0}

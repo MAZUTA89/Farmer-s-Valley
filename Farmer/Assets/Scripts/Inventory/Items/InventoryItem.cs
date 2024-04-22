@@ -15,13 +15,19 @@ namespace Scripts.InventoryCode
 
         public Sprite Icon => _icon;
 
+        public Color Color => _color;
+
         [SerializeField] private string _name;
         [SerializeField] private Sprite _icon;
-       
+        [ColorUsage(true)]
+        [SerializeField] private Color _color;
+        [SerializeField] protected bool IsCountTextActive;
         public virtual void RenderUI(InventoryCell inventoryCell)
         {
             inventoryCell.Icon.sprite = _icon;
             inventoryCell.Text.text = _name;
+            inventoryCell.Text.color = _color;
+            inventoryCell.CountText.gameObject.SetActive(IsCountTextActive);
         }
 
         public virtual InventoryItemData GetItemData()
