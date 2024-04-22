@@ -21,7 +21,11 @@ namespace Scripts.InventoryCode
             }
         }
         [SerializeField] private int _count;
-
+        public override void RenderUI(InventoryCell inventoryCell)
+        {
+            base.RenderUI(inventoryCell);
+            inventoryCell.CountText.text = _count.ToString();
+        }
         public override InventoryItemData GetItemData()
         {
             InventoryItemData itemData = base.GetItemData();

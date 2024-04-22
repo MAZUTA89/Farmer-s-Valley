@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: CarrotBag
   _icon: {fileID: 21300000, guid: d5fab2e871e13c441908cb617c9592b8, type: 3}
+  _color: {r: 0.40392157, g: 0.78431374, b: 0.3529412, a: 1}
+  IsCountTextActive: 1
   _count: 0
+  _seedObject: {fileID: 0}

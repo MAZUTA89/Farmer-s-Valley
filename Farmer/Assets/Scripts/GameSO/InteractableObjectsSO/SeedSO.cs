@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Scripts.SO.InteractableObjects
 {
-    public class SeedSO
+    public class SeedSO : ScriptableObject
     {
         public int GrowsStages;
         public List<Sprite> StagesSpriteList;

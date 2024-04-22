@@ -14,6 +14,7 @@ namespace Scripts.InventoryCode
     {
         [SerializeField] Image IconElement;
         [SerializeField] TextMeshProUGUI TextElement;
+        [SerializeField] TextMeshProUGUI CountTextElement;
         Action _endDragEvent;
         Action<InventoryCell> _beginDragEvent;
         public IInventoryItem InventoryItem { get; private set; }
@@ -23,6 +24,7 @@ namespace Scripts.InventoryCode
 
         public Image Icon => IconElement;
         public TextMeshProUGUI Text => TextElement;
+        public TextMeshProUGUI CountText => CountTextElement;
 
         public int BeginDragSiblingIndex { get; private set; }
 
