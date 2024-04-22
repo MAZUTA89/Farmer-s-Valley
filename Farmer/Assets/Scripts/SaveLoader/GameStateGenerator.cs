@@ -74,10 +74,9 @@ namespace AScripts.SaveLoader
                     var data = itemData as ChestData;
                     List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
                     Chest chest = _chestFactory.Create(inventoryItems);
-                    Vector2Int pos = itemData.GetPosition();
-                    Vector3Int pos3 = new Vector3Int(pos.x, pos.y, 0);
+                    Vector3Int pos3 = itemData.GetPosition();
                     _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                    _placementMap.AddPosition(pos);
+                    _placementMap.AddPosition(pos3);
                 }
                 
                 //switch (placementItem)
