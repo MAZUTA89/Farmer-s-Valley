@@ -42,6 +42,7 @@ namespace Scripts.InventoryCode.ItemResources
             if(Vector2.Distance(_rigidBody.position, _goal) < 
                 SourceSO.DistanceToChangeGroundState)
             {
+                Debug.Log("Я дошел до точки перехода !");
                 StateMachine.ChangeOnGroundState();
             }
             

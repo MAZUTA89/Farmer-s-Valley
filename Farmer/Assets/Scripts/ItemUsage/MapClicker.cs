@@ -15,7 +15,7 @@ namespace Scripts.ItemUsage
             _inputService = inputService;
         }
 
-        public virtual bool IsClicked(out Vector2Int clickedPosition)
+        public virtual bool IsClicked(out Vector3Int clickedPosition)
         {
             if (_inputService.IsRBK())
             {
@@ -29,21 +29,19 @@ namespace Scripts.ItemUsage
                     Debug.Log("Мировые координаты: " + worldPos); // Отладочный вывод
 
                     // Преобразуем позицию в координаты ячейки сетки
-                    Vector3Int cellPos = _tileMap.WorldToCell(worldPos);
-                    Debug.Log("Координаты ячейки: " + cellPos); // Отладочный вывод
-
-                    clickedPosition = new Vector2Int(cellPos.x, cellPos.y);
+                    clickedPosition = _tileMap.WorldToCell(worldPos);
+                    Debug.Log("Координаты ячейки: " + clickedPosition); // Отладочный вывод
                     return true;
                 }
                 else
                 {
-                    clickedPosition = Vector2Int.zero;
+                    clickedPosition = Vector3Int.zero;
                     return false;
                 }
             }
             else 
             {
-                clickedPosition = Vector2Int.zero;
+                clickedPosition = Vector3Int.zero;
                 return false;
             }
         }

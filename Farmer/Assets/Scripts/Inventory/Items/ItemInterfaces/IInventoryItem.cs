@@ -8,6 +8,7 @@ namespace Scripts.InventoryCode
     {
         string Name { get; }
         Sprite Icon { get; }
+        Color Color { get; }
         void RenderUI(InventoryCell inventoryCell);
         InventoryItemData GetItemData();
     }
