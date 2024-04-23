@@ -5,9 +5,9 @@ using Zenject;
 
 namespace Scripts.SO.InteractableObjects
 {
+    [CreateAssetMenu(fileName ="SeedSO", menuName = "SO/Seeds/SeedSO")]
     public class SeedSO : ScriptableObject
     {
-        public int GrowsStages;
         public List<Sprite> StagesSpriteList;
         public float IntervalTimeBetweenGrowthStages;
     }

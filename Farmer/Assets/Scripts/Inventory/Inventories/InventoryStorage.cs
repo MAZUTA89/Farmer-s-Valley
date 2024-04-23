@@ -34,5 +34,14 @@ namespace Scripts.InventoryCode
         {
             SaveInventory();
         }
+        protected override void OnEndDrag()
+        {
+            base.OnEndDrag();
+        }
+        public override void OnDragInto(InventoryCell inventoryCell)
+        {
+            base.OnDragInto(inventoryCell);
+            inventoryCell.InventoryItem.IsSelected = false;
+        }
     }
 }

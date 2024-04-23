@@ -16,5 +16,6 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 9e33cbb06105dd242baa8c30b6924c85, type: 3}
   _color: {r: 0.40392157, g: 0.78431374, b: 0.3529412, a: 1}
   IsCountTextActive: 1
-  _count: 0
-  _seedObject: {fileID: 0}
+  _count: 23
+  _seedObject: {fileID: 2614294283450799002, guid: bf318f763388aae429320b648d0ec280, type: 3}
+  _seedSO: {fileID: 11400000, guid: 09cb449ca6ee6f04292116408d78a247, type: 2}

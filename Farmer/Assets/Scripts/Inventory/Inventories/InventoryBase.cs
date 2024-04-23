@@ -47,7 +47,10 @@ namespace Scripts.InventoryCode
             {
                 AddItem(item);
             }
-
+            foreach (var item in inventoryItems)
+            {
+                item.IsSelected = false;
+            }
         }
 
         public void RegisterDragEvents(InventoryCell inventoryCell)
@@ -106,6 +109,7 @@ namespace Scripts.InventoryCode
             if (_tmpEmptyCell != null)
                 Destroy(_tmpEmptyCell);
             InventoryItems = OverwriteInventoryItemsSequence();
+            Debug.Log(gameObject.name);
         }
 
         public virtual void OnDrag(PointerEventData eventData)
@@ -133,6 +137,10 @@ namespace Scripts.InventoryCode
         }
         
         protected virtual void SaveInventory()
+        {
+
+        }
+        public virtual void OnDragInto(InventoryCell inventoryCell)
         {
 
         }

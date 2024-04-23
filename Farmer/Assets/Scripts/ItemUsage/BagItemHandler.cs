@@ -21,6 +21,7 @@ namespace Scripts.ItemUsage
         {
             _mapClicker = mapClicker;
             _tilePlacementMap = sandTilePlacementMap;
+            _diContainer = diContainer;
         }
         public override void HandleItem(IInventoryItem inventoryItem)
         {
@@ -44,7 +45,7 @@ namespace Scripts.ItemUsage
             }
             else
             {
-                Successor.HandleItem(inventoryItem);
+                Successor?.HandleItem(inventoryItem);
             }
         }
     }

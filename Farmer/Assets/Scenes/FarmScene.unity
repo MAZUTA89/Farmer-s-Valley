@@ -4657,6 +4657,8 @@ MonoBehaviour:
   - {fileID: 1084019033}
   - {fileID: 1444205467}
   - {fileID: 529901096}
+  _gameElementsMap: {fileID: 987030645}
+  _sandMap: {fileID: 302244825}
 --- !u!114 &1791796168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4676,6 +4678,8 @@ MonoBehaviour:
   _storageInventoryInfo: {fileID: 11400000, guid: 3f9516492c3f939469ce70b03da94b69, type: 2}
   ItemSourceSO: {fileID: 11400000, guid: 75ac4e4a90982914b95b8dfd7094c410, type: 2}
   ItemResourcePrefab: {fileID: 312125806613843823, guid: b1b6466e287a34244a60a47282329c24, type: 3}
+  _chestInventoryTemplate: {fileID: 1815537105647621818, guid: f95161a49274a3f41b07eae38bb5f6c2, type: 3}
+  _chestTemplate: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
 --- !u!114 &1791796170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4700,9 +4704,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 119cbcbc8d4efe94897c596a677118e6, type: 2}
   - {fileID: 11400000, guid: 9a5e1a8a4a63c0d44aad8ec0790e53a5, type: 2}
   - {fileID: 11400000, guid: 9efd5a2f5feabc34ebd537da357fae28, type: 2}
-  InventoryStorageTemplate: {fileID: 1815537105647621818, guid: f95161a49274a3f41b07eae38bb5f6c2, type: 3}
-  _gameElementsMap: {fileID: 262809448}
-  _chestTemplate: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
 --- !u!1001 &1951533479
 PrefabInstance:
   m_ObjectHideFlags: 0

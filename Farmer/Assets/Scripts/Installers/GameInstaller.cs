@@ -1,4 +1,6 @@
 ﻿using Scripts.GameMenuCode;
+using Scripts.InteractableObjects;
+using Scripts.ItemUsage;
 using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
@@ -7,6 +9,7 @@ using Scripts.SO.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Zenject;
 
 namespace Scripts.Installers
@@ -23,12 +26,20 @@ namespace Scripts.Installers
         [Header("Дефолтные объекты на уровне")]
         [SerializeField] private List<PlacementItem> _placementItems;
         GameDataState _gameDataState;
+        [Space]
+        [Header("Item Usage:")]
+        [Space]
+        [Header("Elements map:")]
+        [SerializeField] private Tilemap _gameElementsMap;
+        [Header("Sand map:")]
+        [SerializeField] private Tilemap _sandMap;
         public override void InstallBindings()
         {
             BindInputService();
             BindGameMenu();
             BindGameDataState();
             BindPlayer();
+            BindItemsUsage();
         }
         void BindInputService()
         {
@@ -73,6 +84,21 @@ namespace Scripts.Installers
                 .WithId("PlayerTransform")
                 .AsTransient();
             Container.BindInstance(PlayerSO).AsTransient();
+        }
+        void BindItemsUsage()
+        {
+            Container.BindInstance(_sandMap).AsTransient();
+            ItemPlacementMap itemPlacementMap =
+                new ItemPlacementMap(_gameElementsMap);
+            Container.BindInstance(itemPlacementMap).AsTransient();
+            SandTilePlacementMap sandTilePlacementMap =
+                new SandTilePlacementMap(_sandMap);
+            Container.BindInstance(sandTilePlacementMap).AsTransient();
+            Container.Bind<PlacementItem>().To<Chest>().AsTransient();
+            Container.Bind<PlacementItem>().To<Seed>().AsTransient();
+
+            Container.Bind<MapClicker>().AsSingle();
+            Container.Bind<ItemApplier>().AsSingle();
         }
     }
 }

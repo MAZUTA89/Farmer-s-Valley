@@ -9,19 +9,19 @@ namespace Scripts.InventoryCode
     public class InventoryChestPanelFactory : IInventoryPanelFactory
     {
         DiContainer _container;
-        ChestInventory _storageTemplate;
+        ChestInventory _chestInventoryTemplate;
         [Inject(Id = "DragParent")] Transform _globalVisualContext;
         public InventoryChestPanelFactory(DiContainer diContainer,
-            /*[Inject(Id = "ChestPanelTemplate")]*/ ChestInventory storageTemplate
+            /*[Inject(Id = "ChestPanelTemplate")]*/ ChestInventory chestInventoryTemplate
            )
         {
             _container = diContainer;
-            _storageTemplate = storageTemplate;
+            _chestInventoryTemplate = chestInventoryTemplate;
         }
         public InventoryBase Create(List<IInventoryItem> inventoryItems)
         {
             var storage = _container.
-            InstantiatePrefabForComponent<ChestInventory>(_storageTemplate,
+            InstantiatePrefabForComponent<ChestInventory>(_chestInventoryTemplate,
             _globalVisualContext);
             storage.Initialize(inventoryItems);
             return storage;

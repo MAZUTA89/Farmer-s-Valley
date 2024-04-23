@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using Scripts.InventoryCode;
-using Scripts.PlacementCode;
-using UnityEngine.Tilemaps;
-using Scripts.InteractableObjects;
-using Scripts.SaveLoader;
 using Assets.Scripts.Inventory.Items;
 
 namespace Scripts.Installers
@@ -16,15 +11,10 @@ namespace Scripts.Installers
         [Header("Все предметы инвентаря в игре")]
         [SerializeField] List<InventoryItem> _inventoryItemAssetList;
 
-        [SerializeField] private ChestInventory InventoryStorageTemplate;
-
-        [SerializeField] private Tilemap _gameElementsMap;
-        [SerializeField] private Chest _chestTemplate;
+        
         public override void InstallBindings()
         {
             BindInventoryItemsDictionary();
-            //BindItemsData();
-            BindPlacement();
             BindObjectsLogic();
         }
         void BindInventoryItemsDictionary()
@@ -41,18 +31,7 @@ namespace Scripts.Installers
         }
         void BindObjectsLogic()
         {
-            Container.Bind<ChestInventory>().FromInstance(InventoryStorageTemplate)
-                .AsTransient();
-            Container.Bind<IInventoryPanelFactory>()
-                 .To<InventoryChestPanelFactory>()
-                 .WhenInjectedInto<Chest>();
-
-            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
-            Container.BindInstance(chestFactory).AsTransient();
             
-
-            Container.Bind<Chest>().FromComponentInHierarchy()
-                .AsTransient();
         }
         void BindItemsData()
         {
@@ -66,13 +45,6 @@ namespace Scripts.Installers
                 .To<HoeInventoryItem>();
             Container.Bind<IBagInventoryItem>()
                 .To<BagInventoryItem>();
-        }
-        void BindPlacement()
-        {
-            ItemPlacementMap itemPlacementMap =
-                new ItemPlacementMap(_gameElementsMap);
-            Container.BindInstance(itemPlacementMap).AsTransient();
-            Container.Bind<PlacementItem>().To<Chest>().AsTransient();
         }
     }
 }

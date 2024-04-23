@@ -50,6 +50,8 @@ namespace Scripts.PlacementCode
                 .Vector3ConvertToVector3Int(gameObject.transform.position);
                 PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
             }
+            else
+                PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
             OccupyCells();
         }
         private void OccupyCells()

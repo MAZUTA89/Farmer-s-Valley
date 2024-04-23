@@ -11,6 +11,7 @@ namespace Scripts.InventoryCode
             menuName = "SO/InventoryItems/InventoryItem")]
     public class InventoryItem : ScriptableObject, IInventoryItem
     {
+        public bool IsSelected { get; set; }
         public string Name => _name;
 
         public Sprite Icon => _icon;
@@ -22,14 +23,16 @@ namespace Scripts.InventoryCode
         [ColorUsage(true)]
         [SerializeField] private Color _color;
         [SerializeField] protected bool IsCountTextActive;
+        
         public virtual void RenderUI(InventoryCell inventoryCell)
         {
             inventoryCell.Icon.sprite = _icon;
             inventoryCell.Text.text = _name;
             inventoryCell.Text.color = _color;
             inventoryCell.CountText.gameObject.SetActive(IsCountTextActive);
+            inventoryCell.SelectIcon.gameObject.SetActive(IsSelected);
         }
-
+        
         public virtual InventoryItemData GetItemData()
         {
             InventoryItemData inventoryItemData
@@ -37,6 +40,4 @@ namespace Scripts.InventoryCode
             return inventoryItemData;
         }
     }
-
-    
 }

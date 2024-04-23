@@ -1,5 +1,7 @@
-﻿using Scripts.InventoryCode;
+﻿using Scripts.InteractableObjects;
+using Scripts.InventoryCode;
 using Scripts.InventoryCode.ItemResources;
+using Scripts.PlacementCode;
 using Scripts.SO.Inventory;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,11 @@ namespace Scripts.Installers
         [SerializeField] private ItemSourceSO ItemSourceSO;
         [Header("Item resource prefab")]
         [SerializeField] private ItemResource ItemResourcePrefab;
+        [Space]
+        [Header("Chest inventory:")]
+        [SerializeField] private ChestInventory _chestInventoryTemplate;
+        [Header("Chest object:")]
+        [SerializeField] private Chest _chestTemplate;
         public override void InstallBindings()
         {
             BindInventories();
@@ -37,6 +44,7 @@ namespace Scripts.Installers
             BindFactories();
             BindItemResourceLogic();
             BindCells();
+            BindChest();
         }
         void BindGlobalVisualContext()
         {
@@ -55,16 +63,17 @@ namespace Scripts.Installers
         }
         void BindInventories()
         {
-            Container.Bind<InventoryStorage>().FromComponentInHierarchy().AsTransient();
+            Container.Bind<InventoryBase>().To<InventoryStorage>().FromComponentInHierarchy().AsTransient();
             Container.BindInstance(_storageInventoryInfo)
                 .WithId("InventoryStorageInfo")
-                .AsTransient();
-            Container.Bind<ActiveInventory>().AsSingle();
+                .WhenInjectedInto<InventoryStorage>();
+
             Container.BindInstance(_activeInventoryInfo)
                 .WithId("ActiveInventoryInfo")
-                .AsTransient();
+                .WhenInjectedInto<ActiveInventory>();
 
-            Container.Bind<PlayerInventory>()
+            Container.Bind<InventoryStorage>()
+                .To<ActiveInventory>()
                 .FromComponentInHierarchy()
                 .AsSingle();
         }
@@ -91,6 +100,25 @@ namespace Scripts.Installers
             Container.Bind<InventoryCell>()
                 .FromComponentInHierarchy()
                 .AsTransient();
+        }
+        void BindChest()
+        {
+            Container.Bind<PlacementItem>()
+                .To<Chest>()
+                .FromComponentInHierarchy()
+                .AsTransient();
+            //Container.Bind<InventoryStorage>()
+            //    .To<ChestInventory>()
+            //    .FromInstance(_chestInventoryTemplate)
+            //    .AsTransient();
+            Container.BindInstance(_chestInventoryTemplate)
+                .AsTransient();
+            Container.Bind<IInventoryPanelFactory>()
+                 .To<InventoryChestPanelFactory>()
+                 .WhenInjectedInto<Chest>();
+
+            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
+            Container.BindInstance(chestFactory).AsTransient();
         }
     }
 }

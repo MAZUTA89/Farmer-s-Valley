@@ -26,9 +26,9 @@ namespace Scripts.InteractableObjects
 
         [Inject]
         public void ConstructChest(
-            IInventoryPanelFactory inventoryStoragePanelFactory)
+            IInventoryPanelFactory inventoryChestPanelFactory)
         {
-            _inventoryStoragePanelFactory = inventoryStoragePanelFactory;
+            _inventoryStoragePanelFactory = inventoryChestPanelFactory;
         }
 
         protected override void Start()
