@@ -39,8 +39,10 @@ namespace Scripts.InventoryCode
                 _chosenIndex < CurrentSize)
             {
                 SelectCellByIndex(_chosenIndex);
-                _applier.ApplyItem(ChosenItem);
+                
             }
+            if(ChosenItem != null)
+                _applier.ApplyItem(ChosenItem);
         }
         protected override void SaveInventory()
         {
