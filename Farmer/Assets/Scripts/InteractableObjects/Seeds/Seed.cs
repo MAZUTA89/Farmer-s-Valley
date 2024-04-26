@@ -1,10 +1,12 @@
 ﻿using Assets.Scripts.Placement;
 using Scripts.PlacementCode;
+using Scripts.SaveLoader;
 using Scripts.SO.InteractableObjects;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Scripts.InteractableObjects
 {
@@ -18,6 +20,13 @@ namespace Scripts.InteractableObjects
         List<Sprite> _sprites;
         float _intervalTime;
         int _currentStage;
+
+        public override void ConstructItem(PlacementMapsContainer placementMapsContainer,
+            GameDataState gameDataState)
+        {
+            GameDataState = gameDataState;
+            PlacementMap = placementMapsContainer.SeedPlacementMap;
+        }
         protected override void Start()
         {
             base.Start();

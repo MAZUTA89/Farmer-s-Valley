@@ -5,7 +5,9 @@ namespace Scripts.PlacementCode
 {
     public class SandTilePlacementMap : ItemPlacementMap
     {
-        public SandTilePlacementMap(Tilemap sandTile) : base(sandTile)
+        
+        public SandTilePlacementMap(Tilemap sandTile)
+            : base(sandTile)
         {
         }
 

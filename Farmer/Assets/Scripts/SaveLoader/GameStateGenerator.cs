@@ -37,14 +37,14 @@ namespace AScripts.SaveLoader
         [Inject]
         public void Construct(GameDataState gameDataState,
             Dictionary<string, IInventoryItem> inventoryItemsDictionary,
-            ItemPlacementMap itemPlacementMap,
+            PlacementMapsContainer placementMapsContainer,
             IChestFactory chestFactory,
             Player player)
         {
             _gameDataState = gameDataState;
             _inventoryItemsDictionary = inventoryItemsDictionary;
             _chestFactory = chestFactory;
-            _placementMap = itemPlacementMap;
+            _placementMap = placementMapsContainer.ItemPlacementMap;
             _player = player;
         }
 

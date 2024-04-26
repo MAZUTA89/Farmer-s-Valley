@@ -10,6 +10,7 @@ namespace Scripts.PlacementCode
     {
         private List<Vector3Int> _occupiedPositions;
         protected Tilemap TileMap;
+        public string Name;
 
         public ItemPlacementMap(Tilemap tileMap)
         {

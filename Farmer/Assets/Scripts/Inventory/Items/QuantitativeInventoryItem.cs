@@ -18,6 +18,8 @@ namespace Scripts.InventoryCode
             set 
             { 
                 _count = value;
+                if(_count < 0)
+                    _count = 0;
             }
         }
         [SerializeField] private int _count;

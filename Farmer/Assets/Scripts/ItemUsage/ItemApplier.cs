@@ -12,17 +12,18 @@ namespace Scripts.ItemUsage
         MapClicker _mapClicker;
         ItemPlacementMap _itemPlacementMap;
         SandTilePlacementMap _sandTilePlacementMap;
+        ItemPlacementMap _seedPlacementMap;
         DiContainer _diContainer;
-        Vector2Int _clickedPosition;
-        IItemHandler _hoeItemHandler;
+        IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
-        public ItemApplier(ItemPlacementMap itemPlacementMap,
-            SandTilePlacementMap sandTilePlacementMap,
+        public ItemApplier(
+            PlacementMapsContainer placementMapsContainer,
             MapClicker mapClicker,
             DiContainer diContainer)
         {
-            _itemPlacementMap = itemPlacementMap;
-            _sandTilePlacementMap = sandTilePlacementMap;
+            _itemPlacementMap = placementMapsContainer.ItemPlacementMap;
+            _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
+            _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
             _mapClicker = mapClicker;
             _diContainer = diContainer;
             InitializeHandlers();
@@ -33,6 +34,7 @@ namespace Scripts.ItemUsage
                 _itemPlacementMap, _mapClicker);
             _bagItemHandler = new BagItemHandler(_mapClicker,
                 _sandTilePlacementMap,
+                _seedPlacementMap,
                 _diContainer);
             _hoeItemHandler.Successor = _bagItemHandler;
         }

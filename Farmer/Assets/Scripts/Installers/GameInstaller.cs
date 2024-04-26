@@ -87,13 +87,23 @@ namespace Scripts.Installers
         }
         void BindItemsUsage()
         {
-            Container.BindInstance(_sandMap).AsTransient();
+            Container.BindInstance(_gameElementsMap)
+                .AsTransient();
+            
             ItemPlacementMap itemPlacementMap =
                 new ItemPlacementMap(_gameElementsMap);
-            Container.BindInstance(itemPlacementMap).AsTransient();
             SandTilePlacementMap sandTilePlacementMap =
                 new SandTilePlacementMap(_sandMap);
-            Container.BindInstance(sandTilePlacementMap).AsTransient();
+            SeedPlacementMap seedPlacementMap =
+                new SeedPlacementMap(_gameElementsMap);
+            PlacementMapsContainer placementMapsContainer
+                = new PlacementMapsContainer(
+                itemPlacementMap,
+                sandTilePlacementMap,
+                seedPlacementMap);
+
+            Container.BindInstance(placementMapsContainer).AsSingle();
+
             Container.Bind<PlacementItem>().To<Chest>().AsTransient();
             Container.Bind<PlacementItem>().To<Seed>().AsTransient();
 

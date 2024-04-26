@@ -17,13 +17,13 @@ namespace Scripts.PlacementCode
         public Vector3Int PlacePosition { get; private set; }
         protected bool _isInitialized;
         protected PlacementItemData _data;
-        protected bool IsSaved;
 
         [Inject]
-        public void ConstructItem(ItemPlacementMap placementMap,
+        public virtual void ConstructItem(
+            PlacementMapsContainer placementMapsContainer,
             GameDataState gameDataState)
         {
-            PlacementMap = placementMap;
+            PlacementMap = placementMapsContainer.ItemPlacementMap;
             GameDataState = gameDataState;
         }
 
@@ -79,7 +79,6 @@ namespace Scripts.PlacementCode
         {
             _data = GetData();
             GameDataState.AddItemData(_data);
-            IsSaved = true;
         }
         public virtual PlacementItemData GetData()
         {
