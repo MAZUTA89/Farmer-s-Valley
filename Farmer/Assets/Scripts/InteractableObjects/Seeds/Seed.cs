@@ -3,7 +3,6 @@ using Scripts.PlacementCode;
 using Scripts.SaveLoader;
 using Scripts.SO.InteractableObjects;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,7 +13,7 @@ namespace Scripts.InteractableObjects
     public class Seed : PlacementItem, IInteractable, IOccupyingOneCell
     {
         SpriteRenderer _spriteRenderer;
-        SeedSO _seedSO;
+        protected SeedSO SeedSO;
         float _currentTime;
         int _growthStages;
         List<Sprite> _sprites;
@@ -31,14 +30,14 @@ namespace Scripts.InteractableObjects
         {
             base.Start();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _growthStages = _seedSO.StagesSpriteList.Count;
-            _sprites = _seedSO.StagesSpriteList;
-            _intervalTime = _seedSO.IntervalTimeBetweenGrowthStages;
+            _growthStages = SeedSO.StagesSpriteList.Count;
+            _sprites = SeedSO.StagesSpriteList;
+            _intervalTime = SeedSO.IntervalTimeBetweenGrowthStages;
             _spriteRenderer.sprite = _sprites[0];
         }
         public void Initialize(SeedSO seedSO)
         {
-            _seedSO = seedSO;
+            SeedSO = seedSO;
         }
         public void Update()
         {

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5893f4b5fbf25a8498836a116dc5b09f, type: 3}
-  m_Name: Oak
+  m_Script: {fileID: 11500000, guid: 8ce36c3c43756e84abbad534fb0421a6, type: 3}
+  m_Name: OakSeed
   m_EditorClassIdentifier: 
-  GrowsStages: 0
   StagesSpriteList:
   - {fileID: 21300000, guid: cf3ef4af3ba8fa34ea299fe6d055d7db, type: 3}
-  - {fileID: 21300000, guid: 01dd441ec90dc22429846281898d82b5, type: 3}
   - {fileID: 21300000, guid: 67afdcc7401de9843a772c515b7cf1f6, type: 3}
   IntervalTimeBetweenGrowthStages: 2
+  CellsWidth: 3
+  CellsHeight: 3

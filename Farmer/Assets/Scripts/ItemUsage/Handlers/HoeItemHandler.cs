@@ -11,12 +11,11 @@ namespace Scripts.ItemUsage
         SandTilePlacementMap _sandTilePlacementMap;
         ItemPlacementMap _itemPlacementMap;
         MapClicker _itemMapClicker;
-        public HoeItemHandler(SandTilePlacementMap sandTilePlacementMap,
-            ItemPlacementMap itemPlacementMap,
+        public HoeItemHandler(PlacementMapsContainer placementMapsContainer,
             MapClicker itemMapClicker)
         {
-            _sandTilePlacementMap = sandTilePlacementMap;
-            _itemPlacementMap = itemPlacementMap;
+            _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
+            _itemPlacementMap = placementMapsContainer.ItemPlacementMap;
             _itemMapClicker = itemMapClicker;
         }
         public override void HandleItem(IInventoryItem inventoryItem)

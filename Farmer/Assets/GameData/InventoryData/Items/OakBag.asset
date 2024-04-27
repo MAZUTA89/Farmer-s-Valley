@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 089794a8318c04449acfbd961c3deaf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c54d90c7ef1402469526a13548f3635, type: 3}
   m_Name: OakBag
   m_EditorClassIdentifier: 
-  _name: OakBag
+  _name: 
   _icon: {fileID: 21300000, guid: 9e33cbb06105dd242baa8c30b6924c85, type: 3}
-  _color: {r: 0.40392157, g: 0.78431374, b: 0.3529412, a: 1}
+  _color: {r: 0.40392157, g: 0.78431374, b: 0.3529412, a: 0}
   IsCountTextActive: 1
-  _count: 23
-  _seedObject: {fileID: 2614294283450799002, guid: bf318f763388aae429320b648d0ec280, type: 3}
-  _seedSO: {fileID: 11400000, guid: 09cb449ca6ee6f04292116408d78a247, type: 2}
+  _count: 14
+  _seedObject: {fileID: -7466911748013600071, guid: 33d9222b6e6914647b4e3440eb358e0e, type: 3}
+  _seedSO: {fileID: 11400000, guid: 3b4da4ed7a389ab448278cd9e56b6fe5, type: 2}

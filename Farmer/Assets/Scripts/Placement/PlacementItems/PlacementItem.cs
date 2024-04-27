@@ -29,11 +29,7 @@ namespace Scripts.PlacementCode
 
 
 
-        public virtual void InitializePosition(Vector3Int placePosition)
-        {
-            PlacePosition = placePosition;
-            _isInitialized = true;
-        }
+
         public void OnEnable()
         {
             GameEvents.OnExitTheGameEvent += OnExitTheGame;
@@ -44,14 +40,10 @@ namespace Scripts.PlacementCode
         }
         protected virtual void Start()
         {
-            if (!_isInitialized)
-            {
-                PlacePosition = PlacementMap
-                .Vector3ConvertToVector3Int(gameObject.transform.position);
-                PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
-            }
-            else
-                PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
+
+            PlacePosition = PlacementMap
+            .Vector3ConvertToVector3Int(gameObject.transform.position);
+            PlacementMap.PlaceObjectOnCell(gameObject, PlacePosition);
             OccupyCells();
         }
         private void OccupyCells()
@@ -62,6 +54,7 @@ namespace Scripts.PlacementCode
                 IOccupyingSeveralCells obj =
                     (this as IOccupyingSeveralCells);
                 PlacementMap.AddPositions(obj);
+                return;
             }
             if (this is IOccupyingOneCell)
             {

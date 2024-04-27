@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.ItemUsage;
+using Scripts.InteractableObjects;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using System;
@@ -10,33 +11,37 @@ namespace Scripts.ItemUsage
     public class ItemApplier
     {
         MapClicker _mapClicker;
-        ItemPlacementMap _itemPlacementMap;
-        SandTilePlacementMap _sandTilePlacementMap;
-        ItemPlacementMap _seedPlacementMap;
+        PlacementMapsContainer _placementMapsContainer;
         DiContainer _diContainer;
         IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
+        IItemHandler _oakBagItemHandler;
         public ItemApplier(
             PlacementMapsContainer placementMapsContainer,
             MapClicker mapClicker,
             DiContainer diContainer)
         {
-            _itemPlacementMap = placementMapsContainer.ItemPlacementMap;
-            _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
-            _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
+            _placementMapsContainer = placementMapsContainer;
+            
             _mapClicker = mapClicker;
             _diContainer = diContainer;
             InitializeHandlers();
         }
         void InitializeHandlers()
         {
-            _hoeItemHandler = new HoeItemHandler(_sandTilePlacementMap,
-                _itemPlacementMap, _mapClicker);
+            _hoeItemHandler = new HoeItemHandler(_placementMapsContainer, _mapClicker);
             _bagItemHandler = new BagItemHandler(_mapClicker,
-                _sandTilePlacementMap,
-                _seedPlacementMap,
+                _placementMapsContainer,
                 _diContainer);
-            _hoeItemHandler.Successor = _bagItemHandler;
+
+             _oakBagItemHandler = 
+                new OakBagItemHandler(_mapClicker,
+                _placementMapsContainer,
+                _diContainer);
+
+            _hoeItemHandler.Successor = _oakBagItemHandler;
+            _oakBagItemHandler.Successor = _bagItemHandler;
+            //_bagItemHandler.Successor = _hoeItemHandler;
         }
         public void ApplyItem(IInventoryItem inventoryItem)
         {

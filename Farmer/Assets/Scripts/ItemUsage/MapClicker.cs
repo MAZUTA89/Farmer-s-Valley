@@ -26,8 +26,6 @@ namespace Scripts.ItemUsage
                 if (plane.Raycast(ray, out distance))
                 {
                     Vector3 worldPos = ray.GetPoint(distance);
-                    Debug.Log("Мировые координаты: " + worldPos); // Отладочный вывод
-
                     // Преобразуем позицию в координаты ячейки сетки
                     clickedPosition = _tileMap.WorldToCell(worldPos);
                     Debug.Log("Координаты ячейки: " + clickedPosition); // Отладочный вывод
