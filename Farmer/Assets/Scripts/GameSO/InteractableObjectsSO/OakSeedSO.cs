@@ -26,7 +26,7 @@ namespace Scripts.SO.InteractableObjects
                     positions.Add(pos);
                 }
             }
-            ShowList(positions, startPos);
+           //ShowList(positions, startPos);
             return positions;
         }
 

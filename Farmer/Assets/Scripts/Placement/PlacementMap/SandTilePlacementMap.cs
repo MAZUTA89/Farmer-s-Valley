@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Scripts.PlacementCode
@@ -14,6 +15,17 @@ namespace Scripts.PlacementCode
         public bool IsOccupiedBySand(Vector3Int position)
         {
             return TileMap.HasTile(position);
+        }
+        public bool IsOccupiedBySand(List<Vector3Int> positions)
+        {
+            foreach (var position in positions)
+            {
+                if(TileMap.HasTile(position))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         public virtual void PlaceObjectOnCell(RuleTile gameObject, Vector3Int position)
         {

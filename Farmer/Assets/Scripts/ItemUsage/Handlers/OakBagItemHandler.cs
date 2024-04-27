@@ -28,8 +28,9 @@ namespace Scripts.InteractableObjects
             {
                 OakSeedSO treeSeedSO = seedSO as OakSeedSO;
                 List<Vector3Int> positions = treeSeedSO.GetCellsPosition(clickedPosition);
-                // если дерево вмещается, 
-                if (PlacementMap.IsOccupied(positions) == false)
+                // если точки дерева не пересекаются с другими точками и с песком, то ставим
+                if (PlacementMap.IsOccupied(positions) == false &&
+                    SandTilePlacementMap.IsOccupiedBySand(positions) == false)
                 {
                     var seed = SeedFactory.Create(seedSO);
                     PlacementMap.PlaceObjectOnCell(seed.gameObject, clickedPosition);
