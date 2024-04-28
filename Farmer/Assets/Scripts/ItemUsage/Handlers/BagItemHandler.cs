@@ -24,62 +24,52 @@ namespace Scripts.ItemUsage
             SeedPlacementMap = PlacementMapsContainer.SeedPlacementMap;
             _diContainer = DiContainer;
         }
-        public override void HandleItem(IInventoryItem inventoryItem)
+        protected override void HandleClick(IInventoryItem inventoryItem,
+            Vector3Int clickedPosition)
         {
-            base.HandleItem(inventoryItem);
+            IBagInventoryItem bagItem = inventoryItem as IBagInventoryItem;
 
-            if (HandleCondition(inventoryItem))
+            if (SeedFactory == null)
             {
-                IBagInventoryItem bagItem = inventoryItem as IBagInventoryItem;
-                if (bagItem.Count > 0)
-                {
-                    if (MapClicker.IsClicked(out Vector3Int clickedPosition))
-                    {
-                        if (SeedFactory == null)
-                        {
-                            SeedFactory = new SeedFactory(_diContainer,
-                                bagItem.ProductionObject);
-                        }
-                        if(UseBag(clickedPosition, bagItem.SeedSO))
-                        {
-                            bagItem.Count--;
-                        }
-                    }
-                }
+                SeedFactory = new SeedFactory(_diContainer,
+                    bagItem.ProductionObject);
             }
-            else
+            if(UseCondition(inventoryItem, clickedPosition))
             {
-                Successor?.HandleItem(inventoryItem);
+                UseBag(clickedPosition, bagItem.SeedSO);
+                bagItem.Count--;
             }
+            
         }
-        protected virtual bool HandleCondition(IInventoryItem inventoryItem)
+        protected override bool HandleCondition(IInventoryItem inventoryItem)
         {
             Debug.Log("Bag item condition!");
             return inventoryItem is IBagInventoryItem;
         }
-        protected virtual bool UseBag(Vector3Int clickedPosition,
+        protected virtual void UseBag(Vector3Int clickedPosition,
             SeedSO seedSO)
         {
-            if (SandTilePlacementMap.IsOccupiedBySand(clickedPosition) &&
-                       !SeedPlacementMap.IsOccupied(clickedPosition))
-            {
-                Seed seed = SeedFactory.Create(seedSO);
-                SandTilePlacementMap.PlaceObjectOnCell(seed.gameObject,
-                    clickedPosition);
-                return true;
-            }
-            else { return false; }
+            Seed seed = SeedFactory.Create(seedSO);
+            SandTilePlacementMap.PlaceObjectOnCell(seed.gameObject,
+                clickedPosition);
         }
-        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3 position)
+        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3Int position)
         {
-            Vector3Int pos = SandTilePlacementMap.Vector3ConvertToVector3Int(position);
-
-            if (SandTilePlacementMap.IsOccupiedBySand(pos) &&
-                       !SeedPlacementMap.IsOccupied(pos))
+            IBagInventoryItem bagInventoryItem = inventoryItem as IBagInventoryItem;
+            if (bagInventoryItem.Count > 0)
             {
-                return true;
+                if (SandTilePlacementMap.IsOccupiedBySand(position) &&
+                           !SeedPlacementMap.IsOccupied(position))
+                {
+                    return true;
+                }
+                else { return false; }
             }
-            else { return false; }
+            else
+            {
+                return false;
+            }
+
         }
     }
 }

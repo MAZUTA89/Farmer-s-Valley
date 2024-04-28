@@ -17,53 +17,46 @@ namespace Scripts.InteractableObjects
             PlacementMap = itemApplierTools.PlacementMapsContainer.ItemPlacementMap;
         }
 
-        protected override bool UseBag(Vector3Int clickedPosition, SeedSO seedSO)
+        protected override void UseBag(Vector3Int clickedPosition, SeedSO seedSO)
         {
-            ///смотрим, есть ли клик по песку или по другому предмету,
-            ///если нет песка или предмета то идем дальше
-            if (!PlacementMap.IsOccupied(clickedPosition) &&
-                !SandTilePlacementMap.IsOccupied(clickedPosition))
-            {
-                OakSeedSO treeSeedSO = seedSO as OakSeedSO;
-                List<Vector3Int> positions = treeSeedSO.GetCellsPosition(clickedPosition);
-                // если точки дерева не пересекаются с другими точками и с песком, то ставим
-                if (PlacementMap.IsOccupied(positions) == false &&
-                    SandTilePlacementMap.IsOccupiedBySand(positions) == false)
-                {
-                    var seed = SeedFactory.Create(seedSO);
-                    PlacementMap.PlaceObjectOnCell(seed.gameObject, clickedPosition);
-                    return true;
-                }
-                else return false;
-            }
-            else return false;
+            OakSeedSO treeSeedSO = seedSO as OakSeedSO;
+            var seed = SeedFactory.Create(treeSeedSO);
+            PlacementMap.PlaceObjectOnCell(seed.gameObject, clickedPosition);
         }
         protected override bool HandleCondition(IInventoryItem inventoryItem)
         {
             Debug.Log("OakBag item condition!");
             return inventoryItem is IOakBagInventoryItem;
         }
-        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3 position)
+        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3Int position)
         {
-            Vector3Int pos = SandTilePlacementMap.Vector3ConvertToVector3Int(position);
-            ///смотрим, есть ли клик по песку или по другому предмету,
-            ///если нет песка или предмета то идем дальше
-            if (!PlacementMap.IsOccupied(pos) &&
-                !SandTilePlacementMap.IsOccupied(pos))
+            IOakBagInventoryItem bagItem = inventoryItem as IOakBagInventoryItem;
+            if(bagItem.Count > 0)
             {
-                IOakBagInventoryItem bagItem = inventoryItem as IOakBagInventoryItem;
-                SeedSO seedSO = bagItem.SeedSO;
-                OakSeedSO treeSeedSO = seedSO as OakSeedSO;
-                List<Vector3Int> positions = treeSeedSO.GetCellsPosition(pos);
-                // если точки дерева не пересекаются с другими точками и с песком, то ставим
-                if (PlacementMap.IsOccupied(positions) == false  
-                    /*SandTilePlacementMap.IsOccupiedBySand(positions) == false*/)
+                ///смотрим, есть ли клик по песку или по другому предмету,
+                ///если нет песка или предмета то идем дальше
+                if (!PlacementMap.IsOccupied(position) &&
+                    !SandTilePlacementMap.IsOccupied(position))
                 {
-                    return true;
+
+                    SeedSO seedSO = bagItem.SeedSO;
+                    OakSeedSO treeSeedSO = seedSO as OakSeedSO;
+                    List<Vector3Int> positions = treeSeedSO.GetCellsPosition(position);
+                    // если точки дерева не пересекаются с другими точками и с песком, то ставим
+                    if (PlacementMap.IsOccupied(positions) == false &&
+                        SandTilePlacementMap.IsOccupiedBySand(positions) == false)
+                    {
+                        return true;
+                    }
+                    else return false;
                 }
                 else return false;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }

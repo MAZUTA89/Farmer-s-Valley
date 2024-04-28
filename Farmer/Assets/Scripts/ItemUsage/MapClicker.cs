@@ -56,7 +56,6 @@ namespace Scripts.ItemUsage
 
                 Vector3Int cellPosition = _tileMap.WorldToCell(worldPos);
                 position = _tileMap.GetCellCenterWorld(cellPosition);
-                Debug.Log("Координаты ячейки: " + position); // Отладочный вывод
                 return true;
             }
             else
