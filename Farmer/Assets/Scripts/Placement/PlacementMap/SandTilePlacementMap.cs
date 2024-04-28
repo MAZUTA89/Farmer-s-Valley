@@ -6,7 +6,7 @@ namespace Scripts.PlacementCode
 {
     public class SandTilePlacementMap : ItemPlacementMap
     {
-        
+
         public SandTilePlacementMap(Tilemap sandTile)
             : base(sandTile)
         {
@@ -20,12 +20,12 @@ namespace Scripts.PlacementCode
         {
             foreach (var position in positions)
             {
-                if(TileMap.HasTile(position))
+                if (TileMap.HasTile(position))
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
         public virtual void PlaceObjectOnCell(RuleTile gameObject, Vector3Int position)
         {
