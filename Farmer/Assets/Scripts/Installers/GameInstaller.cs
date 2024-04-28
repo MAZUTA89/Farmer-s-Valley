@@ -33,6 +33,8 @@ namespace Scripts.Installers
         [SerializeField] private Tilemap _gameElementsMap;
         [Header("Sand map:")]
         [SerializeField] private Tilemap _sandMap;
+        [Header("KursorObject:")]
+        [SerializeField] private GameObject _kursorObject;
         public override void InstallBindings()
         {
             BindInputService();
@@ -102,8 +104,12 @@ namespace Scripts.Installers
                 sandTilePlacementMap,
                 seedPlacementMap);
 
+            _kursorObject.SetActive(false);
+            Container.BindInstance(_kursorObject).WithId("KursorObject");
+
             Container.BindInstance(placementMapsContainer).AsSingle();
 
+            Container.Bind<ItemApplierTools>().AsSingle();
             Container.Bind<PlacementItem>().To<Chest>().AsTransient();
             Container.Bind<PlacementItem>().To<Seed>().AsTransient();
 

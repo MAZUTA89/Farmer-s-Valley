@@ -43,5 +43,27 @@ namespace Scripts.ItemUsage
                 return false;
             }
         }
+        public bool TryGetMousePositionIfIntersect(out Vector3 position)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Plane plane = new Plane(Vector3.forward, Vector3.zero);
+            float distance;
+
+            if (plane.Raycast(ray, out distance))
+            {
+                Vector3 worldPos = ray.GetPoint(distance);
+                // Преобразуем позицию в координаты ячейки сетки
+
+                Vector3Int cellPosition = _tileMap.WorldToCell(worldPos);
+                position = _tileMap.GetCellCenterWorld(cellPosition);
+                Debug.Log("Координаты ячейки: " + position); // Отладочный вывод
+                return true;
+            }
+            else
+            {
+                position = Vector3Int.zero;
+                return false;
+            }
+        }
     }
 }

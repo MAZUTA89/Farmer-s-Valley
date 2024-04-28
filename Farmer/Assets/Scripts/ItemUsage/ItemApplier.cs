@@ -10,34 +10,23 @@ namespace Scripts.ItemUsage
 {
     public class ItemApplier
     {
-        MapClicker _mapClicker;
-        PlacementMapsContainer _placementMapsContainer;
-        DiContainer _diContainer;
+        ItemApplierTools _itemApplierTools;
         IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
         IItemHandler _oakBagItemHandler;
         public ItemApplier(
-            PlacementMapsContainer placementMapsContainer,
-            MapClicker mapClicker,
-            DiContainer diContainer)
+            ItemApplierTools itemApplierTools)
         {
-            _placementMapsContainer = placementMapsContainer;
-            
-            _mapClicker = mapClicker;
-            _diContainer = diContainer;
+            _itemApplierTools = itemApplierTools;
             InitializeHandlers();
         }
         void InitializeHandlers()
         {
-            _hoeItemHandler = new HoeItemHandler(_placementMapsContainer, _mapClicker);
-            _bagItemHandler = new BagItemHandler(_mapClicker,
-                _placementMapsContainer,
-                _diContainer);
+            _hoeItemHandler = new HoeItemHandler(_itemApplierTools);
+            _bagItemHandler = new BagItemHandler(_itemApplierTools);
 
              _oakBagItemHandler = 
-                new OakBagItemHandler(_mapClicker,
-                _placementMapsContainer,
-                _diContainer);
+                new OakBagItemHandler(_itemApplierTools);
 
             _hoeItemHandler.Successor = _oakBagItemHandler;
             _oakBagItemHandler.Successor = _bagItemHandler;
@@ -46,6 +35,10 @@ namespace Scripts.ItemUsage
         public void ApplyItem(IInventoryItem inventoryItem)
         {
             _hoeItemHandler.HandleItem(inventoryItem);
+        }
+        public void PerformItemCondition(IUsableInventoryItem usableInventoryItem)
+        {
+
         }
     }
 }

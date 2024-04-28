@@ -17,5 +17,7 @@ MonoBehaviour:
   _color: {r: 0.40392157, g: 0.78431374, b: 0.3529412, a: 1}
   IsCountTextActive: 1
   _count: 10
+  _useConditionSO: {fileID: 11400000, guid: 742b523defedb864a9003961e2aa5827, type: 2}
+  _displaySprite: {fileID: 4083779769244706076, guid: a6aab2e82857f284792be5564773794a, type: 3}
   _seedObject: {fileID: 2614294283450799002, guid: bf318f763388aae429320b648d0ec280, type: 3}
   _seedSO: {fileID: 11400000, guid: 7bfad4197c0df044d8775b1e71960301, type: 2}

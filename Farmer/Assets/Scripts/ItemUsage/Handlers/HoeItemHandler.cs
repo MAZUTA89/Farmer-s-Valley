@@ -6,24 +6,23 @@ using UnityEngine;
 
 namespace Scripts.ItemUsage
 {
-    public class HoeItemHandler : ItemHandler
+    public class HoeItemHandler : PressingItemHandler
     {
         SandTilePlacementMap _sandTilePlacementMap;
         ItemPlacementMap _itemPlacementMap;
-        MapClicker _itemMapClicker;
-        public HoeItemHandler(PlacementMapsContainer placementMapsContainer,
-            MapClicker itemMapClicker)
+        public HoeItemHandler(ItemApplierTools itemApplierTools) :
+            base(itemApplierTools)
         {
-            _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
-            _itemPlacementMap = placementMapsContainer.ItemPlacementMap;
-            _itemMapClicker = itemMapClicker;
+            _sandTilePlacementMap = PlacementMapsContainer.SandTilePlacementMap;
+            _itemPlacementMap = PlacementMapsContainer.ItemPlacementMap;
         }
         public override void HandleItem(IInventoryItem inventoryItem)
         {
+            base.HandleItem(inventoryItem);
             if(inventoryItem is IHoeInventoryItem hoe)
             {
                 Vector3Int clickedPosition;
-                if(_itemMapClicker.IsClicked(out clickedPosition))
+                if(MapClicker.IsClicked(out clickedPosition))
                 {
                     if(!_sandTilePlacementMap.IsOccupiedBySand(clickedPosition) &&
                         !_itemPlacementMap.IsOccupied(clickedPosition))
@@ -38,6 +37,19 @@ namespace Scripts.ItemUsage
             {
                 Successor.HandleItem(inventoryItem);
             }
+        }
+
+        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3 position)
+        {
+            Vector3Int pos = _sandTilePlacementMap.Vector3ConvertToVector3Int(position);
+
+            if (!_sandTilePlacementMap.IsOccupiedBySand(pos) &&
+                        !_itemPlacementMap.IsOccupied(pos))
+            {
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

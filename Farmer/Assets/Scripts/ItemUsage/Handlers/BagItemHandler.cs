@@ -10,24 +10,24 @@ using Zenject;
 
 namespace Scripts.ItemUsage
 {
-    public class BagItemHandler : ItemHandler
+    public class BagItemHandler : PressingItemHandler
     {
-        protected MapClicker MapClicker;
         protected SandTilePlacementMap SandTilePlacementMap;
         protected ItemPlacementMap SeedPlacementMap;
         protected ISeedFactory SeedFactory;
         DiContainer _diContainer;
-        public BagItemHandler(MapClicker mapClicker,
-            PlacementMapsContainer placementsContainer,
-            DiContainer diContainer)
+        public BagItemHandler(ItemApplierTools itemApplierTools) :
+            base(itemApplierTools)
+
         {
-            MapClicker = mapClicker;
-            SandTilePlacementMap = placementsContainer.SandTilePlacementMap;
-            SeedPlacementMap = placementsContainer.SeedPlacementMap;
-            _diContainer = diContainer;
+            SandTilePlacementMap = PlacementMapsContainer.SandTilePlacementMap;
+            SeedPlacementMap = PlacementMapsContainer.SeedPlacementMap;
+            _diContainer = DiContainer;
         }
         public override void HandleItem(IInventoryItem inventoryItem)
         {
+            base.HandleItem(inventoryItem);
+
             if (HandleCondition(inventoryItem))
             {
                 IBagInventoryItem bagItem = inventoryItem as IBagInventoryItem;
@@ -66,6 +66,17 @@ namespace Scripts.ItemUsage
                 Seed seed = SeedFactory.Create(seedSO);
                 SandTilePlacementMap.PlaceObjectOnCell(seed.gameObject,
                     clickedPosition);
+                return true;
+            }
+            else { return false; }
+        }
+        protected override bool UseCondition(IInventoryItem inventoryItem, Vector3 position)
+        {
+            Vector3Int pos = SandTilePlacementMap.Vector3ConvertToVector3Int(position);
+
+            if (SandTilePlacementMap.IsOccupiedBySand(pos) &&
+                       !SeedPlacementMap.IsOccupied(pos))
+            {
                 return true;
             }
             else { return false; }
