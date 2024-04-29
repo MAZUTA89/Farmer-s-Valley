@@ -58,7 +58,7 @@ namespace AScripts.SaveLoader
         void LoadPlayerData()
         {
             PlayerData playerData = _gameDataState.PlayerData;
-            if(LoadedData.IsDefault == false)
+            if (LoadedData.IsDefault == false)
             {
                 _player.Load(playerData);
             }
@@ -70,29 +70,32 @@ namespace AScripts.SaveLoader
 
             foreach (PlacementItemData itemData in placementItems)
             {
-                if(itemData is ChestData)
+                switch (itemData)
                 {
-                    var data = itemData as ChestData;
-                    List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
-                    Chest chest = _chestFactory.Create(inventoryItems);
-                    Vector3Int pos3 = itemData.GetPosition();
-                    _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                    _placementMap.AddPosition(pos3);
+                    case SandData data:
+                        {
+                            Vector3Int sandPos = data.GetPosition();
+
+                            break;
+                        }
+                    case ChestData data:
+                        {
+                            List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
+                            Chest chest = _chestFactory.Create(inventoryItems);
+                            Vector3Int pos3 = itemData.GetPosition();
+                            _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
+                            _placementMap.AddPosition(pos3);
+                            break;
+                        }
+                    case SeedData data:
+                        {
+                            break;
+                        }
                 }
-                
-                //switch (placementItem)
-                //{
-                //    case ChestData data:
-                //        {
-                //            List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
-                //            Chest chest = _chestFactory.Create(inventoryItems);
-                //            Vector2Int pos = data.GetPosition();
-                //            Vector3Int pos3 = new Vector3Int(pos.x, pos.y, 0);
-                //            _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                //            _placementMap.AddPosition(pos);
-                //            break;
-                //        }
-                //}
+                if (itemData is ChestData)
+                {
+                    
+                }
             }
 
         }
@@ -124,6 +127,17 @@ namespace AScripts.SaveLoader
                 _inventoryItemsDictionary[itemName];
             switch (itemData)
             {
+                case HoeInventoryItemData data:
+                    {
+                        IHoeInventoryItem hoe = inventoryItem as IHoeInventoryItem;
+                        return hoe;
+                    }
+                case OakBagInventoryItemData data:
+                    {
+                        IOakBagInventoryItem oakBag = inventoryItem as IOakBagInventoryItem;
+                        oakBag.Count = data.Count;
+                        return oakBag;
+                    }
                 case BagInventoryItemData data:
                     {
                         IBagInventoryItem bag = inventoryItem as IBagInventoryItem;
@@ -145,6 +159,7 @@ namespace AScripts.SaveLoader
                         quantitativeInventoryItem.Count = data.Count;
                         return quantitativeInventoryItem;
                     }
+                
                 default:
                     {
                         return inventoryItem;

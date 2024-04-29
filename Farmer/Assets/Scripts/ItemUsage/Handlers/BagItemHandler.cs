@@ -1,6 +1,7 @@
 ﻿using Scripts.InteractableObjects;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
+using Scripts.PlayerCode;
 using Scripts.SO.InteractableObjects;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace Scripts.ItemUsage
         protected ItemPlacementMap SeedPlacementMap;
         protected ISeedFactory SeedFactory;
         DiContainer _diContainer;
-        public BagItemHandler(ItemApplierTools itemApplierTools) :
-            base(itemApplierTools)
+        public BagItemHandler(ItemApplierTools itemApplierTools, Player player) :
+            base(itemApplierTools, player)
 
         {
             SandTilePlacementMap = PlacementMapsContainer.SandTilePlacementMap;
@@ -34,12 +35,12 @@ namespace Scripts.ItemUsage
                 SeedFactory = new SeedFactory(_diContainer,
                     bagItem.ProductionObject);
             }
-            if(UseCondition(inventoryItem, clickedPosition))
+            if (UseCondition(inventoryItem, clickedPosition))
             {
                 UseBag(clickedPosition, bagItem.SeedSO);
                 bagItem.Count--;
             }
-            
+
         }
         protected override bool HandleCondition(IInventoryItem inventoryItem)
         {
@@ -69,7 +70,6 @@ namespace Scripts.ItemUsage
             {
                 return false;
             }
-
         }
     }
 }

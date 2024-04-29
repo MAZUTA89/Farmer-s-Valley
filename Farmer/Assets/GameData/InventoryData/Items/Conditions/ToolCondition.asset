@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf88a6a4c38f3345bda24db1f77f558, type: 3}
   m_Name: ToolCondition
   m_EditorClassIdentifier: 
-  InteractDistance: 3
-  TrueConditionColor: {r: 1, g: 1, b: 1, a: 1}
-  FalseConditionColor: {r: 1, g: 0, b: 0, a: 1}
+  InteractDistance: 5.15
+  TrueConditionColor: {r: 0.023529412, g: 0.31764707, b: 0.94509804, a: 0.1764706}
+  FalseConditionColor: {r: 1, g: 0, b: 0, a: 0.1764706}

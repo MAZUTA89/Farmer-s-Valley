@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BagCondition
   m_EditorClassIdentifier: 
   InteractDistance: 4.94
-  TrueConditionColor: {r: 1, g: 1, b: 1, a: 1}
-  FalseConditionColor: {r: 1, g: 0, b: 0, a: 1}
+  TrueConditionColor: {r: 0.02352941, g: 0.3195677, b: 0.94509804, a: 0.1764706}
+  FalseConditionColor: {r: 1, g: 0, b: 0, a: 0.1764706}

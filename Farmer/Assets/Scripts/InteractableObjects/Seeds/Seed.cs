@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Placement;
+﻿using AScripts.SaveLoader;
+using Assets.Scripts.Placement;
 using Scripts.PlacementCode;
 using Scripts.SaveLoader;
 using Scripts.SO.InteractableObjects;
@@ -56,6 +57,15 @@ namespace Scripts.InteractableObjects
         public Vector3Int GetOccupyingCell()
         {
             return PlacePosition;
+        }
+        public override PlacementItemData GetData()
+        {
+            var data = base.GetData();
+            SeedData seedData = new SeedData();
+            seedData.SetPosition(data.GetPosition());
+            seedData.CurrentTime = _currentTime;
+            seedData.GrowthStage = _currentStage;
+            return seedData;
         }
     }
 }

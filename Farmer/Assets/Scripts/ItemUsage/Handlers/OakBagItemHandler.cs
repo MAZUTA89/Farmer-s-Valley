@@ -1,6 +1,7 @@
 ﻿using Scripts.InventoryCode;
 using Scripts.ItemUsage;
 using Scripts.PlacementCode;
+using Scripts.PlayerCode;
 using Scripts.SO.InteractableObjects;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,8 @@ namespace Scripts.InteractableObjects
     public class OakBagItemHandler : BagItemHandler
     {
         protected ItemPlacementMap PlacementMap;
-        public OakBagItemHandler(ItemApplierTools itemApplierTools)
-            : base(itemApplierTools)
+        public OakBagItemHandler(ItemApplierTools itemApplierTools, Player player)
+            : base(itemApplierTools, player)
         {
             PlacementMap = itemApplierTools.PlacementMapsContainer.ItemPlacementMap;
         }
@@ -31,14 +32,13 @@ namespace Scripts.InteractableObjects
         protected override bool UseCondition(IInventoryItem inventoryItem, Vector3Int position)
         {
             IOakBagInventoryItem bagItem = inventoryItem as IOakBagInventoryItem;
-            if(bagItem.Count > 0)
+            if (bagItem.Count > 0)
             {
                 ///смотрим, есть ли клик по песку или по другому предмету,
                 ///если нет песка или предмета то идем дальше
                 if (!PlacementMap.IsOccupied(position) &&
                     !SandTilePlacementMap.IsOccupied(position))
                 {
-
                     SeedSO seedSO = bagItem.SeedSO;
                     OakSeedSO treeSeedSO = seedSO as OakSeedSO;
                     List<Vector3Int> positions = treeSeedSO.GetCellsPosition(position);
@@ -56,7 +56,6 @@ namespace Scripts.InteractableObjects
             {
                 return false;
             }
-            
         }
     }
 }

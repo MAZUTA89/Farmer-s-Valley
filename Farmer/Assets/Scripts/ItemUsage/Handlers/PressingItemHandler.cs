@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.ItemUsage;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
+using Scripts.PlayerCode;
 using Scripts.SO.Inventory;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Zenject;
 
 
@@ -17,7 +19,9 @@ namespace Scripts.ItemUsage
         protected MapClicker MapClicker;
         private GameObject _kursorObject;
         private SpriteRenderer _sr;
-        public PressingItemHandler(ItemApplierTools itemApplierTools)
+        Transform _playerTransform;
+        public PressingItemHandler(ItemApplierTools itemApplierTools,
+            Player player)
         {
             PlacementMapsContainer = itemApplierTools.PlacementMapsContainer;
             ItemPlacementMap = PlacementMapsContainer.ItemPlacementMap;
@@ -26,20 +30,25 @@ namespace Scripts.ItemUsage
             MapClicker = itemApplierTools.MapClicker;
             _kursorObject = itemApplierTools.KursorObject;
             _sr = _kursorObject.GetComponent<SpriteRenderer>();
+            _playerTransform = player.transform;
         }
         public void HandleItem(IInventoryItem inventoryItem)
         {
-            DisplayItemApplyingOpportunity(inventoryItem);
-
             if(HandleCondition(inventoryItem))
             {
-                if(MapClicker.IsClicked(out Vector3Int clickedPosition))
+                DisplayItemApplyingOpportunity(inventoryItem);
+                if (MapClicker.IsClicked(out Vector3Int clickedPosition))
                 {
-                    HandleClick(inventoryItem, clickedPosition);
+                    if(CheckInteractableDistance(inventoryItem, clickedPosition))
+                    {
+                        HandleClick(inventoryItem, clickedPosition);
+                    }
                 }
             }
             else
             {
+                UsableItemKursorHandler.InvokeFalseConditionEvent();
+                _kursorObject.SetActive(false);
                 Successor?.HandleItem(inventoryItem);
             }
 
@@ -61,25 +70,41 @@ namespace Scripts.ItemUsage
                     _kursorObject.transform.position = position;
                     Vector3Int position3Int = 
                         ItemPlacementMap.Vector3ConvertToVector3Int(position);
-                    if (UseCondition(inventoryItem, position3Int))
+                    if(CheckInteractableDistance(inventoryItem, position))
                     {
-                        _sr.color = useConditionSO.TrueConditionColor;
+                        if (UseCondition(inventoryItem, position3Int))
+                        {
+                            UsableItemKursorHandler.InvokeTrueConditionEvent(inventoryItem);
+                            _sr.color = useConditionSO.TrueConditionColor;
+                        }
+                        else
+                        {
+                            UsableItemKursorHandler.InvokeFalseConditionEvent();
+                            _sr.color = useConditionSO.FalseConditionColor;
+                        }
                     }
                     else
                     {
+                        UsableItemKursorHandler.InvokeFalseConditionEvent();
                         _sr.color = useConditionSO.FalseConditionColor;
                     }
                 }
                 else
                 {
+                    UsableItemKursorHandler.InvokeFalseConditionEvent();
                     _sr.color = useConditionSO.FalseConditionColor;
                 }
 
             }
             else
             {
+                UsableItemKursorHandler.InvokeFalseConditionEvent();
                 _kursorObject.SetActive(false);
             }
+        }
+        private void DisplayKursor(Sprite sprite)
+        {
+
         }
         /// <summary>
         /// При каком условии обрабатывать элемент последовательности
@@ -100,8 +125,22 @@ namespace Scripts.ItemUsage
             Vector3Int position)
         {
             return false;
+            
         }
-
+        bool CheckInteractableDistance(IInventoryItem inventoryItem, Vector3 mousePosition)
+        {
+            if (inventoryItem is IUsableInventoryItem item)
+            {
+                if (Vector3.Distance(mousePosition, _playerTransform.position) <
+                    item.UseConditionSO.InteractDistance)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else { return false; }
+        }
         protected virtual void HandleClick(IInventoryItem inventoryItem, Vector3Int clickedPosition)
         {
 

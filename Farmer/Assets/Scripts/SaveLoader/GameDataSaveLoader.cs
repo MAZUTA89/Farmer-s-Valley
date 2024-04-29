@@ -4,6 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using Assets.Scripts;
 using Newtonsoft.Json.Linq;
+using AScripts.SaveLoader;
 
 namespace Scripts.SaveLoader
 {
@@ -59,6 +60,8 @@ namespace Scripts.SaveLoader
                 {
                     case nameof(ChestData):
                         return item.ToObject<ChestData>(serializer);
+                    case nameof(SandData):
+                        return item.ToObject<SandData>(serializer);
                     default:
                         return item.ToObject<PlacementItemData>(serializer);
                 }

@@ -5,28 +5,31 @@ using Scripts.PlacementCode;
 using System;
 using UnityEngine;
 using Zenject;
+using Scripts.PlayerCode;
 
 namespace Scripts.ItemUsage
 {
     public class ItemApplier
     {
+        Player _player;
         ItemApplierTools _itemApplierTools;
         IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
         IItemHandler _oakBagItemHandler;
         public ItemApplier(
-            ItemApplierTools itemApplierTools)
+            ItemApplierTools itemApplierTools, Player player)
         {
             _itemApplierTools = itemApplierTools;
+            _player = player;
             InitializeHandlers();
         }
         void InitializeHandlers()
         {
-            _hoeItemHandler = new HoeItemHandler(_itemApplierTools);
-            _bagItemHandler = new BagItemHandler(_itemApplierTools);
+            _hoeItemHandler = new HoeItemHandler(_itemApplierTools, _player);
+            _bagItemHandler = new BagItemHandler(_itemApplierTools, _player);
 
              _oakBagItemHandler = 
-                new OakBagItemHandler(_itemApplierTools);
+                new OakBagItemHandler(_itemApplierTools, _player);
 
             _hoeItemHandler.Successor = _oakBagItemHandler;
             _oakBagItemHandler.Successor = _bagItemHandler;

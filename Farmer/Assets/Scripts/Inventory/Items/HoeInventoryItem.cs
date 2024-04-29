@@ -1,4 +1,5 @@
 ﻿using Scripts.InventoryCode;
+using Scripts.SaveLoader;
 using UnityEngine;
 
 namespace Assets.Scripts.Inventory.Items
@@ -9,5 +10,10 @@ namespace Assets.Scripts.Inventory.Items
     {
         public RuleTile ProductionObject => _sandTile;
         [SerializeField] private RuleTile _sandTile;
+
+        public override InventoryItemData GetItemData()
+        {
+           return base.GetItemData();
+        }
     }
 }

@@ -123,6 +123,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &161480330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161480331}
+  - component: {fileID: 161480333}
+  - component: {fileID: 161480332}
+  m_Layer: 5
+  m_Name: UsableItemImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &161480331
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161480330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 573698812}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 42.6, y: 54.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &161480332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161480330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 279955840, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &161480333
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161480330}
+  m_CullTransparentMesh: 1
 --- !u!1 &262809445
 GameObject:
   m_ObjectHideFlags: 0
@@ -3032,8 +3107,8 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
-  - component: {fileID: 519420036}
   - component: {fileID: 519420037}
+  - component: {fileID: 519420038}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3159,20 +3234,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &519420036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940977a2271d95843984bc0a4f4c239f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilemap: {fileID: 302244825}
-  ruleTile: {fileID: 11400000, guid: 17d841fcdfe94c846b811d5406e7614d, type: 2}
 --- !u!114 &519420037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3207,6 +3268,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &519420038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58dd35ad085ee44a92a32c74fd0c986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayImage: {fileID: 161480332}
 --- !u!114 &529901096 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
@@ -3391,6 +3465,7 @@ RectTransform:
   m_Children:
   - {fileID: 1951533480}
   - {fileID: 4763369698570837713}
+  - {fileID: 161480331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3964,7 +4039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &908967237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4006,7 +4081,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -5177388603050735206, guid: 71ebafeef3c03457483266a33ab2b270, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4266,6 +4341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1416821728}
   - component: {fileID: 1416821729}
+  - component: {fileID: 1416821730}
   m_Layer: 0
   m_Name: GameStateGenerator
   m_TagString: Untagged
@@ -4313,12 +4389,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a5e1a8a4a63c0d44aad8ec0790e53a5, type: 2}
   - {fileID: 11400000, guid: 9efd5a2f5feabc34ebd537da357fae28, type: 2}
   _backPackInventory: {fileID: 7112905720759645298}
-  _activeStartItemKit:
-  - {fileID: 11400000, guid: 64f47982085ffcc41829f4758618794e, type: 2}
-  - {fileID: 11400000, guid: da37a0ccda8958c418749364a34d906a, type: 2}
+  _activeStartItemKit: []
   _activeInventory: {fileID: 1951533484}
   _sellerStartItemKit: []
   _sellerInventory: {fileID: 0}
+--- !u!114 &1416821730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416821727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181e80b2b650feb4cb9fa4a44b3ce947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1444205467 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
@@ -4760,6 +4846,8 @@ MonoBehaviour:
   _gameElementsMap: {fileID: 262809448}
   _sandMap: {fileID: 302244825}
   _kursorObject: {fileID: 908967236}
+  _chestInventoryTemplate: {fileID: 1815537105647621818, guid: f95161a49274a3f41b07eae38bb5f6c2, type: 3}
+  _chestTemplate: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
 --- !u!114 &1791796168
 MonoBehaviour:
   m_ObjectHideFlags: 0

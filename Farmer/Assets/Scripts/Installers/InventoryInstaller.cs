@@ -31,11 +31,7 @@ namespace Scripts.Installers
         [SerializeField] private ItemSourceSO ItemSourceSO;
         [Header("Item resource prefab")]
         [SerializeField] private ItemResource ItemResourcePrefab;
-        [Space]
-        [Header("Chest inventory:")]
-        [SerializeField] private ChestInventory _chestInventoryTemplate;
-        [Header("Chest object:")]
-        [SerializeField] private Chest _chestTemplate;
+       
         public override void InstallBindings()
         {
             BindInventories();
@@ -44,7 +40,6 @@ namespace Scripts.Installers
             BindFactories();
             BindItemResourceLogic();
             BindCells();
-            BindChest();
         }
         void BindGlobalVisualContext()
         {
@@ -63,7 +58,10 @@ namespace Scripts.Installers
         }
         void BindInventories()
         {
-            Container.Bind<InventoryBase>().To<InventoryStorage>().FromComponentInHierarchy().AsTransient();
+            Container.Bind<InventoryBase>().To<InventoryStorage>()
+                .FromComponentInHierarchy()
+                .AsTransient();
+
             Container.BindInstance(_storageInventoryInfo)
                 .WithId("InventoryStorageInfo")
                 .WhenInjectedInto<InventoryStorage>();
@@ -100,25 +98,6 @@ namespace Scripts.Installers
             Container.Bind<InventoryCell>()
                 .FromComponentInHierarchy()
                 .AsTransient();
-        }
-        void BindChest()
-        {
-            Container.Bind<PlacementItem>()
-                .To<Chest>()
-                .FromComponentInHierarchy()
-                .AsTransient();
-            //Container.Bind<InventoryStorage>()
-            //    .To<ChestInventory>()
-            //    .FromInstance(_chestInventoryTemplate)
-            //    .AsTransient();
-            Container.BindInstance(_chestInventoryTemplate)
-                .AsTransient();
-            Container.Bind<IInventoryPanelFactory>()
-                 .To<InventoryChestPanelFactory>()
-                 .WhenInjectedInto<Chest>();
-
-            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
-            Container.BindInstance(chestFactory).AsTransient();
         }
     }
 }

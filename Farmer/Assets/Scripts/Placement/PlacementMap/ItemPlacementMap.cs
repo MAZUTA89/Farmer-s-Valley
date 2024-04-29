@@ -8,25 +8,25 @@ namespace Scripts.PlacementCode
 {
     public class ItemPlacementMap
     {
-        private List<Vector3Int> _occupiedPositions;
+        public List<Vector3Int> OccupiedPositions { get; private set; }
         protected Tilemap TileMap;
         public string Name;
 
         public ItemPlacementMap(Tilemap tileMap)
         {
-            _occupiedPositions = new List<Vector3Int>();
+            OccupiedPositions = new List<Vector3Int>();
             TileMap = tileMap;
         }
         public virtual bool IsOccupied(Vector3Int position)
         {
-            return _occupiedPositions.Contains(position);
+            return OccupiedPositions.Contains(position);
         }
         public virtual bool IsOccupied(List<Vector3Int> positions)
         {
             
             foreach (var position in positions)
             {
-                if (_occupiedPositions.Contains(position))
+                if (OccupiedPositions.Contains(position))
                 {
                     return true;
                 }
@@ -36,28 +36,28 @@ namespace Scripts.PlacementCode
 
         public void AddPosition(IOccupyingOneCell obj)
         {
-            _occupiedPositions.Add(obj.GetOccupyingCell());
+            OccupiedPositions.Add(obj.GetOccupyingCell());
         }
         public void AddPosition(Vector3Int position)
         {
-            _occupiedPositions.Add(position);
+            OccupiedPositions.Add(position);
         }
         public void AddPositions(IOccupyingSeveralCells obj)
         {
-            _occupiedPositions.AddRange(obj.GetOccupyingCells());
+            OccupiedPositions.AddRange(obj.GetOccupyingCells());
         }
         public void RemovePosition(IOccupyingOneCell obj)
         {
-            _occupiedPositions.Remove(obj.GetOccupyingCell());
+            OccupiedPositions.Remove(obj.GetOccupyingCell());
         }
         public void RemovePosition(Vector3Int position)
         {
-            _occupiedPositions.Remove(position);
+            OccupiedPositions.Remove(position);
         }
         public void RemovePositions(IOccupyingSeveralCells obj)
         {
             List<Vector3Int> positions = obj.GetOccupyingCells();
-            _occupiedPositions.RemoveAll(x => positions.Contains(x));
+            OccupiedPositions.RemoveAll(x => positions.Contains(x));
         }
         public virtual void PlaceObjectOnCell(GameObject gameObject, Vector3Int position)
         {

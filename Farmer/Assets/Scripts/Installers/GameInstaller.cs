@@ -1,15 +1,18 @@
 ﻿using Scripts.GameMenuCode;
 using Scripts.InteractableObjects;
+using Scripts.InventoryCode;
 using Scripts.ItemUsage;
 using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using Scripts.SaveLoader;
+using Scripts.SO.InteractableObjects;
 using Scripts.SO.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Scripts.Installers
@@ -35,6 +38,17 @@ namespace Scripts.Installers
         [SerializeField] private Tilemap _sandMap;
         [Header("KursorObject:")]
         [SerializeField] private GameObject _kursorObject;
+        [Space]
+        [Header("InteractableObjects:")]
+        [Space]
+        [Header("Chest inventory:")]
+        [SerializeField] private ChestInventory _chestInventoryTemplate;
+        [Header("Chest object:")]
+        [SerializeField] private Chest _chestTemplate;
+        [Header("Sand rule tile:")]
+        [SerializeField] private RuleTile _sandRuleTile;
+        [Header("Seed template:")]
+        [SerializeField] private Seed _seedTemplate;
         public override void InstallBindings()
         {
             BindInputService();
@@ -42,6 +56,8 @@ namespace Scripts.Installers
             BindGameDataState();
             BindPlayer();
             BindItemsUsage();
+            BindChest();
+            BindInteractableObjectsFactories();
         }
         void BindInputService()
         {
@@ -76,6 +92,7 @@ namespace Scripts.Installers
             }
             Container.BindInstance(_gameDataState).AsSingle();
             Container.Bind<GameDataSaveLoader>().AsSingle();
+            Container.Bind<SandTilePlacementSaver>().AsSingle();
         }
         void BindPlayer()
         {
@@ -105,6 +122,7 @@ namespace Scripts.Installers
                 seedPlacementMap);
 
             _kursorObject.SetActive(false);
+
             Container.BindInstance(_kursorObject).WithId("KursorObject");
 
             Container.BindInstance(placementMapsContainer).AsSingle();
@@ -115,6 +133,39 @@ namespace Scripts.Installers
 
             Container.Bind<MapClicker>().AsSingle();
             Container.Bind<ItemApplier>().AsSingle();
+        }
+        void BindChest()
+        {
+            Container.Bind<PlacementItem>()
+                .To<Chest>()
+                .FromComponentInHierarchy()
+                .AsTransient();
+
+            Container.BindInstance(_chestInventoryTemplate)
+                .AsTransient();
+            Container.Bind<IInventoryPanelFactory>()
+                 .To<InventoryChestPanelFactory>()
+                 .WhenInjectedInto<Chest>();
+
+            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
+            Container.BindInstance(chestFactory).AsTransient();
+        }
+        void BindInteractableObjectsFactories()
+        {
+            ISeedFactory seedFactory = new SeedFactory(Container, _seedTemplate);
+            ISandFactory sandFactory = new SandFactory(_sandMap, _sandRuleTile);
+            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
+            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider
+                = new InteractableObjectsFactoryProvider();
+            interactableObjectsFactoryProvider.RegisterFabric(seedFactory);
+            interactableObjectsFactoryProvider.RegisterFabric(sandFactory);
+            interactableObjectsFactoryProvider.RegisterFabric(chestFactory);
+
+            Container.BindInstance(interactableObjectsFactoryProvider).AsSingle();
+
+            //ISeedFactory seedFactory1 =
+            //    (ISeedFactory)interactableObjectsFactoryProvider
+            //    .GetFactory<SeedFactory>();
         }
     }
 }
