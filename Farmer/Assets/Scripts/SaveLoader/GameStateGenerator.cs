@@ -37,7 +37,8 @@ namespace AScripts.SaveLoader
         ISandFactory _sandFactory;
         ISeedFactory _treeFactory;
         ItemPlacementMap _placementMap;
-        SeedPlacementMap _seedPlacementMap;
+        ItemPlacementMap _seedPlacementMap;
+        SandTilePlacementMap _sandTilePlacementMap;
         Player _player;
 
 
@@ -54,6 +55,8 @@ namespace AScripts.SaveLoader
             _gameDataState = gameDataState;
             _inventoryItemsDictionary = inventoryItemsDictionary;
             _placementMap = placementMapsContainer.ItemPlacementMap;
+            _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
+            _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
             _player = player;
         }
 
@@ -95,26 +98,32 @@ namespace AScripts.SaveLoader
                         {
                             Vector3Int sandPos = data.GetPosition();
                             _sandFactory.Create(sandPos);
+                            _sandTilePlacementMap.AddPosition(sandPos);
                             break;
                         }
                     case ChestData data:
                         {
                             List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
                             Chest chest = _chestFactory.Create(inventoryItems);
-                            Vector3Int pos3 = itemData.GetPosition();
+                            Vector3Int pos3 = data.GetPosition();
                             _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
                             _placementMap.AddPosition(pos3);
+                            break;
+                        }
+                    case TreeData data:
+                        {
+                             Seed tree = _treeFactory.Create(_seedSODictionary[data.SeedSOName]);
+                            _placementMap.AddPosition(data.GetPosition());
+                            _placementMap.PlaceObjectOnCell(tree.gameObject, data.GetPosition());
                             break;
                         }
                     case SeedData data:
                         {
                             Seed seed = _seedFactory.Create(_seedSODictionary[data.SeedSOName]);
                             _seedPlacementMap.PlaceObjectOnCell(seed.gameObject, data.GetPosition());
+                            _seedPlacementMap.AddPosition(data.GetPosition());
                             break;
                         }
-                }
-                if (itemData is ChestData)
-                {
                     
                 }
             }
