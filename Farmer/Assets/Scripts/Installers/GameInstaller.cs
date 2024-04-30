@@ -49,6 +49,8 @@ namespace Scripts.Installers
         [SerializeField] private RuleTile _sandRuleTile;
         [Header("Seed template:")]
         [SerializeField] private Seed _seedTemplate;
+        [Header("Tree template:")]
+        [SerializeField] private InteractableObjects.Tree _treeTemplate;
         public override void InstallBindings()
         {
             BindInputService();
@@ -152,14 +154,18 @@ namespace Scripts.Installers
         }
         void BindInteractableObjectsFactories()
         {
-            ISeedFactory seedFactory = new SeedFactory(Container, _seedTemplate);
-            ISandFactory sandFactory = new SandFactory(_sandMap, _sandRuleTile);
-            IChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
+            SeedFactory seedFactory = new SeedFactory(Container, _seedTemplate);
+            SandFactory sandFactory = new SandFactory(_sandMap, _sandRuleTile);
+            ChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
             InteractableObjectsFactoryProvider interactableObjectsFactoryProvider
                 = new InteractableObjectsFactoryProvider();
+            OakSeedFactory oakSeedFactory =
+                new OakSeedFactory(Container, _treeTemplate);
+
             interactableObjectsFactoryProvider.RegisterFabric(seedFactory);
             interactableObjectsFactoryProvider.RegisterFabric(sandFactory);
             interactableObjectsFactoryProvider.RegisterFabric(chestFactory);
+            interactableObjectsFactoryProvider.RegisterFabric(oakSeedFactory);
 
             Container.BindInstance(interactableObjectsFactoryProvider).AsSingle();
 

@@ -12,15 +12,13 @@ namespace Scripts.ItemUsage
         public PlacementMapsContainer PlacementMapsContainer { get; private set; }
         public MapClicker MapClicker { get; private set; }
         public DiContainer DiContainer { get; private set; }
-        public GameObject KursorObject { get; private set; }
         public ItemApplierTools(PlacementMapsContainer placementMapsContainer,
-            MapClicker mapClicker, DiContainer diContainer,
-            [Inject(Id = "KursorObject")] GameObject kursorObject)
+            MapClicker mapClicker, DiContainer diContainer
+            )
         {
             PlacementMapsContainer = placementMapsContainer;
             MapClicker = mapClicker;
             DiContainer = diContainer;
-            KursorObject = kursorObject;
         }
     }
 }

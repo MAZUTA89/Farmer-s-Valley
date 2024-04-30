@@ -1,4 +1,5 @@
-﻿using Scripts.InventoryCode;
+﻿using Scripts.InteractableObjects;
+using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using System;
@@ -10,9 +11,13 @@ namespace Scripts.ItemUsage
     public class HoeItemHandler : PressingItemHandler
     {
         SandTilePlacementMap _sandTilePlacementMap;
-        public HoeItemHandler(ItemApplierTools itemApplierTools, Player player)
+        ISandFactory _sandFactory;
+        RuleTile _sandTile;
+        public HoeItemHandler(ItemApplierTools itemApplierTools, Player player,
+            ISandFactory sandFactory)
             : base(itemApplierTools, player)
         {
+            _sandFactory = sandFactory;
             _sandTilePlacementMap = PlacementMapsContainer.SandTilePlacementMap;
         }
 
@@ -22,8 +27,10 @@ namespace Scripts.ItemUsage
             IHoeInventoryItem hoe = inventoryItem as IHoeInventoryItem;
             if (UseCondition(inventoryItem, clickedPosition))
             {
-                _sandTilePlacementMap.PlaceObjectOnCell(hoe.ProductionObject,
-                    clickedPosition);
+                _sandFactory.Create(clickedPosition);
+                //_sandTilePlacementMap.PlaceObjectOnCell(hoe.ProductionObject,
+                //    clickedPosition);
+
                 _sandTilePlacementMap.AddPosition(clickedPosition);
             }
         }

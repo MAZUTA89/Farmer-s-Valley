@@ -3,6 +3,7 @@ using Zenject;
 using UnityEngine;
 using Scripts.InventoryCode;
 using Assets.Scripts.Inventory.Items;
+using Scripts.SO.InteractableObjects;
 
 namespace Scripts.Installers
 {
@@ -10,11 +11,13 @@ namespace Scripts.Installers
     {
         [Header("Все предметы инвентаря в игре")]
         [SerializeField] List<InventoryItem> _inventoryItemAssetList;
-
+        [Header("Все данные для семян:")]
+        [SerializeField] List<SeedSO> _seedDataList; 
         
         public override void InstallBindings()
         {
             BindInventoryItemsDictionary();
+            BindSeedDataDictionary();
             BindObjectsLogic();
         }
         void BindInventoryItemsDictionary()
@@ -28,6 +31,18 @@ namespace Scripts.Installers
             }
 
             Container.BindInstance(InventoryItemsDictionary).AsSingle();
+        }
+        void BindSeedDataDictionary()
+        {
+            Dictionary<string, SeedSO> SeedDataDictionary
+                = new Dictionary<string, SeedSO>();
+
+            foreach (var seedSO in _seedDataList)
+            {
+                SeedDataDictionary[seedSO.name] = seedSO;
+            }
+
+            Container.BindInstance(SeedDataDictionary).AsSingle();
         }
         void BindObjectsLogic()
         {

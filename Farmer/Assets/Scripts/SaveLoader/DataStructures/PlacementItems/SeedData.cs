@@ -8,6 +8,7 @@ namespace AScripts.SaveLoader
     {
         public int GrowthStage;
         public float CurrentTime;
+        public string SeedSOName;
         public SeedData()
         {
             ItemTypeName = nameof(SeedData);

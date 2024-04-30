@@ -3281,6 +3281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _displayImage: {fileID: 161480332}
+  _plate: {fileID: 908967237}
+  _trueColor: {r: 0.023529412, g: 0.31764707, b: 0.94509804, a: 0.1764706}
+  _falseColor: {r: 1, g: 0, b: 0, a: 0.1764706}
 --- !u!114 &529901096 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
@@ -4848,6 +4851,9 @@ MonoBehaviour:
   _kursorObject: {fileID: 908967236}
   _chestInventoryTemplate: {fileID: 1815537105647621818, guid: f95161a49274a3f41b07eae38bb5f6c2, type: 3}
   _chestTemplate: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
+  _sandRuleTile: {fileID: 11400000, guid: 17d841fcdfe94c846b811d5406e7614d, type: 2}
+  _seedTemplate: {fileID: 2614294283450799002, guid: bf318f763388aae429320b648d0ec280, type: 3}
+  _treeTemplate: {fileID: -7466911748013600071, guid: 33d9222b6e6914647b4e3440eb358e0e, type: 3}
 --- !u!114 &1791796168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4867,8 +4873,6 @@ MonoBehaviour:
   _storageInventoryInfo: {fileID: 11400000, guid: 3f9516492c3f939469ce70b03da94b69, type: 2}
   ItemSourceSO: {fileID: 11400000, guid: 75ac4e4a90982914b95b8dfd7094c410, type: 2}
   ItemResourcePrefab: {fileID: 312125806613843823, guid: b1b6466e287a34244a60a47282329c24, type: 3}
-  _chestInventoryTemplate: {fileID: 1815537105647621818, guid: f95161a49274a3f41b07eae38bb5f6c2, type: 3}
-  _chestTemplate: {fileID: 1543408555321274722, guid: 358454354bf48994daa72cdec9221bf1, type: 3}
 --- !u!114 &1791796170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4893,6 +4897,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 119cbcbc8d4efe94897c596a677118e6, type: 2}
   - {fileID: 11400000, guid: 9a5e1a8a4a63c0d44aad8ec0790e53a5, type: 2}
   - {fileID: 11400000, guid: 9efd5a2f5feabc34ebd537da357fae28, type: 2}
+  _seedDataList:
+  - {fileID: 11400000, guid: 4016ae66508ff384ba2ae3cd497b5b9a, type: 2}
+  - {fileID: 11400000, guid: 234e5a48485b5ae47919317c0558fdf4, type: 2}
+  - {fileID: 11400000, guid: 1dc37f3761ec8e149a35855c49432038, type: 2}
+  - {fileID: 11400000, guid: 32c2896334482a641aa7c65e998eef51, type: 2}
+  - {fileID: 11400000, guid: 7bfad4197c0df044d8775b1e71960301, type: 2}
+  - {fileID: 11400000, guid: 3b4da4ed7a389ab448278cd9e56b6fe5, type: 2}
+  - {fileID: 11400000, guid: 2f7f243f9b10e7f4eb6e8f052d901c7b, type: 2}
+  - {fileID: 11400000, guid: 1337028afca09454b8cbd9eeb27c7b60, type: 2}
 --- !u!1 &1799287408
 GameObject:
   m_ObjectHideFlags: 0

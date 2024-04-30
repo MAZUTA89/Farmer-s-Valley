@@ -16,20 +16,27 @@ namespace Scripts.ItemUsage
         IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
         IItemHandler _oakBagItemHandler;
+        InteractableObjectsFactoryProvider _factoryProvider;
         public ItemApplier(
-            ItemApplierTools itemApplierTools, Player player)
+            ItemApplierTools itemApplierTools, Player player,
+            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider)
         {
+            _factoryProvider = interactableObjectsFactoryProvider;
             _itemApplierTools = itemApplierTools;
             _player = player;
             InitializeHandlers();
         }
         void InitializeHandlers()
         {
-            _hoeItemHandler = new HoeItemHandler(_itemApplierTools, _player);
-            _bagItemHandler = new BagItemHandler(_itemApplierTools, _player);
+            _hoeItemHandler = new HoeItemHandler(_itemApplierTools, _player,
+                (SandFactory)_factoryProvider.GetFactory<SandFactory>());
+
+            _bagItemHandler = new BagItemHandler(_itemApplierTools, _player,
+                (SeedFactory)_factoryProvider.GetFactory<SeedFactory>());
 
              _oakBagItemHandler = 
-                new OakBagItemHandler(_itemApplierTools, _player);
+                new OakBagItemHandler(_itemApplierTools, _player,
+                (OakSeedFactory)_factoryProvider.GetFactory<OakSeedFactory>());
 
             _hoeItemHandler.Successor = _oakBagItemHandler;
             _oakBagItemHandler.Successor = _bagItemHandler;

@@ -65,6 +65,7 @@ namespace Scripts.InteractableObjects
             seedData.SetPosition(data.GetPosition());
             seedData.CurrentTime = _currentTime;
             seedData.GrowthStage = _currentStage;
+            seedData.SeedSOName = SeedSO.name;
             return seedData;
         }
     }

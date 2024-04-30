@@ -17,10 +17,11 @@ namespace Scripts.ItemUsage
         protected ItemPlacementMap SeedPlacementMap;
         protected ISeedFactory SeedFactory;
         DiContainer _diContainer;
-        public BagItemHandler(ItemApplierTools itemApplierTools, Player player) :
+        public BagItemHandler(ItemApplierTools itemApplierTools, Player player, ISeedFactory seedFactory) :
             base(itemApplierTools, player)
 
         {
+            SeedFactory = seedFactory;
             SandTilePlacementMap = PlacementMapsContainer.SandTilePlacementMap;
             SeedPlacementMap = PlacementMapsContainer.SeedPlacementMap;
             _diContainer = DiContainer;

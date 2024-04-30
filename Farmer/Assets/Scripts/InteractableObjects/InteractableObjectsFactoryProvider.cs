@@ -24,12 +24,13 @@ namespace Scripts.InteractableObjects
             Type key = interactableObjectFactory.GetType();
             if(!_factories.ContainsKey(key))
             {
-                _factories[typeof(T)] = interactableObjectFactory;
+                _factories[key] = interactableObjectFactory;
             }
         }
         public object GetFactory<F>()
         {
-            return (F)_factories[typeof(F)];
+            Type t = typeof(F);
+            return (F)_factories[t];
         }
     }
 }

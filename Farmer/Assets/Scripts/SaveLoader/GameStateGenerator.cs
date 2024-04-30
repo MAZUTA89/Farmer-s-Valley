@@ -4,6 +4,7 @@ using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using Scripts.SaveLoader;
+using Scripts.SO.InteractableObjects;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,31 +30,47 @@ namespace AScripts.SaveLoader
 
         GameDataState _gameDataState;
         Dictionary<string, IInventoryItem> _inventoryItemsDictionary;
+        Dictionary<string, SeedSO> _seedSODictionary;
+        InteractableObjectsFactoryProvider _interactableObjectsFactoryProvider;
         IChestFactory _chestFactory;
+        ISeedFactory _seedFactory;
+        ISandFactory _sandFactory;
+        ISeedFactory _treeFactory;
         ItemPlacementMap _placementMap;
+        SeedPlacementMap _seedPlacementMap;
         Player _player;
 
 
         [Inject]
         public void Construct(GameDataState gameDataState,
             Dictionary<string, IInventoryItem> inventoryItemsDictionary,
+            Dictionary<string, SeedSO> seedSODictionary,
             PlacementMapsContainer placementMapsContainer,
-            IChestFactory chestFactory,
+            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider,
             Player player)
         {
+            _interactableObjectsFactoryProvider = interactableObjectsFactoryProvider;
+            _seedSODictionary = seedSODictionary;
             _gameDataState = gameDataState;
             _inventoryItemsDictionary = inventoryItemsDictionary;
-            _chestFactory = chestFactory;
             _placementMap = placementMapsContainer.ItemPlacementMap;
             _player = player;
         }
 
         private void Start()
         {
+            _chestFactory =
+                (ChestFactory)_interactableObjectsFactoryProvider.GetFactory<ChestFactory>();
+            _seedFactory =
+                (SeedFactory)_interactableObjectsFactoryProvider.GetFactory<SeedFactory>();
+            _sandFactory =
+                (SandFactory)_interactableObjectsFactoryProvider.GetFactory<SandFactory>();
+            _treeFactory =
+                (OakSeedFactory)_interactableObjectsFactoryProvider.GetFactory<OakSeedFactory>();
             LoadPlayerInventories();
             LoadPlacementItems();
             LoadPlayerData();
-            //LoadChestData();
+            //LoadChestData(); 
         }
         void LoadPlayerData()
         {
@@ -65,6 +82,8 @@ namespace AScripts.SaveLoader
         }
         void LoadPlacementItems()
         {
+            if (LoadedData.IsDefault == true)
+                return;
             List<PlacementItemData> placementItems =
                 _gameDataState.PlacementObjectsDataList;
 
@@ -75,7 +94,7 @@ namespace AScripts.SaveLoader
                     case SandData data:
                         {
                             Vector3Int sandPos = data.GetPosition();
-
+                            _sandFactory.Create(sandPos);
                             break;
                         }
                     case ChestData data:
@@ -89,6 +108,8 @@ namespace AScripts.SaveLoader
                         }
                     case SeedData data:
                         {
+                            Seed seed = _seedFactory.Create(_seedSODictionary[data.SeedSOName]);
+                            _seedPlacementMap.PlaceObjectOnCell(seed.gameObject, data.GetPosition());
                             break;
                         }
                 }

@@ -2,12 +2,14 @@
 using Scripts.SO.Inventory;
 using System;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Scripts.InventoryCode
 {
-    public class InventoryStorage : InventoryBase
+    public class InventoryStorage : InventoryBase, IPointerEnterHandler, IPointerExitHandler
     {
+        public static bool IsMouseStay {  get; private set; }
         [Inject]
         public virtual void ConstructStorage(
             [Inject(Id = "InventoryStorageInfo")] InventoryInfo inventoryInfo,
@@ -42,6 +44,16 @@ namespace Scripts.InventoryCode
         {
             base.OnDragInto(inventoryCell);
             inventoryCell.InventoryItem.IsSelected = false;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+             IsMouseStay = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            IsMouseStay = false;
         }
     }
 }

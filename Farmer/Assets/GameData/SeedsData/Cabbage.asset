@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5893f4b5fbf25a8498836a116dc5b09f, type: 3}
   m_Name: Cabbage
   m_EditorClassIdentifier: 
-  GrowsStages: 0
   StagesSpriteList:
-  - {fileID: -998441424, guid: 5dd78b7ef790ac749acd369583b7267f, type: 3}
-  - {fileID: 916806815, guid: 5dd78b7ef790ac749acd369583b7267f, type: 3}
-  - {fileID: -1151759444, guid: 5dd78b7ef790ac749acd369583b7267f, type: 3}
-  - {fileID: -8993733, guid: 5dd78b7ef790ac749acd369583b7267f, type: 3}
-  - {fileID: 136142977, guid: 5dd78b7ef790ac749acd369583b7267f, type: 3}
+  - {fileID: 279955840, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
+  - {fileID: 706023651, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
+  - {fileID: 606864763, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
+  - {fileID: 843476645, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
+  - {fileID: 45830665, guid: 9326309a16c49a94aa263dacbc49e391, type: 3}
   IntervalTimeBetweenGrowthStages: 2

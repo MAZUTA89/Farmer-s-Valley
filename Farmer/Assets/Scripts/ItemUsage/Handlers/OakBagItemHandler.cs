@@ -12,8 +12,8 @@ namespace Scripts.InteractableObjects
     public class OakBagItemHandler : BagItemHandler
     {
         protected ItemPlacementMap PlacementMap;
-        public OakBagItemHandler(ItemApplierTools itemApplierTools, Player player)
-            : base(itemApplierTools, player)
+        public OakBagItemHandler(ItemApplierTools itemApplierTools, Player player, ISeedFactory seedFactory)
+            : base(itemApplierTools, player, seedFactory)
         {
             PlacementMap = itemApplierTools.PlacementMapsContainer.ItemPlacementMap;
         }

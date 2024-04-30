@@ -17,8 +17,6 @@ namespace Scripts.ItemUsage
         protected ItemPlacementMap ItemPlacementMap;
         protected DiContainer DiContainer;
         protected MapClicker MapClicker;
-        private GameObject _kursorObject;
-        private SpriteRenderer _sr;
         Transform _playerTransform;
         public PressingItemHandler(ItemApplierTools itemApplierTools,
             Player player)
@@ -28,13 +26,11 @@ namespace Scripts.ItemUsage
 
             DiContainer = itemApplierTools.DiContainer;
             MapClicker = itemApplierTools.MapClicker;
-            _kursorObject = itemApplierTools.KursorObject;
-            _sr = _kursorObject.GetComponent<SpriteRenderer>();
             _playerTransform = player.transform;
         }
         public void HandleItem(IInventoryItem inventoryItem)
         {
-            if(HandleCondition(inventoryItem))
+            if(HandleCondition(inventoryItem) && !InventoryStorage.IsMouseStay)
             {
                 DisplayItemApplyingOpportunity(inventoryItem);
                 if (MapClicker.IsClicked(out Vector3Int clickedPosition))
@@ -48,7 +44,7 @@ namespace Scripts.ItemUsage
             else
             {
                 UsableItemKursorHandler.InvokeFalseConditionEvent();
-                _kursorObject.SetActive(false);
+                UsableItemKursorHandler.InvokeDeactivatePlateEvent();
                 Successor?.HandleItem(inventoryItem);
             }
 
@@ -61,50 +57,39 @@ namespace Scripts.ItemUsage
         {
             if (inventoryItem is IUsableInventoryItem usableInventoryItem)
             {
-                UseConditionSO useConditionSO = usableInventoryItem.UseConditionSO;
-
-                _kursorObject.SetActive(true);
-
                 if (MapClicker.TryGetMousePositionIfIntersect(out Vector3 position))
                 {
-                    _kursorObject.transform.position = position;
                     Vector3Int position3Int = 
                         ItemPlacementMap.Vector3ConvertToVector3Int(position);
+
+                    UsableItemKursorHandler.InvokeMovePlateEvent(position);
+
                     if(CheckInteractableDistance(inventoryItem, position))
                     {
                         if (UseCondition(inventoryItem, position3Int))
                         {
                             UsableItemKursorHandler.InvokeTrueConditionEvent(inventoryItem);
-                            _sr.color = useConditionSO.TrueConditionColor;
                         }
                         else
                         {
                             UsableItemKursorHandler.InvokeFalseConditionEvent();
-                            _sr.color = useConditionSO.FalseConditionColor;
                         }
                     }
                     else
                     {
                         UsableItemKursorHandler.InvokeFalseConditionEvent();
-                        _sr.color = useConditionSO.FalseConditionColor;
                     }
                 }
                 else
                 {
                     UsableItemKursorHandler.InvokeFalseConditionEvent();
-                    _sr.color = useConditionSO.FalseConditionColor;
                 }
 
             }
             else
             {
-                UsableItemKursorHandler.InvokeFalseConditionEvent();
-                _kursorObject.SetActive(false);
+                UsableItemKursorHandler.InvokeDeactivatePlateEvent();
             }
-        }
-        private void DisplayKursor(Sprite sprite)
-        {
-
         }
         /// <summary>
         /// При каком условии обрабатывать элемент последовательности
