@@ -39,7 +39,7 @@ namespace Scripts.PlacementCode
             GameEvents.OnExitTheGameEvent -= OnExitTheGame;
         }
         protected virtual void Start()
-        {
+        {                                
 
             PlacePosition = PlacementMap
             .Vector3ConvertToVector3Int(gameObject.transform.position);
@@ -78,6 +78,6 @@ namespace Scripts.PlacementCode
             PlacementItemData data = new PlacementItemData();
             data.SetPosition(PlacePosition);
             return data;
-        }
+        } 
     }
 }

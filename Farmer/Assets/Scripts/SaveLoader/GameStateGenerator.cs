@@ -7,6 +7,7 @@ using Scripts.SaveLoader;
 using Scripts.SO.InteractableObjects;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using Zenject;
 
@@ -115,6 +116,7 @@ namespace AScripts.SaveLoader
                              Seed tree = _treeFactory.Create(_seedSODictionary[data.SeedSOName]);
                             _placementMap.AddPosition(data.GetPosition());
                             _placementMap.PlaceObjectOnCell(tree.gameObject, data.GetPosition());
+                            tree.LoadSeed(data);
                             break;
                         }
                     case SeedData data:
@@ -122,6 +124,7 @@ namespace AScripts.SaveLoader
                             Seed seed = _seedFactory.Create(_seedSODictionary[data.SeedSOName]);
                             _seedPlacementMap.PlaceObjectOnCell(seed.gameObject, data.GetPosition());
                             _seedPlacementMap.AddPosition(data.GetPosition());
+                            seed.LoadSeed(data);
                             break;
                         }
                     

@@ -21,5 +21,25 @@ namespace Scripts.SaveLoader
         {
             return new Vector3Int(X, Y);
         }
+        public override bool Equals(object obj)
+        {
+            if(obj is PlacementItemData)
+            {
+                PlacementItemData other = (PlacementItemData)obj;
+                if (GetType() == other.GetType())
+                {
+                    if (other.GetPosition() == GetPosition())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else return false;
+            }
+            else { return false; }
+        } 
     }
 }

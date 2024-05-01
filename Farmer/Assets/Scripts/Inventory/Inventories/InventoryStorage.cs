@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using Zenject;
+using UnityEngine;
 
 namespace Scripts.InventoryCode
 {
@@ -48,11 +49,13 @@ namespace Scripts.InventoryCode
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log(" OnPointerEnter");
              IsMouseStay = true;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            Debug.Log(" OnPointerExit");
             IsMouseStay = false;
         }
     }

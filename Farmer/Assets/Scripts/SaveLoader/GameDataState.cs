@@ -34,7 +34,7 @@ namespace Scripts.SaveLoader
         }
         public void UpdateBackPackInventory(List<IInventoryItem> inventoryItems)
         {
-            List<InventoryItemData> itemDataList = 
+            List<InventoryItemData> itemDataList =
                 new List<InventoryItemData>();
             foreach (var item in inventoryItems)
             {
@@ -43,8 +43,11 @@ namespace Scripts.SaveLoader
             BackPackInventory = itemDataList;
         }
         public void AddItemData(PlacementItemData itemData)
-        {
-            PlacementObjectsDataList.Add(itemData);
+         {
+            if (PlacementObjectsDataList.Contains(itemData) == false)
+            {
+                PlacementObjectsDataList.Add(itemData);
+            }
         }
         public void RemoveItemData(PlacementItemData itemData)
         {

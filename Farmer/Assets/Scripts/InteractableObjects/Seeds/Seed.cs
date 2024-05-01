@@ -27,18 +27,28 @@ namespace Scripts.InteractableObjects
             GameDataState = gameDataState;
             PlacementMap = placementMapsContainer.SeedPlacementMap;
         }
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         protected override void Start()
         {
             base.Start();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+           
+        }
+        public void Initialize(SeedSO seedSO)
+        {
+            SeedSO = seedSO;
             _growthStages = SeedSO.StagesSpriteList.Count;
             _sprites = SeedSO.StagesSpriteList;
             _intervalTime = SeedSO.IntervalTimeBetweenGrowthStages;
             _spriteRenderer.sprite = _sprites[0];
         }
-        public void Initialize(SeedSO seedSO)
+        public virtual void LoadSeed(SeedData seedData)
         {
-            SeedSO = seedSO;
+           _currentTime = seedData.CurrentTime;
+            _currentStage = seedData.GrowthStage;
+            _spriteRenderer.sprite = _sprites[_currentStage];
         }
         public void Update()
         {

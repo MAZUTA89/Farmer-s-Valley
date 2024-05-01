@@ -30,7 +30,7 @@ namespace Scripts.ItemUsage
         }
         public void HandleItem(IInventoryItem inventoryItem)
         {
-            if(HandleCondition(inventoryItem) && !InventoryStorage.IsMouseStay)
+            if(HandleCondition(inventoryItem) )
             {
                 DisplayItemApplyingOpportunity(inventoryItem);
                 if (MapClicker.IsClicked(out Vector3Int clickedPosition))
@@ -44,7 +44,7 @@ namespace Scripts.ItemUsage
             else
             {
                 UsableItemKursorHandler.InvokeFalseConditionEvent();
-                UsableItemKursorHandler.InvokeDeactivatePlateEvent();
+                //UsableItemKursorHandler.InvokeDeactivatePlateEvent();
                 Successor?.HandleItem(inventoryItem);
             }
 
@@ -57,7 +57,8 @@ namespace Scripts.ItemUsage
         {
             if (inventoryItem is IUsableInventoryItem usableInventoryItem)
             {
-                if (MapClicker.TryGetMousePositionIfIntersect(out Vector3 position))
+                if (MapClicker.TryGetMousePositionIfIntersect(out Vector3 position)
+                    )
                 {
                     Vector3Int position3Int = 
                         ItemPlacementMap.Vector3ConvertToVector3Int(position);

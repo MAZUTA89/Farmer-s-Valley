@@ -28,10 +28,12 @@ namespace Scripts.PlayerCode
             _gameDataState = gameDataState;
             _playerSO = playerSO;
         }
-
-        public void Start()
+        private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+        }
+        public void Start()
+        {
             _animator = GetComponent<Animator>();
             _movement = new Movement(_inputService,
                 _rb, _animator, _playerSO);

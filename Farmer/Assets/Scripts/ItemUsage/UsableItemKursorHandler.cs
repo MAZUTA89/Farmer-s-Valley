@@ -44,6 +44,7 @@ namespace Assets.Scripts.ItemUsage
         }
         public static void InvokeDeactivatePlateEvent()
         {
+            Debug.LogError("Deactiivate plate!");
             OnDeactivatePlateEvent?.Invoke();
         }
         public static void InvokeMovePlateEvent(Vector3 position)
@@ -74,6 +75,11 @@ namespace Assets.Scripts.ItemUsage
         private void Update()
         {
             _displayImage.transform.position = Input.mousePosition;
+            if(InventoryStorage.IsMouseStay)
+            {
+                _plate.gameObject.SetActive(false);
+            }
+            
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Scripts.InteractableObjects
                 GrowthStage = data.GrowthStage,
                 CurrentTime = data.CurrentTime,
             };
+            treeData.SetPosition(data.GetPosition());
             return treeData;
         }
     }

@@ -59,7 +59,7 @@ namespace Scripts.InventoryCode
         }
         public virtual void AddItem(IInventoryItem inventoryItem)
         {
-            InventoryItems.Add(inventoryItem);
+            //InventoryItems.Add(inventoryItem);
             InventoryCell newCell = _inventoryCellFactory.Create(Container);
             newCell.Initialize(_globalVisualContext, inventoryItem);
             RegisterDragEvents(newCell);

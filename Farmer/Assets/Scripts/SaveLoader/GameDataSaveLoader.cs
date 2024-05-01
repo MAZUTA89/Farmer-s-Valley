@@ -62,6 +62,10 @@ namespace Scripts.SaveLoader
                         return item.ToObject<ChestData>(serializer);
                     case nameof(SandData):
                         return item.ToObject<SandData>(serializer);
+                    case nameof(TreeData):
+                        return item.ToObject<TreeData>(serializer);
+                    case nameof(SeedData):
+                        return item.ToObject<SeedData>(serializer);
                     default:
                         return item.ToObject<PlacementItemData>(serializer);
                 }
