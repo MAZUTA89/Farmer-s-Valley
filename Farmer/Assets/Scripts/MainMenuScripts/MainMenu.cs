@@ -53,7 +53,7 @@ namespace Scripts.MainMenuCode
         public void OnBack()
         {
             _loadMenu.OnBack();
-            gameObject.SetActive(true);
+            _menuObject.SetActive(true);
         }
         public void Create()
         {
@@ -62,7 +62,7 @@ namespace Scripts.MainMenuCode
         public void BackFromCreate()
         {
             _newGameMenu.OnBack();
-            gameObject.SetActive(true);
+            _menuObject.SetActive(true);
         }
     }
 }

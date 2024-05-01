@@ -8,6 +8,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Windows;
 using Zenject;
+using UnityEngine.SceneManagement;
+using Assets.Scripts;
 
 namespace Scripts.MainMenuCode
 {
@@ -47,6 +49,11 @@ namespace Scripts.MainMenuCode
                     StartLevel(input);
                     return;
                 }
+                else
+                {
+                    await FadeText();
+                }
+                
             }
             else if (_lvlNameValidator.ValidateInputName(input))
             {
@@ -54,14 +61,14 @@ namespace Scripts.MainMenuCode
             }
             else
             {
-                _newGamePanel.InfoText.text = "Название не должно повторяться и " +
-                    "начинаться с цифры!";
-                _newGamePanel.InfoText.color = Color.red;
                 await FadeText();
             }
         }
         async Task FadeText()
         {
+            _newGamePanel.InfoText.text = "Название не должно повторяться и " +
+                    "начинаться с цифры!";
+            _newGamePanel.InfoText.color = Color.red;
             await Task.Run(() =>
             {
                 UnityMainThreadDispatcher.Instance().Enqueue(async () =>
@@ -97,6 +104,7 @@ namespace Scripts.MainMenuCode
             }
             names.Add(name);
             _gameDataSaveLoader.SaveWorldNamesJson(names);
+            SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
         public void OnBack()
         {
