@@ -27,5 +27,26 @@ namespace Scripts.MainMenuCode
             LoadedData.Instance().Initialize(gameDataState, false);
             SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
+        public void Delete()
+        {
+            if(PlayerPrefs.HasKey(GameConfiguration.SaveLevelNamesKeyName))
+            {
+                List<string> names = _gameDataSaveLoader.LoadWorldNamesJson();
+                foreach(string name in names)
+                {
+                    if(name == NameText.text)
+                    {
+                        names.Remove(name);
+                        _gameDataSaveLoader.SaveWorldNamesJson(names);
+                        if(PlayerPrefs.HasKey(name))
+                        {
+                            PlayerPrefs.DeleteKey(name);
+                        }
+                        Destroy(gameObject);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

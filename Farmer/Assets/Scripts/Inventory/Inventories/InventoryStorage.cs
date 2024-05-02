@@ -58,5 +58,9 @@ namespace Scripts.InventoryCode
             Debug.Log(" OnPointerExit");
             IsMouseStay = false;
         }
+        public virtual void Update()
+        {
+            
+        }
     }
 }

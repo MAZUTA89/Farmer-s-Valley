@@ -33,7 +33,7 @@ namespace Scripts.InventoryCode
         {
             _chosenIndex = -1;
         }
-        private void Update()
+        public override void Update()
         {
             if (_inputService.IsChosenCell(out _chosenIndex) &&
                 _chosenIndex < CurrentSize)
@@ -81,5 +81,6 @@ namespace Scripts.InventoryCode
         public override void OnDragInto(InventoryCell inventoryCell)
         {
         }
+        
     }
 }

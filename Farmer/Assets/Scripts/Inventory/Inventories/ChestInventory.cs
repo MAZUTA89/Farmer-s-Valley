@@ -16,5 +16,8 @@ namespace Scripts.InventoryCode
         public override void OnExitTheGame()
         {
         }
+        public override void Update()
+        {
+        }
     }
 }
