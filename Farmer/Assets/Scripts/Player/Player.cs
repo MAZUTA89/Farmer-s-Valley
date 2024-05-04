@@ -5,20 +5,27 @@ using Scripts.SO.Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Scripts.PlayerCode
 {
-    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
+        private float _speed;
         InputService _inputService;
         GameDataState _gameDataState;
         Rigidbody2D _rb;
         PlayerSO _playerSO;
-        Animator _animator;
-        Movement _movement;
+        private Vector2 _currentLookDirection;
+        private Vector3 _currentWorldMousePos;
+
+        private int _dirXHash = Animator.StringToHash("DirX");
+        private int _dirYHash = Animator.StringToHash("DirY");
+        private int _speedHash = Animator.StringToHash("Speed");
+
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
@@ -34,17 +41,65 @@ namespace Scripts.PlayerCode
         }
         public void Start()
         {
-            _animator = GetComponent<Animator>();
-            _movement = new Movement(_inputService,
-                _rb, _animator, _playerSO);
+            _speed = _playerSO.Speed;
         }
         private void Update()
         {
-            _movement.Update();
+            _currentWorldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         }
         private void FixedUpdate()
         {
-            _movement.FixedUpdate();
+            var move = _inputService.GetMovement();
+            if (move != Vector2.zero)
+            {
+                SetLookDirectionFrom(move);
+                move = FourDirection(move);
+            }
+            else
+            {
+                if (IsMouseOverGameWindow())
+                {
+                    Vector3 posToMouse = _currentWorldMousePos - transform.position;
+                    SetLookDirectionFrom(posToMouse);
+                }
+            }
+
+            var movement = move * _speed;
+            var speed = movement.sqrMagnitude;
+
+            _animator.SetFloat(_dirXHash, _currentLookDirection.x);
+            _animator.SetFloat(_dirYHash, _currentLookDirection.y);
+            _animator.SetFloat(_speedHash, speed);
+
+            _rb.MovePosition(_rb.position + movement * Time.fixedDeltaTime);
+        }
+        void SetLookDirectionFrom(Vector2 direction)
+        {
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                _currentLookDirection = direction.x > 0 ? Vector2.right : Vector2.left;
+            }
+            else
+            {
+                _currentLookDirection = direction.y > 0 ? Vector2.up : Vector2.down;
+            }
+        }
+        bool IsMouseOverGameWindow()
+        {
+            return !(0 > Input.mousePosition.x || 0 > Input.mousePosition.y || Screen.width < Input.mousePosition.x || Screen.height < Input.mousePosition.y);
+        }
+        Vector2 FourDirection(Vector2 move)
+        {
+            
+            if (Mathf.Abs(move.x) > Mathf.Abs(move.y))
+            {
+                move = move.x > 0 ? Vector2.right : Vector2.left;
+            }
+            else
+            {
+                move = move.y > 0 ? Vector2.up : Vector2.down;
+            }
+            return move;
         }
         private void OnEnable()
         {

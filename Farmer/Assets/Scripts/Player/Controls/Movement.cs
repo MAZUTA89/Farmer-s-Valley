@@ -40,4 +40,5 @@ public class Movement
         _animator.SetFloat(_aniX, delta.x);
         _animator.SetFloat(_aniY, delta.y);
     }
+    
 }
