@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HappyHarvest;
+using Scripts.PlacementCode;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +12,13 @@ namespace Scripts.InventoryCode
     {
         public override bool Apply(Vector3Int target)
         {
-            throw new NotImplementedException();
+             PlacementService.Instance().WaterAt(target);
+            return true;
         }
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            throw new NotImplementedException();
+            return PlacementService.Instance().IsTilled(target);
         }
     }
 }

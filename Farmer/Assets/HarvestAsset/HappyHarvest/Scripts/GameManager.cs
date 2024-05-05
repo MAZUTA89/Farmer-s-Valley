@@ -79,7 +79,7 @@ namespace HappyHarvest
         private void Awake()
         {
             s_Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             
             m_IsTicking = true;
             

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Scripts.InventoryCode
 {
-    public class CropDataBase
+    [CreateAssetMenu(fileName = "CropDataBase", menuName = "SO/DataBases/Crop")]
+    public class CropDataBase : DataBase<Crop>
     {
     }
 }

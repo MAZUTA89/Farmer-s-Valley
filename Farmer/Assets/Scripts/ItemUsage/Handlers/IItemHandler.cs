@@ -7,6 +7,6 @@ namespace Assets.Scripts.ItemUsage
     public interface IItemHandler
     {
         IItemHandler Successor { get; set; }
-        void HandleItem(IInventoryItem inventoryItem);
+        void HandleItem(InventoryItem inventoryItem);
     }
 }

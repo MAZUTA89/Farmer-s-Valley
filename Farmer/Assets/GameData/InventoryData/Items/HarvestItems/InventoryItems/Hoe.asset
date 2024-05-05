@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Hoe
   MaxStackSize: 1
-  Consumable: 1
+  _startCount: 0
+  Consumable: 0
   BuyPrice: -1
   _name: hoe
   _icon: {fileID: 21300000, guid: 89ee8b6deaf984e4d8ee312f327d3c71, type: 3}

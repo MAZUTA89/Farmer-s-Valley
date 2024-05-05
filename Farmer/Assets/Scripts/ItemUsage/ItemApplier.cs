@@ -28,21 +28,21 @@ namespace Scripts.ItemUsage
         }
         void InitializeHandlers()
         {
-            _hoeItemHandler = new HoeItemHandler(_itemApplierTools, _player,
-                (SandFactory)_factoryProvider.GetFactory<SandFactory>());
+            //_hoeItemHandler = new HoeItemHandler(_itemApplierTools, _player,
+            //    (SandFactory)_factoryProvider.GetFactory<SandFactory>());
 
-            _bagItemHandler = new BagItemHandler(_itemApplierTools, _player,
-                (SeedFactory)_factoryProvider.GetFactory<SeedFactory>());
+            //_bagItemHandler = new BagItemHandler(_itemApplierTools, _player,
+            //    (SeedFactory)_factoryProvider.GetFactory<SeedFactory>());
 
-             _oakBagItemHandler = 
-                new OakBagItemHandler(_itemApplierTools, _player,
-                (OakSeedFactory)_factoryProvider.GetFactory<OakSeedFactory>());
+            // _oakBagItemHandler = 
+            //    new OakBagItemHandler(_itemApplierTools, _player,
+            //    (OakSeedFactory)_factoryProvider.GetFactory<OakSeedFactory>());
 
-            _hoeItemHandler.Successor = _oakBagItemHandler;
-            _oakBagItemHandler.Successor = _bagItemHandler;
+            //_hoeItemHandler.Successor = _oakBagItemHandler;
+            //_oakBagItemHandler.Successor = _bagItemHandler;
             //_bagItemHandler.Successor = _hoeItemHandler;
         }
-        public void ApplyItem(IInventoryItem inventoryItem)
+        public void ApplyItem(InventoryItem inventoryItem)
         {
             _hoeItemHandler.HandleItem(inventoryItem);
         }

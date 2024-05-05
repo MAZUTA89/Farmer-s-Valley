@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Watering
   MaxStackSize: 1
-  Consumable: 1
+  _startCount: 0
+  Consumable: 0
   BuyPrice: -1
   _name: water_can
   _icon: {fileID: 21300000, guid: 1a0774ef281b3fa418ab4659c049da87, type: 3}

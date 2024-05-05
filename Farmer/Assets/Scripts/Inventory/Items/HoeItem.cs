@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scripts.PlacementCode;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ namespace Scripts.InventoryCode
     {
         public override bool Apply(Vector3Int target)
         {
-            return false;
+            PlacementService.Instance().TillAt(target);
+            return true;
         }
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            return true;
+
+            return PlacementService.Instance() != null &&
+                PlacementService.Instance().IsTillable(target);
         }
     }
 }

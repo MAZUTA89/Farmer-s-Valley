@@ -20,6 +20,22 @@ namespace Scripts.InventoryCode
         public string UniqueName => _name;
 
         public int MaxStackSize = 10;
+        public int Count
+        {
+            get
+            {
+                return _startCount;
+            }
+            set
+            {
+                _startCount = value;
+
+                if (_startCount < 0)
+                    _startCount = 0;
+            }
+        }
+        
+        [SerializeField] private int _startCount;
         public bool Consumable = true;
         public int BuyPrice = -1;
 
@@ -49,6 +65,7 @@ namespace Scripts.InventoryCode
             inventoryCell.NameDisplayText.text = DisplayName;
             inventoryCell.NameDisplayText.color = _color;
             inventoryCell.CountText.color = _color;
+            inventoryCell.CountText.text = Count.ToString();
             inventoryCell.CountText.gameObject.SetActive(IsCountTextActive);
             inventoryCell.SelectIcon.gameObject.SetActive(IsSelected);
         }

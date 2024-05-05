@@ -53,6 +53,10 @@ namespace Scripts.Installers
         [SerializeField] private Seed _seedTemplate;
         [Header("Tree template:")]
         [SerializeField] private InteractableObjects.Tree _treeTemplate;
+        [Header("Crop data base:")]
+        [SerializeField] private CropDataBase _cropDataBase;
+        [Header("Item data base:")]
+        [SerializeField] private InventoryItemDataBase _itemDataBase;
         public override void InstallBindings()
         {
             BindInputService();
@@ -63,11 +67,20 @@ namespace Scripts.Installers
             BindChest();
             BindInteractableObjectsFactories();
             BindGrid();
+            BindDataBases();
+        }
+        void BindDataBases()
+        {
+            Container.BindInstance(_cropDataBase).AsSingle();
+            Container.BindInstance(_itemDataBase).AsSingle();
         }
         void BindGrid()
         {
             Container.BindInstance(_grid).AsSingle();
             Container.Bind<MarkerController>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            Container.Bind<PlacementService>()
                 .FromComponentInHierarchy()
                 .AsSingle();
         }

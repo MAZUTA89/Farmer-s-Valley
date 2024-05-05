@@ -61,7 +61,7 @@ namespace HappyHarvest
         private InteractiveObject m_CurrentInteractiveTarget { get; set; } = null;  
         private Collider2D[] m_CollidersCache = new Collider2D[8];
 
-        private Dictionary<Item, ItemInstance> m_ItemVisualInstance = new();
+        private Dictionary<Item, ItemInstance> m_ItemVisualInstance { get; set; } = new();
 
         private int m_DirXHash = Animator.StringToHash("DirX");
         private int m_DirYHash = Animator.StringToHash("DirY");

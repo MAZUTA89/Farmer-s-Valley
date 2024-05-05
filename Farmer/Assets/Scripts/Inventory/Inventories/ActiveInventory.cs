@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using Scripts.ItemUsage;
+using Scripts.PlacementCode;
+using Scripts.PlayerCode;
 
 namespace Scripts.InventoryCode
 {
@@ -11,17 +13,22 @@ namespace Scripts.InventoryCode
     {
         InputService _inputService;
         int _chosenIndex;
+        Player _player;
         ItemApplier _applier;
         public InventoryItem ChosenItem { get; private set; }
-
+        MarkerController _markerController;
 
         [Inject]
         public void ConstructActive(InputService inputService, ItemApplier itemApplier,
             [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo,
+            MarkerController markerController,
+            Player player,
             IInventoryCellFactory inventoryCellFactory)
         {
+            _markerController = markerController;
             _inputService = inputService;
             _applier = itemApplier;
+            _player = player;
             base.ConstructStorage(inventoryInfo, inventoryCellFactory);
         }
 
@@ -32,6 +39,7 @@ namespace Scripts.InventoryCode
         protected override void Start()
         {
             _chosenIndex = -1;
+            _markerController.InteractMarker.Hide();
         }
         public override void Update()
         {
@@ -41,8 +49,34 @@ namespace Scripts.InventoryCode
                 SelectCellByIndex(_chosenIndex);
                 
             }
-            //if(ChosenItem != null)
-            //    _applier.ApplyItem(ChosenItem);
+
+            ApplyItem();
+        }
+        void ApplyItem()
+        {
+            if (ChosenItem != null &&
+                ChosenItem.ApplyCondition(_markerController.CurrentTarget))
+            {
+                _markerController.InteractMarker.Activate();
+
+                if(_inputService.IsLBK())
+                {
+                    bool used = ChosenItem.Apply(_markerController.CurrentTarget);
+                    if(used)
+                    {
+                        _player.UseItemVisual(ChosenItem);
+                        
+                        if(ChosenItem.Consumable)
+                        {
+                            ChosenItem.Count--;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                _markerController.InteractMarker.Hide();
+            }
         }
         protected override void SaveInventory()
         {

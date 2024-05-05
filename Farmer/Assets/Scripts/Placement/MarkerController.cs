@@ -14,7 +14,7 @@ namespace Scripts.PlacementCode
         private Grid _grid;
 
         Player _player;
-        InteractMarker _interactMarker;
+        public InteractMarker InteractMarker { get; private set; }
         public Vector3Int CurrentTarget {  get; private set; }  
 
         [Inject]
@@ -25,7 +25,7 @@ namespace Scripts.PlacementCode
 
         private void Start()
         {
-            _interactMarker = _interactMarketSprite.GetComponent<InteractMarker>();
+            InteractMarker = _interactMarketSprite.GetComponent<InteractMarker>();
             _player = GetComponent<Player>();
         }
 
@@ -51,7 +51,7 @@ namespace Scripts.PlacementCode
 
             CurrentTarget = currentCell + toTarget;
 
-            _interactMarker.transform.position =
+            InteractMarker.transform.position =
                 _grid.GetCellCenterWorld(CurrentTarget);
         }
 

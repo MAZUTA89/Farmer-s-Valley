@@ -7,7 +7,8 @@ namespace HappyHarvest
     {
         public override bool CanUse(Vector3Int target)
         {
-            return GameManager.Instance?.Terrain != null && GameManager.Instance.Terrain.IsTillable(target);
+            return GameManager.Instance?.Terrain != null 
+                && GameManager.Instance.Terrain.IsTillable(target);
         }
 
         public override bool Use(Vector3Int target)

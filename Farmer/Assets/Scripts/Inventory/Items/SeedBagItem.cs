@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HappyHarvest;
+using Scripts.PlacementCode;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,36 +9,21 @@ namespace Scripts.InventoryCode
     [CreateAssetMenu(fileName = "SeedBag", menuName = "SO/InventoryItems/SeedBag")]
     public class SeedBagItem : InventoryItem
     {
-        
-        public int CurrentCount
-        {
-            get
-            {
-                return _startCount;
-            }
-            set
-            {
-                _startCount = value;
-
-                if(_startCount < 0)
-                    _startCount = 0;
-            }
-        }
-        [Range(0, 10)]
-        [SerializeField] private int _startCount;
+        public Crop CropToPlant;
+       
         public override bool Apply(Vector3Int target)
         {
-            throw new NotImplementedException();
+            PlacementService.Instance().PlantAt(target, CropToPlant);
+            return true;
         }
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            throw new NotImplementedException();
+            return PlacementService.Instance().IsPlantable(target);
         }
         public override void RenderUI(InventoryCell inventoryCell)
         {
             base.RenderUI(inventoryCell);
-            inventoryCell.CountText.text = CurrentCount.ToString();
         }
     }
 }

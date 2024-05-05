@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HappyHarvest;
+using Scripts.PlacementCode;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +12,22 @@ namespace Scripts.InventoryCode
     {
         public override bool Apply(Vector3Int target)
         {
-            throw new NotImplementedException();
+            var product = PlacementService.Instance().HarvestAt(target);
+            if(product != null)
+            {
+                if (PlayerInventory.Instance().TryAddItem(product.Produce))
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            return false;
         }
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            throw new NotImplementedException();
+            var data = PlacementService.Instance().GetCropDataAt(target);
+            return data != null && data.GrowingCrop != null && Mathf.Approximately(data.GrowthRatio, 1.0f);
         }
         public override void RenderUI(InventoryCell inventoryCell)
         {

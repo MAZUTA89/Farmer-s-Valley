@@ -11,12 +11,17 @@ namespace Scripts.InventoryCode
         public int SellPrice = 1;
         public override bool Apply(Vector3Int target)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+        public override bool NeedTarget()
+        {
+            return false;
         }
     }
 }
