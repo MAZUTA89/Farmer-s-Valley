@@ -55,7 +55,7 @@ namespace HappyHarvest
         // Will return the ratio of time for the current day between 0 (00:00) and 1 (23:59).
         public float CurrentDayRatio => m_CurrentTimeOfTheDay / DayDurationInSeconds;
 
-        [Header("Market")] 
+        [Header("Market")]
         public Item[] MarketEntries;
         
         [Header("Time settings")]
@@ -63,9 +63,9 @@ namespace HappyHarvest
         public float DayDurationInSeconds;
         public float StartingTime = 0.0f;
 
-        [Header("Data")] 
+        [Header("Data")]
         public ItemDatabase ItemDatabase;
-        public CropDatabase CropDatabase;
+        public CropDatabase CropDatabase {  get; set; }
 
         public Storage Storage;
 
@@ -83,7 +83,7 @@ namespace HappyHarvest
             
             m_IsTicking = true;
             
-            ItemDatabase.Init();
+           ItemDatabase.Init();
             CropDatabase.Init();
             
             Storage = new Storage();

@@ -18,7 +18,7 @@ namespace Scripts.InventoryCode
         }
         protected int TotalSize;
         protected int CurrentSize => Container.childCount;
-        protected List<IInventoryItem> InventoryItems;
+        protected List<InventoryItem> InventoryItems;
         protected IInventoryCellFactory _inventoryCellFactory;
         private Transform _globalVisualContext;
         private RectTransform _contextRect;
@@ -39,9 +39,9 @@ namespace Scripts.InventoryCode
             _gameDataState = gameDataState;
         }
 
-        public void Initialize(List<IInventoryItem> inventoryItems)
+        public void Initialize(List<InventoryItem> inventoryItems)
         {
-            InventoryItems = new List<IInventoryItem>(TotalSize);
+            InventoryItems = new List<InventoryItem>(TotalSize);
             InventoryItems.InsertRange(0, inventoryItems);
             foreach (var item in inventoryItems)
             {
@@ -57,9 +57,8 @@ namespace Scripts.InventoryCode
         {
             inventoryCell.RegisterEvents(OnEndDragEvent, OnBeginDragEvent);
         }
-        public virtual void AddItem(IInventoryItem inventoryItem)
+        public virtual void AddItem(InventoryItem inventoryItem)
         {
-            //InventoryItems.Add(inventoryItem);
             InventoryCell newCell = _inventoryCellFactory.Create(Container);
             newCell.Initialize(_globalVisualContext, inventoryItem);
             RegisterDragEvents(newCell);
@@ -117,9 +116,9 @@ namespace Scripts.InventoryCode
 
         }
 
-        List<IInventoryItem> OverwriteInventoryItemsSequence()
+        List<InventoryItem> OverwriteInventoryItemsSequence()
         {
-            List<IInventoryItem> items = new List<IInventoryItem>();
+            List<InventoryItem> items = new List<InventoryItem>();
             for (int i = 0; i < Container.childCount; i++)
             {
                 var cellObject = Container.GetChild(i);
@@ -131,7 +130,7 @@ namespace Scripts.InventoryCode
             }
             return items;
         }
-        public List<IInventoryItem> GetItems()
+        public List<InventoryItem> GetItems()
         {
             return InventoryItems;
         }

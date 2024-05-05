@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3198431654008537285}
   - component: {fileID: 4641256610836659631}
-  - component: {fileID: 2623493277047878684}
   m_Layer: 0
   m_Name: UI Target
   m_TagString: Untagged
@@ -85,20 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2623493277047878684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025736795874584758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d10c1306c8953e45ad46fa88f49c8ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activeColor: {r: 0.99215686, g: 0.9137255, b: 0.5137255, a: 1}
-  _inactiveColor: {r: 0.3137255, g: 0.26666668, b: 0.26666668, a: 0.5019608}
 --- !u!1 &1582637432254282612
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,11 +269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761328161004084007, guid: 6bee013094345d04496f18318365539d, type: 3}
       propertyPath: m_InstanceId
-      value: -191544
+      value: -895592
       objectReference: {fileID: 0}
     - target: {fileID: 1890902283021295622, guid: 6bee013094345d04496f18318365539d, type: 3}
       propertyPath: m_InstanceId
-      value: -191518
+      value: -895566
       objectReference: {fileID: 0}
     - target: {fileID: 1902371474539058939, guid: 6bee013094345d04496f18318365539d, type: 3}
       propertyPath: m_LocalPosition.x

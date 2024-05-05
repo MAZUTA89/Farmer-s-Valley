@@ -49,7 +49,7 @@ namespace HappyHarvest
         private Vector2 m_CurrentLookDirection;
         private Vector3Int m_CurrentTarget;
 
-        private TargetMarker m_TargetMarker;
+        private TargetMarker m_TargetMarker { get; set; }
 
         private bool m_HasTarget = false;
         private bool m_IsOverUI = false;
@@ -58,7 +58,7 @@ namespace HappyHarvest
 
         private Animator m_Animator;
 
-        private InteractiveObject m_CurrentInteractiveTarget = null;
+        private InteractiveObject m_CurrentInteractiveTarget { get; set; } = null;  
         private Collider2D[] m_CollidersCache = new Collider2D[8];
 
         private Dictionary<Item, ItemInstance> m_ItemVisualInstance = new();

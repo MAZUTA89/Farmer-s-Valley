@@ -17,7 +17,7 @@ namespace HappyHarvest
     public abstract class BaseDatabase<T> : ScriptableObject where T: class, IDatabaseEntry
     {
         [SerializeReference]
-        public List<T> Entries; 
+        public List<T> Entries;
 
         private Dictionary<string, T> m_LookupDictionnary;
 

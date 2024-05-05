@@ -17,7 +17,7 @@ namespace Scripts.InventoryCode
             _container = diContainer;
             _storageTemplate = storageTemplate;
         }
-        public InventoryBase Create(List<IInventoryItem> inventoryItems)
+        public InventoryBase Create(List<InventoryItem> inventoryItems)
         {
             var storage = _container.
             InstantiatePrefabForComponent<InventoryStorage>(_storageTemplate,

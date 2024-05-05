@@ -18,13 +18,13 @@ namespace Scripts.InventoryCode
         [SerializeField] Image SelectIconElement;
         Action _endDragEvent;
         Action<InventoryCell> _beginDragEvent;
-        public IInventoryItem InventoryItem { get; private set; }
+        public InventoryItem InventoryItem { get; private set; }
 
         public Transform _globalVisualContext { get; private set; }
         public Transform OriginVisualContext { get; private set; }
 
         public Image Icon => IconElement;
-        public TextMeshProUGUI Text => TextElement;
+        public TextMeshProUGUI NameDisplayText => TextElement;
         public TextMeshProUGUI CountText => CountTextElement;
         public Image SelectIcon => SelectIconElement;
 
@@ -48,7 +48,7 @@ namespace Scripts.InventoryCode
 
         }
         public void Initialize(Transform globalVisualContext,
-            IInventoryItem inventoryItem)
+            InventoryItem inventoryItem)
         {
             _globalVisualContext = globalVisualContext;
             OriginVisualContext = transform.parent;

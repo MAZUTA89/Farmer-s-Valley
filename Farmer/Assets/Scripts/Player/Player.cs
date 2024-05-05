@@ -4,6 +4,7 @@ using Scripts.SaveLoader;
 using Scripts.SO.Player;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -20,7 +21,8 @@ namespace Scripts.PlayerCode
         Rigidbody2D _rb;
         PlayerSO _playerSO;
         private Vector2 _currentLookDirection;
-        private Vector3 _currentWorldMousePos;
+        public Vector3 CurrentWorldMousePos { get; private set; }
+
 
         private int _dirXHash = Animator.StringToHash("DirX");
         private int _dirYHash = Animator.StringToHash("DirY");
@@ -29,6 +31,7 @@ namespace Scripts.PlayerCode
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
+            Grid grid,
             PlayerSO playerSO)
         {
             _inputService = inputService;
@@ -45,21 +48,25 @@ namespace Scripts.PlayerCode
         }
         private void Update()
         {
-            _currentWorldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            CurrentWorldMousePos = GetMousePosition();
         }
         private void FixedUpdate()
+        {
+            Movement();
+        }
+        void Movement()
         {
             var move = _inputService.GetMovement();
             if (move != Vector2.zero)
             {
-                SetLookDirectionFrom(move);
                 move = FourDirection(move);
+                SetLookDirectionFrom(move);
             }
             else
             {
                 if (IsMouseOverGameWindow())
                 {
-                    Vector3 posToMouse = _currentWorldMousePos - transform.position;
+                    Vector3 posToMouse = CurrentWorldMousePos - transform.position;
                     SetLookDirectionFrom(posToMouse);
                 }
             }
@@ -101,6 +108,19 @@ namespace Scripts.PlayerCode
             }
             return move;
         }
+        public Vector3 GetMousePosition()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Plane plane = new Plane(Vector3.forward, Vector3.zero);
+            float distance;
+
+            if (plane.Raycast(ray, out distance))
+            {
+               return ray.GetPoint(distance);
+            }
+            else { return Vector3.zero; }
+        }
+
         private void OnEnable()
         {
             GameEvents.OnExitTheGameEvent += 

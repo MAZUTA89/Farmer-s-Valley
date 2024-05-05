@@ -154,7 +154,7 @@ namespace HappyHarvest
 			Handles.BeginGUI ();
 			Handles.color = LinkStyle.normal.textColor;
 			Handles.DrawLine (new Vector3(position.xMin, position.yMax), new Vector3(position.xMax, position.yMax));
-			Handles.color = Color.white;
+			Handles.color = Color.blue;
 			Handles.EndGUI ();
 
 			EditorGUIUtility.AddCursorRect (position, MouseCursor.Link);

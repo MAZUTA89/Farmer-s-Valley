@@ -2,7 +2,6 @@
 using Zenject;
 using UnityEngine;
 using Scripts.InventoryCode;
-using Assets.Scripts.Inventory.Items;
 using Scripts.SO.InteractableObjects;
 
 namespace Scripts.Installers
@@ -16,18 +15,17 @@ namespace Scripts.Installers
         
         public override void InstallBindings()
         {
-            BindInventoryItemsDictionary();
+            //BindInventoryItemsDictionary();
             BindSeedDataDictionary();
-            BindObjectsLogic();
         }
         void BindInventoryItemsDictionary()
         {
-            Dictionary<string, IInventoryItem> InventoryItemsDictionary
-                = new Dictionary<string, IInventoryItem>();
+            Dictionary<string, InventoryItem> InventoryItemsDictionary
+                = new Dictionary<string, InventoryItem>();
 
             foreach (var item in _inventoryItemAssetList)
             {
-                InventoryItemsDictionary[item.Name] = item;
+                InventoryItemsDictionary[item.DisplayName] = item;
             }
 
             Container.BindInstance(InventoryItemsDictionary).AsSingle();
@@ -43,23 +41,6 @@ namespace Scripts.Installers
             }
 
             Container.BindInstance(SeedDataDictionary).AsSingle();
-        }
-        void BindObjectsLogic()
-        {
-            
-        }
-        void BindItemsData()
-        {
-            Container.Bind<IInventoryItem>()
-                .To<InventoryItem>();
-            Container.Bind<IQuantitativeInventoryItem>()
-                .To<QuantitativeInventoryItem>();
-            Container.Bind<IProductionInventoryItem<RuleTile>>()
-                .To<IHoeInventoryItem>();
-            Container.Bind<IHoeInventoryItem>()
-                .To<HoeInventoryItem>();
-            Container.Bind<IBagInventoryItem>()
-                .To<BagInventoryItem>();
         }
     }
 }

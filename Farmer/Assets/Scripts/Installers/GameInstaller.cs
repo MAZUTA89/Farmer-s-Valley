@@ -19,6 +19,8 @@ namespace Scripts.Installers
 {
     public class GameInstaller : MonoInstaller
     {
+        [Header("Grid:")]
+        [SerializeField] private Grid _grid;
         [Header("Player binds:")]
         [Space]
         [SerializeField] private Transform _playerTransform;
@@ -60,6 +62,14 @@ namespace Scripts.Installers
             BindItemsUsage();
             BindChest();
             BindInteractableObjectsFactories();
+            BindGrid();
+        }
+        void BindGrid()
+        {
+            Container.BindInstance(_grid).AsSingle();
+            Container.Bind<MarkerController>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindInputService()
         {

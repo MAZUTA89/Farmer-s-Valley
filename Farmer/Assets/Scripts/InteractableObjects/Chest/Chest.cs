@@ -20,7 +20,7 @@ namespace Scripts.InteractableObjects
         /// True если открыт, false если закрыт
         /// </summary>
         bool _openCloseFlag;
-        List<IInventoryItem> _inventoryItems;
+        List<InventoryItem> _inventoryItems;
         IInventoryPanelFactory _inventoryStoragePanelFactory;
         InventoryBase _chestStorage;
 
@@ -38,7 +38,7 @@ namespace Scripts.InteractableObjects
             _aniIsOpenCode = Animator.StringToHash("IsOpen");
             if(_inventoryItems == null)
             {
-                _inventoryItems = new List<IInventoryItem>();
+                _inventoryItems = new List<InventoryItem>();
             }
             _chestStorage = _inventoryStoragePanelFactory.Create(_inventoryItems);
             _chestStorage.gameObject.SetActive(false);
@@ -69,7 +69,7 @@ namespace Scripts.InteractableObjects
             }
             _openCloseFlag = !_openCloseFlag;
         }
-        public void Initialize(List<IInventoryItem> inventoryItems)
+        public void Initialize(List<InventoryItem> inventoryItems)
         {
             _inventoryItems  = inventoryItems;
         }
@@ -81,9 +81,9 @@ namespace Scripts.InteractableObjects
         public override PlacementItemData GetData()
         {
             ChestData chestData = new ChestData();
-            var data = base.GetData();
-            chestData.SetPosition(data.GetPosition());
-            chestData.UpdateItems(_chestStorage.GetItems());
+            //var data = base.GetData();
+            //chestData.SetPosition(data.GetPosition());
+            //chestData.UpdateItems(_chestStorage.GetItems());
             return chestData;
         }
     }

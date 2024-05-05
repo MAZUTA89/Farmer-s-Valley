@@ -31,7 +31,7 @@ namespace Scripts.InventoryCode
         }
         protected override void SaveInventory()
         {
-            _gameDataState.UpdateBackPackInventory(InventoryItems);
+           // _gameDataState.UpdateBackPackInventory(InventoryItems);
         }
         public virtual void OnExitTheGame()
         {

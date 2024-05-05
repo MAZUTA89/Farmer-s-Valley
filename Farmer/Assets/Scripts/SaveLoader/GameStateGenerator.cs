@@ -45,7 +45,7 @@ namespace AScripts.SaveLoader
 
         [Inject]
         public void Construct(GameDataState gameDataState,
-            Dictionary<string, IInventoryItem> inventoryItemsDictionary,
+            //Dictionary<string, IInventoryItem> inventoryItemsDictionary,
             Dictionary<string, SeedSO> seedSODictionary,
             PlacementMapsContainer placementMapsContainer,
             InteractableObjectsFactoryProvider interactableObjectsFactoryProvider,
@@ -54,7 +54,7 @@ namespace AScripts.SaveLoader
             _interactableObjectsFactoryProvider = interactableObjectsFactoryProvider;
             _seedSODictionary = seedSODictionary;
             _gameDataState = gameDataState;
-            _inventoryItemsDictionary = inventoryItemsDictionary;
+            //_inventoryItemsDictionary = inventoryItemsDictionary;
             _placementMap = placementMapsContainer.ItemPlacementMap;
             _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
             _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
@@ -72,8 +72,8 @@ namespace AScripts.SaveLoader
             _treeFactory =
                 (OakSeedFactory)_interactableObjectsFactoryProvider.GetFactory<OakSeedFactory>();
             LoadPlayerInventories();
-            LoadPlacementItems();
-            LoadPlayerData();
+            //LoadPlacementItems();
+            //LoadPlayerData();
             //LoadChestData(); 
         }
         void LoadPlayerData()
@@ -104,11 +104,11 @@ namespace AScripts.SaveLoader
                         }
                     case ChestData data:
                         {
-                            List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
-                            Chest chest = _chestFactory.Create(inventoryItems);
-                            Vector3Int pos3 = data.GetPosition();
-                            _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                            _placementMap.AddPosition(pos3);
+                            //List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
+                            //Chest chest = _chestFactory.Create(inventoryItems);
+                            //Vector3Int pos3 = data.GetPosition();
+                            //_placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
+                            //_placementMap.AddPosition(pos3);
                             break;
                         }
                     case TreeData data:
@@ -136,20 +136,14 @@ namespace AScripts.SaveLoader
         {
             if (LoadedData.IsDefault)
             {
-                List<IInventoryItem> activeItems = new List<IInventoryItem>(_activeStartItemKit);
-                List<IInventoryItem> backItems = new List<IInventoryItem>(_backPackStartItemKit);
-                _backPackInventory.Initialize(backItems);
-                _activeInventory.Initialize(activeItems);
+                _backPackInventory.Initialize(_backPackStartItemKit);
+                _activeInventory.Initialize(_activeStartItemKit);
             }
             else
             {
-                List<IInventoryItem> backPackInventoryItems =
-                    ProcessInventoryItemsData(_gameDataState.BackPackInventory);
-                _backPackInventory.Initialize(backPackInventoryItems);
-
-                List<IInventoryItem> activePackInventoryItems =
-                    ProcessInventoryItemsData(_gameDataState.ActivePackInventory);
-                _activeInventory.Initialize(activePackInventoryItems);
+               
+                _backPackInventory.Initialize(_backPackStartItemKit);
+                _activeInventory.Initialize(_activeStartItemKit);
             }
         }
 

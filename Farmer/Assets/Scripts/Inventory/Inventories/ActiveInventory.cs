@@ -12,7 +12,7 @@ namespace Scripts.InventoryCode
         InputService _inputService;
         int _chosenIndex;
         ItemApplier _applier;
-        public IInventoryItem ChosenItem { get; private set; }
+        public InventoryItem ChosenItem { get; private set; }
 
 
         [Inject]
@@ -41,12 +41,12 @@ namespace Scripts.InventoryCode
                 SelectCellByIndex(_chosenIndex);
                 
             }
-            if(ChosenItem != null)
-                _applier.ApplyItem(ChosenItem);
+            //if(ChosenItem != null)
+            //    _applier.ApplyItem(ChosenItem);
         }
         protected override void SaveInventory()
         {
-            _gameDataState.UpdateActivePackInventory(InventoryItems);
+            //_gameDataState.UpdateActivePackInventory(InventoryItems);
         }
         protected override void OnEndDrag()
         {
@@ -69,7 +69,7 @@ namespace Scripts.InventoryCode
                 DeactivateOther(ChosenItem);
             }
         }
-        void DeactivateOther(IInventoryItem selectedItem)
+        void DeactivateOther(InventoryItem selectedItem)
         {
             foreach (var item in InventoryItems)
             {
