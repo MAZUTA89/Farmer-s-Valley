@@ -31,9 +31,12 @@ namespace Scripts.Installers
         [SerializeField] private ItemSourceSO ItemSourceSO;
         [Header("Item resource prefab")]
         [SerializeField] private ItemResource ItemResourcePrefab;
+        [Header("Player Inventory object:")]
+        [SerializeField] private PlayerInventory _playerInventory;
        
         public override void InstallBindings()
         {
+            Container.BindInstance(_playerInventory).AsSingle();
             BindInventories();
             BindCellTemplate();
             BindGlobalVisualContext();

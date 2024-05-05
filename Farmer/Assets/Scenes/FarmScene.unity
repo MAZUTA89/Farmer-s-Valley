@@ -68348,7 +68348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid: {fileID: 1089860432}
-  _playerTransform: {fileID: 6306105545217331278}
+  _playerTransform: {fileID: 1826916990}
   PlayerSO: {fileID: 11400000, guid: 0ccf1aed6ab8ec547be66fd2268b5715, type: 2}
   _placementItems:
   - {fileID: 1084019033}
@@ -68381,6 +68381,7 @@ MonoBehaviour:
   _storageInventoryInfo: {fileID: 11400000, guid: 3f9516492c3f939469ce70b03da94b69, type: 2}
   ItemSourceSO: {fileID: 11400000, guid: 75ac4e4a90982914b95b8dfd7094c410, type: 2}
   ItemResourcePrefab: {fileID: 312125806613843823, guid: b1b6466e287a34244a60a47282329c24, type: 3}
+  _playerInventory: {fileID: 1372844968}
 --- !u!114 &1791796170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69577,11 +69578,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010887698, y: 0.13131802}
   m_Size: {x: 0.6878962, y: 0.26264378}
   m_Direction: 1
---- !u!4 &6306105545217331278 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5799230438683340369, guid: c674f698f55fa8442a0b3c78260848f7, type: 3}
-  m_PrefabInstance: {fileID: 6306105545217331261}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6306105545217331281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69595,7 +69591,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
-  CurrentWorldMousePos: {x: 0, y: 0, z: 0}
 --- !u!114 &7112905720759645298
 MonoBehaviour:
   m_ObjectHideFlags: 0

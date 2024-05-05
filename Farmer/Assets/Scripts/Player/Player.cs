@@ -31,7 +31,6 @@ namespace Scripts.PlayerCode
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
-            Grid grid,
             PlayerSO playerSO)
         {
             _inputService = inputService;
