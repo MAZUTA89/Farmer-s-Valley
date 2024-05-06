@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Corn Cob
   MaxStackSize: 10
+  _startCount: 3
   Consumable: 1
   BuyPrice: -1
   _name: corn_cob

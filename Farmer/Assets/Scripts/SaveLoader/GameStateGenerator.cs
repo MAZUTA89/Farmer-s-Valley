@@ -136,8 +136,10 @@ namespace AScripts.SaveLoader
         {
             if (LoadedData.IsDefault)
             {
-                _backPackInventory.Initialize(_backPackStartItemKit);
-                _activeInventory.Initialize(_activeStartItemKit);
+                _backPackInventory.Initialize(CopyItemList(_backPackStartItemKit));
+                _activeInventory.Initialize(CopyItemList(_activeStartItemKit));
+                //_backPackInventory.Initialize(_backPackStartItemKit);
+                //_activeInventory.Initialize(_activeStartItemKit);
             }
             else
             {
@@ -146,7 +148,47 @@ namespace AScripts.SaveLoader
                 _activeInventory.Initialize(_activeStartItemKit);
             }
         }
+        List<InventoryItem> CopyItemList(List<InventoryItem> items)
+        {
+            List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
+            foreach (InventoryItem item in items)
+            {
+                InventoryItem copy = null;
+                switch(item)
+                {
+                    case BasketItem basketItem:
+                        {
+                            copy = ScriptableObject.CreateInstance<BasketItem>();
+                            break;
+                        }
+                    case HoeItem hoeItem:
+                        {
+                            copy = ScriptableObject.CreateInstance<HoeItem>();
+                            break;
+                        }
+                    case SeedBagItem seedBagItem:
+                        {
+                            copy = ScriptableObject.CreateInstance<SeedBagItem>();
+                            break;
+                        }
+                    case ProductItem productItem:
+                        {
+                            copy = ScriptableObject.CreateInstance<ProductItem>();
+                            break;
+                        }
+                    case WateringItem wateringItem:
+                        {
+                            copy = ScriptableObject.CreateInstance<WateringItem>();
+                            break;
+                        }
+                }
+                copy.InitializeCopy(item);
+                inventoryItems.Add(copy);
+            }
+
+            return inventoryItems;
+        }
         private IInventoryItem ProcessItemData(InventoryItemData itemData)
         {
             string itemName = itemData.SoName;

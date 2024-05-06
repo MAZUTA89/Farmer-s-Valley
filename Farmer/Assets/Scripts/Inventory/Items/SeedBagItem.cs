@@ -2,6 +2,7 @@
 using Scripts.PlacementCode;
 using System;
 using System.Collections.Generic;
+using Unity.XR.OpenVR;
 using UnityEngine;
 
 namespace Scripts.InventoryCode
@@ -11,6 +12,14 @@ namespace Scripts.InventoryCode
     {
         public Crop CropToPlant;
        
+        public override void InitializeCopy(InventoryItem inventoryItem)
+        {
+            base.InitializeCopy(inventoryItem);
+            if(inventoryItem is SeedBagItem bag)
+            {
+                CropToPlant = bag.CropToPlant;
+            }
+        }
         public override bool Apply(Vector3Int target)
         {
             PlacementService.Instance().PlantAt(target, CropToPlant);

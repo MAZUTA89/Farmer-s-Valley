@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Wheat Grain
   MaxStackSize: 10
+  _startCount: 2
   Consumable: 1
   BuyPrice: -1
   _name: wheat_grain

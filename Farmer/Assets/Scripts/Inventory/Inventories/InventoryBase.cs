@@ -1,9 +1,11 @@
-﻿using Scripts.SaveLoader;
+﻿using HappyHarvest;
+using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
+using static UnityEditor.Progress;
 
 
 namespace Scripts.InventoryCode
@@ -33,7 +35,8 @@ namespace Scripts.InventoryCode
 
         [Inject]
         public void Construct([Inject(Id = "DragParent")] Transform dragParent, 
-            GameDataState gameDataState)
+            GameDataState gameDataState
+           )
         {
             _globalVisualContext = dragParent;
             _gameDataState = gameDataState;
@@ -77,6 +80,23 @@ namespace Scripts.InventoryCode
             {
                 return false;
             }
+        }
+        public bool CanFit(InventoryItem newItem)
+        {
+            int remainingToFit = newItem.Count;
+            for (int i = 0; i < InventoryItems.Count; i++)
+            {
+                var item = InventoryItems[i];
+                
+                if(item.UniqueName == newItem.UniqueName && 
+                    item.Count < newItem.MaxStackSize)
+                {
+                    int fit = item.MaxStackSize - item.Count;
+
+                }
+                
+            }
+
         }
         private void Awake()
         {

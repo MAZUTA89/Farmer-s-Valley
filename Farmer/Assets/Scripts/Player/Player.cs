@@ -53,11 +53,11 @@ namespace Scripts.PlayerCode
         public void Start()
         {
             _speed = _playerSO.Speed;
-            foreach (var entry in _itemDatabase.Items)
-            {
-                if (entry != null)
-                    CreateItemVisual(entry);
-            }
+            //foreach (var entry in _itemDatabase.Items)
+            //{
+            //    if (entry != null)
+            //        CreateItemVisual(entry);
+            //}
         }
         private void Update()
         {
@@ -160,14 +160,21 @@ namespace Scripts.PlayerCode
                     visual.Animator.SetFloat(_dirXHash, _currentLookDirection.x);
                     visual.Animator.SetFloat(_dirYHash, _currentLookDirection.y);
                     visual.Animator.SetTrigger(_useHash);
+
+                    //this mean we finished using an item, the entry is now empty, so we need to disable the visual if any
+                    if (previousEquipped != null)
+                    {
+                        //This is a bit of a quick fix, this will let any animation to finish playing before we disable the visual.
+                        StartCoroutine(DelayedObjectDisable(previousEquipped));
+                    }
                 }
             }
-            //this mean we finished using an item, the entry is now empty, so we need to disable the visual if any
-            if (previousEquipped != null)
+            else
             {
-                //This is a bit of a quick fix, this will let any animation to finish playing before we disable the visual.
-                StartCoroutine(DelayedObjectDisable(previousEquipped));
+                CreateItemVisual(previousEquipped);
+                UseItemVisual(inventoryItem);
             }
+            
         }
         void CreateItemVisual(InventoryItem item)
         {

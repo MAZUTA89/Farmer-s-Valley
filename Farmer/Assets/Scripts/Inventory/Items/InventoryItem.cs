@@ -56,9 +56,26 @@ namespace Scripts.InventoryCode
 
         public string PlayerAnimatorTriggerUse = "GenericToolSwing";
 
+        
+        public virtual void InitializeCopy(InventoryItem inventoryItem)
+        {
+            DisplayName = inventoryItem.DisplayName;
+            _icon = inventoryItem.Icon;
+            _color = inventoryItem.Color;
+            _name = inventoryItem.UniqueName;
+            _startCount = inventoryItem.Count;
+            MaxStackSize = inventoryItem.MaxStackSize;
+            BuyPrice = inventoryItem.BuyPrice;
+            Consumable = inventoryItem.Consumable;
+            IsCountTextActive = inventoryItem.IsCountTextActive;
+            VisualPrefab = inventoryItem.VisualPrefab;
+            UseSound = inventoryItem.UseSound;
+            PlayerAnimatorTriggerUse = inventoryItem.PlayerAnimatorTriggerUse;
+        }
         public abstract bool ApplyCondition(Vector3Int target);
-        public abstract bool Apply(Vector3Int target);
 
+        public abstract bool Apply(Vector3Int target);
+        
         public virtual void RenderUI(InventoryCell inventoryCell)
         {
             inventoryCell.Icon.sprite = _icon;

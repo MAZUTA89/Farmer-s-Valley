@@ -31,7 +31,7 @@ namespace HappyHarvest
         public int EquippedItemIdx { get; private set; }
         public Item EquippedItem => Entries[EquippedItemIdx].Item;
 
-        public InventoryEntry[] Entries = new InventoryEntry[InventorySize];
+        public InventoryEntry[] Entries { get; set; } =  new InventoryEntry[InventorySize];
 
         public void Init()
         {
@@ -143,7 +143,8 @@ namespace HappyHarvest
             {
                 if (Entries[i].Item == newItem && Entries[i].StackSize < newItem.MaxStackSize)
                 {
-                    int fit = Mathf.Min(newItem.MaxStackSize - Entries[i].StackSize, remainingToFit);
+                    int fit = Mathf.Min(newItem.MaxStackSize - Entries[i].StackSize,
+                        remainingToFit);
                     Entries[i].StackSize += fit;
                     remainingToFit -= fit;
                     UIHandler.UpdateInventory(this);

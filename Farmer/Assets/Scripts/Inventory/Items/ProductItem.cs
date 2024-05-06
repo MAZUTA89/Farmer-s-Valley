@@ -9,6 +9,15 @@ namespace Scripts.InventoryCode
     public class ProductItem : InventoryItem
     {
         public int SellPrice = 1;
+
+        public override void InitializeCopy(InventoryItem inventoryItem)
+        {
+            base.InitializeCopy(inventoryItem);
+            if(inventoryItem is ProductItem product)
+            {
+                SellPrice = product.SellPrice;
+            }
+        }
         public override bool Apply(Vector3Int target)
         {
             return true;

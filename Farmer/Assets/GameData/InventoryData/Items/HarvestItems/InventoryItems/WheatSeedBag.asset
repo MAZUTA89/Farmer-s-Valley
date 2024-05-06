@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Seed (Wheat)
   MaxStackSize: 10
-  _startCount: 10
+  _startCount: 7
   Consumable: 1
   BuyPrice: 1
   _name: wheat_seed
