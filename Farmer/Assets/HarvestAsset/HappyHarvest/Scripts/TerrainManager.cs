@@ -105,7 +105,7 @@ namespace HappyHarvest
         public VisualEffect TillingEffectPrefab;
         
         private Dictionary<Vector3Int, GroundData> m_GroundData = new();
-        private Dictionary<Vector3Int, CropData> m_CropData = new();
+        private Dictionary<Vector3Int, CropData> m_CropData { get; set; } = new();
 
         private Dictionary<Crop, List<VisualEffect>> m_HarvestEffectPool = new();
         private List<VisualEffect> m_TillingEffectPool = new();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HappyHarvest;
 using UnityEngine;
+using Zenject;
 
 namespace HappyHarvest
 {
@@ -14,6 +15,13 @@ namespace HappyHarvest
     public class CharacterAnimationEventHandler : MonoBehaviour
     {
         private PlayerController m_Controller;
+        private InputService _inputService;
+
+        [Inject]
+        public void Construct(InputService inputService)
+        {
+            _inputService = inputService;
+        }
 
         private void Awake()
         {
@@ -24,12 +32,14 @@ namespace HappyHarvest
 
         void LockControl()
         {
-            m_Controller.ToggleControl(false);
+            _inputService?.LockControls();
+            m_Controller?.ToggleControl(false);
         }
 
         void UnlockControl()
         {
-            m_Controller.ToggleControl(true);
+            m_Controller?.ToggleControl(true);
+            _inputService?.UnlockControls();
         }
     }
 }

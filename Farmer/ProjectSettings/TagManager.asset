@@ -38,17 +38,26 @@ TagManager:
   - 
   - InteractiveObject
   m_SortingLayers:
+  - name: Filling
+    uniqueID: 3934752195
+    locked: 0
+  - name: Tiled
+    uniqueID: 2195570237
+    locked: 0
+  - name: Crop
+    uniqueID: 1899097085
+    locked: 0
   - name: Bottom
     uniqueID: 1161173501
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Objects
-    uniqueID: 1471039481
-    locked: 0
   - name: ObjectsFront
     uniqueID: 3561676937
+    locked: 0
+  - name: Objects
+    uniqueID: 1471039481
     locked: 0
   - name: Foreground
     uniqueID: 1304480043

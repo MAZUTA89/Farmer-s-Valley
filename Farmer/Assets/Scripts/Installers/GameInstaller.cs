@@ -1,4 +1,5 @@
-﻿using Scripts.GameMenuCode;
+﻿using HappyHarvest;
+using Scripts.GameMenuCode;
 using Scripts.InteractableObjects;
 using Scripts.InventoryCode;
 using Scripts.ItemUsage;
@@ -128,6 +129,9 @@ namespace Scripts.Installers
                 .WithId("PlayerTransform")
                 .AsTransient();
             Container.BindInstance(PlayerSO).AsTransient();
+            Container.Bind<CharacterAnimationEventHandler>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindItemsUsage()
         {

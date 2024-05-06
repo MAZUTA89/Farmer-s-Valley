@@ -62,6 +62,14 @@ public class InputService : IDisposable
         return _inputActions.PlayerMap.OpenCloseGameMenu
             .WasPerformedThisFrame();
     }
+    public void LockControls()
+    {
+        _inputActions.PlayerMap.Disable();
+    }
+    public void UnlockControls()
+    {
+        _inputActions.PlayerMap.Enable();
+    }
     public void Dispose()
     {
         _inputActions.Disable();

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Seed (Carrot)
   MaxStackSize: 10
+  _startCount: 10
   Consumable: 1
   BuyPrice: 10
   _name: carrot_seed
@@ -24,4 +25,4 @@ MonoBehaviour:
   UseSound:
   - {fileID: 8300000, guid: 9440290ca86f48c41a2abfd592a57e6c, type: 3}
   PlayerAnimatorTriggerUse: Planting
-  _startCount: 10
+  CropToPlant: {fileID: 11400000, guid: 3823d0bb055adf144875c76e881de83a, type: 2}
