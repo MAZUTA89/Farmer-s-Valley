@@ -29,6 +29,15 @@ namespace Scripts.InventoryCode
             var data = PlacementService.Instance().GetCropDataAt(target);
             return data != null && data.GrowingCrop != null && Mathf.Approximately(data.GrowthRatio, 1.0f);
         }
+
+        public override object Clone()
+        {
+            BasketItem basketItem =
+                CreateInstance<BasketItem>();
+            basketItem.InitializeCopy(this);
+            return basketItem;
+        }
+
         public override void RenderUI(InventoryCell inventoryCell)
         {
             base.RenderUI(inventoryCell);

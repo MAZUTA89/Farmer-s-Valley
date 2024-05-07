@@ -28,11 +28,20 @@ namespace Scripts.InventoryCode
 
         public override bool ApplyCondition(Vector3Int target)
         {
-            return PlacementService.Instance().IsPlantable(target);
+            return PlacementService.Instance().IsPlantable(target) && 
+                Count > 0;
         }
         public override void RenderUI(InventoryCell inventoryCell)
         {
             base.RenderUI(inventoryCell);
+        }
+
+        public override object Clone()
+        {
+            SeedBagItem bagItem =
+                CreateInstance<SeedBagItem>();
+            bagItem.InitializeCopy(this);
+            return bagItem;
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scripts.InventoryCode
 {
-    public abstract class InventoryItem : ScriptableObject, IDataBaseItem
+    public abstract class InventoryItem : ScriptableObject, IDataBaseItem, ICloneable
     {
         public bool IsSelected { get; set; }
 
@@ -97,5 +97,8 @@ namespace Scripts.InventoryCode
         {
             return true;
         }
+
+        public abstract object Clone();
+        
     }
 }

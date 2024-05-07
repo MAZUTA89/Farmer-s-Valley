@@ -20,5 +20,13 @@ namespace Scripts.InventoryCode
             return PlacementService.Instance() != null &&
                 PlacementService.Instance().IsTillable(target);
         }
+
+        public override object Clone()
+        {
+            HoeItem hoeItem =
+                CreateInstance<HoeItem>();
+            hoeItem.InitializeCopy(this);
+            return hoeItem;
+        }
     }
 }

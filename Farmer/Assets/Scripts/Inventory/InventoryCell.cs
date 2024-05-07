@@ -63,6 +63,12 @@ namespace Scripts.InventoryCode
         private void Update()
         {
             InventoryItem?.RenderUI(this);
+            if(InventoryItem.Consumable &&
+                InventoryItem.Count < 1)
+            {
+                Destroy(gameObject);
+                _endDragEvent?.Invoke();
+            }
         }
         
         public void OnDrag(PointerEventData eventData)
@@ -87,6 +93,7 @@ namespace Scripts.InventoryCode
                 {
                     DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
                     this, BeginDragSiblingIndex);
+                    _endDragEvent?.Invoke();
                 }
                 else//другой инвентарь
                 {

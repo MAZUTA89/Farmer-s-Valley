@@ -98,6 +98,7 @@ namespace Scripts.InventoryCode
         {
             if (InventoryItems.Count > 0)
             {
+                
                 ChosenItem = InventoryItems[0];
                 ChosenItem.IsSelected = true;
                 DeactivateOther(ChosenItem);

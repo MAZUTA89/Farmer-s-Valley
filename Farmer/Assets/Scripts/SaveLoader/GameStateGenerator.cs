@@ -155,35 +155,7 @@ namespace AScripts.SaveLoader
             foreach (InventoryItem item in items)
             {
                 InventoryItem copy = null;
-                switch(item)
-                {
-                    case BasketItem basketItem:
-                        {
-                            copy = ScriptableObject.CreateInstance<BasketItem>();
-                            break;
-                        }
-                    case HoeItem hoeItem:
-                        {
-                            copy = ScriptableObject.CreateInstance<HoeItem>();
-                            break;
-                        }
-                    case SeedBagItem seedBagItem:
-                        {
-                            copy = ScriptableObject.CreateInstance<SeedBagItem>();
-                            break;
-                        }
-                    case ProductItem productItem:
-                        {
-                            copy = ScriptableObject.CreateInstance<ProductItem>();
-                            break;
-                        }
-                    case WateringItem wateringItem:
-                        {
-                            copy = ScriptableObject.CreateInstance<WateringItem>();
-                            break;
-                        }
-                }
-                copy.InitializeCopy(item);
+                copy = (InventoryItem)item.Clone();
                 inventoryItems.Add(copy);
             }
 

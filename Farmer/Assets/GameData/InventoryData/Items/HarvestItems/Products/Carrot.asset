@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: Carrot
   MaxStackSize: 10
-  _startCount: 7
+  _startCount: 2
   Consumable: 1
   BuyPrice: -1
   _name: carrot
   _icon: {fileID: 21300000, guid: f2c50504d7db1cd4d8df1e3bb31d78e2, type: 3}
-  _color: {r: 0.1600837, g: 0.9811321, b: 0, a: 0}
+  _color: {r: 0.1600837, g: 0.9811321, b: 0, a: 1}
   IsCountTextActive: 1
   VisualPrefab: {fileID: 8966544202626773991, guid: 2e0831dc56cf5294a8962622c990f6bd, type: 3}
   UseSound:

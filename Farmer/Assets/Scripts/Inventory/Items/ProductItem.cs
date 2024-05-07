@@ -23,14 +23,27 @@ namespace Scripts.InventoryCode
             return true;
         }
 
+        public override void RenderUI(InventoryCell inventoryCell)
+        {
+            base.RenderUI(inventoryCell);
+        }
+
         public override bool ApplyCondition(Vector3Int target)
         {
-            return true;
+            return Count > 0;
         }
 
         public override bool NeedTarget()
         {
             return false;
+        }
+
+        public override object Clone()
+        {
+            ProductItem productItem = 
+                CreateInstance<ProductItem>();
+            productItem.InitializeCopy(this);
+            return productItem;
         }
     }
 }

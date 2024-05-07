@@ -25,13 +25,25 @@ namespace Scripts.InventoryCode
         {
             if (_backPackInventory.IsFull() == false)
             {
-                _backPackInventory.AddItem(inventoryItem);
-                return true;
+                if(_backPackInventory.AddItem(inventoryItem))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else if (_activePackInventory.IsFull() == false)
             {
-                _activePackInventory.AddItem(inventoryItem);
-                return true;
+                if(_activePackInventory.AddItem(inventoryItem))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return false;
         }

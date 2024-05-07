@@ -20,5 +20,13 @@ namespace Scripts.InventoryCode
         {
             return PlacementService.Instance().IsTilled(target);
         }
+
+        public override object Clone()
+        {
+            WateringItem wateringItem =
+                CreateInstance<WateringItem>();
+            wateringItem.InitializeCopy(this);
+            return wateringItem;
+        }
     }
 }
