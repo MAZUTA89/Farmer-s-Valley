@@ -54,11 +54,11 @@ namespace Scripts.InventoryCode
             inventory = null;
             return false;
         }
-        public static async void PlaceInTheNearestCellLocal(Transform visualContext,
+        public static async Task PlaceInTheNearestCellLocal(Transform visualContext,
             InventoryCell inventoryCell, int currentIndex)
         {
             int closetIndex = GetNearestIndex(visualContext, inventoryCell);
-            
+
             inventoryCell.transform.SetParent(visualContext);
             await MoveCellTo(inventoryCell.transform, closetIndex, currentIndex);
         }

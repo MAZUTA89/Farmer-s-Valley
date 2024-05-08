@@ -38,6 +38,10 @@ namespace Scripts.DayNight
         {
             DayNightService.RemoveEventHandler(this);
         }
+        public void OnOnLight()
+        {
+            
+        }
     }
 
 #if UNITY_EDITOR

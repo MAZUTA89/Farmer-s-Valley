@@ -26,7 +26,7 @@ namespace HappyHarvest
             public float StartTime = 0.0f;
             public float EndTime = 1.0f;
 
-            public UnityEvent OnEvents;
+            public UnityEvent OnEvents { get; set; }
             public UnityEvent OffEvent;
 
             public bool IsInRange(float t)
@@ -35,7 +35,7 @@ namespace HappyHarvest
             }
         }
 
-        public DayEvent[] Events;
+        public DayEvent[] Events { get; private set; }
 
         private void Start()
         {

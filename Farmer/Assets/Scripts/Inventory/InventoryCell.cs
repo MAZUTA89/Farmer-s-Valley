@@ -1,9 +1,12 @@
-﻿using Scripts.InventoryCode.ItemResources;
+﻿using PimDeWitte.UnityMainThreadDispatcher;
+using Scripts.InventoryCode.ItemResources;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -82,7 +85,7 @@ namespace Scripts.InventoryCode
             transform.SetParent(_globalVisualContext);
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        public async void OnEndDrag(PointerEventData eventData)
         {
             InventoryBase inventory;
             if (DragExtension.CheckMouseIntersectionWithContainers(eventData,
@@ -91,16 +94,25 @@ namespace Scripts.InventoryCode
                 // если это тот же инвентарь
                 if (OriginVisualContext == inventory.Container)
                 {
-                    DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
-                    this, BeginDragSiblingIndex);
-                    _endDragEvent?.Invoke();
+                    await DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
+                    this, BeginDragSiblingIndex).ContinueWith((i) =>
+                    {
+                        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                        {
+                            _endDragEvent?.Invoke();
+
+                        });
+                    });
                 }
                 else//другой инвентарь
                 {
                     if (inventory.IsFull())// если полон, то не перекладывать
                     {
-                        DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
-                        this, BeginDragSiblingIndex);
+                        await DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
+                        this, BeginDragSiblingIndex).ContinueWith((i) =>
+                        {
+                            _endDragEvent?.Invoke();
+                        });
                     }
                     else// переложить и переподписать ячейку на события другого инвентаря
                     {
