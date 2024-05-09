@@ -32,7 +32,7 @@ namespace AScripts.SaveLoader
         GameDataState _gameDataState;
         Dictionary<string, IInventoryItem> _inventoryItemsDictionary;
         Dictionary<string, SeedSO> _seedSODictionary;
-        InteractableObjectsFactoryProvider _interactableObjectsFactoryProvider;
+        FactoriesProvider _interactableObjectsFactoryProvider;
         IChestFactory _chestFactory;
         ISeedFactory _seedFactory;
         ISandFactory _sandFactory;
@@ -48,7 +48,7 @@ namespace AScripts.SaveLoader
             //Dictionary<string, IInventoryItem> inventoryItemsDictionary,
             Dictionary<string, SeedSO> seedSODictionary,
             PlacementMapsContainer placementMapsContainer,
-            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider,
+            FactoriesProvider interactableObjectsFactoryProvider,
             Player player)
         {
             _interactableObjectsFactoryProvider = interactableObjectsFactoryProvider;

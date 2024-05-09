@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6341a325d69bb14ab319ec612cae052, type: 3}
+  m_Name: WheatSeedBag
+  m_EditorClassIdentifier: 
+  DisplayName: Seed (Wheat)
+  MaxStackSize: 10
+  _startCount: 1
+  Consumable: 1
+  BuyPrice: 3
+  _name: wheat_seed
+  _icon: {fileID: 21300000, guid: 86237958bb89e654d9fd98f1283742a8, type: 3}
+  _color: {r: 0.42292306, g: 1, b: 0.2783019, a: 1}
+  IsCountTextActive: 1
+  VisualPrefab: {fileID: 3853442708067445921, guid: 568576d705657ad49a3195bcd7689d76, type: 3}
+  UseSound:
+  - {fileID: 8300000, guid: 9440290ca86f48c41a2abfd592a57e6c, type: 3}
+  PlayerAnimatorTriggerUse: Planting
+  CropToPlant: {fileID: 11400000, guid: d4943e9065f045c40902bf3a6a9c905d, type: 2}

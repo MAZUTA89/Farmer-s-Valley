@@ -1,4 +1,5 @@
 ﻿using HappyHarvest;
+using Scripts.Inventory;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,6 @@ namespace Scripts.InventoryCode
 
         private GameObject _tmpEmptyCell;
         protected GameDataState _gameDataState;
-
 
         [Inject]
         public void Construct([Inject(Id = "DragParent")] Transform dragParent,
@@ -88,60 +88,19 @@ namespace Scripts.InventoryCode
             CreateCellForItem(newItemCopy);
             InventoryItems = OverwriteInventoryItemsSequence();
 
-            //if we reach here we couldn't fit it in existing stack, so we look for an empty place to fit it
-            //for (int i = 0; i < TotalSize; ++i)
-            //{
-            //    if (InventoryItems[i] == null)
-            //    {
-            //        InventoryItems[i] = newItem;
-            //        int fit = Mathf.Min(newItem.MaxStackSize -
-            //            InventoryItems[i].Count, remainingToFit);
-            //        remainingToFit -= fit;
-            //        InventoryItems[i].Count = fit;
-            //        if (remainingToFit == 0)
-            //            return true;
-            //    }
-            //}
-
-            //we couldn't had so no space left
+            
             return remainingToFit == 0;
-
-            //if (newItem.Consumable)
-            //{
-            //    int remainingFit = newItem.Count;
-            //    for (int i = 0; i < InventoryItems.Count; i++)
-            //    {
-            //        var item = InventoryItems[i];
-            //        if (item.UniqueName == newItem.UniqueName && item.Consumable &&
-            //            item.Count < item.MaxStackSize)
-            //        {
-            //            int itemRemainingFit = item.MaxStackSize - item.Count;
-            //            int fit = Mathf.Min(itemRemainingFit, remainingFit);
-            //            item.Count += fit;
-            //            remainingFit -= fit;
-            //            if (remainingFit == 0)
-            //            {
-            //                return true;
-            //            }
-            //        }
-
-            //    }
-            //    newItem.Count = remainingFit;
-            //    if (IsFull())
-            //    {
-            //        return false;
-            //    }
-            //    else
-            //    {
-            //        CreateCellForItem(newItem);
-            //        return true;
-            //    }
-            //}
-            //else
-            //{
-            //    CreateCellForItem(newItem);
-            //    return true;
-            //}
+        }
+        public void RemoveItem(int itemIndex) 
+        {
+            for (int i = 0; i < Container.childCount; i++)
+            {
+                if(i == itemIndex)
+                {
+                    Transform cell = Container.GetChild(i);
+                    Destroy(cell.gameObject);
+                }
+            }
         }
         void CreateCellForItem(InventoryItem inventoryItem)
         {
@@ -164,27 +123,7 @@ namespace Scripts.InventoryCode
                 return false;
             }
         }
-        public bool CanFit(InventoryItem newItem)
-        {
-            int remainingToFit = newItem.Count;
-            for (int i = 0; i < InventoryItems.Count; i++)
-            {
-                var item = InventoryItems[i];
-
-                if (item.UniqueName == newItem.UniqueName &&
-                    item.Count < newItem.MaxStackSize)
-                {
-                    int fit = newItem.MaxStackSize - item.Count;
-                    item.Count += fit;
-                    remainingToFit -= fit;
-
-                    if (remainingToFit == 0)
-                        return true;
-                }
-            }
-            return false;
-
-        }
+        
         private void Awake()
         {
             _contextRect = gameObject.GetComponent<RectTransform>();
@@ -240,6 +179,34 @@ namespace Scripts.InventoryCode
         public List<InventoryItem> GetItems()
         {
             return InventoryItems;
+        }
+        public List<ItemContextData> GetItemsContextData()
+        {
+            List<ItemContextData> itemContextDatas = new List<ItemContextData>();
+
+            for (int i = 0; i < Container.childCount; i++)
+            {
+                var name = Container.name;
+                var index = i;
+                InventoryCell inventoryCell = Container.GetChild(index).GetComponent<InventoryCell>();
+                ItemContextData itemContextData = new ItemContextData(
+                    inventoryCell.InventoryItem, index, name);
+
+                itemContextDatas.Add(itemContextData);
+            }
+            //foreach (Transform cellObj in Container)
+            //{
+            //    var name = Container.name;
+            //    int index = cellObj.GetSiblingIndex();
+            //    var item = cellObj.GetComponent<InventoryCell>().InventoryItem;
+
+            //    ItemContextData itemContextData = new ItemContextData(
+            //        item, index, name);
+
+            //    itemContextDatas.Add(itemContextData);
+            //}
+
+            return itemContextDatas;
         }
 
         protected virtual void SaveInventory()

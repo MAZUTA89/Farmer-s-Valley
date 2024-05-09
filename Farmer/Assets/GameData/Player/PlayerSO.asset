@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerSO
   m_EditorClassIdentifier: 
   Speed: 3.03
+  StartMoney: 20

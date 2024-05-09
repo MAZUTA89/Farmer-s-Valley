@@ -14,7 +14,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using Scripts.SellBuy;
 using Zenject;
+using TMPro;
+using Newtonsoft.Json.Bson;
+using Scripts.Inventory;
 
 namespace Scripts.Installers
 {
@@ -58,8 +62,17 @@ namespace Scripts.Installers
         [SerializeField] private CropDataBase _cropDataBase;
         [Header("Item data base:")]
         [SerializeField] private InventoryItemDataBase _itemDataBase;
+        [Header("Trading:")]
+        [SerializeField] private BuyItemsDatabase _buyItemsDatabase;
+        [SerializeField] private SellTradeElement  SellTradeElementTemplate;
+        [SerializeField] private BuyTradeElement BuyTradeElementTemplate;
+        [SerializeField] private TextMeshProUGUI MoneyText;
+
+        FactoriesProvider _factoryProvider;
+
         public override void InstallBindings()
         {
+            _factoryProvider = new FactoriesProvider();
             BindInputService();
             BindGameMenu();
             BindGameDataState();
@@ -69,6 +82,28 @@ namespace Scripts.Installers
             BindInteractableObjectsFactories();
             BindGrid();
             BindDataBases();
+            BindTradeLogic();
+            Container.BindInstance(_factoryProvider).AsSingle();
+        }
+        void BindTradeLogic()
+        {
+            Container.BindInstance(_buyItemsDatabase).AsSingle();
+            PlayerMoney playerMoney = new PlayerMoney(PlayerSO.StartMoney, MoneyText);
+            Container.BindInstance(playerMoney).AsSingle();
+            SellTradeElementFactory sellTradeElementFactory = new SellTradeElementFactory(SellTradeElementTemplate,
+                Container);
+            BuyTradeElementFactory buyTradeElementFactory = new BuyTradeElementFactory(BuyTradeElementTemplate, Container);
+            _factoryProvider.RegisterFabric(sellTradeElementFactory);
+            _factoryProvider.RegisterFabric(buyTradeElementFactory);
+
+            Container.Bind<TradeService>().AsSingle();
+            Container.Bind<TradePanel>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            Container.Bind<TradeElement>()
+                .To<BuyTradeElement>().AsTransient();
+            Container.Bind<TradeElement>()
+                .To<SellTradeElement>().AsTransient();
         }
         void BindDataBases()
         {
@@ -184,17 +219,16 @@ namespace Scripts.Installers
             SeedFactory seedFactory = new SeedFactory(Container, _seedTemplate);
             SandFactory sandFactory = new SandFactory(_sandMap, _sandRuleTile);
             ChestFactory chestFactory = new ChestFactory(Container, _chestTemplate);
-            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider
-                = new InteractableObjectsFactoryProvider();
+           
             OakSeedFactory oakSeedFactory =
                 new OakSeedFactory(Container, _treeTemplate);
 
-            interactableObjectsFactoryProvider.RegisterFabric(seedFactory);
-            interactableObjectsFactoryProvider.RegisterFabric(sandFactory);
-            interactableObjectsFactoryProvider.RegisterFabric(chestFactory);
-            interactableObjectsFactoryProvider.RegisterFabric(oakSeedFactory);
+            _factoryProvider.RegisterFabric(seedFactory);
+            _factoryProvider.RegisterFabric(sandFactory);
+            _factoryProvider.RegisterFabric(chestFactory);
+            _factoryProvider.RegisterFabric(oakSeedFactory);
 
-            Container.BindInstance(interactableObjectsFactoryProvider).AsSingle();
+            
 
             //ISeedFactory seedFactory1 =
             //    (ISeedFactory)interactableObjectsFactoryProvider

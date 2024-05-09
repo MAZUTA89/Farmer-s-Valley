@@ -98,12 +98,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
-  - StartTime: 0.22107437
-    EndTime: 0.5661157
+  - StartTime: 0.34466988
+    EndTime: 0.6897112
     OnEvents:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 548091670050176938}
+        - m_Target: {fileID: 902007762192396498}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -118,7 +118,7 @@ MonoBehaviour:
     OffEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 548091670050176938}
+        - m_Target: {fileID: 902007762192396498}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -128,7 +128,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1 &3073017973912089859
 GameObject:
@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4526829615420274079}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.39392, y: 3.5897634, z: 25.154053}
   m_LocalScale: {x: 0.531, y: 0.531, z: 0.531}
   m_ConstrainProportionsScale: 0
@@ -330,7 +330,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1471039481
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 421839523bd44fe4a86f29484f502a03, type: 3}
   m_Color: {r: 0.40064666, g: 0.47414967, b: 0.6886792, a: 1}
@@ -371,7 +371,7 @@ MonoBehaviour:
   - {x: 0.51232845, y: 0.18366204, z: 0}
   m_ShapePathHash: 1251290476
   m_Mesh: {fileID: 0}
-  m_InstanceId: -2680
+  m_InstanceId: -234592
   m_LocalBounds:
     m_Center: {x: 0.008399308, y: 0.14570478, z: 0}
     m_Extent: {x: 0.50392914, y: 0.23385113, z: 0}
@@ -615,15 +615,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6929098867049519375, guid: 3154484e43d90644b8e969b02ef3a297, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.003954053
+      value: 3.7145782
       objectReference: {fileID: 0}
     - target: {fileID: 6929098867049519375, guid: 3154484e43d90644b8e969b02ef3a297, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.61506325
       objectReference: {fileID: 0}
     - target: {fileID: 6929098867049519375, guid: 3154484e43d90644b8e969b02ef3a297, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7071068
+      value: 0.78847784
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6055218533694485406, guid: 3154484e43d90644b8e969b02ef3a297, type: 3}
@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6f3f49a7098c444be40edf1900daf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseLength: 1
+  BaseLength: 2.89
 --- !u!1001 &8286152291787632545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,7 +1555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814760979996268022, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8814760979996268022, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
       propertyPath: m_SortingOrder
@@ -1567,7 +1567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8814760980251754618, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8814760980251754618, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
       propertyPath: m_SortingOrder
@@ -1957,6 +1957,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8814760980251754621, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
   m_PrefabInstance: {fileID: 8286152291787632545}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &624313642487261163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8814760980424181834, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
+  m_PrefabInstance: {fileID: 8286152291787632545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624313642487261164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &624313642487261164 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8814760980424181837, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
@@ -1975,12 +1986,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
-  - StartTime: 0.22107437
-    EndTime: 0.5661157
+  - StartTime: 0.33717924
+    EndTime: 0.6822206
     OnEvents:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 624313642487261164}
+        - m_Target: {fileID: 624313642487261163}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -1995,7 +2006,7 @@ MonoBehaviour:
     OffEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 624313642487261164}
+        - m_Target: {fileID: 624313642487261163}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6
@@ -2005,7 +2016,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!4 &713173705462674661 stripped
 Transform:
@@ -2030,8 +2041,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Events:
-  - StartTime: 0.22107437
-    EndTime: 0.5661157
+  - StartTime: 0.34092456
+    EndTime: 0.6859659
     OnEvents:
       m_PersistentCalls:
         m_Calls:
@@ -2060,7 +2071,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!114 &6507932371960371633 stripped
 MonoBehaviour:
@@ -2090,41 +2101,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd41505808a6ef44eab48fd2d704589b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Events:
-  - StartTime: 0.24960384
-    EndTime: 0.7926867
-    OnEvents:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8240685831264933627}
-          m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OffEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8240685831264933627}
-          m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
---- !u!199 &8240685831264933627 stripped
-ParticleSystemRenderer:
-  m_CorrespondingSourceObject: {fileID: 45774325796469082, guid: 99d30f017272fdb4f935bfb45126990b, type: 3}
-  m_PrefabInstance: {fileID: 8286152291787632545}
-  m_PrefabAsset: {fileID: 0}

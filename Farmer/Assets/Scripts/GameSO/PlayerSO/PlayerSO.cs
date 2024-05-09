@@ -11,5 +11,6 @@ namespace Scripts.SO.Player
     public class PlayerSO : ScriptableObject
     {
         public float Speed;
+        public int StartMoney;
     }
 }

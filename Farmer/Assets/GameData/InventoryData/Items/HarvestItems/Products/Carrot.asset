@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxStackSize: 10
   _startCount: 2
   Consumable: 1
-  BuyPrice: -1
+  BuyPrice: 3
   _name: carrot
   _icon: {fileID: 21300000, guid: f2c50504d7db1cd4d8df1e3bb31d78e2, type: 3}
   _color: {r: 0.1600837, g: 0.9811321, b: 0, a: 1}

@@ -16,10 +16,10 @@ namespace Scripts.ItemUsage
         IItemHandler _hoeItemHandler;  
         IItemHandler _bagItemHandler;
         IItemHandler _oakBagItemHandler;
-        InteractableObjectsFactoryProvider _factoryProvider;
+        FactoriesProvider _factoryProvider;
         public ItemApplier(
             ItemApplierTools itemApplierTools, Player player,
-            InteractableObjectsFactoryProvider interactableObjectsFactoryProvider)
+            FactoriesProvider interactableObjectsFactoryProvider)
         {
             _factoryProvider = interactableObjectsFactoryProvider;
             _itemApplierTools = itemApplierTools;
