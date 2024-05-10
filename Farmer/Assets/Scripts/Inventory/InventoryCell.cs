@@ -48,7 +48,6 @@ namespace Scripts.InventoryCode
         }
         private void Start()
         {
-
         }
         public void Initialize(Transform globalVisualContext,
             InventoryItem inventoryItem)
@@ -111,7 +110,11 @@ namespace Scripts.InventoryCode
                         await DragExtension.PlaceInTheNearestCellLocal(OriginVisualContext,
                         this, BeginDragSiblingIndex).ContinueWith((i) =>
                         {
-                            _endDragEvent?.Invoke();
+                            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+                            {
+                                _endDragEvent?.Invoke();
+
+                            });
                         });
                     }
                     else// переложить и переподписать ячейку на события другого инвентаря

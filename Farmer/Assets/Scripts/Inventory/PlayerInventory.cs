@@ -1,4 +1,5 @@
-﻿using Scripts.Inventory;
+﻿using Scripts.FarmGameEvents;
+using Scripts.Inventory;
 using Scripts.InventoryCode.ItemResources;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Scripts.InventoryCode
         static PlayerInventory s_instance;
         [SerializeField] InventoryBase _activePackInventory;
         [SerializeField] InventoryBase _backPackInventory;
+        [SerializeField] private CanvasGroup _playerGroup;
 
         private void Awake()
         {
@@ -20,6 +22,14 @@ namespace Scripts.InventoryCode
             {
                 s_instance = this;
             }
+        }
+        private void OnEnable()
+        {
+            GameEvents.OnTradePanelOpenClose += OnTradePanelAction;
+        }
+        private void OnDisable()
+        {
+            GameEvents.OnTradePanelOpenClose -= OnTradePanelAction;
         }
 
         public bool TryAddItem(InventoryItem inventoryItem)
@@ -107,6 +117,11 @@ namespace Scripts.InventoryCode
             {
                 _backPackInventory.RemoveItem(itemContextData.Index);
             }
+        }
+
+        void OnTradePanelAction(bool isIgnore)
+        {
+            _playerGroup.blocksRaycasts = isIgnore;
         }
 
     }

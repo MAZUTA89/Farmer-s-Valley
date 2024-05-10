@@ -7,10 +7,11 @@ using Zenject;
 using Scripts.InteractableObjects;
 using Scripts.Inventory;
 using Scripts.FarmGameEvents;
+using UnityEngine.EventSystems;
 
 namespace Scripts.SellBuy
 {
-    public class TradePanel : MonoBehaviour
+    public class TradePanel : MonoBehaviour, IDragHandler
     {
         [SerializeField] Transform ContentArea;
 
@@ -123,6 +124,7 @@ namespace Scripts.SellBuy
         {
             ClearElements();
             gameObject.SetActive(false);
+            GameEvents.InvokeTradePanelActionEvent(true);
         }
         void ClearElements()
         {
@@ -135,6 +137,13 @@ namespace Scripts.SellBuy
         void OnSellItem()
         {
             OnSell();
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            
+            gameObject.transform.position = mousePos;
         }
     }
 }

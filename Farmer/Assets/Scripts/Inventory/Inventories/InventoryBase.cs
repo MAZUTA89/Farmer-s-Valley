@@ -188,24 +188,14 @@ namespace Scripts.InventoryCode
             {
                 var name = Container.name;
                 var index = i;
-                InventoryCell inventoryCell = Container.GetChild(index).GetComponent<InventoryCell>();
-                ItemContextData itemContextData = new ItemContextData(
-                    inventoryCell.InventoryItem, index, name);
+                if(Container.GetChild(index).TryGetComponent(out InventoryCell cell))
+                {
+                    ItemContextData itemContextData = new ItemContextData(
+                        cell.InventoryItem, index, name);
 
-                itemContextDatas.Add(itemContextData);
+                    itemContextDatas.Add(itemContextData);
+                }
             }
-            //foreach (Transform cellObj in Container)
-            //{
-            //    var name = Container.name;
-            //    int index = cellObj.GetSiblingIndex();
-            //    var item = cellObj.GetComponent<InventoryCell>().InventoryItem;
-
-            //    ItemContextData itemContextData = new ItemContextData(
-            //        item, index, name);
-
-            //    itemContextDatas.Add(itemContextData);
-            //}
-
             return itemContextDatas;
         }
 

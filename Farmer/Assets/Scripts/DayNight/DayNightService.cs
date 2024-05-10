@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -9,6 +10,7 @@ namespace Scripts.DayNight
     public class DayNightService : MonoBehaviour
     {
         private static DayNightService s_instance;
+        [SerializeField] private TextMeshProUGUI _timerText;
         private DayNightCycleHandler _dayCycleHandler;
         [Header("Time settings")]
         [Min(1.0f)]
@@ -40,6 +42,8 @@ namespace Scripts.DayNight
 
         private void Update()
         {
+            _timerText.text = GetTimeAsString(CurrentDayRatio);
+
             CurrentTimeOfTheDay = m_CurrentTimeOfTheDay;
             if (m_IsTicking)
             {

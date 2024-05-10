@@ -1,4 +1,5 @@
-﻿using Scripts.SellBuy;
+﻿using Scripts.FarmGameEvents;
+using Scripts.SellBuy;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Scripts.SellBuy
             {
                 _panelObject.gameObject.SetActive(false);
             }
+            GameEvents.InvokeTradePanelActionEvent(!_panelObject.gameObject.activeSelf);
         }
     }
 }

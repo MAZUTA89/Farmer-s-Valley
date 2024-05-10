@@ -19,9 +19,9 @@ namespace Template2DCommon
             public float SFXVolume = 1.0f;
         }
 
-        public AudioMixer Mixer;
-        public AudioSource UISource;
-        public AudioSource SFXReferenceSource;
+        public AudioMixer Mixer { get; set; }
+        public AudioSource UISource { get; set; }
+        public AudioSource SFXReferenceSource { get; set; }
 
         public SoundData Sound { get; protected set; } = new();
     
