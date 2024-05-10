@@ -28,13 +28,7 @@ namespace Scripts.SellBuy
             _itemData = contextData;
         }
 
-        IEnumerator OverriteSellList(float time)
-        {
-            
-            yield return new WaitForSeconds(time);
-            Debug.Log(time);
-            GameEvents.InvokeSellItemEvent();
-        }
+       
         async Task OverriteSellList()
         {
 

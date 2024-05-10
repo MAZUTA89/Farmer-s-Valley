@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using HappyHarvest;
+using Scripts.PlacementCode;
 using Template2DCommon;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using Zenject;
+using Scripts.Sounds;
 
 namespace HappyHarvest
 {
@@ -29,6 +32,13 @@ namespace HappyHarvest
         public TileSoundMapping[] SoundMappings;
 
         private Dictionary<TileBase, AudioClip[]> m_Mapping = new();
+        SoundService _soundService;
+
+        [Inject]
+        public void Construct(SoundService soundService)
+        {
+            _soundService = soundService;
+        }
 
         void Start()
         {
@@ -44,13 +54,24 @@ namespace HappyHarvest
         //This is called by animation event on the walking animation of the character.
         public void PlayStepSound()
         {
-            var underCell = GameManager.Instance.WalkSurfaceTilemap.WorldToCell(transform.position);
-            var tile = GameManager.Instance.WalkSurfaceTilemap.GetTile(underCell);
-
-            SoundManager.Instance.PlaySFXAt(transform.position,
+            //var underCell = GameManager.Instance.WalkSurfaceTilemap.WorldToCell(transform.position);
+            //var tile = GameManager.Instance.WalkSurfaceTilemap.GetTile(underCell);
+            var underCell = PlacementService.Instance().GroundTilemap.WorldToCell(transform.position);
+            var tile = PlacementService.Instance().GroundTilemap.GetTile(underCell);
+            if(SoundManager.Instance == null)
+            {
+                _soundService.PlaySFXAt(transform.position,
                 (tile != null && m_Mapping.ContainsKey(tile))
                     ? GetRandomEntry(m_Mapping[tile])
                     : GetRandomEntry(DefaultStepSounds), false);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySFXAt(transform.position,
+                (tile != null && m_Mapping.ContainsKey(tile))
+                    ? GetRandomEntry(m_Mapping[tile])
+                    : GetRandomEntry(DefaultStepSounds), false);
+            }
         }
 
         AudioClip GetRandomEntry(AudioClip[] clips)

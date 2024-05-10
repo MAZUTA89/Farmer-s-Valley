@@ -19,6 +19,7 @@ using Zenject;
 using TMPro;
 using Newtonsoft.Json.Bson;
 using Scripts.Inventory;
+using Scripts.Sounds;
 
 namespace Scripts.Installers
 {
@@ -83,7 +84,17 @@ namespace Scripts.Installers
             BindGrid();
             BindDataBases();
             BindTradeLogic();
+            BindSounds();
             Container.BindInstance(_factoryProvider).AsSingle();
+        }
+        void BindSounds()
+        {
+            Container.Bind<SoundService>()
+                .FromComponentInHierarchy()
+                .AsSingle();
+            Container.Bind<StepSoundHandler>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindTradeLogic()
         {
