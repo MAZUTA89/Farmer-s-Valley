@@ -22,20 +22,12 @@ namespace Scripts.InventoryCode
         protected override void OnEnable()
         {
             base.OnEnable();
-            GameEvents.OnExitTheGameEvent += OnExitTheGame;
+            
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            GameEvents.OnExitTheGameEvent -= OnExitTheGame;
-        }
-        protected override void SaveInventory()
-        {
-           // _gameDataState.UpdateBackPackInventory(InventoryItems);
-        }
-        public virtual void OnExitTheGame()
-        {
-            SaveInventory();
+          
         }
         protected override void OnEndDrag()
         {

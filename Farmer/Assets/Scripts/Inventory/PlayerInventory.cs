@@ -1,6 +1,7 @@
 ﻿using Scripts.FarmGameEvents;
 using Scripts.Inventory;
 using Scripts.InventoryCode.ItemResources;
+using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,6 +16,7 @@ namespace Scripts.InventoryCode
         [SerializeField] InventoryBase _activePackInventory;
         [SerializeField] InventoryBase _backPackInventory;
         [SerializeField] private CanvasGroup _playerGroup;
+        GameDataState _gameDataState;
 
         private void Awake()
         {
@@ -23,13 +25,22 @@ namespace Scripts.InventoryCode
                 s_instance = this;
             }
         }
+
+        [Inject]
+        public void Construct(GameDataState gameDataState)
+        {
+            _gameDataState = gameDataState;
+        }
+
         private void OnEnable()
         {
             GameEvents.OnTradePanelOpenClose += OnTradePanelAction;
+            GameEvents.OnExitTheGameEvent += OnExitTheGame;
         }
         private void OnDisable()
         {
             GameEvents.OnTradePanelOpenClose -= OnTradePanelAction;
+            GameEvents.OnExitTheGameEvent -= OnExitTheGame;
         }
 
         public bool TryAddItem(InventoryItem inventoryItem)
@@ -118,7 +129,13 @@ namespace Scripts.InventoryCode
                 _backPackInventory.RemoveItem(itemContextData.Index);
             }
         }
-
+        void OnExitTheGame()
+        {
+            var activePackItems = _activePackInventory.GetItems();
+            var backPackItems = _backPackInventory.GetItems();
+            _gameDataState.UpdateActivePackInventory(activePackItems);
+            _gameDataState.UpdateBackPackInventory(backPackItems);
+        }
         void OnTradePanelAction(bool isIgnore)
         {
             _playerGroup.blocksRaycasts = isIgnore;

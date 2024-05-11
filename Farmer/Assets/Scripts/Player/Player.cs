@@ -29,6 +29,7 @@ namespace Scripts.PlayerCode
         public Transform ItemAttachBone;
         private Dictionary<InventoryItem, ItemInstance> m_ItemVisualInstance { get; set; } = new();
         InventoryItemDataBase _itemDatabase;
+        PlayerMoney _playerMoney;
 
         private int _dirXHash = Animator.StringToHash("DirX");
         private int _dirYHash = Animator.StringToHash("DirY");
@@ -39,11 +40,13 @@ namespace Scripts.PlayerCode
         public void Construct(InputService inputService,
             GameDataState gameDataState,
             InventoryItemDataBase inventoryItemDataBase,
+            PlayerMoney playerMoney,
             PlayerSO playerSO)
         {
             _inputService = inputService;
             _gameDataState = gameDataState;
             _playerSO = playerSO;
+            _playerMoney = playerMoney;
             _itemDatabase = inventoryItemDataBase;
         }
         private void Awake()
@@ -53,11 +56,6 @@ namespace Scripts.PlayerCode
         public void Start()
         {
             _speed = _playerSO.Speed;
-            //foreach (var entry in _itemDatabase.Items)
-            //{
-            //    if (entry != null)
-            //        CreateItemVisual(entry);
-            //}
         }
         private void Update()
         {
@@ -217,11 +215,13 @@ namespace Scripts.PlayerCode
         {
             PlayerData playerData = new PlayerData();
             playerData.SetPosition(_rb.position);
+            playerData.Money = _playerMoney.Money;
             _gameDataState.PlayerData = playerData;
         }
         public void Load(PlayerData playerData)
         {
             _rb.position = playerData.GetPosition();
+            _playerMoney.Money = playerData.Money;
         }
     }
 }

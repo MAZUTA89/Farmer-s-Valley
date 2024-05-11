@@ -43,5 +43,11 @@ namespace Scripts.InventoryCode
             base.RenderUI(inventoryCell);
 
         }
+        public override InventoryItemData GetData()
+        {
+            BasketItemData basketItemData = new();
+            basketItemData.Init(base.GetData());
+            return basketItemData;
+        }
     }
 }

@@ -30,9 +30,7 @@ namespace Scripts.InventoryCode
 
             rectTransform.localPosition = localPoint;
         }
-        public override void OnExitTheGame()
-        {
-        }
+        
         public override void Update()
         {
         }

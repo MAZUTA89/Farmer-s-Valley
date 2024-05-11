@@ -28,5 +28,11 @@ namespace Scripts.InventoryCode
             wateringItem.InitializeCopy(this);
             return wateringItem;
         }
+        public override InventoryItemData GetData()
+        {
+            WateringItemData wateringItemData = new();
+            wateringItemData.Init(base.GetData());
+            return wateringItemData;
+        }
     }
 }

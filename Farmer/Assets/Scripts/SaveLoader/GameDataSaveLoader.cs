@@ -5,12 +5,13 @@ using Newtonsoft.Json;
 using Assets.Scripts;
 using Newtonsoft.Json.Linq;
 using AScripts.SaveLoader;
+using Scripts.InventoryCode;
 
 namespace Scripts.SaveLoader
 {
     public class GameDataSaveLoader
     {
-        
+
         public GameDataSaveLoader() { }
 
         public void SaveGameState(GameDataState gameDataState)
@@ -19,7 +20,7 @@ namespace Scripts.SaveLoader
             PlayerPrefs.SetString(gameDataState.GameDataStateName,
                 json);
         }
-        
+
         public GameDataState LoadGameState(string keyName)
         {
             string json = PlayerPrefs.GetString(keyName);
@@ -27,10 +28,13 @@ namespace Scripts.SaveLoader
                 JsonConvert.DeserializeObject<GameDataState>(json,
                 new JsonSerializerSettings
                 {
-                    Converters = new List<JsonConverter> { new ItemPlacementDataConverter() }
+                    Converters = new List<JsonConverter> {
+                        new ItemPlacementDataConverter(),
+                        new InventoryItemsDataConverter(),
+                    }
                 });
             return gameDataState;
-        } 
+        }
         public void SaveWorldNamesJson(List<string> worldNames)
         {
             string json = JsonConvert.SerializeObject(worldNames);
@@ -38,7 +42,7 @@ namespace Scripts.SaveLoader
         }
         public List<string> LoadWorldNamesJson()
         {
-            string json = 
+            string json =
                 PlayerPrefs.GetString(GameConfiguration.SaveLevelNamesKeyName);
             var names =
                 JsonConvert.DeserializeObject<List<string>>(json);
@@ -68,6 +72,39 @@ namespace Scripts.SaveLoader
                         return item.ToObject<SeedData>(serializer);
                     default:
                         return item.ToObject<PlacementItemData>(serializer);
+                }
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
+        }
+        public class InventoryItemsDataConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                return objectType == typeof(InventoryItemData);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                var item = JObject.Load(reader);
+                var inventoryItemTypeName = item["InventoryItemTypeName"].ToString();
+                switch (inventoryItemTypeName)
+                {
+                    case nameof(HoeItemData):
+                        return item.ToObject<HoeItemData>(serializer);
+                    case nameof(BasketItemData):
+                        return item.ToObject<BasketItemData>(serializer);
+                    case nameof(ProductItemData):
+                        return item.ToObject<ProductItemData>(serializer);
+                    case nameof(WateringItemData):
+                        return item.ToObject<WateringItemData>(serializer);
+                    case nameof(SeedBagItemData):
+                        return item.ToObject<SeedBagItemData>(serializer);
+                    default:
+                        throw new Exception("Error with json converter");
                 }
             }
 

@@ -41,7 +41,7 @@ namespace AScripts.SaveLoader
         ItemPlacementMap _seedPlacementMap;
         SandTilePlacementMap _sandTilePlacementMap;
         Player _player;
-
+        InventoryItemDataBase _inventoryItemDataBase;
 
         [Inject]
         public void Construct(GameDataState gameDataState,
@@ -49,11 +49,13 @@ namespace AScripts.SaveLoader
             Dictionary<string, SeedSO> seedSODictionary,
             PlacementMapsContainer placementMapsContainer,
             FactoriesProvider interactableObjectsFactoryProvider,
+            InventoryItemDataBase inventoryItemDataBase,
             Player player)
         {
             _interactableObjectsFactoryProvider = interactableObjectsFactoryProvider;
             _seedSODictionary = seedSODictionary;
             _gameDataState = gameDataState;
+            _inventoryItemDataBase = inventoryItemDataBase;
             //_inventoryItemsDictionary = inventoryItemsDictionary;
             _placementMap = placementMapsContainer.ItemPlacementMap;
             _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
@@ -72,9 +74,8 @@ namespace AScripts.SaveLoader
             _treeFactory =
                 (OakSeedFactory)_interactableObjectsFactoryProvider.GetFactory<OakSeedFactory>();
             LoadPlayerInventories();
-            //LoadPlacementItems();
+            LoadPlacementItems();
             //LoadPlayerData();
-            //LoadChestData(); 
         }
         void LoadPlayerData()
         {
@@ -104,11 +105,11 @@ namespace AScripts.SaveLoader
                         }
                     case ChestData data:
                         {
-                            //List<IInventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
-                            //Chest chest = _chestFactory.Create(inventoryItems);
-                            //Vector3Int pos3 = data.GetPosition();
-                            //_placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
-                            //_placementMap.AddPosition(pos3);
+                            List<InventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
+                            Chest chest = _chestFactory.Create(inventoryItems);
+                            Vector3Int pos3 = data.GetPosition();
+                            _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
+                            _placementMap.AddPosition(pos3);
                             break;
                         }
                     case TreeData data:
@@ -138,14 +139,14 @@ namespace AScripts.SaveLoader
             {
                 _backPackInventory.Initialize(CopyItemList(_backPackStartItemKit));
                 _activeInventory.Initialize(CopyItemList(_activeStartItemKit));
-                //_backPackInventory.Initialize(_backPackStartItemKit);
-                //_activeInventory.Initialize(_activeStartItemKit);
+                
             }
             else
             {
-               
-                _backPackInventory.Initialize(_backPackStartItemKit);
-                _activeInventory.Initialize(_activeStartItemKit);
+                var backPackItems = ProcessInventoryItemsData(_gameDataState.BackPackInventory);
+                var activePackItems = ProcessInventoryItemsData(_gameDataState.ActivePackInventory);
+                _backPackInventory.Initialize(backPackItems);
+                _activeInventory.Initialize(activePackItems);
             }
         }
         List<InventoryItem> CopyItemList(List<InventoryItem> items)
@@ -154,64 +155,40 @@ namespace AScripts.SaveLoader
 
             foreach (InventoryItem item in items)
             {
-                InventoryItem copy = null;
+                InventoryItem copy;
                 copy = (InventoryItem)item.Clone();
                 inventoryItems.Add(copy);
             }
 
             return inventoryItems;
         }
-        private IInventoryItem ProcessItemData(InventoryItemData itemData)
+        private InventoryItem ProcessItemData(InventoryItemData itemData)
         {
             string itemName = itemData.SoName;
-            IInventoryItem inventoryItem =
-                _inventoryItemsDictionary[itemName];
-            switch (itemData)
+            InventoryItem item = (InventoryItem)_inventoryItemDataBase.GetItemByName(itemName)
+                .Clone();
+            item.Count = itemData.Amount;
+            switch(item)
             {
-                case HoeInventoryItemData data:
-                    {
-                        IHoeInventoryItem hoe = inventoryItem as IHoeInventoryItem;
-                        return hoe;
-                    }
-                case OakBagInventoryItemData data:
-                    {
-                        IOakBagInventoryItem oakBag = inventoryItem as IOakBagInventoryItem;
-                        oakBag.Count = data.Count;
-                        return oakBag;
-                    }
-                case BagInventoryItemData data:
-                    {
-                        IBagInventoryItem bag = inventoryItem as IBagInventoryItem;
-                        bag.Count = data.Count;
-                        return bag;
-                    }
-                case ChestInventoryItemData data:
-                    {
-                        IChestInventoryItem chest = inventoryItem as IChestInventoryItem;
-                        List<IInventoryItem> inventoryItems
-                            = ProcessInventoryItemsData(data.ItemsList);
-                        chest.Items = inventoryItems;
-                        return chest;
-                    }
-                case QuantitativeItemData data:
-                    {
-                        IQuantitativeInventoryItem quantitativeInventoryItem
-                            = inventoryItem as IQuantitativeInventoryItem;
-                        quantitativeInventoryItem.Count = data.Count;
-                        return quantitativeInventoryItem;
-                    }
-                
-                default:
-                    {
-                        return inventoryItem;
-                    }
+                case HoeItem hoeItem:
+                        return hoeItem;
+                case WateringItem wateringItem:
+                    return wateringItem;
+                case SeedBagItem seedBagItem:
+                    return seedBagItem;
+                case ProductItem productItem:
+                    return productItem;
+                case BasketItem basketItem:
+                    return basketItem;
+                default: return item;
             }
+            
         }
-        private List<IInventoryItem> ProcessInventoryItemsData(
+        private List<InventoryItem> ProcessInventoryItemsData(
             List<InventoryItemData> inventoryItemsData)
         {
-            List<IInventoryItem> inventoryItems
-                = new List<IInventoryItem>();
+            List<InventoryItem> inventoryItems
+                = new List<InventoryItem>();
             foreach (var itemData in inventoryItemsData)
             {
                 inventoryItems.Add(ProcessItemData(itemData));

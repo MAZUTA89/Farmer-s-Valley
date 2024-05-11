@@ -81,9 +81,9 @@ namespace Scripts.InteractableObjects
         public override PlacementItemData GetData()
         {
             ChestData chestData = new ChestData();
-            //var data = base.GetData();
-            //chestData.SetPosition(data.GetPosition());
-            //chestData.UpdateItems(_chestStorage.GetItems());
+            var data = base.GetData();
+            chestData.SetPosition(data.GetPosition());
+            chestData.UpdateItems(_chestStorage.GetItems());
             return chestData;
         }
     }

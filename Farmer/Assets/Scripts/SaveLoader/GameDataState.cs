@@ -22,23 +22,23 @@ namespace Scripts.SaveLoader
             GameDataStateName = gameDataStateName;
             PlacementObjectsDataList = new List<PlacementItemData>();
         }
-        public void UpdateActivePackInventory(List<IInventoryItem> inventoryItems)
+        public void UpdateActivePackInventory(List<InventoryItem> inventoryItems)
         {
             List<InventoryItemData> itemDataList =
                 new List<InventoryItemData>();
             foreach (var item in inventoryItems)
             {
-                itemDataList.Add(item.GetItemData());
+                itemDataList.Add(item.GetData());
             }
             ActivePackInventory = itemDataList;
         }
-        public void UpdateBackPackInventory(List<IInventoryItem> inventoryItems)
+        public void UpdateBackPackInventory(List<InventoryItem> inventoryItems)
         {
             List<InventoryItemData> itemDataList =
                 new List<InventoryItemData>();
             foreach (var item in inventoryItems)
             {
-                itemDataList.Add(item.GetItemData());
+                itemDataList.Add(item.GetData());
             }
             BackPackInventory = itemDataList;
         }

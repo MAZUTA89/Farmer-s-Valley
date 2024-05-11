@@ -31,15 +31,12 @@ namespace Scripts.InventoryCode
         protected Action OnEndDragEvent;
 
         private GameObject _tmpEmptyCell;
-        protected GameDataState _gameDataState;
 
         [Inject]
-        public void Construct([Inject(Id = "DragParent")] Transform dragParent,
-            GameDataState gameDataState
+        public void Construct([Inject(Id = "DragParent")] Transform dragParent
            )
         {
             _globalVisualContext = dragParent;
-            _gameDataState = gameDataState;
         }
 
         public void Initialize(List<InventoryItem> inventoryItems)
@@ -199,10 +196,7 @@ namespace Scripts.InventoryCode
             return itemContextDatas;
         }
 
-        protected virtual void SaveInventory()
-        {
-
-        }
+        
         public virtual void OnDragInto(InventoryCell inventoryCell)
         {
 

@@ -28,5 +28,11 @@ namespace Scripts.InventoryCode
             hoeItem.InitializeCopy(this);
             return hoeItem;
         }
+        public override InventoryItemData GetData()
+        {
+            HoeItemData hoeItemData = new();
+            hoeItemData.Init(base.GetData());
+            return hoeItemData;
+        }
     }
 }

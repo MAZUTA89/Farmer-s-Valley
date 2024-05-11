@@ -43,5 +43,11 @@ namespace Scripts.InventoryCode
             bagItem.InitializeCopy(this);
             return bagItem;
         }
+        public override InventoryItemData GetData()
+        {
+            SeedBagItemData seedBagItemData = new();
+            seedBagItemData.Init(base.GetData());
+            return seedBagItemData;
+        }
     }
 }

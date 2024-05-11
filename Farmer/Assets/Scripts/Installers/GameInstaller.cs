@@ -118,6 +118,8 @@ namespace Scripts.Installers
         }
         void BindDataBases()
         {
+            _itemDataBase.Init();
+            _cropDataBase.Init();
             Container.BindInstance(_cropDataBase).AsSingle();
             Container.BindInstance(_itemDataBase).AsSingle();
         }

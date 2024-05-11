@@ -16,11 +16,11 @@ namespace Scripts.SaveLoader
         }
         
 
-        public void UpdateItems(List<IInventoryItem> inventoryItems)
+        public void UpdateItems(List<InventoryItem> inventoryItems)
         {
             foreach (var item in inventoryItems)
             {
-                Items.Add(item.GetItemData());
+                Items.Add(item.GetData());
             }
         }
     }

@@ -78,10 +78,7 @@ namespace Scripts.InventoryCode
                 _markerController.InteractMarker.Hide();
             }
         }
-        protected override void SaveInventory()
-        {
-            //_gameDataState.UpdateActivePackInventory(InventoryItems);
-        }
+        
         protected override void OnEndDrag()
         {
             base.OnEndDrag();

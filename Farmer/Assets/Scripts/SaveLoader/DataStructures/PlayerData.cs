@@ -4,6 +4,7 @@ namespace Scripts.SaveLoader
 {
     public class PlayerData
     {
+        public int Money;
         public float X;
         public float Y;
 

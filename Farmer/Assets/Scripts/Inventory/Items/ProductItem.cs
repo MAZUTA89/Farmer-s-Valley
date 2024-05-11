@@ -45,5 +45,11 @@ namespace Scripts.InventoryCode
             productItem.InitializeCopy(this);
             return productItem;
         }
+        public override InventoryItemData GetData()
+        {
+            ProductItemData productItemData = new();
+            productItemData.Init(base.GetData());
+            return productItemData;
+        }
     }
 }

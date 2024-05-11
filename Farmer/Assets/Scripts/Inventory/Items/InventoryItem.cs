@@ -1,5 +1,4 @@
 ﻿using Scripts.InventoryCode;
-using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,6 +98,15 @@ namespace Scripts.InventoryCode
         }
 
         public abstract object Clone();
+        public virtual InventoryItemData GetData()
+        {
+            InventoryItemData inventoryItemData = new InventoryItemData()
+            {
+                SoName = UniqueName,
+                Amount = Count
+            };
+            return inventoryItemData;
+        }
         
     }
 }
