@@ -14,6 +14,8 @@ namespace Scripts.SaveLoader
         public List<PlacementItemData> PlacementObjectsDataList;
         public List<InventoryItemData> ActivePackInventory;
         public List<InventoryItemData> BackPackInventory;
+        public PlacementData PlacementData;
+        
 
         public GameDataState(string gameDataStateName)
         {
@@ -21,6 +23,7 @@ namespace Scripts.SaveLoader
             BackPackInventory = new List<InventoryItemData>();
             GameDataStateName = gameDataStateName;
             PlacementObjectsDataList = new List<PlacementItemData>();
+            PlacementData = new PlacementData();
         }
         public void UpdateActivePackInventory(List<InventoryItem> inventoryItems)
         {
@@ -41,6 +44,10 @@ namespace Scripts.SaveLoader
                 itemDataList.Add(item.GetData());
             }
             BackPackInventory = itemDataList;
+        }
+        public void UpdatePlacementData(PlacementData placementData)
+        {
+            PlacementData = placementData;
         }
         public void AddItemData(PlacementItemData itemData)
          {

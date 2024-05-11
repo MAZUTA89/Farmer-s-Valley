@@ -42,6 +42,7 @@ namespace AScripts.SaveLoader
         SandTilePlacementMap _sandTilePlacementMap;
         Player _player;
         InventoryItemDataBase _inventoryItemDataBase;
+        PlacementService _placementService;
 
         [Inject]
         public void Construct(GameDataState gameDataState,
@@ -50,6 +51,7 @@ namespace AScripts.SaveLoader
             PlacementMapsContainer placementMapsContainer,
             FactoriesProvider interactableObjectsFactoryProvider,
             InventoryItemDataBase inventoryItemDataBase,
+            PlacementService placementService,
             Player player)
         {
             _interactableObjectsFactoryProvider = interactableObjectsFactoryProvider;
@@ -61,6 +63,7 @@ namespace AScripts.SaveLoader
             _seedPlacementMap = placementMapsContainer.SeedPlacementMap;
             _sandTilePlacementMap = placementMapsContainer.SandTilePlacementMap;
             _player = player;
+            _placementService = placementService;
         }
 
         private void Start()
@@ -89,6 +92,10 @@ namespace AScripts.SaveLoader
         {
             if (LoadedData.IsDefault == true)
                 return;
+
+
+            _placementService.Load(); 
+            
             List<PlacementItemData> placementItems =
                 _gameDataState.PlacementObjectsDataList;
 

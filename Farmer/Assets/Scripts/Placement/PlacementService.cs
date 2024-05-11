@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.VFX;
 using Zenject;
+using Scripts.SaveLoader;
 using Crop = Scripts.InventoryCode.Crop;
+using Scripts.FarmGameEvents;
 
 
 namespace Scripts.PlacementCode
@@ -15,12 +17,15 @@ namespace Scripts.PlacementCode
         static PlacementService s_instance;
         Grid _grid;
         CropDataBase _cropDatabase;
+        GameDataState _gameDataState;
         [Inject]
         public void Construct(Grid grid,
-            CropDataBase cropDataBase
+            CropDataBase cropDataBase,
+            GameDataState gameDataState
             )
         {
             _grid = grid;
+            _gameDataState = gameDataState;
             _cropDatabase = cropDataBase;
         }
 
@@ -93,25 +98,25 @@ namespace Scripts.PlacementCode
                 return crop;
             }
 
-            public void Save(ref SaveData data)
+            public void Save(PlacedCropData placedCropData)
             {
-                data.Stage = CurrentGrowthStage;
-                data.CropId = GrowingCrop.UniqueName;
-                data.DyingTimer = DyingTimer;
-                data.GrowthRatio = GrowthRatio;
-                data.GrowthTimer = GrowthTimer;
-                data.HarvestCount = HarvestCount;
+                placedCropData.Stage = CurrentGrowthStage;
+                placedCropData.CropId = GrowingCrop.UniqueName;
+                placedCropData.DyingTimer = DyingTimer;
+                placedCropData.GrowthRatio = GrowthRatio;
+                placedCropData.GrowthTimer = GrowthTimer;
+                placedCropData.HarvestCount = HarvestCount;
             }
 
-            public void Load(SaveData data, 
+            public void Load(PlacedCropData placedCropData, 
                 CropDataBase cropDataBase)
             {
-                CurrentGrowthStage = data.Stage;
-                GrowingCrop = cropDataBase.GetItemByName(data.CropId);
-                DyingTimer = data.DyingTimer;
-                GrowthRatio = data.GrowthRatio;
-                GrowthTimer = data.GrowthTimer;
-                HarvestCount = data.HarvestCount;
+                CurrentGrowthStage = placedCropData.Stage;
+                GrowingCrop = cropDataBase.GetItemByName(placedCropData.CropId);
+                DyingTimer = placedCropData.DyingTimer;
+                GrowthRatio = placedCropData.GrowthRatio;
+                GrowthTimer = placedCropData.GrowthTimer;
+                HarvestCount = placedCropData.HarvestCount;
             }
         }
 
@@ -125,6 +130,14 @@ namespace Scripts.PlacementCode
             {
                 s_instance = this;
             }
+        }
+        private void OnEnable()
+        {
+            GameEvents.OnExitTheGameEvent += OnExitTheGame;
+        }
+        private void OnDisable()
+        {
+            GameEvents.OnExitTheGameEvent -= OnExitTheGame;
         }
 
         private void Start()
@@ -290,6 +303,87 @@ namespace Scripts.PlacementCode
                 var inst = Instantiate(crop.PickEffect);
                 inst.Stop();
                 m_HarvestEffectPool[crop].Add(inst);
+            }
+        }
+
+        void OnExitTheGame()
+        {
+            Save();
+        }
+        void Save()
+        {
+            PlacementData placementData = new PlacementData();
+
+            foreach (var cropData in _cropData)
+            {
+                TilePlacementData tilePlacementData = new TilePlacementData();
+                tilePlacementData.SetPosition(cropData.Key);
+
+                placementData.CropsTilePlacementDatas.Add(tilePlacementData);
+
+                PlacedCropData placedCropData = new PlacedCropData();
+                cropData.Value.Save(placedCropData);
+
+                placementData.PlacedCropDatas.Add(placedCropData);
+            }
+
+            foreach (var ground in _groundData)
+            {
+                TilePlacementData tilePlacementData = new TilePlacementData();
+                tilePlacementData.SetPosition(ground.Key);
+
+                placementData.GroundTilePlacementDatas.Add(tilePlacementData);
+
+                placementData.GroupDatas.Add(ground.Value);
+            }
+
+            _gameDataState.UpdatePlacementData(placementData);
+
+        }
+        public void Load()
+        {
+            PlacementData placementData = _gameDataState.PlacementData;
+
+            _groundData = new Dictionary<Vector3Int, GroundData>();
+            for (int i = 0; i < placementData.GroupDatas.Count; ++i)
+            {
+                var pos = placementData.GroundTilePlacementDatas[i].GetPosition();
+                _groundData.Add(pos, placementData.GroupDatas[i]);
+
+                GroundTilemap.SetTile(pos, TilledTile);
+
+                WaterTilemap.SetTile(pos, placementData.GroupDatas[i].WaterTimer > 0.0f ? WateredTile : null);
+                //GroundTilemap.SetColor(data.GroundDataPositions[i], data.GroundDatas[i].WaterTimer > 0.0f ? WateredTiledColorTint : Color.white);
+            }
+
+            //clear all existing effect as we will reload new one
+            foreach (var pool in m_HarvestEffectPool)
+            {
+                if (pool.Value != null)
+                {
+                    foreach (var effect in pool.Value)
+                    {
+                        Destroy(effect.gameObject);
+                    }
+                }
+            }
+
+
+            _cropData = new Dictionary<Vector3Int, CropData>();
+            for (int i = 0; i < placementData.PlacedCropDatas.Count; ++i)
+            {
+                CropData newData = new CropData();
+                newData.Load(placementData.PlacedCropDatas[i], _cropDatabase);
+
+                var pos = placementData.CropsTilePlacementDatas[i].GetPosition();
+                _cropData.Add(pos, newData);
+
+                UpdateCropVisual(pos);
+
+                if (!m_HarvestEffectPool.ContainsKey(newData.GrowingCrop))
+                {
+                    InitHarvestEffect(newData.GrowingCrop);
+                }
             }
         }
 
