@@ -96,7 +96,7 @@ namespace Scripts.MainMenuCode
         void StartLevel(string name)
         {
             GameDataState gameDataState = new(name);
-            LoadedData.Instance().Initialize(gameDataState, true);
+            LoadedData.Instance().InitializeGameStateData(gameDataState, true);
             List<string> names = _gameDataSaveLoader.LoadWorldNamesJson();
             if(names == null)
             {

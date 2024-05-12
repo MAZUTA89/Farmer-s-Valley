@@ -151,7 +151,6 @@ namespace Scripts.InventoryCode
             if (_tmpEmptyCell != null)
                 Destroy(_tmpEmptyCell);
             InventoryItems = OverwriteInventoryItemsSequence();
-            Debug.Log(gameObject.name);
         }
 
         public virtual void OnDrag(PointerEventData eventData)

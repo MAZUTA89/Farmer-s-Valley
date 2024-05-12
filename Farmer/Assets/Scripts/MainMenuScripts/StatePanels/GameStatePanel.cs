@@ -24,7 +24,7 @@ namespace Scripts.MainMenuCode
         {
             GameDataState gameDataState = 
                 _gameDataSaveLoader.LoadGameState(NameText.text);
-            LoadedData.Instance().Initialize(gameDataState, false);
+            LoadedData.Instance().InitializeGameStateData(gameDataState, false);
             SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
         public void Delete()

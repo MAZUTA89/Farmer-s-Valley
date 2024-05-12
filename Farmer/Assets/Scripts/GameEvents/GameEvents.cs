@@ -8,6 +8,7 @@ namespace Scripts.FarmGameEvents
         public static Action OnExitTheGameEvent;
         public static Action OnSellItemEvent;
         public static Action<bool> OnTradePanelOpenClose;
+        public static Action OnSaveSettingsEvent;
        
         public static void InvokeExitTheGameEvent()
         {
@@ -22,6 +23,11 @@ namespace Scripts.FarmGameEvents
         public static void InvokeTradePanelActionEvent(bool isIgnore)
         {
             OnTradePanelOpenClose?.Invoke(isIgnore);
+        }
+
+        public static void InvokeOnSaveSettingsEvent()
+        {
+            OnSaveSettingsEvent?.Invoke();
         }
     }
 }

@@ -145,7 +145,7 @@ namespace Scripts.Installers
         }
         void BindGameDataState()
         {
-            if (LoadedData.IsDefault)
+            if (LoadedData.IsGameStateDefault)
             {
                 if (LoadedData.Instance() == null)
                 {

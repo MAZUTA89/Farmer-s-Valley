@@ -62,14 +62,20 @@ namespace Scripts.InventoryCode
             _endDragEvent = endDragEvent;
             _beginDragEvent = beginDragEvent;
         }
+        bool _isItemOver = false;
         private void Update()
         {
+            if(_isItemOver)
+            {
+                _endDragEvent?.Invoke();
+                _isItemOver = false;
+            }
             InventoryItem?.RenderUI(this);
             if(InventoryItem.Consumable &&
                 InventoryItem.Count < 1)
             {
                 Destroy(gameObject);
-                _endDragEvent?.Invoke();
+                _isItemOver = true;
             }
         }
         

@@ -11,8 +11,10 @@ namespace Scripts.MainMenuCode
         
         static LoadedData()
         {
-            IsDefault = true;
+            IsGameStateDefault = true;
+
         }
+       
         private void Awake()
         {
             if (_dataInstance == null)
@@ -21,13 +23,19 @@ namespace Scripts.MainMenuCode
             }
             DontDestroyOnLoad(this);
         }
-        public static bool IsDefault { get; private set; }
+        public static bool IsGameStateDefault { get; private set; }
         public GameDataState GameDataState { get; private set; }
-
-        public void Initialize(GameDataState gameDataState, bool isDefault)
+        public static bool IsSettingsDataDefault { get; private set; }
+        public SettingsData SettingsData { get; private set; }
+        public void InitializeGameStateData(GameDataState gameDataState, bool isDefault)
         {
             GameDataState = gameDataState;
-            IsDefault = isDefault;
+            IsGameStateDefault = isDefault;
+        }
+        public void InitializeSettingsData(SettingsData settingsData, bool isDefault)
+        {
+            SettingsData = settingsData;
+            IsSettingsDataDefault = isDefault;
         }
         public static LoadedData Instance()
         {

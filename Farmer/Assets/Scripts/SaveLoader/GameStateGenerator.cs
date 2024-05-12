@@ -83,14 +83,14 @@ namespace AScripts.SaveLoader
         void LoadPlayerData()
         {
             PlayerData playerData = _gameDataState.PlayerData;
-            if (LoadedData.IsDefault == false)
+            if (LoadedData.IsGameStateDefault == false)
             {
                 _player.Load(playerData);
             }
         }
         void LoadPlacementItems()
         {
-            if (LoadedData.IsDefault == true)
+            if (LoadedData.IsGameStateDefault == true)
                 return;
 
 
@@ -142,7 +142,7 @@ namespace AScripts.SaveLoader
         }
         void LoadPlayerInventories()
         {
-            if (LoadedData.IsDefault)
+            if (LoadedData.IsGameStateDefault)
             {
                 _backPackInventory.Initialize(CopyItemList(_backPackStartItemKit));
                 _activeInventory.Initialize(CopyItemList(_activeStartItemKit));

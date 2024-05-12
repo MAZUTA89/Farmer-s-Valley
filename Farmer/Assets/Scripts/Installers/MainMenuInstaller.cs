@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using Scripts.MainMenuCode;
 using Scripts.MainMenuScripts;
+using Scripts.SaveLoader;
 
 namespace Scripts.Installers
 {
@@ -17,10 +18,13 @@ namespace Scripts.Installers
         [SerializeField] private Transform _content;
         [Header("Меню создания")]
         [SerializeField] private NewGamePanel _newGamePanel;
+        [Header("Меню настроек")]
+        [SerializeField] private SettingsPanel _settingsPanel;
         public override void InstallBindings()
         {
             BindMainMenu();
             BindLoadMenu();
+            BindSettingsMenu();
             BindNewGameMenu();
         }
         void BindMainMenu()
@@ -51,6 +55,15 @@ namespace Scripts.Installers
                 .WithId("NewGamePanel")
                 .AsTransient();
             Container.Bind<NewGameMenu>().AsSingle();
+        }
+        void BindSettingsMenu()
+        {
+            SettingsMenu settingsMenu = new SettingsMenu(_settingsPanel);
+            
+            Container.BindInstance(settingsMenu).AsSingle();
+            Container.Bind<MenuSound>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindSatePanel()
         {
