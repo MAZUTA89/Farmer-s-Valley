@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
+#if UNITY_EDITOR
+using UnityEditor.UIElements;
+using UnityEditor;
+#endif
 
 
 namespace Scripts.DayNight

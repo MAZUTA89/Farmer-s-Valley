@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
-using static UnityEditor.Progress;
 
 
 namespace Scripts.InventoryCode
