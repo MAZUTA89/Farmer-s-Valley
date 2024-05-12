@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using Zenject;
 using DropDownOption = TMPro.TMP_Dropdown.OptionData;
 
-namespace Scripts.MainMenuScripts
+namespace Scripts.MainMenuCode
 {
     public class SettingsPanel : MonoBehaviour
     {

@@ -20,7 +20,7 @@ namespace HappyHarvest
         public AudioSource DayAmbienceSource;
         public AudioSource NightAmbienceSource;
 
-        private State m_CurrentState;
+        private State m_CurrentState { get; set; }
         private float m_CurrentBlendRatio = 0.0f;
         
         private void Start()

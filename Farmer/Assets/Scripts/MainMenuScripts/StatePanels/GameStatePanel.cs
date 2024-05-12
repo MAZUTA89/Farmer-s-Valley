@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Scripts.FarmGameEvents;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Scripts.MainMenuCode
             GameDataState gameDataState = 
                 _gameDataSaveLoader.LoadGameState(NameText.text);
             LoadedData.Instance().InitializeGameStateData(gameDataState, false);
+            GameEvents.InvokeOnSaveSettingsEvent();
             SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
         public void Delete()

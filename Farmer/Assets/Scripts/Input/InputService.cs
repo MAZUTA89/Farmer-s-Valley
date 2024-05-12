@@ -59,16 +59,24 @@ public class InputService : IDisposable
     }
     public bool IsOpenCloseMenu()
     {
-        return _inputActions.PlayerMap.OpenCloseGameMenu
+        return _inputActions.MenuActions.OpenCloseGameMenu
             .WasPerformedThisFrame();
     }
-    public void LockControls()
+    public void LockGamePlayControls()
     {
         _inputActions.PlayerMap.Disable();
     }
-    public void UnlockControls()
+    public void UnlockGamePlayControls()
     {
         _inputActions.PlayerMap.Enable();
+    }
+    public void LockMenuControls()
+    {
+        _inputActions.MenuActions.Disable();
+    }
+    public void UnlockMenuControls()
+    {
+        _inputActions.MenuActions.Enable();
     }
     public void Dispose()
     {

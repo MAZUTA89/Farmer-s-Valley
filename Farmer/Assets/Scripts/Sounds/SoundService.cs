@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 using System.IO;
+using Zenject;
+using Scripts.MainMenuCode;
 
 namespace Scripts.Sounds
 {
@@ -23,6 +25,13 @@ namespace Scripts.Sounds
         public SoundData Sound { get; protected set; } = new();
 
         private Queue<AudioSource> m_SFXPool;
+        SettingsMenu _settingsMenu;
+
+        [Inject]
+        public void Construct(SettingsMenu settingsMenu)
+        {
+            _settingsMenu = settingsMenu;
+        }
 
         private void Awake()
         {
@@ -41,11 +50,22 @@ namespace Scripts.Sounds
                 m_SFXPool.Enqueue(source);
             }
         }
+        private void OnEnable()
+        {
+            _settingsMenu.AddListenerAtMainVolume(OnMainVolumeValueChange);
+            _settingsMenu.AddListenerAtMusicVolume(OnMusicVolumeValueChange);
+            _settingsMenu.AddListenerAtSFXVolume(OnSFXVolumeValueChange);
+        }
+        private void OnDisable()
+        {
+            _settingsMenu.RemoveListenerAtMainVolume(OnMainVolumeValueChange);
+            _settingsMenu.RemoveListenerAtMusicVolume(OnMusicVolumeValueChange);
+            _settingsMenu.RemoveListenerAtSFXVolume(OnSFXVolumeValueChange);
+        }
 
         private void Start()
         {
             //Load();
-            UpdateVolume();
         }
 
         public void UpdateVolume()
@@ -95,6 +115,19 @@ namespace Scripts.Sounds
                 Sound.SFXVolume = 1.0f;
                 UpdateVolume();
             }
+        }
+        void OnMainVolumeValueChange(float value)
+        {
+            _mixer.SetFloat("MainVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30.0f);
+        }
+        void OnSFXVolumeValueChange(float value)
+        {
+            _mixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30.0f);
+        }
+
+        void OnMusicVolumeValueChange(float value)
+        {
+            _mixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30.0f);
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Scripts.MainMenuCode;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using Zenject;
 
@@ -9,6 +11,7 @@ namespace Scripts.MainMenuScripts
     public class MenuSound : MonoBehaviour
     {
         [SerializeField] private AudioSource _menuAudioSource;
+        [SerializeField] private AudioMixer _mixer;
 
         SettingsMenu _settingsMenu;
 
@@ -20,10 +23,14 @@ namespace Scripts.MainMenuScripts
         private void OnEnable()
         {
             _settingsMenu.AddListenerAtMusicVolume(OnMusicValueChange);
+            _settingsMenu.AddListenerAtMainVolume(OnMainValueChange);
+            _settingsMenu.AddListenerAtSFXVolume(OnSFXValueChange);
         }
         private void OnDisable()
         {
             _settingsMenu.RemoveListenerAtMusicVolume(OnMusicValueChange);
+            _settingsMenu.RemoveListenerAtMainVolume(OnMainValueChange);
+            _settingsMenu.RemoveListenerAtSFXVolume(OnSFXValueChange);
         }
         private void Start()
         {
@@ -32,7 +39,18 @@ namespace Scripts.MainMenuScripts
 
         void OnMusicValueChange(float value)
         {
-            _menuAudioSource.volume = value;
+            _mixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30f);
+
         }
+        void OnMainValueChange(float value)
+        {
+            _mixer.SetFloat("MainVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30f);
+        }
+
+        void OnSFXValueChange(float value)
+        {
+            _mixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30f);
+        }
+
     }
 }

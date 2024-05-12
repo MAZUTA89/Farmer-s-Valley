@@ -17,14 +17,17 @@ namespace Scripts.GameMenuCode
         InputService _inputService;
         GameDataState _gameDataState;
         GameDataSaveLoader _gameDataSaveLoader;
+        SettingsMenu _settingsMenu;
 
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
+            SettingsMenu settingMenu,
             GameDataSaveLoader gameDataSaveLoader)
         {
             _inputService = inputService;
             _gameDataState = gameDataState;
+            _settingsMenu = settingMenu;
             _gameDataSaveLoader = gameDataSaveLoader;
         }
 
@@ -34,11 +37,17 @@ namespace Scripts.GameMenuCode
             {
                 _menuPanel.SetActive(false);
             }
+            if(LoadedData.Instance() != null &&
+                LoadedData.IsSettingsDataDefault == false)
+            {
+                _settingsMenu.Load(LoadedData.Instance().SettingsData);
+            }
         }
         public void OnContinue()
         {
             if (_menuPanel.activeSelf)
             {
+                _inputService.UnlockGamePlayControls();
                 _menuPanel.SetActive(false);
             }
         }
@@ -48,15 +57,29 @@ namespace Scripts.GameMenuCode
             {
                 if (_menuPanel.activeSelf == false)
                 {
+                    _inputService.LockGamePlayControls();
                     _menuPanel.SetActive(true);
                     return;
                 }
                 if (_menuPanel.activeSelf == true)
                 {
+                    _inputService.UnlockGamePlayControls();
                     _menuPanel.SetActive(false);
                     return;
                 }
             }
+        }
+        public void OnSettings()
+        {
+            _inputService.LockMenuControls();
+            _settingsMenu.Activate();
+            _menuPanel.SetActive(false);
+        }
+        public void OnBackFromSettings()
+        {
+            _inputService.UnlockMenuControls();
+            _settingsMenu.Back();
+            _menuPanel.SetActive(true);
         }
         public void OnExit()
         {
@@ -65,6 +88,7 @@ namespace Scripts.GameMenuCode
             _gameDataSaveLoader.SaveGameState(_gameDataState);
 
             GameEvents.InvokeOnSaveSettingsEvent();
+            _settingsMenu.Save();
             SceneManager.LoadScene(GameConfiguration.MainMenuSceneName);
         }
     }

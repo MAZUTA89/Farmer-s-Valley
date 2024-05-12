@@ -25,4 +25,4 @@ MonoBehaviour:
   StageAfterHarvest: 3
   ProductPerHarvest: 2
   DryDeathTimer: 3000
-  PickEffect: {fileID: 2466092027356929877, guid: b22c0b7ba7feb1a4194738232d7a049d, type: 3}
+  PickEffect: {fileID: 6868274327975543791, guid: 0a550373057fc4b4a82ceb27907686ae, type: 3}

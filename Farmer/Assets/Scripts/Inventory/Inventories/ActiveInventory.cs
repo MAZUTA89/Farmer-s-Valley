@@ -6,6 +6,8 @@ using UnityEngine;
 using Scripts.ItemUsage;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
+using Scripts.Sounds;
+using Random = UnityEngine.Random;
 
 namespace Scripts.InventoryCode
 {
@@ -14,7 +16,7 @@ namespace Scripts.InventoryCode
         InputService _inputService;
         int _chosenIndex;
         Player _player;
-        ItemApplier _applier;
+        SoundService _soundService;
         public InventoryItem ChosenItem { get; private set; }
         MarkerController _markerController;
 
@@ -23,11 +25,12 @@ namespace Scripts.InventoryCode
             [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo,
             MarkerController markerController,
             Player player,
+            SoundService soundService,
             IInventoryCellFactory inventoryCellFactory)
         {
             _markerController = markerController;
+            _soundService = soundService;
             _inputService = inputService;
-            _applier = itemApplier;
             _player = player;
             base.ConstructStorage(inventoryInfo, inventoryCellFactory);
         }
@@ -69,6 +72,13 @@ namespace Scripts.InventoryCode
                         if(ChosenItem.Consumable)
                         {
                             ChosenItem.Count--;
+                        }
+
+                        if(ChosenItem.UseSound != null &&
+                            ChosenItem.UseSound.Length > 0)
+                        {
+                            _soundService.PlaySFXAt(_player.transform.position,
+                                ChosenItem.UseSound[Random.Range(0, ChosenItem.UseSound.Length)], false);
                         }
                     }
                 }

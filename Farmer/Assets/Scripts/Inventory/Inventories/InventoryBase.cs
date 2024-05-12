@@ -20,7 +20,7 @@ namespace Scripts.InventoryCode
             private set { ContainerField = value; }
         }
         protected int TotalSize;
-        protected int CurrentSize => Container.childCount;
+        protected int CurrentSize => InventoryItems.Count;
         protected List<InventoryItem> InventoryItems;
         protected IInventoryCellFactory _inventoryCellFactory;
         private Transform _globalVisualContext;
@@ -38,9 +38,33 @@ namespace Scripts.InventoryCode
         {
             _globalVisualContext = dragParent;
         }
+        private void Awake()
+        {
+            _contextRect = gameObject.GetComponent<RectTransform>();
 
+        }
+        protected virtual void OnEnable()
+        {
+            DragExtension.RegisterInventoryRectTransform
+                (_contextRect);
+            
+        }
+        protected virtual void OnDisable()
+        {
+            DragExtension.UnregisterInventoryRectTransform(_contextRect);
+        }
+        private void OnDestroy()
+        {
+            OnBeginDragEvent -= OnBeginDragCell;
+            OnEndDragEvent -= OnEndDrag;
+        }
+        protected virtual void Start()
+        {
+        }
         public void Initialize(List<InventoryItem> inventoryItems)
         {
+            OnBeginDragEvent += OnBeginDragCell;
+            OnEndDragEvent += OnEndDrag;
             InventoryItems = new List<InventoryItem>(TotalSize);
             InventoryItems.InsertRange(0, inventoryItems);
             foreach (var item in inventoryItems)
@@ -121,26 +145,9 @@ namespace Scripts.InventoryCode
             }
         }
         
-        private void Awake()
-        {
-            _contextRect = gameObject.GetComponent<RectTransform>();
-        }
-        protected virtual void Start()
-        {
-        }
-        protected virtual void OnEnable()
-        {
-            DragExtension.RegisterInventoryRectTransform
-                (_contextRect);
-            OnBeginDragEvent += OnBeginDragCell;
-            OnEndDragEvent += OnEndDrag;
-        }
-        protected virtual void OnDisable()
-        {
-            DragExtension.UnregisterInventoryRectTransform(_contextRect);
-            OnBeginDragEvent -= OnBeginDragCell;
-            OnEndDragEvent -= OnEndDrag;
-        }
+       
+        
+        
         protected virtual void OnBeginDragCell(InventoryCell inventoryCell)
         {
             _tmpEmptyCell = _inventoryCellFactory.CreateEmpty(inventoryCell);

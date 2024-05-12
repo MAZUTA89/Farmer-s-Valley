@@ -44,7 +44,7 @@ namespace Scripts.InventoryCode
 
         private void OnDisable()
         {
-            _endDragEvent = null;
+            
         }
         private void Start()
         {
@@ -62,21 +62,25 @@ namespace Scripts.InventoryCode
             _endDragEvent = endDragEvent;
             _beginDragEvent = beginDragEvent;
         }
-        bool _isItemOver = false;
-        private void Update()
+        private async void Update()
         {
-            if(_isItemOver)
-            {
-                _endDragEvent?.Invoke();
-                _isItemOver = false;
-            }
             InventoryItem?.RenderUI(this);
             if(InventoryItem.Consumable &&
                 InventoryItem.Count < 1)
             {
                 Destroy(gameObject);
-                _isItemOver = true;
+                await InvokeEndDragOnItemOver();
             }
+        }
+
+        async Task InvokeEndDragOnItemOver()
+        {
+            await Task.Delay(100);
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                Debug.Log("InvokeEndDragOnItemOver");
+                _endDragEvent?.Invoke();
+            });
         }
         
         public void OnDrag(PointerEventData eventData)
@@ -94,7 +98,7 @@ namespace Scripts.InventoryCode
         {
             InventoryBase inventory;
             if (DragExtension.CheckMouseIntersectionWithContainers(eventData,
-                out inventory))// если есть пересечение с другим инвентарем
+                out inventory))// если есть пересечение с инвентарем
             {
                 // если это тот же инвентарь
                 if (OriginVisualContext == inventory.Container)

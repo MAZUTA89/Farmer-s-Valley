@@ -10,6 +10,7 @@ using UnityEngine.Windows;
 using Zenject;
 using UnityEngine.SceneManagement;
 using Assets.Scripts;
+using Scripts.FarmGameEvents;
 
 namespace Scripts.MainMenuCode
 {
@@ -104,6 +105,7 @@ namespace Scripts.MainMenuCode
             }
             names.Add(name);
             _gameDataSaveLoader.SaveWorldNamesJson(names);
+            GameEvents.InvokeOnSaveSettingsEvent();
             SceneManager.LoadScene(GameConfiguration.FarmSceneName);
         }
         public void OnBack()

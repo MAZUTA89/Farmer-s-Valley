@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "OpenCloseGameMenu",
-                    "type": "Button",
-                    "id": "a552e7c9-58bc-488f-a9c8-059743898353",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -190,17 +181,6 @@
                     "action": "RBK",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "96af86e0-143c-4613-991c-4e8238ee3160",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenCloseGameMenu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -287,6 +267,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChooseFourthCell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "MenuActions",
+            "id": "119f7e97-4665-4427-bf7f-668e7be427c0",
+            "actions": [
+                {
+                    "name": "OpenCloseGameMenu",
+                    "type": "Button",
+                    "id": "29ce6929-1f59-4865-85d9-bdf2a1f80d9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8e7c3c6e-f5d7-42bd-acea-c18543eb093a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenCloseGameMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

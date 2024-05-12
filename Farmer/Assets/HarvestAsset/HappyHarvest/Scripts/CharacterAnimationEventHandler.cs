@@ -32,14 +32,14 @@ namespace HappyHarvest
 
         void LockControl()
         {
-            _inputService?.LockControls();
+            _inputService?.LockGamePlayControls();
             m_Controller?.ToggleControl(false);
         }
 
         void UnlockControl()
         {
             m_Controller?.ToggleControl(true);
-            _inputService?.UnlockControls();
+            _inputService?.UnlockGamePlayControls();
         }
     }
 }

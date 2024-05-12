@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 
-namespace Scripts.MainMenuScripts
+namespace Scripts.MainMenuCode
 {
     public class SettingsMenu
     {
@@ -82,6 +82,7 @@ namespace Scripts.MainMenuScripts
             settingsData.SFXVolume = _settingsPanel.SliderSFX.value;
 
             _settingSaveLoader.Save(settingsData);
+            LoadedData.Instance().InitializeSettingsData(settingsData, false);
         }
     }
 }

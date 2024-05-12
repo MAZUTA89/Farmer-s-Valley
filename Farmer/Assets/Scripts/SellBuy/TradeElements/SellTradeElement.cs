@@ -32,7 +32,7 @@ namespace Scripts.SellBuy
         async Task OverriteSellList()
         {
 
-            await Task.Delay(500);
+            await Task.Delay(50);
             Debug.Log(500);
             GameEvents.InvokeSellItemEvent();
         }

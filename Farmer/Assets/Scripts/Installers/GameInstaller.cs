@@ -68,6 +68,8 @@ namespace Scripts.Installers
         [SerializeField] private SellTradeElement  SellTradeElementTemplate;
         [SerializeField] private BuyTradeElement BuyTradeElementTemplate;
         [SerializeField] private TextMeshProUGUI MoneyText;
+        [Header("Settings Panel")]
+        [SerializeField] private SettingsPanel _settingsPanel;
 
         FactoriesProvider _factoryProvider;
 
@@ -142,6 +144,8 @@ namespace Scripts.Installers
             Container.Bind<GameMenu>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+            SettingsMenu settingsMenu = new(_settingsPanel);
+            Container.BindInstance(settingsMenu).AsSingle();
         }
         void BindGameDataState()
         {

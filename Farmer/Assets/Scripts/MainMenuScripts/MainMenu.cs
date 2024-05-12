@@ -31,7 +31,14 @@ namespace Scripts.MainMenuCode
             _settingsMenu = settingsMenu;
             _menuObject = menuObject;
         }
-        
+        private void OnEnable()
+        {
+            GameEvents.OnSaveSettingsEvent += _settingsMenu.Save;
+        }
+        private void OnDisable()
+        {
+            GameEvents.OnSaveSettingsEvent -= _settingsMenu.Save;
+        }
         private void Start()
         {
             SettingsDataSaveLoader settingsDataSaveLoader = new();
