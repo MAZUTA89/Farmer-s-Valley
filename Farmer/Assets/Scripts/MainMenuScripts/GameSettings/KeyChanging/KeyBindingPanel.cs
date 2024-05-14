@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Scripts.MainMenuCode
 {
@@ -21,6 +22,7 @@ namespace Scripts.MainMenuCode
 
         InputAction _inputAction;
         InputControl _inputControl;
+        int _bindingIndex;
 
         private InputActionRebindingExtensions.RebindingOperation _rebindOperation;
 
@@ -32,55 +34,84 @@ namespace Scripts.MainMenuCode
 
         public void Initialize(InputAction inputAction, InputControl control)
         {
+            _bindingIndex = inputAction.GetBindingIndexForControl(control);
             _inputAction = inputAction;
             _inputControl = control;
         }
         void StartInteractiveBindingOperation(InputAction inputAction, int bindingIndex)
         {
+            if (bindingIndex == -1)
+                return;
+            _keyButton.enabled = false;
             _rebindOperation?.Cancel();
             void CleanUp()
             {
                 _rebindOperation?.Dispose();
                 _rebindOperation = null;
+                _keyButton.enabled = true;
+                //Debug.Log("OPERATION CLEAN UP!");
             }
-
+            
             inputAction.Disable();
+            Debug.Log("OPEN WHILE REBIND WINDOW!");
             GameEvents.InvokeOnPerformInteractiveRebindEvent(c_textWhileRebind, true);
 
             _rebindOperation = inputAction.PerformInteractiveRebinding(bindingIndex)
                 .OnCancel((callback) =>
                 {
-                    CleanUp();
-                })
-                .OnComplete((callback) =>
-                {
-                    callback.Dispose();
-                    CleanUp();
-                    _inputAction.Enable(); 
-                    string controlName;
-                    if (_inputAction.bindings[bindingIndex].isPartOfComposite)
-                    {
-                        var binding = _inputAction.bindings[bindingIndex];
-
-                        controlName = _inputControl.displayName;
-                    }
-                    else
-                    {
-                        controlName = _inputControl.displayName;
-                    }
-                    UpdateUIActionParameters(controlName);
+                    Debug.Log("OPERATION CANCELD");
                     GameEvents.InvokeOnPerformInteractiveRebindEvent(c_textWhileRebind, false);
+                    CleanUp();
                 })
-                .Start();
-            
+                .WithCancelingThrough("<Keyboard>/space")
+                .OnApplyBinding((op, path) =>
+                {
+                    CleanUp();
+                    //_inputAction.Enable(); 
+                    _inputAction.ChangeBinding(bindingIndex)
+                    .WithPath(path);
+                    string controlName;
+                    var binding = _inputAction.bindings[bindingIndex];
+                    controlName = binding.ToDisplayString();
+                    UpdateUIActionParameters(controlName);
+                    Debug.Log("CLOSE WHILE REBIND WINDOW!");
+                   
+                    Debug.Log("OPERATION COMPLETED!!!");
+                    GameEvents.InvokeOnPerformInteractiveRebindEvent(c_textWhileRebind, false);
+                    Debug.Log("APPLY BINDING! - " + path);
+                });
+                //.OnComplete((callback) =>
+                //{
+                    
+                //});
 
-           
-
-            //_rebindOperation.Start();
+            _rebindOperation.Start();
         }
+        //public bool ResolveActionAndBinding(out InputAction action, out int bindingIndex)
+        //{
+        //    bindingIndex = -1;
+
+        //    action = m_Action?.action;
+        //    if (action == null)
+        //        return false;
+
+        //    if (string.IsNullOrEmpty(m_BindingId))
+        //        return false;
+
+        //    // Look up binding index.
+        //    var bindingId = new Guid(m_BindingId);
+        //    bindingIndex = action.bindings.IndexOf(x => x.id == bindingId);
+        //    if (bindingIndex == -1)
+        //    {
+        //        Debug.LogError($"Cannot find binding with ID '{bindingId}' on '{action}'", this);
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
         public void OnChangeControl()
         {
-            StartInteractiveBindingOperation(_inputAction, _inputAction.GetBindingIndexForControl(_inputControl));
+            StartInteractiveBindingOperation(_inputAction, _bindingIndex);
         }
     }
 }
