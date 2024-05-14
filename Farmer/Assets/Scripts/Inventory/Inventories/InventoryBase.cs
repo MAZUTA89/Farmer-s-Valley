@@ -81,7 +81,7 @@ namespace Scripts.InventoryCode
             inventoryCell.RegisterEvents(OnEndDragEvent, OnBeginDragEvent);
         }
 
-        public bool AddItem(InventoryItem newItem, int amount = 1)
+        public bool AddItem(InventoryItem newItem)
         {
             InventoryItem newItemCopy = (InventoryItem)newItem.Clone();
             int remainingToFit = newItemCopy.Count;
@@ -129,7 +129,7 @@ namespace Scripts.InventoryCode
             RegisterDragEvents(newCell);
         }
         /// <summary>
-        /// Возвращает true, если инвентарь заполнен
+        /// Возвращает false, если инвентарь заполнен
         /// </summary>
         /// <returns></returns>
         public bool IsFull()
@@ -143,9 +143,6 @@ namespace Scripts.InventoryCode
                 return false;
             }
         }
-        
-       
-        
         
         protected virtual void OnBeginDragCell(InventoryCell inventoryCell)
         {

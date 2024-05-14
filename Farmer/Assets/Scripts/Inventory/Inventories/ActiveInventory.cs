@@ -60,7 +60,14 @@ namespace Scripts.InventoryCode
             if (ChosenItem != null &&
                 ChosenItem.ApplyCondition(_markerController.CurrentTarget))
             {
-                _markerController.InteractMarker.Activate();
+                if(ChosenItem is ProductItem)
+                {
+                    _markerController.InteractMarker.Hide();
+                }
+                else
+                {
+                    _markerController.InteractMarker.Activate();
+                }
 
                 if(_inputService.IsLBK())
                 {

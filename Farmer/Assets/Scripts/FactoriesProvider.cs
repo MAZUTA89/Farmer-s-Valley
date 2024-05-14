@@ -19,7 +19,7 @@ namespace Scripts.InteractableObjects
             _factories = new Dictionary<Type, object>();
         }
         public void RegisterFabric<T, D>
-            (IInteractableObjectFactory<T, D> interactableObjectFactory)
+            (IGameObjectFactory<T, D> interactableObjectFactory)
         {
             Type key = interactableObjectFactory.GetType();
             if(!_factories.ContainsKey(key))

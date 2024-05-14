@@ -12,9 +12,13 @@ namespace Scripts.MainMenuCode
     {
         SettingsPanel _settingsPanel;
         SettingsDataSaveLoader _settingSaveLoader;
+        InputService _inputService;
 
-        public SettingsMenu(SettingsPanel settingsPanel)
+        public SettingsMenu(SettingsPanel settingsPanel,
+            InputService inputService,
+            bool initializeControls)
         {
+            _inputService = inputService;
             _settingsPanel = settingsPanel;
             _settingSaveLoader = new SettingsDataSaveLoader();
             _settingsPanel.gameObject.SetActive(false);
@@ -47,7 +51,10 @@ namespace Scripts.MainMenuCode
         {
             _settingsPanel.SliderSFX.onValueChanged.RemoveListener(action);
         }
-
+        public void InitializeKeyBindings()
+        {
+            _settingsPanel.InitializeBindingsKeys(_inputService);
+        }
         public void Activate()
         {
             if (_settingsPanel.gameObject.activeSelf == false)

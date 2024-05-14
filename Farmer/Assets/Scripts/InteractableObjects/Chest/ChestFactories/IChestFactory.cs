@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.InteractableObjects
 {
-    public interface IChestFactory : IInteractableObjectFactory< Chest, List<InventoryItem>>
+    public interface IChestFactory : IGameObjectFactory< Chest, List<InventoryItem>>
     {
     }
 }

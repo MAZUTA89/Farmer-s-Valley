@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.SellBuy
 {
-    public interface ITradeElementFactory : IInteractableObjectFactory<TradeElement, Transform>
+    public interface ITradeElementFactory : IGameObjectFactory<TradeElement, Transform>
     {
         
     }

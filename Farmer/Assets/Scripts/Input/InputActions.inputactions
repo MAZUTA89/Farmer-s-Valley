@@ -15,33 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseDelta",
-                    "type": "Value",
-                    "id": "6200aca6-7bf6-4d6a-8b4d-6c9eb4deab95",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "UseItem",
-                    "type": "Button",
-                    "id": "e716f881-de55-4b70-a08c-6d03c4ca86df",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "InteractWithItem",
-                    "type": "Button",
-                    "id": "5a4632a1-c5a9-46a3-9803-0f9df0801b9a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LBK",
                     "type": "Button",
                     "id": "210e6cfe-261e-4e9c-b326-6c75ec7f0f4f",
@@ -61,17 +34,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "fbf6ca93-4dbf-40bd-82ed-ff51b27ee2ac",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "f2a3a1d3-8fab-4488-805b-4f56e4e10d56",
@@ -126,39 +88,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "8060c9b7-b614-4ddd-b89e-e25f6caec595",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseDelta",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "069a45e0-4e5c-4d44-82fd-ffa703e3bfcf",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fe1a8ed3-523b-42fa-80cb-f4ae394bc7f4",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PSScheme",
-                    "action": "InteractWithItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",

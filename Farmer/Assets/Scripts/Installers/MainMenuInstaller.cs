@@ -5,6 +5,7 @@ using UnityEngine;
 using Scripts.MainMenuCode;
 using Scripts.MainMenuScripts;
 using Scripts.SaveLoader;
+using Scripts.InteractableObjects;
 
 namespace Scripts.Installers
 {
@@ -20,12 +21,18 @@ namespace Scripts.Installers
         [SerializeField] private NewGamePanel _newGamePanel;
         [Header("Меню настроек")]
         [SerializeField] private SettingsPanel _settingsPanel;
+        [SerializeField] private KeyBindingPanel _keyBindingPanelTemplate;
+        FactoriesProvider _factoriesProvider;
         public override void InstallBindings()
         {
+            Container.Bind<InputService>().AsSingle();
+            _factoriesProvider = new FactoriesProvider();
             BindMainMenu();
             BindLoadMenu();
             BindSettingsMenu();
             BindNewGameMenu();
+            Container.BindInstance(_factoriesProvider)
+                .AsSingle();
         }
         void BindMainMenu()
         {
@@ -58,16 +65,17 @@ namespace Scripts.Installers
         }
         void BindSettingsMenu()
         {
-            SettingsMenu settingsMenu = new SettingsMenu(_settingsPanel);
+            KeyBindingPanelFactory keyBindingPanel = new KeyBindingPanelFactory(_keyBindingPanelTemplate,
+                Container);
+            _factoriesProvider.RegisterFabric(keyBindingPanel);
+            Container.Bind<KeyBindingPanel>().AsTransient();
+            InputService inputService = new InputService();
+            SettingsMenu settingsMenu = new SettingsMenu(_settingsPanel, inputService, true);
             
             Container.BindInstance(settingsMenu).AsSingle();
             Container.Bind<MenuSound>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-        }
-        void BindSatePanel()
-        {
-            Container.Bind<GameStatePanel>().AsTransient();
         }
     }
 }

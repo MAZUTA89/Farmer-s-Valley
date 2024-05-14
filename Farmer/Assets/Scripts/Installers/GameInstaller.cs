@@ -70,11 +70,12 @@ namespace Scripts.Installers
         [SerializeField] private TextMeshProUGUI MoneyText;
         [Header("Settings Panel")]
         [SerializeField] private SettingsPanel _settingsPanel;
-
+        InputService _inputService;
         FactoriesProvider _factoryProvider;
 
         public override void InstallBindings()
         {
+            _inputService = new InputService();
             _factoryProvider = new FactoriesProvider();
             BindInputService();
             BindGameMenu();
@@ -137,14 +138,14 @@ namespace Scripts.Installers
         }
         void BindInputService()
         {
-            Container.Bind<InputService>().AsSingle();
+            Container.BindInstance(_inputService).AsSingle();
         }
         void BindGameMenu()
         {
             Container.Bind<GameMenu>()
                 .FromComponentInHierarchy()
                 .AsSingle();
-            SettingsMenu settingsMenu = new(_settingsPanel);
+            SettingsMenu settingsMenu = new(_settingsPanel, _inputService, true);
             Container.BindInstance(settingsMenu).AsSingle();
         }
         void BindGameDataState()

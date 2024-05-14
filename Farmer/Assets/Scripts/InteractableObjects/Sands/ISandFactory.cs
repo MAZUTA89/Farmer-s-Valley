@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts.InteractableObjects
 {
-    public interface ISandFactory : IInteractableObjectFactory<RuleTile, Vector3Int>
+    public interface ISandFactory : IGameObjectFactory<RuleTile, Vector3Int>
     {
 
     }

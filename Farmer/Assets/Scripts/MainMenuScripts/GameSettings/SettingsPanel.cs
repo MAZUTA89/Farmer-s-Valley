@@ -1,9 +1,11 @@
 ﻿using Scripts.FarmGameEvents;
+using Scripts.InteractableObjects;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 using DropDownOption = TMPro.TMP_Dropdown.OptionData;
@@ -17,19 +19,28 @@ namespace Scripts.MainMenuCode
         [SerializeField] private Slider _sliderMusic;
         [SerializeField] private Slider _sliderMain;
         [SerializeField] private Slider _sliderSFX;
+        [SerializeField] private Transform _keyBoardBindingsContent;
 
         public TMP_Dropdown DropDownResolution => _dropDownResolution;
         public Toggle ToggleFullScreen => _toggleFullScreen;
         public Slider SliderMusic => _sliderMusic;
         public Slider SliderMain => _sliderMain;
         public Slider SliderSFX => _sliderSFX;
+        public Transform KeyBoardBindingsContent => _keyBoardBindingsContent;
 
         List<Resolution> _availableResolutions;
 
+        InputService _inputService;
+
+        KeyBindingPanelFactory _keyBindingPanelFactory;
+
+        public InputActionAsset InputActionsAsset => _inputService.GetInputActionAsset();
 
         [Inject]
-        public void Construct()
+        public void Construct(FactoriesProvider factoriesProvider)
         {
+            _keyBindingPanelFactory = (KeyBindingPanelFactory)factoriesProvider
+                .GetFactory<KeyBindingPanelFactory>();
         }
         public void InitializeDropDownResolution()
         {
@@ -49,7 +60,7 @@ namespace Scripts.MainMenuCode
                 optionData.text = resolutionText;
                 _dropDownResolution.options.Add(optionData);
 
-                if(currentResolution.width == resolution.width &&
+                if (currentResolution.width == resolution.width &&
                     currentResolution.height == resolution.height)
                 {
                     currentResolutionIndex = i;
@@ -77,6 +88,59 @@ namespace Scripts.MainMenuCode
                 Screen.fullScreen = call;
             });
             _toggleFullScreen.onValueChanged = ev;
+        }
+        public void InitializeBindingsKeys(InputService inputService)
+        {
+            InputActionAsset asset = inputService.GetInputActionAsset();
+
+            foreach (var map in asset.actionMaps)
+            {
+                foreach (InputAction action in map.actions)
+                {
+                    
+                    Debug.Log("Action name: " + action.name);
+                    Debug.Log("Expected type: " + action.expectedControlType);  
+                    if(action.expectedControlType == "Vector2")
+                    {
+                        for (int i = 0; i < action.controls.Count; i++)
+                        {
+                            var control = action.controls[i];
+
+                            var binding = action.GetBindingForControl(control);
+
+                            KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
+
+                            keyBindingPanel.ActionNameText.text = binding.Value.name;
+                            keyBindingPanel.KeyButtonText.text = control.displayName;
+                        }
+                    }
+                    else
+                    {
+                        KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
+
+                        keyBindingPanel.ActionNameText.text = action.name;
+                        keyBindingPanel.KeyButtonText.text = action.controls[0].displayName;
+                    }
+                    foreach (var control in action.controls)
+                    {
+                        
+                        //KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
+
+                        //keyBindingPanel.ActionNameText.text = control.name;
+                        //keyBindingPanel.KeyButtonText.text = control.displayName;
+                        Debug.Log("Control name: " + control.displayName);
+                        //keyBindingPanel.InitializeAction(action);
+                    }
+                    foreach (var binding in action.bindings)
+                    {
+                        Debug.Log("Binding name: " + binding.name);
+                    }
+                    
+                    //Debug.Log("LocalScale: " + keyBindingPanel.transform.localScale);
+                    //keyBindingPanel.transform.SetParent();
+                    //Debug.Log("Local scale after: " + keyBindingPanel.transform.localScale);
+                }
+            }
         }
     }
 }
