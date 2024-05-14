@@ -33,7 +33,6 @@ namespace Scripts.GameMenuCode
 
         private void Start()
         {
-            _settingsMenu.InitializeKeyBindings();
             if (_menuPanel.activeSelf == true)
             {
                 _menuPanel.SetActive(false);
@@ -43,6 +42,7 @@ namespace Scripts.GameMenuCode
             {
                 _settingsMenu.Load(LoadedData.Instance().SettingsData);
             }
+            _settingsMenu.InitializeKeyBindings();
         }
         public void OnContinue()
         {

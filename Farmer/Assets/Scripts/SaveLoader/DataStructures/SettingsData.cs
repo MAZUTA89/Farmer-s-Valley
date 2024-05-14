@@ -13,6 +13,7 @@ namespace Scripts.SaveLoader
         public float MainVolume;
         public float MusicVolume;
         public float SFXVolume;
+        public string InputOverrides;
 
         public void SetResolution(Resolution resolution)
         {

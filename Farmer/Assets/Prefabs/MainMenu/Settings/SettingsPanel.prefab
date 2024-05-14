@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 2411741904077646468}
   - component: {fileID: 5684200986634184345}
   - component: {fileID: 2853269671761223}
-  - component: {fileID: 8815612155894183094}
+  - component: {fileID: 4462801979344921384}
   m_Layer: 5
   m_Name: SettingsPanel
   m_TagString: Untagged
@@ -488,8 +488,8 @@ MonoBehaviour:
   _sliderSFX: {fileID: 8711644462165148870}
   _keyBoardBindingsContent: {fileID: 4875023172115622278}
   _interactableRebindText: {fileID: 0}
-  _settingsCanvasGroup: {fileID: 8815612155894183094}
---- !u!225 &8815612155894183094
+  _settingsCanvasGroup: {fileID: 4462801979344921384}
+--- !u!225 &4462801979344921384
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6226852910318373169}
   m_HandleRect: {fileID: 6440369223860686895}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2515,8 +2515,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Scripts.MainMenuCode.MainMenu, Assembly-CSharp
-        m_MethodName: BackFromSettings
+        m_TargetAssemblyTypeName: Scripts.GameMenuCode.GameMenu, Assembly-CSharp
+        m_MethodName: OnBackFromSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4647,7 +4647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 8.5, y: -249.99991}
+  m_AnchoredPosition: {x: 8.5, y: -250.00002}
   m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4097643597446970816

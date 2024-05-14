@@ -41,7 +41,6 @@ namespace Scripts.MainMenuCode
         }
         private void Start()
         {
-            _settingsMenu.InitializeKeyBindings();
             SettingsDataSaveLoader settingsDataSaveLoader = new();
             SettingsData settingsData = null;
             if (settingsDataSaveLoader.IsDefault())
@@ -59,6 +58,8 @@ namespace Scripts.MainMenuCode
             {
                 _settingsMenu.Load(settingsData);
             }
+            _settingsMenu.InitializeKeyBindings();
+
         }
         public void NewGame()
         {

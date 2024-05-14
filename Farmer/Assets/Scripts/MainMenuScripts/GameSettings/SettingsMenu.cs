@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
@@ -77,6 +78,10 @@ namespace Scripts.MainMenuCode
             _settingsPanel.SliderMain.value = settingsData.MainVolume;
             _settingsPanel.SliderMusic.value = settingsData.MusicVolume;
             _settingsPanel.SliderSFX.value = settingsData.SFXVolume;
+
+            var asset = _inputService.GetInputActionAsset();
+
+            asset.LoadBindingOverridesFromJson(settingsData.InputOverrides);
         }
         public void Save()
         {
@@ -87,6 +92,7 @@ namespace Scripts.MainMenuCode
             settingsData.MainVolume = _settingsPanel.SliderMain.value;
             settingsData.MusicVolume = _settingsPanel.SliderMusic.value;
             settingsData.SFXVolume = _settingsPanel.SliderSFX.value;
+            settingsData.InputOverrides = _inputService.GetInputActionAsset().SaveBindingOverridesAsJson();
 
             _settingSaveLoader.Save(settingsData);
             LoadedData.Instance().InitializeSettingsData(settingsData, false);
