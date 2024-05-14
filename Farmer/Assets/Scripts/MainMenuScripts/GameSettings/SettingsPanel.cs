@@ -4,6 +4,7 @@ using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ namespace Scripts.MainMenuCode
         [SerializeField] private Slider _sliderMain;
         [SerializeField] private Slider _sliderSFX;
         [SerializeField] private Transform _keyBoardBindingsContent;
+        [SerializeField] private TextMeshProUGUI _interactableRebindText;
+        [SerializeField] private CanvasGroup _settingsCanvasGroup;
 
         public TMP_Dropdown DropDownResolution => _dropDownResolution;
         public Toggle ToggleFullScreen => _toggleFullScreen;
@@ -27,6 +30,7 @@ namespace Scripts.MainMenuCode
         public Slider SliderMain => _sliderMain;
         public Slider SliderSFX => _sliderSFX;
         public Transform KeyBoardBindingsContent => _keyBoardBindingsContent;
+        public TextMeshProUGUI InteractableRebindText => _interactableRebindText;
 
         List<Resolution> _availableResolutions;
 
@@ -41,6 +45,14 @@ namespace Scripts.MainMenuCode
         {
             _keyBindingPanelFactory = (KeyBindingPanelFactory)factoriesProvider
                 .GetFactory<KeyBindingPanelFactory>();
+        }
+        private void OnEnable()
+        {
+            GameEvents.OnPerformInteractiveRebindEvent += OnRebind;
+        }
+        private void OnDisable()
+        {
+            GameEvents.OnPerformInteractiveRebindEvent -= OnRebind;
         }
         public void InitializeDropDownResolution()
         {
@@ -98,8 +110,6 @@ namespace Scripts.MainMenuCode
                 foreach (InputAction action in map.actions)
                 {
                     
-                    Debug.Log("Action name: " + action.name);
-                    Debug.Log("Expected type: " + action.expectedControlType);  
                     if(action.expectedControlType == "Vector2")
                     {
                         for (int i = 0; i < action.controls.Count; i++)
@@ -109,6 +119,8 @@ namespace Scripts.MainMenuCode
                             var binding = action.GetBindingForControl(control);
 
                             KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
+
+                            keyBindingPanel.Initialize(action, control);
 
                             keyBindingPanel.ActionNameText.text = binding.Value.name;
                             keyBindingPanel.KeyButtonText.text = control.displayName;
@@ -120,27 +132,18 @@ namespace Scripts.MainMenuCode
 
                         keyBindingPanel.ActionNameText.text = action.name;
                         keyBindingPanel.KeyButtonText.text = action.controls[0].displayName;
-                    }
-                    foreach (var control in action.controls)
-                    {
-                        
-                        //KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
 
-                        //keyBindingPanel.ActionNameText.text = control.name;
-                        //keyBindingPanel.KeyButtonText.text = control.displayName;
-                        Debug.Log("Control name: " + control.displayName);
-                        //keyBindingPanel.InitializeAction(action);
+                        keyBindingPanel.Initialize(action, action.controls[0]);
                     }
-                    foreach (var binding in action.bindings)
-                    {
-                        Debug.Log("Binding name: " + binding.name);
-                    }
-                    
-                    //Debug.Log("LocalScale: " + keyBindingPanel.transform.localScale);
-                    //keyBindingPanel.transform.SetParent();
-                    //Debug.Log("Local scale after: " + keyBindingPanel.transform.localScale);
                 }
             }
+        }
+        void OnRebind(string text, bool activeSelf)
+        {
+            InteractableRebindText.text = text;
+            _settingsCanvasGroup.blocksRaycasts = !activeSelf;
+            InteractableRebindText.gameObject.transform.parent.
+                transform.gameObject.SetActive(activeSelf);
         }
     }
 }

@@ -70,6 +70,7 @@ namespace Scripts.Installers
         [SerializeField] private TextMeshProUGUI MoneyText;
         [Header("Settings Panel")]
         [SerializeField] private SettingsPanel _settingsPanel;
+        [SerializeField] private KeyBindingPanel keyBindingPanelTemplate;
         InputService _inputService;
         FactoriesProvider _factoryProvider;
 
@@ -145,6 +146,7 @@ namespace Scripts.Installers
             Container.Bind<GameMenu>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+            _factoryProvider.RegisterFabric(new KeyBindingPanelFactory(keyBindingPanelTemplate, Container));
             SettingsMenu settingsMenu = new(_settingsPanel, _inputService, true);
             Container.BindInstance(settingsMenu).AsSingle();
         }
