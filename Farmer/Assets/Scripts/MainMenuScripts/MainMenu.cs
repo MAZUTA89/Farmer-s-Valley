@@ -1,6 +1,7 @@
 ﻿using PimDeWitte.UnityMainThreadDispatcher;
 using Scripts.FarmGameEvents;
 using Scripts.MainMenuScripts;
+using Scripts.MouseHandle;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,15 @@ namespace Scripts.MainMenuCode
         private NewGameMenu _newGameMenu;
         private GameObject _menuObject;
         private SettingsMenu _settingsMenu;
-
+        MouseCursor _mouseCursor;
         [Inject]
         public void Construct(LoadMenu loadMenu,
             NewGameMenu newGameMenu,
             SettingsMenu settingsMenu,
-            [Inject(Id = "MainMenuObject")] GameObject menuObject)
+            [Inject(Id = "MainMenuObject")] GameObject menuObject,
+            MouseCursor mouseCursor)
         {
+            _mouseCursor = mouseCursor;
             _loadMenu = loadMenu;
             _newGameMenu = newGameMenu;
             _settingsMenu = settingsMenu;
@@ -60,6 +63,13 @@ namespace Scripts.MainMenuCode
             }
             _settingsMenu.InitializeKeyBindings();
 
+        }
+        private void Update()
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                _mouseCursor.ImitateClick();
+            }
         }
         public void NewGame()
         {

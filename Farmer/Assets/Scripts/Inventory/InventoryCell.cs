@@ -1,5 +1,6 @@
 ﻿using PimDeWitte.UnityMainThreadDispatcher;
 using Scripts.InventoryCode.ItemResources;
+using Scripts.MouseHandle;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -34,11 +35,14 @@ namespace Scripts.InventoryCode
         public int BeginDragSiblingIndex { get; private set; }
 
         ItemResourceDroper _itemResourceDroper;
+        MouseCursor _mouseCursor;
 
         [Inject]
-        public void Construct(ItemResourceDroper itemResourceDroper)
+        public void Construct(ItemResourceDroper itemResourceDroper,
+            MouseCursor mouseCursor)
         {
             _itemResourceDroper = itemResourceDroper;
+            _mouseCursor = mouseCursor;
         }
 
 
@@ -92,10 +96,12 @@ namespace Scripts.InventoryCode
             BeginDragSiblingIndex = transform.GetSiblingIndex();
             _beginDragEvent?.Invoke(this);
             transform.SetParent(_globalVisualContext);
+            _mouseCursor.ChangeCursor(CursorType.Drag);
         }
 
         public async void OnEndDrag(PointerEventData eventData)
         {
+            _mouseCursor.ChangeCursor(CursorType.Default);
             InventoryBase inventory;
             if (DragExtension.CheckMouseIntersectionWithContainers(eventData,
                 out inventory))// если есть пересечение с инвентарем

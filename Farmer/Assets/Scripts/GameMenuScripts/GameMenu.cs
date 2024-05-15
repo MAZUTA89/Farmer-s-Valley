@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using Scripts.FarmGameEvents;
 using Scripts.MainMenuCode;
+using Scripts.MouseHandle;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,19 @@ namespace Scripts.GameMenuCode
         GameDataState _gameDataState;
         GameDataSaveLoader _gameDataSaveLoader;
         SettingsMenu _settingsMenu;
-
+        MouseCursor _mouseCursor;
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
             SettingsMenu settingMenu,
-            GameDataSaveLoader gameDataSaveLoader)
+            GameDataSaveLoader gameDataSaveLoader,
+             MouseCursor mouseCursor)
         {
             _inputService = inputService;
             _gameDataState = gameDataState;
             _settingsMenu = settingMenu;
             _gameDataSaveLoader = gameDataSaveLoader;
+            _mouseCursor = mouseCursor;
         }
 
         private void Start()
@@ -50,6 +53,7 @@ namespace Scripts.GameMenuCode
             {
                 _inputService.UnlockGamePlayControls();
                 _menuPanel.SetActive(false);
+                _mouseCursor.ChangeCursor(CursorType.Default);
             }
         }
         private void Update()
@@ -60,14 +64,20 @@ namespace Scripts.GameMenuCode
                 {
                     _inputService.LockGamePlayControls();
                     _menuPanel.SetActive(true);
+                    _mouseCursor.ChangeCursor(CursorType.Menu);
                     return;
                 }
                 if (_menuPanel.activeSelf == true)
                 {
                     _inputService.UnlockGamePlayControls();
                     _menuPanel.SetActive(false);
+                    _mouseCursor.ChangeCursor(CursorType.Default);
                     return;
                 }
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                _mouseCursor.ImitateClick();
             }
         }
         public void OnSettings()

@@ -6,6 +6,7 @@ using Scripts.MainMenuCode;
 using Scripts.MainMenuScripts;
 using Scripts.SaveLoader;
 using Scripts.InteractableObjects;
+using Scripts.MouseHandle;
 
 namespace Scripts.Installers
 {
@@ -23,6 +24,8 @@ namespace Scripts.Installers
         [SerializeField] private SettingsPanel _settingsPanel;
         [SerializeField] private KeyBindingPanel _keyBindingPanelTemplate;
         FactoriesProvider _factoriesProvider;
+        [Header("Mouse Handles:")]
+        [SerializeField] private MouseIconDatabase _mouseIconDatabase;
         public override void InstallBindings()
         {
             Container.Bind<InputService>().AsSingle();
@@ -31,8 +34,16 @@ namespace Scripts.Installers
             BindLoadMenu();
             BindSettingsMenu();
             BindNewGameMenu();
+            BindCursor();
             Container.BindInstance(_factoriesProvider)
                 .AsSingle();
+        }
+        void BindCursor()
+        {
+            MouseCursor mouseCursor = new MouseCursor(_mouseIconDatabase);
+            mouseCursor.ChangeCursor(CursorType.Default);
+
+            Container.BindInstance(mouseCursor).AsSingle();
         }
         void BindMainMenu()
         {

@@ -1,5 +1,6 @@
 ﻿using HappyHarvest;
 using Scripts.Inventory;
+using Scripts.MouseHandle;
 using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using Zenject;
 
 namespace Scripts.InventoryCode
 {
-    public abstract class InventoryBase : MonoBehaviour, IDragHandler
+    public abstract class InventoryBase : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] protected Transform ContainerField;
         public Transform Container
@@ -30,12 +31,14 @@ namespace Scripts.InventoryCode
         protected Action OnEndDragEvent;
 
         private GameObject _tmpEmptyCell;
+        MouseCursor _mouseCursor;
 
         [Inject]
-        public void Construct([Inject(Id = "DragParent")] Transform dragParent
-           )
+        public void Construct([Inject(Id = "DragParent")] Transform dragParent,
+           MouseCursor mouseCursor)
         {
             _globalVisualContext = dragParent;
+            _mouseCursor = mouseCursor;
         }
         private void Awake()
         {
@@ -202,6 +205,16 @@ namespace Scripts.InventoryCode
         public virtual void OnDragInto(InventoryCell inventoryCell)
         {
 
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _mouseCursor.ChangeCursor(CursorType.Drag);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _mouseCursor.ChangeCursor(CursorType.Default);
         }
     }
 }

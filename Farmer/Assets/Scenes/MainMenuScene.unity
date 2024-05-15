@@ -4310,6 +4310,7 @@ MonoBehaviour:
   _newGamePanel: {fileID: 111223936}
   _settingsPanel: {fileID: 579379362}
   _keyBindingPanelTemplate: {fileID: 3516184000165783187, guid: 1850e1771af7dbe46a75261e96a2b915, type: 3}
+  _mouseIconDatabase: {fileID: 11400000, guid: ea41e7a8f7d166b4d8360047820f42be, type: 2}
 --- !u!1 &2108548083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4646,7 +4647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4875023172115622278, guid: 17bbe230215690941aba041c35f81d69, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -250.00003
+      value: -250.00008
       objectReference: {fileID: 0}
     - target: {fileID: 4923632290015019760, guid: 17bbe230215690941aba041c35f81d69, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4926,6 +4927,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8303248757763710352, guid: 17bbe230215690941aba041c35f81d69, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893782808074351504, guid: 17bbe230215690941aba041c35f81d69, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893782808074351504, guid: 17bbe230215690941aba041c35f81d69, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893782808074351504, guid: 17bbe230215690941aba041c35f81d69, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

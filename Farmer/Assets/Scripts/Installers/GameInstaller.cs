@@ -20,6 +20,7 @@ using TMPro;
 using Newtonsoft.Json.Bson;
 using Scripts.Inventory;
 using Scripts.Sounds;
+using Scripts.MouseHandle;
 
 namespace Scripts.Installers
 {
@@ -73,6 +74,9 @@ namespace Scripts.Installers
         [SerializeField] private KeyBindingPanel keyBindingPanelTemplate;
         InputService _inputService;
         FactoriesProvider _factoryProvider;
+        [Header("Mouse Handles:")]
+        [SerializeField] private MouseIconDatabase _mouseIconDatabase;
+
 
         public override void InstallBindings()
         {
@@ -89,7 +93,15 @@ namespace Scripts.Installers
             BindDataBases();
             BindTradeLogic();
             BindSounds();
+            BindCursor();
             Container.BindInstance(_factoryProvider).AsSingle();
+        }
+        void BindCursor()
+        {
+            MouseCursor mouseCursor = new MouseCursor(_mouseIconDatabase);
+            mouseCursor.ChangeCursor(CursorType.Default);
+
+            Container.BindInstance(mouseCursor).AsSingle();
         }
         void BindSounds()
         {

@@ -8,10 +8,11 @@ using Scripts.InteractableObjects;
 using Scripts.Inventory;
 using Scripts.FarmGameEvents;
 using UnityEngine.EventSystems;
+using Scripts.MouseHandle;
 
 namespace Scripts.SellBuy
 {
-    public class TradePanel : MonoBehaviour, IDragHandler
+    public class TradePanel : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         [SerializeField] Transform ContentArea;
 
@@ -22,14 +23,16 @@ namespace Scripts.SellBuy
         ITradeElementFactory _sellElementFactory;
         ITradeElementFactory _buyElementFactory;
         BuyItemsDatabase _buyItemsDatabase;
+        MouseCursor _mouseCursor;
 
         [Inject]
         public void Construct(TradeService tradeService,
             PlayerInventory playerInventory,
             FactoriesProvider factoriesProvider,
-            BuyItemsDatabase buyItemsDatabase)
+            BuyItemsDatabase buyItemsDatabase,
+            MouseCursor mouseCursor)
         {
-
+            _mouseCursor = mouseCursor;
             _tradeService = tradeService;
             _playerInventory = playerInventory;
             _factoriesProvider = factoriesProvider;
@@ -144,6 +147,16 @@ namespace Scripts.SellBuy
             Vector3 mousePos = Input.mousePosition;
             
             gameObject.transform.position = mousePos;
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _mouseCursor.ChangeCursor(CursorType.Drag);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _mouseCursor.ChangeCursor(CursorType.Default);
         }
     }
 }
