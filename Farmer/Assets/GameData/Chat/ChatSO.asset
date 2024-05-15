@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e17434e78f8684d968f22aeb24505d, type: 3}
+  m_Name: ChatSO
+  m_EditorClassIdentifier: 
+  APIKey: sk-or-vv-d9aaca2458fa9b5cbc6887e989445c71ebfbb1df611c27f2dd4b85cc537cfcdf
+  Url: https://api.vsegpt.ru:6070/v1/chat/completions
+  SystemMassage: 
