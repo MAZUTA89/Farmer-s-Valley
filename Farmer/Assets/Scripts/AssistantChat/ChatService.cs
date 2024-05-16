@@ -1,4 +1,5 @@
 ﻿using Scripts.SO.Chat;
+using OpenAI_API;
 
 namespace Scripts.ChatAssistant
 {
@@ -10,6 +11,7 @@ namespace Scripts.ChatAssistant
         public ChatService(MassagePanelsFactories massagePanelsFactories, 
             ChatSO chatSO)
         {
+           OpenAIAPI openAIAPI = new OpenAIAPI();
             _massagePanelsFactories = massagePanelsFactories;
             _chatSO = chatSO;
         }

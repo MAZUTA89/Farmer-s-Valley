@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using Scripts.ChatAssistant;
 using Scripts.SO.Chat;
+using OpenAI_API;
 
 namespace Scripts.Installers
 {
@@ -16,6 +17,7 @@ namespace Scripts.Installers
         MassagePanelsFactories _massagePanelsFactories;
         public override void InstallBindings()
         {
+            Debug.Log(new OpenAIAPI().ApiVersion);
             Container.BindInstance(_chatSO).AsSingle();
             Container.BindInstance(_massageSO).AsSingle();
             Container.Bind<ChatService>().AsSingle();
