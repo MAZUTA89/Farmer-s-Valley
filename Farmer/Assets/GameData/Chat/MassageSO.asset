@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008a5a64bbb251c4fbf277c7bc186f08, type: 3}
   m_Name: MassageSO
   m_EditorClassIdentifier: 
-  WriteSpeed: 374
+  WriteSpeed: 85

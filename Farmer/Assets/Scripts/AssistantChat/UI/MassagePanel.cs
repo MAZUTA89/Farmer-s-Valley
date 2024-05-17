@@ -1,4 +1,5 @@
-﻿using Scripts.SO.Chat;
+﻿using PimDeWitte.UnityMainThreadDispatcher;
+using Scripts.SO.Chat;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ namespace Scripts.ChatAssistant
 {
     public class MassagePanel : MonoBehaviour
     {
-        [SerializeField] private RectTransform _rectTransform;    
+        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _childRect;
+        [SerializeField] private RectTransform _textRect;
         [SerializeField] private TextMeshProUGUI _textField;
         public TextMeshProUGUI TextField => _textField;
         public float FontSize => TextField.fontSize;
@@ -22,11 +25,11 @@ namespace Scripts.ChatAssistant
             }
             set
             {
-                _rectTransform.rect.Set(_rectTransform.rect.position.x,
-                    _rectTransform.rect.position.y, value.x, value.y);
+                _rectTransform.sizeDelta = new Vector2(value.x, value.y);
+                _childRect.sizeDelta = new Vector2(_childRect.rect.size.x, value.y);
+                _textRect.sizeDelta = new Vector2(_textRect.rect.size.x, value.y);
             }
         }
-        public (float, float) WidthHeight => (_rectTransform.rect.size.x, _rectTransform.rect.size.y);
 
         MassageSO _massageSO;
 
@@ -36,13 +39,28 @@ namespace Scripts.ChatAssistant
             _massageSO = massageSO;
         }
 
-        public async Task WriteText(string text)
+        public async Task WriteTextAsync(string text)
         {
-            var textField = _textField.text;
+            await Task.Run(() =>
+            {
+                UnityMainThreadDispatcher.Instance().Enqueue(async () =>
+                {
+                    _textField.text = String.Empty;
+                    foreach (var ch in text)
+                    {
+                        _textField.text += ch;
+                        await Task.Delay(_massageSO.WriteSpeed);
+                    }
+                });
+            });
+        }
+        
+        public void WriteText(string text)
+        {
+            _textField.text = String.Empty;
             foreach (var ch in text)
             {
-                textField += ch;
-                await Task.Delay(_massageSO.WriteSpeed);
+                _textField.text += ch;
             }
         }
     }

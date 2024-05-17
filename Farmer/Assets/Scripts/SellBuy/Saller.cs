@@ -9,7 +9,9 @@ namespace Scripts.SellBuy
 {
     public class Seller : MonoBehaviour
     {
-        [SerializeField] private TradePanel _panelObject;
+        [SerializeField] private GameObject _panelObject;
+        [SerializeField] private TradePanel TradePanel;
+        [SerializeField] private GameObject ChatObject;
 
         private void OnMouseDown()
         {
@@ -22,6 +24,18 @@ namespace Scripts.SellBuy
                 _panelObject.gameObject.SetActive(false);
             }
             GameEvents.InvokeTradePanelActionEvent(!_panelObject.gameObject.activeSelf);
+        }
+
+        public void OnTrade()
+        {
+            TradePanel.gameObject.SetActive(true);
+            _panelObject.gameObject.SetActive(false);
+        }
+
+        public void OnTalk()
+        {
+            ChatObject.SetActive(true);
+            _panelObject.gameObject.SetActive(false);
         }
     }
 }
