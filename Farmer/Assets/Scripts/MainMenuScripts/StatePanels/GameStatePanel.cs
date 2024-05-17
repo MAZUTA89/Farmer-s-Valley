@@ -11,8 +11,11 @@ namespace Scripts.MainMenuCode
 {
     public class GameStatePanel : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI NameTextField;
-        public TextMeshProUGUI NameText => NameTextField;
+        [SerializeField] private TextMeshProUGUI _nameTextField;
+        [SerializeField] private TextMeshProUGUI _moneyTextField;
+
+        public TextMeshProUGUI MoneyText =>_moneyTextField;
+        public TextMeshProUGUI NameText => _nameTextField;
 
         GameDataSaveLoader _gameDataSaveLoader;
 

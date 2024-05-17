@@ -24,14 +24,17 @@ namespace Scripts.SellBuy
         ITradeElementFactory _buyElementFactory;
         BuyItemsDatabase _buyItemsDatabase;
         MouseCursor _mouseCursor;
+        InputService _inputService;
 
         [Inject]
         public void Construct(TradeService tradeService,
             PlayerInventory playerInventory,
             FactoriesProvider factoriesProvider,
             BuyItemsDatabase buyItemsDatabase,
-            MouseCursor mouseCursor)
+            MouseCursor mouseCursor,
+            InputService inputService)
         {
+            _inputService = inputService;
             _mouseCursor = mouseCursor;
             _tradeService = tradeService;
             _playerInventory = playerInventory;
@@ -84,7 +87,7 @@ namespace Scripts.SellBuy
 
             var itemsContext = _playerInventory.GetAllItemsContextData();
 
-            DebugItemContextData(itemsContext);
+            //DebugItemContextData(itemsContext);
 
             foreach (ItemContextData contextData in itemsContext)
             {
@@ -128,6 +131,7 @@ namespace Scripts.SellBuy
             ClearElements();
             gameObject.SetActive(false);
             GameEvents.InvokeTradePanelActionEvent(true);
+            _inputService.UnlockGamePlayControls();
         }
         void ClearElements()
         {

@@ -11,7 +11,7 @@ namespace Scripts.SellBuy
     public class Seller : MonoBehaviour
     {
         [SerializeField] private GameObject _panelObject;
-        [SerializeField] private TradePanel TradePanel;
+        [SerializeField] private GameObject TradePanel;
         [SerializeField] private GameObject ChatObject;
         InputService _inputService;
 
@@ -31,14 +31,14 @@ namespace Scripts.SellBuy
             {
                 _panelObject.gameObject.SetActive(false);
             }
-            GameEvents.InvokeTradePanelActionEvent(!_panelObject.gameObject.activeSelf);
         }
 
         public void OnTrade()
         {
             _inputService.LockGamePlayControls();
-            TradePanel.gameObject.SetActive(true);
+            TradePanel.SetActive(true);
             _panelObject.gameObject.SetActive(false);
+            GameEvents.InvokeTradePanelActionEvent(!_panelObject.gameObject.activeSelf);
         }
 
         public void OnTalk()

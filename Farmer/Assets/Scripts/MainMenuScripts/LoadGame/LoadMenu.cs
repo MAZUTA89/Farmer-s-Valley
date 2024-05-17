@@ -48,7 +48,10 @@ namespace Scripts.MainMenuCode
         {
             foreach(string name in names)
             {
-                _gameStatePanelFactory.Create(name, _content);
+
+                GameStatePanel panel = _gameStatePanelFactory.Create(name, _content);
+                panel.MoneyText.text 
+                    = _gameDataSaveLoader.LoadGameState(name).PlayerData.Money.ToString();
             }
         }
 

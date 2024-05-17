@@ -29,7 +29,7 @@ namespace Scripts.PlayerCode
         public Transform ItemAttachBone;
         private Dictionary<InventoryItem, ItemInstance> m_ItemVisualInstance { get; set; } = new();
         InventoryItemDataBase _itemDatabase;
-        PlayerMoney _playerMoney;
+        PlayerMoney _playerMoney { get; set; }
 
         private int _dirXHash = Animator.StringToHash("DirX");
         private int _dirYHash = Animator.StringToHash("DirY");
