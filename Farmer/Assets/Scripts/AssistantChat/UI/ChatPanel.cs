@@ -20,13 +20,16 @@ namespace Scripts.ChatAssistant
         [SerializeField] private Button _enterButton;
         [SerializeField] private GameObject _chatPanel;
 
+        InputService _inputService;
 
         [Inject]
         public void Construct(MassagePanelsFactories massagePanelsFactories,
-            ChatService chatService)
+            ChatService chatService,
+            InputService inputService)
         {
             _massagePanelsFactories = massagePanelsFactories;
             _chatService = chatService;
+            _inputService = inputService;
         }
 
         private void Start()
@@ -119,6 +122,7 @@ namespace Scripts.ChatAssistant
 
         public void OnExit()
         {
+            _inputService.UnlockGamePlayControls();
             _chatPanel.SetActive(false);
         }
 

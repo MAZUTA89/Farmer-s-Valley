@@ -94,7 +94,12 @@ namespace Scripts.Installers
             BindTradeLogic();
             BindSounds();
             BindCursor();
+            BindSeller();
             Container.BindInstance(_factoryProvider).AsSingle();
+        }
+        void BindSeller()
+        {
+            Container.Bind<Seller>().AsSingle();
         }
         void BindCursor()
         {

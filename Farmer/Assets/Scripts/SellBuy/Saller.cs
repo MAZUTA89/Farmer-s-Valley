@@ -3,6 +3,7 @@ using Scripts.SellBuy;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 
 namespace Scripts.SellBuy
@@ -12,6 +13,13 @@ namespace Scripts.SellBuy
         [SerializeField] private GameObject _panelObject;
         [SerializeField] private TradePanel TradePanel;
         [SerializeField] private GameObject ChatObject;
+        InputService _inputService;
+
+        [Inject]
+        public void Construct(InputService inputService)
+        {
+            _inputService = inputService;
+        }
 
         private void OnMouseDown()
         {
@@ -28,12 +36,14 @@ namespace Scripts.SellBuy
 
         public void OnTrade()
         {
+            _inputService.LockGamePlayControls();
             TradePanel.gameObject.SetActive(true);
             _panelObject.gameObject.SetActive(false);
         }
 
         public void OnTalk()
         {
+            _inputService.LockGamePlayControls();
             ChatObject.SetActive(true);
             _panelObject.gameObject.SetActive(false);
         }
