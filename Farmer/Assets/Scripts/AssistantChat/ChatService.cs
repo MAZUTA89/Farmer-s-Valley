@@ -11,17 +11,15 @@ namespace Scripts.ChatAssistant
     
     public class ChatService
     {
-        MassagePanelsFactories _massagePanelsFactories;
         ChatSO _chatSO;
         OpenAIAPI _api;
         APIAuthentication _authentication;
 
         Conversation _chat;
         
-        public ChatService(MassagePanelsFactories massagePanelsFactories,
+        public ChatService(
             ChatSO chatSO)
         {
-            _massagePanelsFactories = massagePanelsFactories;
             _chatSO = chatSO;
             _authentication = new APIAuthentication(_chatSO.APIKey);
 

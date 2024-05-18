@@ -1,4 +1,5 @@
 ﻿using PimDeWitte.UnityMainThreadDispatcher;
+using Scripts.SO.Chat;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Scripts.ChatAssistant
 {
     public class ChatPanel : MonoBehaviour
     {
+        [SerializeField] private string Name;
         Transform _container;
         MassagePanelsFactories _massagePanelsFactories;
         ChatService _chatService;
@@ -21,19 +23,30 @@ namespace Scripts.ChatAssistant
         [SerializeField] private GameObject _chatPanel;
 
         InputService _inputService;
+        ChatSODataBase _chatSOData;
 
         [Inject]
         public void Construct(MassagePanelsFactories massagePanelsFactories,
-            ChatService chatService,
+            ChatSODataBase chatSODataBase,
             InputService inputService)
         {
+            _chatSOData = chatSODataBase;
             _massagePanelsFactories = massagePanelsFactories;
-            _chatService = chatService;
             _inputService = inputService;
         }
 
         private void Start()
         {
+            ChatSO chatSO = _chatSOData.GetItemByName(Name);
+            if(chatSO == null)
+            {
+                Debug.LogError($"Cannot get chat SO Object by name {Name}");
+                Destroy(gameObject);
+            }
+            else
+            {
+                _chatService = new ChatService(chatSO);
+            }
             _container = gameObject.transform;
         }
 

@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Scripts.InventoryCode;
+using System;
 using UnityEngine;
 
 namespace Scripts.SO.Chat
 {
     [CreateAssetMenu(fileName ="ChatSO", menuName = "SO/ChatAssistant/ChatSO")]
-    public class ChatSO : ScriptableObject
+    public class ChatSO : ScriptableObject, IDataBaseItem
     {
+        public string Name;
         public string APIKey;
         public string Url;
         public string ModelId;
@@ -15,5 +17,7 @@ namespace Scripts.SO.Chat
         [Header("Request parameters")]
         [Range(0f, 10f)]
         public double Temperature;
+
+        public string UniqueName => Name;
     }
 }

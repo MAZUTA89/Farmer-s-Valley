@@ -4,12 +4,13 @@ using Zenject;
 using UnityEngine;
 using Scripts.ChatAssistant;
 using Scripts.SO.Chat;
+using Scripts.InventoryCode;
 
 namespace Scripts.Installers
 {
     public class ChatAssistantInstaller : MonoInstaller
     {
-        [SerializeField] private ChatSO _chatSO;
+        [SerializeField] private ChatSODataBase _chatSODataBase;
         [SerializeField] private MassageSO _massageSO;
         [SerializeField] private MassagePanel _assistantMassagePanel;
         [SerializeField] private MassagePanel _playerMassagePanel;
@@ -17,19 +18,14 @@ namespace Scripts.Installers
         public override void InstallBindings()
         {
             _massagePanelsFactories = new MassagePanelsFactories();
-            Container.BindInstance(_chatSO).AsSingle();
+            _chatSODataBase.Init();
+            Container.BindInstance(_chatSODataBase).AsSingle();
             Container.BindInstance(_massageSO).AsSingle();
 
             BindFactories();
-            BindChatService();
             BindPanels();
         }
-        void BindChatService()
-        {
-            ChatService chatService = new ChatService(_massagePanelsFactories,
-                _chatSO);
-            Container.BindInstance(chatService).AsSingle();
-        }
+        
         void BindFactories()
         {
             _massagePanelsFactories.Add(MassagePanelType.Player, new MassagePanelFactory(_playerMassagePanel,
