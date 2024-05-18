@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MouseIcon 1
   m_EditorClassIdentifier: 
   CursorType: 1
-  CursorIcon: {fileID: 2800000, guid: 0eea54d4450089e4abeec9ce3b7e2d88, type: 3}
+  CursorIcon: {fileID: 2800000, guid: 87925112ffdd71c4fa7643a786f32bb6, type: 3}
