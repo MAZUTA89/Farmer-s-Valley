@@ -98,7 +98,6 @@ namespace Scripts.GameMenuCode
             
             _gameDataSaveLoader.SaveGameState(_gameDataState);
 
-            GameEvents.InvokeOnSaveSettingsEvent();
             _settingsMenu.Save();
             SceneManager.LoadScene(GameConfiguration.MainMenuSceneName);
         }

@@ -8,7 +8,7 @@ namespace Scripts.FarmGameEvents
         public static Action OnExitTheGameEvent;
         public static Action OnSellItemEvent;
         public static Action<bool> OnTradePanelOpenClose { get; set; }
-        public static Action OnSaveSettingsEvent;
+        public static Action OnSaveSettingsEvent {  get; set; }
         public static Action<string, bool> OnPerformInteractiveRebindEvent;
        
         public static void InvokeExitTheGameEvent()

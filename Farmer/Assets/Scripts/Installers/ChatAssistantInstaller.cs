@@ -37,7 +37,9 @@ namespace Scripts.Installers
         }
         void BindPanels()
         {
-            Container.Bind<ChatPanel>().AsSingle();
+            Container.Bind<ChatPanel>().
+                FromComponentInHierarchy()
+                .AsTransient();
             Container.Bind<MassagePanel>().AsTransient();
         }
     }

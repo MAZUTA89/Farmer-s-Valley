@@ -48,6 +48,7 @@ namespace Scripts.ChatAssistant
                 _chatService = new ChatService(chatSO);
             }
             _container = gameObject.transform;
+            //gameObject.SetActive(false);
         }
 
         public async Task CreateMassagePanelAsync(IMassagePanelFactory massagePanelFactory, string text)

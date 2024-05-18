@@ -21,6 +21,7 @@ using Newtonsoft.Json.Bson;
 using Scripts.Inventory;
 using Scripts.Sounds;
 using Scripts.MouseHandle;
+using Scripts.NextLevel;
 
 namespace Scripts.Installers
 {
@@ -95,6 +96,9 @@ namespace Scripts.Installers
             BindSounds();
             BindCursor();
             BindSeller();
+            Container.Bind<NextLevel.NextLevel>()
+                .FromComponentInHierarchy()
+                .AsSingle();
             Container.BindInstance(_factoryProvider).AsSingle();
         }
         void BindSeller()

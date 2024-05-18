@@ -52,15 +52,17 @@ namespace Scripts.Sounds
         }
         private void OnEnable()
         {
-            _settingsMenu.AddListenerAtMainVolume(OnMainVolumeValueChange);
-            _settingsMenu.AddListenerAtMusicVolume(OnMusicVolumeValueChange);
-            _settingsMenu.AddListenerAtSFXVolume(OnSFXVolumeValueChange);
+            if (!_settingsMenu.Controls) return;
+            _settingsMenu?.AddListenerAtMainVolume(OnMainVolumeValueChange);
+            _settingsMenu?.AddListenerAtMusicVolume(OnMusicVolumeValueChange);
+            _settingsMenu?.AddListenerAtSFXVolume(OnSFXVolumeValueChange);
         }
         private void OnDisable()
         {
-            _settingsMenu.RemoveListenerAtMainVolume(OnMainVolumeValueChange);
-            _settingsMenu.RemoveListenerAtMusicVolume(OnMusicVolumeValueChange);
-            _settingsMenu.RemoveListenerAtSFXVolume(OnSFXVolumeValueChange);
+            if (!_settingsMenu.Controls) return;
+            _settingsMenu?.RemoveListenerAtMainVolume(OnMainVolumeValueChange);
+            _settingsMenu?.RemoveListenerAtMusicVolume(OnMusicVolumeValueChange);
+            _settingsMenu?.RemoveListenerAtSFXVolume(OnSFXVolumeValueChange);
         }
 
         private void Start()
@@ -94,28 +96,6 @@ namespace Scripts.Sounds
             _UISource.Play();
         }
 
-        public void Save()
-        {
-            var file = Application.persistentDataPath + "/sound_settings.json";
-            File.WriteAllText(file, JsonUtility.ToJson(Sound));
-        }
-
-        public void Load()
-        {
-            var file = Application.persistentDataPath + "/sound_settings.json";
-            if (File.Exists(file))
-            {
-                JsonUtility.FromJsonOverwrite(File.ReadAllText(file), Sound);
-                UpdateVolume();
-            }
-            else
-            {
-                Sound.MainVolume = 1.0f;
-                Sound.BGMVolume = 1.0f;
-                Sound.SFXVolume = 1.0f;
-                UpdateVolume();
-            }
-        }
         void OnMainVolumeValueChange(float value)
         {
             _mixer.SetFloat("MainVolume", Mathf.Log10(Mathf.Max(0.0001f, value)) * 30.0f);

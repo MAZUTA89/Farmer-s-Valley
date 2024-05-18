@@ -35,7 +35,7 @@ namespace Scripts.SellBuy
 
         public void OnTrade()
         {
-            _inputService.LockGamePlayControls();
+            _inputService?.LockGamePlayControls();
             TradePanel.SetActive(true);
             _panelObject.gameObject.SetActive(false);
             GameEvents.InvokeTradePanelActionEvent(!_panelObject.gameObject.activeSelf);
@@ -43,7 +43,7 @@ namespace Scripts.SellBuy
 
         public void OnTalk()
         {
-            _inputService.LockGamePlayControls();
+            _inputService?.LockGamePlayControls();
             ChatObject.SetActive(true);
             _panelObject.gameObject.SetActive(false);
         }

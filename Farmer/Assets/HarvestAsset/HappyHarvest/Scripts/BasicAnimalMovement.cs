@@ -1,6 +1,8 @@
+using Scripts.Sounds;
 using System;
 using Template2DCommon;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 
@@ -34,6 +36,13 @@ namespace HappyHarvest
         private Animator m_Animator;
         private int SpeedHash = Animator.StringToHash("Speed");
 
+        SoundService _soundService;
+        [Inject]
+        public void Construct(SoundService soundService)
+        {
+            _soundService = soundService;
+        }
+
         private void Start()
         {
             if (MaxIdleTime <= MinIdleTime)
@@ -52,7 +61,7 @@ namespace HappyHarvest
             m_SoundTimer -= Time.deltaTime;
             if (m_SoundTimer <= 0.0f)
             {
-                SoundManager.Instance.PlaySFXAt(transform.position, AnimalSound[Random.Range(0, AnimalSound.Length)],
+                _soundService.PlaySFXAt(transform.position, AnimalSound[Random.Range(0, AnimalSound.Length)],
                     true);
                 m_SoundTimer = Random.Range(MinRandomSoundTime, MaxRandomSoundTime);
             }

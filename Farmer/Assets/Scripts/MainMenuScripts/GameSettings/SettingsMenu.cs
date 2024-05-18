@@ -14,17 +14,22 @@ namespace Scripts.MainMenuCode
         SettingsPanel _settingsPanel;
         SettingsDataSaveLoader _settingSaveLoader;
         InputService _inputService;
+        public bool Controls;
 
         public SettingsMenu(SettingsPanel settingsPanel,
             InputService inputService,
             bool initializeControls)
         {
-            _inputService = inputService;
-            _settingsPanel = settingsPanel;
-            _settingSaveLoader = new SettingsDataSaveLoader();
-            _settingsPanel.gameObject.SetActive(false);
-            _settingsPanel.InitializeDropDownResolution();
-            _settingsPanel.InitializeToggleFullScreen();
+            if (initializeControls)
+            {
+                _inputService = inputService;
+                _settingsPanel = settingsPanel;
+                _settingSaveLoader = new SettingsDataSaveLoader();
+                _settingsPanel.gameObject.SetActive(false);
+                _settingsPanel.InitializeDropDownResolution();
+                _settingsPanel.InitializeToggleFullScreen();
+            }
+            Controls = initializeControls;
 
         }
 

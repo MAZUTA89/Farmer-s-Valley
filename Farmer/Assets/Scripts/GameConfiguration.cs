@@ -8,6 +8,6 @@ namespace Assets.Scripts
         public static readonly string SaveLevelNamesKeyName = "LevelsKey";
         public static readonly string SaveEditorGameStateName = "Editor mode";
         public static readonly string SaveSettingsKeyName = "SettingsKey";
-        public static readonly string NextLevelName = "Farm_Outdoor";
+        public static readonly string NextLevelName = "NextLevel";
     }
 }
