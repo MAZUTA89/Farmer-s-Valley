@@ -28,7 +28,7 @@ namespace HappyHarvest
             public Light2D ReferenceLight;
             public float NormalizedTime;
         }
-        
+
         [Tooltip("The light of which the shape will be changed according to the defined frames")]
         public Light2D TargetLight;
         public LightFrame[] LightFrames;

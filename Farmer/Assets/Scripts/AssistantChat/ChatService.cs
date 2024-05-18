@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Scripts.ChatAssistant
 {
     
-    public class ChatService : MonoBehaviour
+    public class ChatService
     {
         MassagePanelsFactories _massagePanelsFactories;
         ChatSO _chatSO;
