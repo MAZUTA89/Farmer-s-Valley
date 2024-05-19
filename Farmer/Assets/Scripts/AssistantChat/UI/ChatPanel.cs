@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using SharpToken;
+using Assets.Scripts.GameSO.Chat;
 
 namespace Scripts.ChatAssistant
 {
@@ -16,13 +17,18 @@ namespace Scripts.ChatAssistant
         [SerializeField] private string Name;
         Transform _container;
         MassagePanelsFactories _massagePanelsFactories;
+
         ChatService _chatService;
+        ChatContextOptimizer _chatContextOptimizer;
+
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] private Button _enterButton;
+        [SerializeField] private Button _resetButton;
         [SerializeField] private GameObject _chatPanel;
 
         InputService _inputService;
         ChatSODataBase _chatSOData;
+
 
         [Inject]
         public void Construct(MassagePanelsFactories massagePanelsFactories,
@@ -37,6 +43,7 @@ namespace Scripts.ChatAssistant
         private void Start()
         {
             ChatSO chatSO = _chatSOData.GetItemByName(Name);
+            
             if(chatSO == null)
             {
                 Debug.LogError($"Cannot get chat SO Object by name {Name}");
@@ -45,10 +52,21 @@ namespace Scripts.ChatAssistant
             else
             {
                 _chatService = new ChatService(chatSO);
+
+                _chatContextOptimizer = new ChatContextOptimizer(chatSO.EncodingModelID,
+                    chatSO.ResetContextSize);
+
+                if(_chatContextOptimizer.TryInitialize() == false)
+                {
+                    Debug.LogError($"Cannot initialize chat context optimizer by name {Name}");
+                    Destroy(gameObject);
+                }
             }
             _container = gameObject.transform;
-            //gameObject.SetActive(false);
+            _resetButton.interactable = false;
         }
+
+        
 
         public async Task CreateMassagePanelAsync(IMassagePanelFactory massagePanelFactory, string text)
         {
@@ -95,10 +113,16 @@ namespace Scripts.ChatAssistant
                 _chatService.AddUserInput(_inputField.text);
 
                 _inputField.text = String.Empty;
-
                 await ConstructResponse();
             }
 
+        }
+        public void OnReset()
+        {
+            _chatService.ClearChat();
+            ClearMassagePanels();
+            _enterButton.interactable = true;
+            _resetButton.interactable = false;
         }
 
         async Task ConstructResponse()
@@ -126,6 +150,12 @@ namespace Scripts.ChatAssistant
                                {
                                    _enterButton.interactable = true;
                                    Debug.Log("End cunstruct response!");
+
+                                   if(_chatContextOptimizer.IsNeedReset(_chatService.GetContextText()))
+                                   {
+                                       _enterButton.interactable = false;
+                                       _resetButton.interactable = true;
+                                   }
                                });
                            });
                     }
@@ -137,6 +167,14 @@ namespace Scripts.ChatAssistant
         {
             _inputService.UnlockGamePlayControls();
             _chatPanel.SetActive(false);
+        }
+
+        void ClearMassagePanels()
+        {
+            foreach(Transform massagePanel in _container)
+            {
+                Destroy(massagePanel.gameObject);
+            }
         }
 
     }

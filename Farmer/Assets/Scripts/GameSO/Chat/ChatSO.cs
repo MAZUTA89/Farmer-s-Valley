@@ -14,9 +14,17 @@ namespace Scripts.SO.Chat
         [Multiline]
         public string SystemMassage;
         [Space]
-        [Header("Request parameters")]
-        [Range(0f, 10f)]
+        [Header("Request parameters:")]
+        [Range(0f, 1f)]
         public double Temperature;
+        [Header("Сколько токенов использовать для ответа")]
+        [Range(0, 200)]
+        public int MaxTokens;
+        [Header("Название модели токенизатора")]
+        public string EncodingModelID;
+        [Header("Величина активного сеанса для очистки")]
+        [Range(1500, 20000)]
+        public int ResetContextSize;
 
         public string UniqueName => Name;
     }

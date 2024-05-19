@@ -5,6 +5,10 @@ using Zenject;
 using OpenAI_API.Chat;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using System.Linq;
+using System.Text;
+using System.Runtime.InteropServices;
 
 namespace Scripts.ChatAssistant
 {
@@ -16,6 +20,8 @@ namespace Scripts.ChatAssistant
         APIAuthentication _authentication;
 
         Conversation _chat;
+
+        StringBuilder _massagesTextBuilder;
         
         public ChatService(
             ChatSO chatSO)
@@ -28,6 +34,10 @@ namespace Scripts.ChatAssistant
             _chat = _api.Chat.CreateConversation();
             _chat.Model.ModelID = _chatSO.ModelId;
             _chat.RequestParameters.Temperature = _chatSO.Temperature;
+            _chat.RequestParameters.MaxTokens = _chatSO.MaxTokens;
+
+            _massagesTextBuilder = new StringBuilder();
+
             AddSystemInput(_chatSO.SystemMassage);
         }
 
@@ -44,6 +54,29 @@ namespace Scripts.ChatAssistant
         public async Task<string> GetResponseAsync()
         {
             return await _chat.GetResponseFromChatbotAsync();
+        }
+        public string GetContextText()
+        {
+            _massagesTextBuilder.Clear();
+
+            foreach (var massage in _chat.Messages)
+            {
+                _massagesTextBuilder.Append(massage.TextContent);
+            }
+
+            return _massagesTextBuilder.ToString();
+        }
+        public void ClearChat()
+        {
+            var massages = _chat.Messages;
+            for (int i = 0; i < massages.Count; i++)
+            {
+                if (massages[i].Role.ToString() == "user" ||
+                    massages[i].Role.ToString() == "assistant")
+                {
+                    massages.Remove(massages[i]);
+                }
+            }
         }
     }
 }
