@@ -2,7 +2,6 @@
 using Scripts.GameMenuCode;
 using Scripts.InteractableObjects;
 using Scripts.InventoryCode;
-using Scripts.ItemUsage;
 using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
@@ -232,12 +231,8 @@ namespace Scripts.Installers
 
             Container.BindInstance(placementMapsContainer).AsSingle();
 
-            Container.Bind<ItemApplierTools>().AsSingle();
             Container.Bind<PlacementItem>().To<Chest>().AsTransient();
             Container.Bind<PlacementItem>().To<Seed>().AsTransient();
-
-            Container.Bind<MapClicker>().AsSingle();
-            Container.Bind<ItemApplier>().AsSingle();
         }
         void BindChest()
         {

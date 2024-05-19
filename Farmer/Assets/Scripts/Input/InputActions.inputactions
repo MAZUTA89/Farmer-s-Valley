@@ -15,18 +15,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LBK",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "210e6cfe-261e-4e9c-b326-6c75ec7f0f4f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RBK",
-                    "type": "Button",
-                    "id": "0c965d55-962e-44b3-8c36-65d6ad0be7ad",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -96,18 +87,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LBK",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d359f161-713b-41f5-85af-d776ad3eb802",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RBK",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -118,7 +98,7 @@
             "id": "a3b1922f-5963-47f4-8882-bafac1824f51",
             "actions": [
                 {
-                    "name": "ChooseFirstCell",
+                    "name": "Choose first cell",
                     "type": "Button",
                     "id": "38abc9b6-fd9e-464d-8353-d380ac2aa0c3",
                     "expectedControlType": "Button",
@@ -127,7 +107,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChooseSecondCell",
+                    "name": "Choose second cell",
                     "type": "Button",
                     "id": "0c9037d8-7a3a-41c3-92fd-185e6770df86",
                     "expectedControlType": "Button",
@@ -136,7 +116,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChooseThirdCell",
+                    "name": "Choose third cell",
                     "type": "Button",
                     "id": "1e151e78-0916-424f-b807-02d42c081bcc",
                     "expectedControlType": "Button",
@@ -145,9 +125,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChooseFourthCell",
+                    "name": "Choose fourth cell",
                     "type": "Button",
                     "id": "8611d126-3241-4df4-bea6-1f358cf1bff0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Open/Close back pack",
+                    "type": "Button",
+                    "id": "c7f3c3b0-61ba-4370-9cf4-7fd504418835",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -162,7 +151,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChooseFirstCell",
+                    "action": "Choose first cell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -173,7 +162,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChooseSecondCell",
+                    "action": "Choose second cell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -184,7 +173,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChooseThirdCell",
+                    "action": "Choose third cell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -195,7 +184,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChooseFourthCell",
+                    "action": "Choose fourth cell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "757d0e66-fe8c-49f2-9796-92c5b12494c3",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open/Close back pack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -206,7 +206,7 @@
             "id": "119f7e97-4665-4427-bf7f-668e7be427c0",
             "actions": [
                 {
-                    "name": "OpenCloseGameMenu",
+                    "name": "Open/Close game menu",
                     "type": "Button",
                     "id": "29ce6929-1f59-4865-85d9-bdf2a1f80d9c",
                     "expectedControlType": "Button",
@@ -223,7 +223,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenCloseGameMenu",
+                    "action": "Open/Close game menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
-namespace Assets.Scripts.Inventory
+namespace Scripts.InventoryCode
 {
     public class Pack : MonoBehaviour
     {
         [SerializeField] GameObject InventoryObject;
 
+        InputService _inputService;
+
+        [Inject]
+        public void Construct(InputService inputService)
+        {
+            _inputService = inputService;
+        }
+
+
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (_inputService.IsOpenCloseBackPack())
             {
                 if (InventoryObject.activeSelf)
                 {

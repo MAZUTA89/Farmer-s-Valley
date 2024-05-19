@@ -77,6 +77,10 @@ namespace Scripts.Installers
                 .To<ActiveInventory>()
                 .FromComponentInHierarchy()
                 .AsSingle();
+
+            Container.Bind<Pack>()
+                .FromComponentInHierarchy()
+                .AsSingle();
         }
         void BindFactories()
         {

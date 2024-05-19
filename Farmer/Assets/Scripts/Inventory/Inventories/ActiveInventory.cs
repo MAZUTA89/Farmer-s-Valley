@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
-using Scripts.ItemUsage;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using Scripts.Sounds;
@@ -21,7 +20,7 @@ namespace Scripts.InventoryCode
         MarkerController _markerController;
 
         [Inject]
-        public void ConstructActive(InputService inputService, ItemApplier itemApplier,
+        public void ConstructActive(InputService inputService, 
             [Inject(Id = "ActiveInventoryInfo")] InventoryInfo inventoryInfo,
             MarkerController markerController,
             Player player,

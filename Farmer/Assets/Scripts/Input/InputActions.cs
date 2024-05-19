@@ -37,18 +37,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""LBK"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""210e6cfe-261e-4e9c-b326-6c75ec7f0f4f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RBK"",
-                    ""type"": ""Button"",
-                    ""id"": ""0c965d55-962e-44b3-8c36-65d6ad0be7ad"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -118,18 +109,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LBK"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d359f161-713b-41f5-85af-d776ad3eb802"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RBK"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -140,7 +120,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""a3b1922f-5963-47f4-8882-bafac1824f51"",
             ""actions"": [
                 {
-                    ""name"": ""ChooseFirstCell"",
+                    ""name"": ""Choose first cell"",
                     ""type"": ""Button"",
                     ""id"": ""38abc9b6-fd9e-464d-8353-d380ac2aa0c3"",
                     ""expectedControlType"": ""Button"",
@@ -149,7 +129,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChooseSecondCell"",
+                    ""name"": ""Choose second cell"",
                     ""type"": ""Button"",
                     ""id"": ""0c9037d8-7a3a-41c3-92fd-185e6770df86"",
                     ""expectedControlType"": ""Button"",
@@ -158,7 +138,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChooseThirdCell"",
+                    ""name"": ""Choose third cell"",
                     ""type"": ""Button"",
                     ""id"": ""1e151e78-0916-424f-b807-02d42c081bcc"",
                     ""expectedControlType"": ""Button"",
@@ -167,9 +147,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChooseFourthCell"",
+                    ""name"": ""Choose fourth cell"",
                     ""type"": ""Button"",
                     ""id"": ""8611d126-3241-4df4-bea6-1f358cf1bff0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Open/Close back pack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7f3c3b0-61ba-4370-9cf4-7fd504418835"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -184,7 +173,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChooseFirstCell"",
+                    ""action"": ""Choose first cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -195,7 +184,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChooseSecondCell"",
+                    ""action"": ""Choose second cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -206,7 +195,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChooseThirdCell"",
+                    ""action"": ""Choose third cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -217,7 +206,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChooseFourthCell"",
+                    ""action"": ""Choose fourth cell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""757d0e66-fe8c-49f2-9796-92c5b12494c3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open/Close back pack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -228,7 +228,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""119f7e97-4665-4427-bf7f-668e7be427c0"",
             ""actions"": [
                 {
-                    ""name"": ""OpenCloseGameMenu"",
+                    ""name"": ""Open/Close game menu"",
                     ""type"": ""Button"",
                     ""id"": ""29ce6929-1f59-4865-85d9-bdf2a1f80d9c"",
                     ""expectedControlType"": ""Button"",
@@ -245,7 +245,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""OpenCloseGameMenu"",
+                    ""action"": ""Open/Close game menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -274,17 +274,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // PlayerMap
         m_PlayerMap = asset.FindActionMap("PlayerMap", throwIfNotFound: true);
         m_PlayerMap_Movement = m_PlayerMap.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerMap_LBK = m_PlayerMap.FindAction("LBK", throwIfNotFound: true);
-        m_PlayerMap_RBK = m_PlayerMap.FindAction("RBK", throwIfNotFound: true);
+        m_PlayerMap_Interact = m_PlayerMap.FindAction("Interact", throwIfNotFound: true);
         // InventoryMap
         m_InventoryMap = asset.FindActionMap("InventoryMap", throwIfNotFound: true);
-        m_InventoryMap_ChooseFirstCell = m_InventoryMap.FindAction("ChooseFirstCell", throwIfNotFound: true);
-        m_InventoryMap_ChooseSecondCell = m_InventoryMap.FindAction("ChooseSecondCell", throwIfNotFound: true);
-        m_InventoryMap_ChooseThirdCell = m_InventoryMap.FindAction("ChooseThirdCell", throwIfNotFound: true);
-        m_InventoryMap_ChooseFourthCell = m_InventoryMap.FindAction("ChooseFourthCell", throwIfNotFound: true);
+        m_InventoryMap_Choosefirstcell = m_InventoryMap.FindAction("Choose first cell", throwIfNotFound: true);
+        m_InventoryMap_Choosesecondcell = m_InventoryMap.FindAction("Choose second cell", throwIfNotFound: true);
+        m_InventoryMap_Choosethirdcell = m_InventoryMap.FindAction("Choose third cell", throwIfNotFound: true);
+        m_InventoryMap_Choosefourthcell = m_InventoryMap.FindAction("Choose fourth cell", throwIfNotFound: true);
+        m_InventoryMap_OpenClosebackpack = m_InventoryMap.FindAction("Open/Close back pack", throwIfNotFound: true);
         // MenuActions
         m_MenuActions = asset.FindActionMap("MenuActions", throwIfNotFound: true);
-        m_MenuActions_OpenCloseGameMenu = m_MenuActions.FindAction("OpenCloseGameMenu", throwIfNotFound: true);
+        m_MenuActions_OpenClosegamemenu = m_MenuActions.FindAction("Open/Close game menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -347,15 +347,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMap;
     private List<IPlayerMapActions> m_PlayerMapActionsCallbackInterfaces = new List<IPlayerMapActions>();
     private readonly InputAction m_PlayerMap_Movement;
-    private readonly InputAction m_PlayerMap_LBK;
-    private readonly InputAction m_PlayerMap_RBK;
+    private readonly InputAction m_PlayerMap_Interact;
     public struct PlayerMapActions
     {
         private @InputActions m_Wrapper;
         public PlayerMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMap_Movement;
-        public InputAction @LBK => m_Wrapper.m_PlayerMap_LBK;
-        public InputAction @RBK => m_Wrapper.m_PlayerMap_RBK;
+        public InputAction @Interact => m_Wrapper.m_PlayerMap_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -368,12 +366,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @LBK.started += instance.OnLBK;
-            @LBK.performed += instance.OnLBK;
-            @LBK.canceled += instance.OnLBK;
-            @RBK.started += instance.OnRBK;
-            @RBK.performed += instance.OnRBK;
-            @RBK.canceled += instance.OnRBK;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerMapActions instance)
@@ -381,12 +376,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @LBK.started -= instance.OnLBK;
-            @LBK.performed -= instance.OnLBK;
-            @LBK.canceled -= instance.OnLBK;
-            @RBK.started -= instance.OnRBK;
-            @RBK.performed -= instance.OnRBK;
-            @RBK.canceled -= instance.OnRBK;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerMapActions instance)
@@ -408,18 +400,20 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // InventoryMap
     private readonly InputActionMap m_InventoryMap;
     private List<IInventoryMapActions> m_InventoryMapActionsCallbackInterfaces = new List<IInventoryMapActions>();
-    private readonly InputAction m_InventoryMap_ChooseFirstCell;
-    private readonly InputAction m_InventoryMap_ChooseSecondCell;
-    private readonly InputAction m_InventoryMap_ChooseThirdCell;
-    private readonly InputAction m_InventoryMap_ChooseFourthCell;
+    private readonly InputAction m_InventoryMap_Choosefirstcell;
+    private readonly InputAction m_InventoryMap_Choosesecondcell;
+    private readonly InputAction m_InventoryMap_Choosethirdcell;
+    private readonly InputAction m_InventoryMap_Choosefourthcell;
+    private readonly InputAction m_InventoryMap_OpenClosebackpack;
     public struct InventoryMapActions
     {
         private @InputActions m_Wrapper;
         public InventoryMapActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChooseFirstCell => m_Wrapper.m_InventoryMap_ChooseFirstCell;
-        public InputAction @ChooseSecondCell => m_Wrapper.m_InventoryMap_ChooseSecondCell;
-        public InputAction @ChooseThirdCell => m_Wrapper.m_InventoryMap_ChooseThirdCell;
-        public InputAction @ChooseFourthCell => m_Wrapper.m_InventoryMap_ChooseFourthCell;
+        public InputAction @Choosefirstcell => m_Wrapper.m_InventoryMap_Choosefirstcell;
+        public InputAction @Choosesecondcell => m_Wrapper.m_InventoryMap_Choosesecondcell;
+        public InputAction @Choosethirdcell => m_Wrapper.m_InventoryMap_Choosethirdcell;
+        public InputAction @Choosefourthcell => m_Wrapper.m_InventoryMap_Choosefourthcell;
+        public InputAction @OpenClosebackpack => m_Wrapper.m_InventoryMap_OpenClosebackpack;
         public InputActionMap Get() { return m_Wrapper.m_InventoryMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -429,34 +423,40 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_InventoryMapActionsCallbackInterfaces.Add(instance);
-            @ChooseFirstCell.started += instance.OnChooseFirstCell;
-            @ChooseFirstCell.performed += instance.OnChooseFirstCell;
-            @ChooseFirstCell.canceled += instance.OnChooseFirstCell;
-            @ChooseSecondCell.started += instance.OnChooseSecondCell;
-            @ChooseSecondCell.performed += instance.OnChooseSecondCell;
-            @ChooseSecondCell.canceled += instance.OnChooseSecondCell;
-            @ChooseThirdCell.started += instance.OnChooseThirdCell;
-            @ChooseThirdCell.performed += instance.OnChooseThirdCell;
-            @ChooseThirdCell.canceled += instance.OnChooseThirdCell;
-            @ChooseFourthCell.started += instance.OnChooseFourthCell;
-            @ChooseFourthCell.performed += instance.OnChooseFourthCell;
-            @ChooseFourthCell.canceled += instance.OnChooseFourthCell;
+            @Choosefirstcell.started += instance.OnChoosefirstcell;
+            @Choosefirstcell.performed += instance.OnChoosefirstcell;
+            @Choosefirstcell.canceled += instance.OnChoosefirstcell;
+            @Choosesecondcell.started += instance.OnChoosesecondcell;
+            @Choosesecondcell.performed += instance.OnChoosesecondcell;
+            @Choosesecondcell.canceled += instance.OnChoosesecondcell;
+            @Choosethirdcell.started += instance.OnChoosethirdcell;
+            @Choosethirdcell.performed += instance.OnChoosethirdcell;
+            @Choosethirdcell.canceled += instance.OnChoosethirdcell;
+            @Choosefourthcell.started += instance.OnChoosefourthcell;
+            @Choosefourthcell.performed += instance.OnChoosefourthcell;
+            @Choosefourthcell.canceled += instance.OnChoosefourthcell;
+            @OpenClosebackpack.started += instance.OnOpenClosebackpack;
+            @OpenClosebackpack.performed += instance.OnOpenClosebackpack;
+            @OpenClosebackpack.canceled += instance.OnOpenClosebackpack;
         }
 
         private void UnregisterCallbacks(IInventoryMapActions instance)
         {
-            @ChooseFirstCell.started -= instance.OnChooseFirstCell;
-            @ChooseFirstCell.performed -= instance.OnChooseFirstCell;
-            @ChooseFirstCell.canceled -= instance.OnChooseFirstCell;
-            @ChooseSecondCell.started -= instance.OnChooseSecondCell;
-            @ChooseSecondCell.performed -= instance.OnChooseSecondCell;
-            @ChooseSecondCell.canceled -= instance.OnChooseSecondCell;
-            @ChooseThirdCell.started -= instance.OnChooseThirdCell;
-            @ChooseThirdCell.performed -= instance.OnChooseThirdCell;
-            @ChooseThirdCell.canceled -= instance.OnChooseThirdCell;
-            @ChooseFourthCell.started -= instance.OnChooseFourthCell;
-            @ChooseFourthCell.performed -= instance.OnChooseFourthCell;
-            @ChooseFourthCell.canceled -= instance.OnChooseFourthCell;
+            @Choosefirstcell.started -= instance.OnChoosefirstcell;
+            @Choosefirstcell.performed -= instance.OnChoosefirstcell;
+            @Choosefirstcell.canceled -= instance.OnChoosefirstcell;
+            @Choosesecondcell.started -= instance.OnChoosesecondcell;
+            @Choosesecondcell.performed -= instance.OnChoosesecondcell;
+            @Choosesecondcell.canceled -= instance.OnChoosesecondcell;
+            @Choosethirdcell.started -= instance.OnChoosethirdcell;
+            @Choosethirdcell.performed -= instance.OnChoosethirdcell;
+            @Choosethirdcell.canceled -= instance.OnChoosethirdcell;
+            @Choosefourthcell.started -= instance.OnChoosefourthcell;
+            @Choosefourthcell.performed -= instance.OnChoosefourthcell;
+            @Choosefourthcell.canceled -= instance.OnChoosefourthcell;
+            @OpenClosebackpack.started -= instance.OnOpenClosebackpack;
+            @OpenClosebackpack.performed -= instance.OnOpenClosebackpack;
+            @OpenClosebackpack.canceled -= instance.OnOpenClosebackpack;
         }
 
         public void RemoveCallbacks(IInventoryMapActions instance)
@@ -478,12 +478,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // MenuActions
     private readonly InputActionMap m_MenuActions;
     private List<IMenuActionsActions> m_MenuActionsActionsCallbackInterfaces = new List<IMenuActionsActions>();
-    private readonly InputAction m_MenuActions_OpenCloseGameMenu;
+    private readonly InputAction m_MenuActions_OpenClosegamemenu;
     public struct MenuActionsActions
     {
         private @InputActions m_Wrapper;
         public MenuActionsActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @OpenCloseGameMenu => m_Wrapper.m_MenuActions_OpenCloseGameMenu;
+        public InputAction @OpenClosegamemenu => m_Wrapper.m_MenuActions_OpenClosegamemenu;
         public InputActionMap Get() { return m_Wrapper.m_MenuActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,16 +493,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MenuActionsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MenuActionsActionsCallbackInterfaces.Add(instance);
-            @OpenCloseGameMenu.started += instance.OnOpenCloseGameMenu;
-            @OpenCloseGameMenu.performed += instance.OnOpenCloseGameMenu;
-            @OpenCloseGameMenu.canceled += instance.OnOpenCloseGameMenu;
+            @OpenClosegamemenu.started += instance.OnOpenClosegamemenu;
+            @OpenClosegamemenu.performed += instance.OnOpenClosegamemenu;
+            @OpenClosegamemenu.canceled += instance.OnOpenClosegamemenu;
         }
 
         private void UnregisterCallbacks(IMenuActionsActions instance)
         {
-            @OpenCloseGameMenu.started -= instance.OnOpenCloseGameMenu;
-            @OpenCloseGameMenu.performed -= instance.OnOpenCloseGameMenu;
-            @OpenCloseGameMenu.canceled -= instance.OnOpenCloseGameMenu;
+            @OpenClosegamemenu.started -= instance.OnOpenClosegamemenu;
+            @OpenClosegamemenu.performed -= instance.OnOpenClosegamemenu;
+            @OpenClosegamemenu.canceled -= instance.OnOpenClosegamemenu;
         }
 
         public void RemoveCallbacks(IMenuActionsActions instance)
@@ -532,18 +532,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IPlayerMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnLBK(InputAction.CallbackContext context);
-        void OnRBK(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IInventoryMapActions
     {
-        void OnChooseFirstCell(InputAction.CallbackContext context);
-        void OnChooseSecondCell(InputAction.CallbackContext context);
-        void OnChooseThirdCell(InputAction.CallbackContext context);
-        void OnChooseFourthCell(InputAction.CallbackContext context);
+        void OnChoosefirstcell(InputAction.CallbackContext context);
+        void OnChoosesecondcell(InputAction.CallbackContext context);
+        void OnChoosethirdcell(InputAction.CallbackContext context);
+        void OnChoosefourthcell(InputAction.CallbackContext context);
+        void OnOpenClosebackpack(InputAction.CallbackContext context);
     }
     public interface IMenuActionsActions
     {
-        void OnOpenCloseGameMenu(InputAction.CallbackContext context);
+        void OnOpenClosegamemenu(InputAction.CallbackContext context);
     }
 }

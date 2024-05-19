@@ -17,52 +17,6 @@ public class InputService : IDisposable
         _inputActions = new InputActions();
         _inputActions.Enable();
         InputActionAsset inputActionsAsset = _inputActions.asset;
-        //foreach (InputActionMap map in inputActionsAsset.actionMaps)
-        //{
-        //    foreach (InputAction action in map.actions)
-        //    {
-        //        if (action.name == "LBK")
-        //        {
-        //            var control = action.controls[0];
-        //            int bindIndex = action.GetBindingIndexForControl(control);
-        //            action.Disable();
-        //            var operation = action.PerformInteractiveRebinding()
-        //                .WithControlsExcluding("Mouse")
-        //                .OnComplete((callback) =>
-        //                {
-        //                    callback.Dispose();
-        //                    action.Enable();
-        //                    Debug.Log("New lbk control: " + action.controls[0]);
-        //                    string json = inputActionsAsset.SaveBindingOverridesAsJson();
-        //                })
-        //                .Start();
-
-        //            action.ChangeBinding(bindIndex).WithPath("<Keyboard>/space");
-        //            InputBinding? binding = action.GetBindingForControl(control);
-        //            (int, string) k = ((bindIndex, "<Keyboard>/space"));
-        //            action.ApplyBindingOverride(k.Item1, k.Item2);
-        //            string json = inputActionsAsset.SaveBindingOverridesAsJson();
-        //            inputActionsAsset.LoadBindingOverridesFromJson(json);
-        //            inputActionsAsset.RemoveAllBindingOverrides();
-        //            action.RemoveAllBindingOverrides();
-        //            json = inputActionsAsset.SaveBindingOverridesAsJson();
-        //        }
-        //        //Debug.Log("Name: " + action.name);
-        //        ////Debug.Log("BindingIndex: " + action.GetBindingIndex().ToString());
-        //        //foreach (var control in action.controls)
-        //        //{
-        //        //    Debug.Log("Control :" + control.displayName);
-        //        //    int index = action.GetBindingIndexForControl(control);
-        //        //    action.ChangeBinding(index).WithPath(;
-        //        //    Debug.Log("Control binding index: " + (action.GetBindingIndexForControl(control)));
-        //        //}
-        //        //foreach (var binding in action.bindings)
-        //        //{
-        //        //    Debug.Log("- binding name: " + binding.name);
-        //        //}
-        //        //Debug.Log("bindingDisplay: " + action.GetBindingDisplayString());
-        //    }
-        //}
     }
     
     public Vector2 GetMovement()
@@ -73,22 +27,22 @@ public class InputService : IDisposable
     {
         index = 0;
         bool wasPerformed = false; 
-        if(_inputActions.InventoryMap.ChooseFirstCell.WasPerformedThisFrame())
+        if(_inputActions.InventoryMap.Choosefirstcell.WasPerformedThisFrame())
         {
             index = c_firstItemCellIndex;
             wasPerformed = true;
         }
-        if (_inputActions.InventoryMap.ChooseSecondCell.WasPerformedThisFrame())
+        if (_inputActions.InventoryMap.Choosesecondcell.WasPerformedThisFrame())
         {
             index = c_secondItemCellIndex;
             wasPerformed = true;
         }
-        if (_inputActions.InventoryMap.ChooseThirdCell.WasPerformedThisFrame())
+        if (_inputActions.InventoryMap.Choosethirdcell.WasPerformedThisFrame())
         {
             index = c_thirdItemCellIndex;
             wasPerformed = true;
         }
-        if (_inputActions.InventoryMap.ChooseFourthCell.WasPerformedThisFrame())
+        if (_inputActions.InventoryMap.Choosefourthcell.WasPerformedThisFrame())
         {
             index = c_fourthItemCellIndex;
             wasPerformed = true;
@@ -98,15 +52,12 @@ public class InputService : IDisposable
 
     public bool IsLBK()
     {
-        return _inputActions.PlayerMap.LBK.WasPerformedThisFrame();
+        return _inputActions.PlayerMap.Interact.WasPerformedThisFrame();
     }
-    public bool IsRBK()
-    {
-        return _inputActions.PlayerMap.RBK.WasPerformedThisFrame();
-    }
+    
     public bool IsOpenCloseMenu()
     {
-        return _inputActions.MenuActions.OpenCloseGameMenu
+        return _inputActions.MenuActions.OpenClosegamemenu
             .WasPerformedThisFrame();
     }
     public void LockGamePlayControls()
@@ -124,6 +75,10 @@ public class InputService : IDisposable
     public void UnlockMenuControls()
     {
         _inputActions.MenuActions.Enable();
+    }
+    public bool IsOpenCloseBackPack()
+    {
+        return _inputActions.InventoryMap.OpenClosebackpack.WasPerformedThisFrame();
     }
     public void Dispose()
     {
