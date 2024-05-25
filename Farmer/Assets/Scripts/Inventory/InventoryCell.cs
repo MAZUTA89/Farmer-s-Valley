@@ -24,7 +24,7 @@ namespace Scripts.InventoryCode
         Action<InventoryCell> _beginDragEvent;
         public InventoryItem InventoryItem { get; private set; }
 
-        public Transform _globalVisualContext { get; private set; }
+        public Transform GlobalVisualContext { get; private set; }
         public Transform OriginVisualContext { get; private set; }
 
         public Image Icon => IconElement;
@@ -56,7 +56,7 @@ namespace Scripts.InventoryCode
         public void Initialize(Transform globalVisualContext,
             InventoryItem inventoryItem)
         {
-            _globalVisualContext = globalVisualContext;
+            GlobalVisualContext = globalVisualContext;
             OriginVisualContext = transform.parent;
             InventoryItem = inventoryItem;
             
@@ -95,7 +95,7 @@ namespace Scripts.InventoryCode
         {
             BeginDragSiblingIndex = transform.GetSiblingIndex();
             _beginDragEvent?.Invoke(this);
-            transform.SetParent(_globalVisualContext);
+            transform.SetParent(GlobalVisualContext);
             _mouseCursor.ChangeCursor(CursorType.Drag);
         }
 

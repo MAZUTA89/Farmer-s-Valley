@@ -41,7 +41,7 @@ namespace Scripts.PlacementCode
         public TileBase TilledTile;
         public VisualEffect TillingEffectPrefab;
 
-        private Dictionary<Crop, List<VisualEffect>> m_HarvestEffectPool = new();
+        private Dictionary<Crop, List<VisualEffect>> harvestEffectPool = new();
         private List<VisualEffect> _tillingEffectPool = new();
 
         public class GroundData
@@ -52,16 +52,7 @@ namespace Scripts.PlacementCode
         }
         public class CropData
         {
-            [Serializable]
-            public struct SaveData
-            {
-                public string CropId;
-                public int Stage;
-                public float GrowthRatio;
-                public float GrowthTimer;
-                public int HarvestCount;
-                public float DyingTimer;
-            }
+            
 
             public Crop GrowingCrop = null;
             public int CurrentGrowthStage = 0;
@@ -71,19 +62,9 @@ namespace Scripts.PlacementCode
 
             public int HarvestCount = 0;
 
-            public float DyingTimer;
+            public float DyingTimer { get; set; }
             public bool HarvestDone => HarvestCount == GrowingCrop.NumberOfHarvest;
 
-            public void Init()
-            {
-                GrowingCrop = null;
-                GrowthRatio = 0.0f;
-                GrowthTimer = 0.0f;
-                CurrentGrowthStage = 0;
-                HarvestCount = 0;
-
-                DyingTimer = 0.0f;
-            }
 
             public Crop Harvest()
             {
@@ -240,7 +221,7 @@ namespace Scripts.PlacementCode
 
             UpdateCropVisual(target);
 
-            if (!m_HarvestEffectPool.ContainsKey(cropToPlant))
+            if (!harvestEffectPool.ContainsKey(cropToPlant))
             {
                 InitHarvestEffect(cropToPlant);
             }
@@ -260,10 +241,10 @@ namespace Scripts.PlacementCode
 
             UpdateCropVisual(target);
 
-            var effect = m_HarvestEffectPool[data.GrowingCrop][0];
+            var effect = harvestEffectPool[data.GrowingCrop][0];
             effect.transform.position = _grid.GetCellCenterWorld(target);
-            m_HarvestEffectPool[data.GrowingCrop].RemoveAt(0);
-            m_HarvestEffectPool[data.GrowingCrop].Add(effect);
+            harvestEffectPool[data.GrowingCrop].RemoveAt(0);
+            harvestEffectPool[data.GrowingCrop].Add(effect);
             effect.Play();
 
             return produce;
@@ -297,12 +278,12 @@ namespace Scripts.PlacementCode
         }
         public void InitHarvestEffect(Crop crop)
         {
-            m_HarvestEffectPool[crop] = new List<VisualEffect>();
+            harvestEffectPool[crop] = new List<VisualEffect>();
             for (int i = 0; i < 4; ++i)
             {
                 var inst = Instantiate(crop.PickEffect);
                 inst.Stop();
-                m_HarvestEffectPool[crop].Add(inst);
+                harvestEffectPool[crop].Add(inst);
             }
         }
 
@@ -357,7 +338,7 @@ namespace Scripts.PlacementCode
             }
 
             //clear all existing effect as we will reload new one
-            foreach (var pool in m_HarvestEffectPool)
+            foreach (var pool in harvestEffectPool)
             {
                 if (pool.Value != null)
                 {
@@ -380,7 +361,7 @@ namespace Scripts.PlacementCode
 
                 UpdateCropVisual(pos);
 
-                if (!m_HarvestEffectPool.ContainsKey(newData.GrowingCrop))
+                if (!harvestEffectPool.ContainsKey(newData.GrowingCrop))
                 {
                     InitHarvestEffect(newData.GrowingCrop);
                 }

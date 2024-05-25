@@ -86,12 +86,7 @@ namespace Scripts.InventoryCode
             inventoryCell.SelectIcon.gameObject.SetActive(IsSelected);
         }
         
-        public virtual InventoryItemData GetItemData()
-        {
-            InventoryItemData inventoryItemData
-                = new InventoryItemData() { SoName = _name };
-            return inventoryItemData;
-        }
+       
         public virtual bool NeedTarget()
         {
             return true;
