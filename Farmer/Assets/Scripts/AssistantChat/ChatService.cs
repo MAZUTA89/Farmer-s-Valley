@@ -1,14 +1,8 @@
 ﻿using Scripts.SO.Chat;
 using OpenAI_API;
-using UnityEngine;
-using Zenject;
 using OpenAI_API.Chat;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using System.Linq;
 using System.Text;
-using System.Runtime.InteropServices;
 
 namespace Scripts.ChatAssistant
 {

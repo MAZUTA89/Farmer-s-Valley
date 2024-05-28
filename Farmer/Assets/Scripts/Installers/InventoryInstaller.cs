@@ -1,11 +1,6 @@
-﻿using Scripts.InteractableObjects;
-using Scripts.InventoryCode;
+﻿using Scripts.InventoryCode;
 using Scripts.InventoryCode.ItemResources;
-using Scripts.PlacementCode;
 using Scripts.SO.Inventory;
-using System;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 

@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Scripts.StateMachine
 {
     public abstract class UniversalStateMachine<T> where T : IUniversalState

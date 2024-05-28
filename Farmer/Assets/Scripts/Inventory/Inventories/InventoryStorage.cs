@@ -1,7 +1,4 @@
-﻿using Scripts.FarmGameEvents;
-using Scripts.SO.Inventory;
-using System;
-using System.Collections.Generic;
+﻿using Scripts.SO.Inventory;
 using UnityEngine.EventSystems;
 using Zenject;
 using UnityEngine;

@@ -3,8 +3,6 @@ using Scripts.FarmGameEvents;
 using Scripts.MainMenuCode;
 using Scripts.MouseHandle;
 using Scripts.SaveLoader;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;

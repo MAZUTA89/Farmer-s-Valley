@@ -1,8 +1,5 @@
 ﻿using Scripts.SO.Inventory;
-using System;
-using System.Collections.Generic;
 using Zenject;
-using UnityEngine;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using Scripts.Sounds;

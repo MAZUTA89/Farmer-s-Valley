@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Zenject;
+﻿using Zenject;
 using UnityEngine;
 using Scripts.ChatAssistant;
 using Scripts.SO.Chat;
-using Scripts.InventoryCode;
 
 namespace Scripts.Installers
 {

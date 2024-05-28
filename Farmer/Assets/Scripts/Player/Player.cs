@@ -1,15 +1,11 @@
 ﻿using HappyHarvest;
 using Scripts.FarmGameEvents;
 using Scripts.InventoryCode;
-using Scripts.MainMenuCode;
 using Scripts.SaveLoader;
 using Scripts.SO.Player;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Scripts.PlayerCode

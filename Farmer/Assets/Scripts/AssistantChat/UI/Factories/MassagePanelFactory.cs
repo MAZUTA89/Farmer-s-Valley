@@ -1,6 +1,4 @@
-﻿using Scripts.MainMenuCode;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 

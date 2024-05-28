@@ -1,9 +1,6 @@
 ﻿using Scripts.MainMenuCode;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Scripts.MainMenuScripts
@@ -31,10 +28,6 @@ namespace Scripts.MainMenuScripts
             _settingsMenu.RemoveListenerAtMusicVolume(OnMusicValueChange);
             _settingsMenu.RemoveListenerAtMainVolume(OnMainValueChange);
             _settingsMenu.RemoveListenerAtSFXVolume(OnSFXValueChange);
-        }
-        private void Start()
-        {
-            
         }
 
         void OnMusicValueChange(float value)

@@ -5,5 +5,4 @@ namespace Scripts.InteractableObjects
     {
         T Create(D createData);
     }
-    
 }

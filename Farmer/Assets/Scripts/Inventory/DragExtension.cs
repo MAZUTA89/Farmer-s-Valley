@@ -1,9 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using Scripts.InventoryCode;
-using UnityEngine.UI;
 using System.Threading.Tasks;
 
 

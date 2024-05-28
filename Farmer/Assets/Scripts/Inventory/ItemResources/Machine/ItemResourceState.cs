@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Scripts.StateMachine;
-using UnityEngine;
+﻿using Scripts.StateMachine;
 
 namespace Scripts.InventoryCode.ItemResources
 {

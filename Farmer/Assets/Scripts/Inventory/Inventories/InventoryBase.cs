@@ -1,7 +1,5 @@
-﻿using HappyHarvest;
-using Scripts.Inventory;
+﻿using Scripts.Inventory;
 using Scripts.MouseHandle;
-using Scripts.SaveLoader;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

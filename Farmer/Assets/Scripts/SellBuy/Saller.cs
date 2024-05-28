@@ -1,7 +1,4 @@
 ﻿using Scripts.FarmGameEvents;
-using Scripts.SellBuy;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 namespace Scripts.InventoryCode
@@ -23,7 +21,6 @@ namespace Scripts.InventoryCode
         {
             return _container.InstantiatePrefabForComponent<InventoryCell>
                 (_inventoryCellTemplate, visualContext);
-            //return GameObject.Instantiate(_inventoryCellTemplate, visualContext);
         }
 
         public GameObject CreateEmpty(InventoryCell inventoryCell)

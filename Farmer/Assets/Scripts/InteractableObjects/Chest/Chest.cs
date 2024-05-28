@@ -2,7 +2,6 @@ using Assets.Scripts.Placement;
 using Scripts.InventoryCode;
 using Scripts.PlacementCode;
 using Scripts.SaveLoader;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;

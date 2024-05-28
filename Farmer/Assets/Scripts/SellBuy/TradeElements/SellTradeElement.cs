@@ -1,7 +1,5 @@
 ﻿using Scripts.FarmGameEvents;
 using Scripts.Inventory;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 

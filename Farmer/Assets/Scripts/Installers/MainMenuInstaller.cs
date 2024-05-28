@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Zenject;
+﻿using Zenject;
 using UnityEngine;
 using Scripts.MainMenuCode;
 using Scripts.MainMenuScripts;
-using Scripts.SaveLoader;
 using Scripts.InteractableObjects;
 using Scripts.MouseHandle;
 

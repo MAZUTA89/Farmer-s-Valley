@@ -1,6 +1,4 @@
 ﻿using Scripts.PlacementCode;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.InventoryCode

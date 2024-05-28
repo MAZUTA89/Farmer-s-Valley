@@ -6,21 +6,16 @@ using Scripts.MainMenuCode;
 using Scripts.PlacementCode;
 using Scripts.PlayerCode;
 using Scripts.SaveLoader;
-using Scripts.SO.InteractableObjects;
 using Scripts.SO.Player;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 using Scripts.SellBuy;
 using Zenject;
 using TMPro;
-using Newtonsoft.Json.Bson;
 using Scripts.Inventory;
 using Scripts.Sounds;
 using Scripts.MouseHandle;
-using Scripts.NextLevel;
 
 namespace Scripts.Installers
 {
@@ -263,12 +258,6 @@ namespace Scripts.Installers
             _factoryProvider.RegisterFabric(sandFactory);
             _factoryProvider.RegisterFabric(chestFactory);
             _factoryProvider.RegisterFabric(oakSeedFactory);
-
-            
-
-            //ISeedFactory seedFactory1 =
-            //    (ISeedFactory)interactableObjectsFactoryProvider
-            //    .GetFactory<SeedFactory>();
         }
     }
 }

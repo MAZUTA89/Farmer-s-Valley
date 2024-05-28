@@ -1,12 +1,9 @@
 ﻿using PimDeWitte.UnityMainThreadDispatcher;
 using Scripts.MainMenuScripts;
 using Scripts.SaveLoader;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Windows;
 using Zenject;
 using UnityEngine.SceneManagement;
 using Assets.Scripts;

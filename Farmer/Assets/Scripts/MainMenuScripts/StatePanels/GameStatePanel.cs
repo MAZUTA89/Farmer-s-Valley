@@ -1,7 +1,6 @@
 ﻿using Assets.Scripts;
 using Scripts.FarmGameEvents;
 using Scripts.SaveLoader;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;

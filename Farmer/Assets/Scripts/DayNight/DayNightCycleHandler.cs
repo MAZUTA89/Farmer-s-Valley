@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
-using HappyHarvest;
-
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -14,7 +10,6 @@ using UnityEditor.UIElements;
 
 namespace Scripts.DayNight
 {
-    //[DefaultExecutionOrder(10)]
     public class DayNightCycleHandler : MonoBehaviour
     {
         private static DayNightCycleHandler s_instance;

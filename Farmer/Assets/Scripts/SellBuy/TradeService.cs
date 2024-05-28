@@ -1,7 +1,5 @@
 ﻿using Scripts.InventoryCode;
 using Scripts.PlayerCode;
-using System;
-using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using Scripts.Inventory;

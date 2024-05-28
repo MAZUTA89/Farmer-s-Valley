@@ -1,13 +1,6 @@
-﻿using PimDeWitte.UnityMainThreadDispatcher;
-using Scripts.FarmGameEvents;
-using Scripts.MainMenuScripts;
+﻿using Scripts.FarmGameEvents;
 using Scripts.MouseHandle;
 using Scripts.SaveLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -112,7 +105,5 @@ namespace Scripts.MainMenuCode
             _settingsMenu.Back();
             _menuObject.SetActive(true);
         }
-
-       
     }
 }

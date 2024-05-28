@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 namespace Scripts.SellBuy
 {
     public class BuyTradeElement : TradeElement

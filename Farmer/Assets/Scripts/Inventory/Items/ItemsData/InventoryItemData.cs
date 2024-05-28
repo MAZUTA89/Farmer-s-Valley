@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace Scripts.InventoryCode
+﻿namespace Scripts.InventoryCode
 {
     public class InventoryItemData
     {
