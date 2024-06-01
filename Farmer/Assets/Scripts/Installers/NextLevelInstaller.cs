@@ -1,5 +1,6 @@
 ﻿using HappyHarvest;
 using Scripts.MainMenuCode;
+using Scripts.NextLevel;
 using Scripts.SellBuy;
 using Scripts.Sounds;
 using Zenject;
@@ -24,6 +25,8 @@ namespace Scripts.Installers
                 new SettingsMenu(null, null, false);
             Container.BindInstance(settingsMenu).AsSingle();
             Container.Bind<InputService>().AsSingle();
+            Container.Bind<PreviousLevel>()
+                .FromComponentInHierarchy().AsSingle();
         }
     }
 }

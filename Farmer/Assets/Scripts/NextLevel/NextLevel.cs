@@ -12,21 +12,24 @@ namespace Scripts.NextLevel
     {
         SettingsMenu _settingsMenu;
         GameDataState _gameDataState;
+        LevelLoader _levelLoader;
 
         [Inject]
         public void Construct(SettingsMenu settingsMenu,
-            GameDataState gameDataState)
+            GameDataState gameDataState,
+            LevelLoader levelLoader)
         {
             _settingsMenu = settingsMenu;
             _gameDataState = gameDataState;
+            _levelLoader = levelLoader;
         }
 
-        public void OnView()
+        public async void OnView()
         {
             GameEvents.InvokeExitTheGameEvent();
             LoadedData.Instance().InitializeGameStateData(_gameDataState, false);
             _settingsMenu.Save();
-            SceneManager.LoadScene(GameConfiguration.NextLevelName);
+            await _levelLoader.LoadLevel(GameConfiguration.NextLevelName);
         }
     }
 }

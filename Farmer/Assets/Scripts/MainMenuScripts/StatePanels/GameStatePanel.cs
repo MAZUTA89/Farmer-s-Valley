@@ -17,19 +17,24 @@ namespace Scripts.MainMenuCode
         public TextMeshProUGUI NameText => _nameTextField;
 
         GameDataSaveLoader _gameDataSaveLoader;
+        LevelLoader _levelLoader;
 
         private void Start()
         {
             _gameDataSaveLoader = new GameDataSaveLoader();
         }
 
-        public void Load()
+        public async void Load()
         {
             GameDataState gameDataState = 
                 _gameDataSaveLoader.LoadGameState(NameText.text);
             LoadedData.Instance().InitializeGameStateData(gameDataState, false);
             GameEvents.InvokeOnSaveSettingsEvent();
-            SceneManager.LoadScene(GameConfiguration.FarmSceneName);
+            await _levelLoader.LoadLevel(GameConfiguration.FarmSceneName);
+        }
+        public void SetLevelLoader(LevelLoader levelLoader)
+        {
+            _levelLoader = levelLoader;
         }
         public void Delete()
         {

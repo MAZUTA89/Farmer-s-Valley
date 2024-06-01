@@ -22,7 +22,16 @@ public class BGMove : MonoBehaviour
 
     void Update()
     {
+        var height = Camera.main.orthographicSize * 2f;
+        var width = height * Screen.width / Screen.height;
+
+        transform.localScale = new Vector3(width, height, 0);
         _meshOffset.x += Time.deltaTime * BgSpeed;
         _meshRenderer.sharedMaterial.SetTextureOffset("_MainTex", _meshOffset);
+    }
+    public void Perform()
+    {
+        _meshOffset.x += Time.deltaTime * BgSpeed;
+        _meshRenderer?.sharedMaterial?.SetTextureOffset("_MainTex", _meshOffset);
     }
 }

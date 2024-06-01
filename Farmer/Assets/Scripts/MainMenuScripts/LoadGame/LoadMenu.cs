@@ -11,9 +11,11 @@ namespace Scripts.MainMenuCode
         GameObject _loadLevelsPanel;
         GameDataSaveLoader _gameDataSaveLoader;
         Transform _content;
+        LevelLoader _levelLoader;
         public LoadMenu(IGameStatePanelFactory gameStatePanelFactory,
              [Inject(Id = "LoadMenuPanel")] GameObject loadLevelsPanel,
-             [Inject(Id = "LoadMenuContent")] Transform content)
+             [Inject(Id = "LoadMenuContent")] Transform content,
+             LevelLoader levelLoader)
     
         {
             _gameStatePanelFactory = gameStatePanelFactory;
@@ -21,6 +23,7 @@ namespace Scripts.MainMenuCode
             _gameDataSaveLoader = new GameDataSaveLoader();
             _content = content;
             _loadLevelsPanel.gameObject.SetActive(false);
+            _levelLoader = levelLoader;
         }
 
         public void Activate()
@@ -45,8 +48,8 @@ namespace Scripts.MainMenuCode
         {
             foreach(string name in names)
             {
-
                 GameStatePanel panel = _gameStatePanelFactory.Create(name, _content);
+                panel.SetLevelLoader(_levelLoader);
                 panel.MoneyText.text 
                     = _gameDataSaveLoader.LoadGameState(name).PlayerData.Money.ToString();
             }

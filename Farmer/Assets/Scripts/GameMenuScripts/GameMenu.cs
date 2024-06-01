@@ -3,8 +3,8 @@ using Scripts.FarmGameEvents;
 using Scripts.MainMenuCode;
 using Scripts.MouseHandle;
 using Scripts.SaveLoader;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 
@@ -18,18 +18,21 @@ namespace Scripts.GameMenuCode
         GameDataSaveLoader _gameDataSaveLoader;
         SettingsMenu _settingsMenu;
         MouseCursor _mouseCursor;
+        LevelLoader _levelLoader;
         [Inject]
         public void Construct(InputService inputService,
             GameDataState gameDataState,
             SettingsMenu settingMenu,
             GameDataSaveLoader gameDataSaveLoader,
-             MouseCursor mouseCursor)
+             MouseCursor mouseCursor,
+             LevelLoader levelLoader)
         {
             _inputService = inputService;
             _gameDataState = gameDataState;
             _settingsMenu = settingMenu;
             _gameDataSaveLoader = gameDataSaveLoader;
             _mouseCursor = mouseCursor;
+            _levelLoader = levelLoader;
         }
 
         private void Start()
@@ -90,14 +93,15 @@ namespace Scripts.GameMenuCode
             _settingsMenu.Back();
             _menuPanel.SetActive(true);
         }
-        public void OnExit()
+        public async void OnExit()
         {
             GameEvents.InvokeExitTheGameEvent();
             
             _gameDataSaveLoader.SaveGameState(_gameDataState);
 
             _settingsMenu.Save();
-            SceneManager.LoadScene(GameConfiguration.MainMenuSceneName);
+            _menuPanel.gameObject.SetActive(false);
+            await _levelLoader.LoadLevel(GameConfiguration.MainMenuSceneName);
         }
     }
 }

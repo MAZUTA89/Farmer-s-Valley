@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - LoadScreenLayer
   - Water
   - UI
   - character
   - interactable
   - bottom
   - WorldUIlayer
-  - 
+  - LoadBG
   - 
   - 
   - 

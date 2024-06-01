@@ -17,12 +17,15 @@ namespace Scripts.MainMenuCode
         NewGamePanel _newGamePanel;
         List<string> _lvlNames;
         LevelNameValidator _lvlNameValidator;
-        public NewGameMenu([Inject(Id = "NewGamePanel")] NewGamePanel newGamePanel)
+        LevelLoader _levelLoader;
+        public NewGameMenu([Inject(Id = "NewGamePanel")] NewGamePanel newGamePanel,
+            LevelLoader levelLoader)
         {
             _gameDataSaveLoader = new GameDataSaveLoader();
             _newGamePanel = newGamePanel;
             _newGamePanel.gameObject.SetActive(false);
             _lvlNameValidator = new LevelNameValidator();
+            _levelLoader = levelLoader;
         }
 
         public void Activate()
@@ -51,7 +54,7 @@ namespace Scripts.MainMenuCode
                 {
                     await FadeText();
                 }
-                
+
             }
             else if (_lvlNameValidator.ValidateInputName(input))
             {
@@ -88,22 +91,23 @@ namespace Scripts.MainMenuCode
                     _newGamePanel.InfoText.color = targetColor;
                 });
             });
-             
-            
+
+
         }
-        void StartLevel(string name)
+        async void StartLevel(string name)
         {
             GameDataState gameDataState = new(name);
             LoadedData.Instance().InitializeGameStateData(gameDataState, true);
             List<string> names = _gameDataSaveLoader.LoadWorldNamesJson();
-            if(names == null)
+            if (names == null)
             {
                 names = new List<string>();
             }
             names.Add(name);
             _gameDataSaveLoader.SaveWorldNamesJson(names);
             GameEvents.InvokeOnSaveSettingsEvent();
-            SceneManager.LoadScene(GameConfiguration.FarmSceneName);
+            _newGamePanel.gameObject.SetActive(false);
+            await _levelLoader.LoadLevel(GameConfiguration.FarmSceneName);
         }
         public void OnBack()
         {
