@@ -76,6 +76,15 @@ namespace Scripts.InteractableObjects
         {
             return PlacePosition;
         }
+        public override void SaveData()
+        {
+            ChestData chestData = new ChestData();
+            var data = base.GetData();
+            chestData.SetPosition(data.GetPosition());
+            chestData.UpdateItems(_chestStorage.GetItems());
+
+            GameDataState.UpdateChestData(chestData);
+        }
 
         public override PlacementItemData GetData()
         {

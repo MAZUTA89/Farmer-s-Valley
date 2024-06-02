@@ -100,7 +100,10 @@ namespace Scripts.MainMenuCode
             settingsData.InputOverrides = _inputService.GetInputActionAsset().SaveBindingOverridesAsJson();
 
             _settingSaveLoader.Save(settingsData);
-            LoadedData.Instance().InitializeSettingsData(settingsData, false);
+            if (LoadedData.Instance() != null)
+            {
+                LoadedData.Instance().InitializeSettingsData(settingsData, false);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Scripts.SaveLoader
         public string GameDataStateName;
         public PlayerData PlayerData;
         public List<PlacementItemData> PlacementObjectsDataList;
+        public ChestData ChestData;
         public List<InventoryItemData> ActivePackInventory;
         public List<InventoryItemData> BackPackInventory;
         public PlacementData PlacementData;
@@ -49,10 +50,14 @@ namespace Scripts.SaveLoader
         }
         public void AddItemData(PlacementItemData itemData)
          {
-            if (PlacementObjectsDataList.Contains(itemData) == false)
-            {
+            //if (PlacementObjectsDataList.Contains(itemData) == false)
+            //{
                 PlacementObjectsDataList.Add(itemData);
-            }
+            //}
+        }
+        public void UpdateChestData(ChestData chestData)
+        {
+            ChestData = chestData;
         }
         public void RemoveItemData(PlacementItemData itemData)
         {

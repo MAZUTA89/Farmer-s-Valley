@@ -188,7 +188,6 @@ namespace Scripts.Installers
             }
             Container.BindInstance(_gameDataState).AsSingle();
             Container.Bind<GameDataSaveLoader>().AsSingle();
-            Container.Bind<SandTilePlacementSaver>().AsSingle();
         }
         void BindPlayer()
         {

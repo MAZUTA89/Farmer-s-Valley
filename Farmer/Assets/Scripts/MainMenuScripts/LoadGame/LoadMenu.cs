@@ -1,4 +1,5 @@
-﻿using Scripts.SaveLoader;
+﻿using Assets.Scripts;
+using Scripts.SaveLoader;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -35,8 +36,7 @@ namespace Scripts.MainMenuCode
 
             List<string> lvlNames = _gameDataSaveLoader.LoadWorldNamesJson();
 
-            //_gameStatePanelFactory.Create(GameConfiguration.SaveEditorGameStateName,
-            //    _content);
+            CreateEditorState();
 
             if (lvlNames != null &&
                 lvlNames.Count > 0)
@@ -54,7 +54,12 @@ namespace Scripts.MainMenuCode
                     = _gameDataSaveLoader.LoadGameState(name).PlayerData.Money.ToString();
             }
         }
-
+        public void CreateEditorState()
+        {
+            var panel = _gameStatePanelFactory.Create(GameConfiguration.SaveEditorGameStateName,
+                _content);
+            panel.SetLevelLoader(_levelLoader);
+        }
         public void OnBack()
         {
             foreach (Transform state in _content)

@@ -75,8 +75,9 @@ namespace AScripts.SaveLoader
             _treeFactory =
                 (OakSeedFactory)_interactableObjectsFactoryProvider.GetFactory<OakSeedFactory>();
             LoadPlayerInventories();
-            LoadPlacementItems();
+            //LoadPlacementItems();
             LoadPlayerData();
+            LoadChestData();
         }
         void LoadPlayerData()
         {
@@ -86,14 +87,26 @@ namespace AScripts.SaveLoader
                 _player.Load(playerData);
             }
         }
+        void LoadChestData()
+        {
+            if (LoadedData.IsGameStateDefault == false)
+            {
+                ChestData data = _gameDataState.ChestData;
+                List<InventoryItem> inventoryItems = ProcessInventoryItemsData(data.Items);
+                Chest chest = _chestFactory.Create(inventoryItems);
+                Vector3Int pos3 = data.GetPosition();
+                _placementMap.PlaceObjectOnCell(chest.gameObject, pos3);
+                _placementMap.AddPosition(pos3);
+            }
+        }
         void LoadPlacementItems()
         {
             if (LoadedData.IsGameStateDefault == true)
                 return;
 
 
-            _placementService.Load(); 
-            
+            _placementService.Load();
+
             List<PlacementItemData> placementItems =
                 _gameDataState.PlacementObjectsDataList;
 
@@ -119,7 +132,7 @@ namespace AScripts.SaveLoader
                         }
                     case TreeData data:
                         {
-                             Seed tree = _treeFactory.Create(_seedSODictionary[data.SeedSOName]);
+                            Seed tree = _treeFactory.Create(_seedSODictionary[data.SeedSOName]);
                             _placementMap.AddPosition(data.GetPosition());
                             _placementMap.PlaceObjectOnCell(tree.gameObject, data.GetPosition());
                             tree.LoadSeed(data);
@@ -133,7 +146,7 @@ namespace AScripts.SaveLoader
                             seed.LoadSeed(data);
                             break;
                         }
-                    
+
                 }
             }
 
@@ -144,7 +157,7 @@ namespace AScripts.SaveLoader
             {
                 _backPackInventory.Initialize(CopyItemList(_backPackStartItemKit));
                 _activeInventory.Initialize(CopyItemList(_activeStartItemKit));
-                
+
             }
             else
             {
@@ -173,10 +186,10 @@ namespace AScripts.SaveLoader
             InventoryItem item = (InventoryItem)_inventoryItemDataBase.GetItemByName(itemName)
                 .Clone();
             item.Count = itemData.Amount;
-            switch(item)
+            switch (item)
             {
                 case HoeItem hoeItem:
-                        return hoeItem;
+                    return hoeItem;
                 case WateringItem wateringItem:
                     return wateringItem;
                 case SeedBagItem seedBagItem:
@@ -187,7 +200,7 @@ namespace AScripts.SaveLoader
                     return basketItem;
                 default: return item;
             }
-            
+
         }
         private List<InventoryItem> ProcessInventoryItemsData(
             List<InventoryItemData> inventoryItemsData)
