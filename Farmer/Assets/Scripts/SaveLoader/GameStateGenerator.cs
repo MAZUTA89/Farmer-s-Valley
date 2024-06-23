@@ -75,7 +75,7 @@ namespace AScripts.SaveLoader
             _treeFactory =
                 (OakSeedFactory)_interactableObjectsFactoryProvider.GetFactory<OakSeedFactory>();
             LoadPlayerInventories();
-            //LoadPlacementItems();
+            LoadPlacementItems();
             LoadPlayerData();
             LoadChestData();
         }
