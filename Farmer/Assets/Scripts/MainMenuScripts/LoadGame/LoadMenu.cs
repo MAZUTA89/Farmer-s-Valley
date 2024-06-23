@@ -36,7 +36,7 @@ namespace Scripts.MainMenuCode
 
             List<string> lvlNames = _gameDataSaveLoader.LoadWorldNamesJson();
 
-            CreateEditorState();
+            //CreateEditorState();
 
             if (lvlNames != null &&
                 lvlNames.Count > 0)
