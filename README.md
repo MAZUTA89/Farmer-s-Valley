@@ -1,2 +1,2 @@
 # FarmerGameRepository
- Diplom
+ GPT integration
