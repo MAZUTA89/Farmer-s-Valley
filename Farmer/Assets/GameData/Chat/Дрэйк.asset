@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: "\u0414\u0440\u044D\u0439\u043A"
   m_EditorClassIdentifier: 
   Name: "\u0414\u0440\u044D\u0439\u043A"
-  APIKey: sk-or-vv-d9aaca2458fa9b5cbc6887e989445c71ebfbb1df611c27f2dd4b85cc537cfcdf
-  Url: https://api.vsegpt.ru:6070/v1/chat/completions
-  ModelId: openai/gpt-3.5-turbo-0125
+  GptApiSO: {fileID: 11400000, guid: 7bd5dae6943e50045ae9b4a72312c3f5, type: 2}
   SystemMassage: "\u0422\u044B \u2014 \u0414\u0440\u044D\u0439\u043A, 28-\u043B\u0435\u0442\u043D\u0438\u0439
     \u043F\u0440\u043E\u0434\u0430\u0432\u0435\u0446 \u043D\u0430 \u0444\u0435\u0440\u043C\u0435
     \u0432 \u043C\u0443\u043B\u044C\u0442\u044F\u0448\u043D\u043E\u043C \u043C\u0438\u0440\u0435,
