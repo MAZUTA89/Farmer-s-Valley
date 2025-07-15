@@ -8,9 +8,10 @@ namespace Scripts.SO.Chat
     public class ChatSO : ScriptableObject, IDataBaseItem
     {
         public string Name;
-        public string APIKey;
-        public string Url;
-        public string ModelId;
+        public GptApiSO GptApiSO;
+        public string APIKey =>GptApiSO.APIKey;
+        public string Url => GptApiSO.Url;
+        public string ModelId => GptApiSO.ModelId;
         [Multiline]
         public string SystemMassage;
         [Space]

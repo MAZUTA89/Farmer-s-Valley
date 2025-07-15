@@ -117,7 +117,8 @@ namespace Scripts.MainMenuCode
 
                             var binding = action.GetBindingForControl(control);
 
-                            KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory.Create(KeyBoardBindingsContent);
+                            KeyBindingPanel keyBindingPanel = _keyBindingPanelFactory
+                                .Create(KeyBoardBindingsContent);
 
                             keyBindingPanel.Initialize(action, control);
 
